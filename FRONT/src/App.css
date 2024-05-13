@@ -1,0 +1,257 @@
+*, *::after, *::before{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+
+  padding: 0.5rem;
+  text-align: center;
+}
+
+content {
+  margin-top: 150px;
+}
+/*ESTILOS HEADER*/
+nav {
+  width: 100%; /* El navbar ocupa el 100% del ancho de la página */
+  display: flex;
+  position:fixed;
+  top: 0;
+  justify-content: space-evenly; /* Alinea elementos a la izquierda y derecha */
+  align-items: center; /* Centra verticalmente */
+  padding: 15px 20px 10px 10px; /* Relleno */
+  background-color: #f5f5f5; /* Color de fondo */
+  z-index: 1000;
+  
+  
+  
+}
+
+.navbar-left {
+  text-decoration: none; /* Quita subrayado en enlaces */
+  color: #36383b;
+  display: flex;
+  align-items: center; /* Mantiene el logo y el texto en línea */
+}
+
+.navbar-right {
+  display: flex;
+  gap: 10px; /* Espacio entre botones */
+}
+.nav-list {
+  display: contents;
+  list-style: none; /* Elimina los puntos predeterminados */
+  padding: 0; /* Elimina el relleno predeterminado */
+  margin: 0; /* Elimina el margen predeterminado */
+}
+
+/* Estilos CSS para cada ítem de la lista */
+.nav-item {
+  border-left: 1px solid #ccc; /* Agrega una línea vertical a la izquierda */
+  padding: 0 10px; /* Añade espacio interno */
+}
+
+
+
+.navbar-logo {
+  height: 60px; /* Ajusta la altura del logo */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
+}
+
+.navbar-heading {
+  margin: 0; /* Elimina el margen predeterminado del h2 */
+}
+
+.navbar-button {
+  padding: 10px 15px; /* Ajusta el relleno del botón */
+  background-color: #36383b; /* Color del botón */
+  color: white; /* Color del texto */
+  border: none; /* Sin bordes */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cursor de mano cuando se pasa el ratón */
+  transition: background-color 0.3s; /* Efecto de transición */
+}
+
+.navbar-button:hover {
+  background-color: #545556; /* Color de fondo al pasar el cursor */
+}
+/*ESTILOS FOOTER*/
+footer {
+  width: 100%; /* Ocupa el ancho completo */
+  padding: 10px; /* Relleno */
+  background-color: #f5f5f5; /* Color de fondo */
+  display: flex; /* Usa Flexbox para distribuir elementos */
+  justify-content: space-between; /* Alinea el texto a la izquierda y los logotipos a la derecha */
+  align-items: center; /* Centra verticalmente */
+  position: sticky; /* Mantiene el footer en el flujo normal */
+  z-index: 1000;
+ 
+}
+
+.footer-texto {
+  width: 200px;
+  font-size: 20px;
+  text-align: left;
+ 
+}
+
+.footer-logos {
+  display: flex; /* Distribuye las imágenes de los logotipos en línea */
+   
+}
+
+.footer-logo {
+  height: 65px; /* Ajusta el tamaño del logo */
+  cursor: pointer; /* Cambia el cursor para hacer clic */
+  transition: transform 0.3s; /* Efecto de transición al pasar el cursor */
+}
+
+.footer-logo:hover {
+  transform: scale(1.1); /* Efecto de aumento al pasar el cursor */
+}
+
+/****ESTILOS HOME*****/
+.home {
+  
+  align-items: center;
+  margin-top: 60px;
+  height: 100%;
+  padding: 20px; /* Espacio interno */
+}
+
+.card-container {
+  width: 100%;
+  height: 600px;
+  display: flex; /* Flexbox para distribuir tarjetas */
+  justify-content: space-around; /* Distribuye uniformemente */
+  gap: 20px; /* Espacio entre tarjetas */
+}
+
+.card {
+
+  text-decoration: none; /* Quita subrayado en enlaces */
+  color: black;
+  background-color: #f5f5f5; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 20px; /* Espacio interno */
+  text-align: center; /* Centra el texto */
+  width: 350px; /* Ancho fijo para tarjetas */
+  transition: transform 0.3s; /* Efecto suave al pasar el cursor */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+}
+
+/****ESTILO CARD RECETAS****/
+.recipe-card {
+  background-color: #f5f5f5; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 15px; /* Espacio interno */
+  text-align: center; /* Centra el contenido */
+  transition: transform 0.3s; /* Efecto al pasar el cursor */
+}
+
+.recipe-card:hover {
+  transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+}
+
+.recipe-card-image {
+  width: 100%; /* Imagen ocupa todo el ancho */
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.recipe-card-title {
+  margin: 10px 0; /* Espacio para el título */
+}
+
+.recipe-card-description {
+  font-size: 0.9rem; /* Tamaño de fuente para la descripción */
+  color: #555; /* Color del texto para la descripción */
+}
+
+.category-recipes {
+  margin-top: 80px;
+  display: grid; /* Usar CSS Grid en lugar de Flexbox */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
+  gap: 20px; /* Espacio entre tarjetas */
+  padding: 20px; /* Espacio interno */
+}
+
+/*ESTILOS SECCION RECOMENDADOS*/
+
+.recommended-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* Cinco columnas */
+  gap: 20px; /* Espacio entre tarjetas */
+}
+
+.recommended-section {
+  
+  display: grid; /* Usar CSS Grid en lugar de Flexbox */
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
+  gap: 20px; /* Espacio entre tarjetas */
+  padding: 20px; /* Espacio interno para la sección */
+}
+.titulo-recomendados{
+  margin-top: 60px;
+}
+
+/*ESTILO BARRA BUSQUEDA*/
+
+.search-bar {
+  display: flex; /* Flexbox para alinear elementos */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  margin: 40px auto; /* Margen para el contenedor */
+}
+
+.search-bar input {
+  width: 300px; /* Limita el ancho del campo de entrada */
+  padding: 10px; /* Espacio interno */
+  border-radius: 10px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para un aspecto moderno */
+  outline: none; /* Quita el contorno azul al enfocar */
+  transition: all 0.3s; /* Transición suave para efectos */
+}
+
+.search-bar input:hover,
+.search-bar input:focus {
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor o enfocar */
+}
+
+.search-bar button {
+  background: rgb(228, 226, 226); /* Fondo transparente */
+  border: none; /* Sin borde */
+  border-radius: 12px;
+  margin-left: 10px; /* Espacio entre el input y el botón */
+  padding: 10px; /* Espacio interno */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  transition: all 0.3s; /* Transición suave */
+}
+
+.search-bar button:hover {
+  transform: scale(1.1); /* Efecto al pasar el cursor */
+}
+
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
