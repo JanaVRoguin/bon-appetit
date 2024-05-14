@@ -7,9 +7,9 @@
 3. Moverse a la carpeta de trabajo respectiva.
 
 ## Pasos a seguir cada vez que trabajamos:
-Moverse a la rama develop: git checkout develop
-Git pull (Nos traemos cualquier cambio de otros colaboradores)
-git checkout --nuestra rama--
-trabajamos, pusheamos a nuestra rama
+1. Moverse a la rama develop: git checkout develop (o gco develop)
+2. Git pull (Nos traemos cualquier cambio de otros colaboradores)
+3. git checkout o gco --nuestra rama--
+4. trabajamos, pusheamos a nuestra rama
 
 *HAPPY CODDING!*
