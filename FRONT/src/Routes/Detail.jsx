@@ -3,6 +3,7 @@ import { fakeRecipes } from "../Components/utils/fakeData";
 import { useContextGlobal } from "../Components/global.context";
 import { useEffect } from "react";
 import Card from "../Components/Card";
+import axios from "axios";
 
 
 export const Detail = () => {
@@ -18,12 +19,18 @@ export const Detail = () => {
     }, [])
 
   return (
+    <>
+    {
     <Card
         key={recipeSelected.id}
-        title={recipeSelected.title}
-        image={recipeSelected.image}
-        description={recipeSelected.description}
-    />
+        title={recipeSelected.nombre}
+        image={recipeSelected.imagenes.urlImg}
+        description={recipeSelected.instrucciones}
+  />
+  
+  
+  }
+    </>
   )
 }
 
