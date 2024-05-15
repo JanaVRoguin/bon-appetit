@@ -17,6 +17,6 @@ public class RecetaEntradaDto {
     private String ingredientes;
     private String instrucciones;
     private List<Long> categorias;
-    private List<Long> imagenes;
+    private List<String> imagenes;
 
 }

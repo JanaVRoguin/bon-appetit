@@ -8,6 +8,7 @@ import com.bonappetit.bonappetitApi.entity.Receta;
 import com.bonappetit.bonappetitApi.repository.ICategoriaRepository;
 import com.bonappetit.bonappetitApi.repository.IImagenRepository;
 import com.bonappetit.bonappetitApi.repository.IRecetaRepository;
+import com.bonappetit.bonappetitApi.service.IImagenService;
 import com.bonappetit.bonappetitApi.service.IRecetaService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,8 @@ public class RecetaService implements IRecetaService {
     @Autowired
     private IImagenRepository iImagenRepository;
     @Autowired
+    private IImagenService iImagenService;
+    @Autowired
     private ModelMapper modelMapper;
     @Override
     public Receta crearReceta(RecetaEntradaDto recetaEntradaDto) {
@@ -37,8 +40,10 @@ public class RecetaService implements IRecetaService {
             categorias.add(categoria);
         }
 
-        for (Long imagenId : recetaEntradaDto.getImagenes()) {
-            Imagen imagen = iImagenRepository.findById(imagenId).orElse(null);
+        for (String url : recetaEntradaDto.getImagenes()) {
+            Imagen imagen = new Imagen();
+            imagen.setUrlImg(url);
+            imagen = iImagenService.crearImagen(imagen);
             imagenes.add(imagen);
         }
 
@@ -57,12 +62,13 @@ public class RecetaService implements IRecetaService {
     }
 
     @Override
+    public Receta buscarReceta(Long id) {
+        return iRecetaRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public void eliminarReceta(Long id) {
         iRecetaRepository.deleteById(id);
     }
 
-    private RecetaSalidaDto entidadADto(Receta receta){
-        RecetaSalidaDto recetaSalidaDto = modelMapper.map(receta, RecetaSalidaDto.class);
-        return recetaSalidaDto;
-    }
 }
