@@ -19,6 +19,7 @@ export const Cena = () => {
             image={recipe.imagenes}
             description={recipe.descripcion}
             category={recipe.categorias} // Pasa la prop 'category' al componente Card
+            id={recipe.id}
           />
         ))}
     </div>
