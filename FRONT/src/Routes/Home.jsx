@@ -14,7 +14,7 @@ export const Home = () => {
     <div className="home">
       <SearchBar onSearch={handleSearch}/>
       <div className="card-container">
-          <h2></h2>
+          {/* <h2></h2> */}
           <Link to="/desayuno" className="card"> {/* Navega a la página de desayuno */}
             <h1>Desayuno</h1>
           </Link>

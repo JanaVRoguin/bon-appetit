@@ -9,8 +9,9 @@ import Mediatarde from './Routes/Mediatarde';
 import Cena from './Routes/Cena';
 import Detail from './Routes/Detail';
 import AdminPanel from './Routes/AdminPanel/AdminPanel';
-import './App.css'
 import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
+
+import './App.css'
 
 
 function App() {
@@ -27,8 +28,8 @@ function App() {
             <Route path={routes.mediatarde} element={<Mediatarde />} /> {/* Página de mediatarde */}
             <Route path={routes.cena} element={<Cena />} /> {/* Página de cena */}
             <Route path={routes.detail} element={<Detail/>} /> {/* Página de detalle */}
-            <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página de detalle */}
-            <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página de detalle */}
+            <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página panel de admin */}
+            <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página para crear comida */}
           </Routes>
         </div>
            <Footer/>
