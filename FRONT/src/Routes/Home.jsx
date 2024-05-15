@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Recomendados from '../Components/Recomendados';
 import SearchBar from '../Components/SearchBar';
 
+
 export const Home = () => {
   const handleSearch = (term) => {
     console.log('Buscando recetas para:', term); // Aquí puedes implementar la lógica de búsqueda
@@ -26,6 +27,7 @@ export const Home = () => {
           <Link to="/cena" className="card"> {/* Navega a la página de cena */}
             <h1>Cena</h1>
           </Link>
+
       </div>
       <div>
           

@@ -1,0 +1,148 @@
+.admin-panel-container {
+  margin: 100px 20px 20px; /* Adjusted margin-top */
+  font-family: Arial, sans-serif;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.actions .btn {
+  width: 150px; /* Set width for both buttons */
+  height: 150px; /* Set height for both buttons */
+  padding: 20px; /* Add padding to maintain button size */
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px; /* Apply border radius to make them cubed */
+}
+
+.create-btn {
+  background-color: #007bff;
+  margin-left: 20px; /* Add margin between buttons */
+}
+
+.create-btn:hover {
+  background-color: #0056b3;
+}
+
+.refresh-btn {
+  background-color: #6c757d;
+}
+
+.refresh-btn:hover {
+  background-color: #5a6268;
+}
+
+.recetas-table {
+  width: calc(100% - 200px); /* Increased margin size */
+  margin: 0 100px; /* Increased margin size */
+  border-collapse: collapse;
+}
+
+.recetas-table th, .recetas-table td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.recetas-table th {
+  background-color: #f2f2f2;
+}
+
+.recetas-table img {
+  display: block;
+  max-width: 100px;
+  height: auto;
+}
+
+.action-buttons {
+  white-space: nowrap;
+}
+
+.action-buttons .btn {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.edit-btn {
+  background-color: #007bff;
+}
+
+.edit-btn:hover {
+  background-color: #0056b3;
+}
+
+.delete-btn {
+  background-color: #dc3545;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}
+
+.categorias-container {
+  margin-top: 40px; /* Adjust margin-top */
+}
+
+.categorias-title {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.categorias {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categoria-card {
+  width: 100px; /* Set width for each card */
+  height: 80px; /* Set height for each card */
+  background-color: #f2f2f2;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px; /* Adjust margin for spacing */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* Center text */
+  cursor: pointer;
+}
+
+.categoria-link {
+  text-decoration: none; /* Remove underline */
+  color: inherit; /* Inherit text color */
+}
+
+.mostrar-todas {
+  width: 100px; /* Set width for "Mostrar todas" card */
+  height: 80px; /* Set height for "Mostrar todas" card */
+  background-color: #007bff;
+  color: white;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  text-align: center; /* Center text */
+}

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { routes } from './utils/routes'
 
 const Navbar = () => {
   return (
@@ -12,7 +13,7 @@ const Navbar = () => {
         <Link to="/"><li className='nav-item'>Inicio</li></Link> {/* Navega a Home */}
         <li className='nav-item'>Contacto</li>
         <li className='nav-item'>Sobre Nosotros</li>
-        <li className='nav-item'>Rol Administrador</li>
+        <li className='nav-item'><Link to={routes.adminPanel}>Panel de administrador</Link></li>
       </ul>
       <div className="navbar-right">
         <button className="navbar-button">Crear Cuenta</button>
