@@ -30,6 +30,11 @@ public class RecetaController {
         return new ResponseEntity<>(listarRecetas,HttpStatus.OK);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Receta> buscarReceta(@PathVariable Long id){
+        return new ResponseEntity<>(iRecetaService.buscarReceta(id), HttpStatus.OK);
+    }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarReceta(@PathVariable Long id){
         iRecetaService.eliminarReceta(id);
