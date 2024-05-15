@@ -5,5 +5,8 @@ export const routes = {
     mediatarde:'/mediatarde',
     cena: '/cena',
     detail: '/recipe/:id',
-    detailTest: ''
+    detailTest: '',
+    adminPanel:'/administracion/recetas',
+    crearReceta: '/administracion/recetas/crear',
+    editarReceta: '/administracion/recetas/editar/:id'
 } 
