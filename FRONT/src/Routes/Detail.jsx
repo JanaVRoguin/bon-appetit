@@ -7,7 +7,7 @@ import Card from "../Components/Card";
 
 export const Detail = () => {
     const params = useParams();
-    const url = `http://localhost:8080/recetas/listarPorId/${params.id}`;
+    const url = `http://localhost:8080/recetas/${params.id}`;
     const {dispatch, state} = useContextGlobal();
     const {recipeSelected} = state;
     useEffect(() => {
