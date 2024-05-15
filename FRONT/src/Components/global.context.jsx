@@ -22,7 +22,7 @@ const ContextProvider = ({ children }) => {
             dispatch({type: 'GET_LIST', payload: res.data})
         })
     }, []);
-    console.log(state);
+    // console.log(state);
     
 return (
     <ContextGlobal.Provider value={{state,dispatch}}>
