@@ -17,8 +17,6 @@ import './App.css'
 function App() {
   
   return (
-  
-     
         <div>
            <Navbar/>
            <div className="content"> {/* El contenedor principal para el contenido */}
