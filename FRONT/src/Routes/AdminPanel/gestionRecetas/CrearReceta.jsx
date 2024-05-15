@@ -85,7 +85,7 @@ const CrearReceta = () => {
 
           <div className="form-group">
             <label>Imagenes</label>
-            <input className="form-control" name="nombre" />
+            <input className="form-control" name="imagenes" />
             <span className="error-text">{validationErrors.nombre}</span>
           </div>
 
