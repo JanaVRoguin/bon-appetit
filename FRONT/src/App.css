@@ -10,8 +10,9 @@
   text-align: center;
 }
 
-content {
+.content {
   margin-top: 150px;
+  min-height: 100vh;
 }
 /*ESTILOS HEADER*/
 nav {

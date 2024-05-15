@@ -19,7 +19,6 @@ const CrearReceta = () => {
       !receta.instrucciones ||
       !receta.categoria ||
       !receta.imagen
-
     ) {
       alert("Por favor ingrese todos los campos.");
       return;
