@@ -7,13 +7,16 @@ import Card from "../Components/Card";
 
 export const Detail = () => {
     const params = useParams();
-    const url = `${fakeRecipes}/${params.id}`;
+    const url = `http://localhost:8080/recetas/listarPorId/${params.id}`;
     const {dispatch, state} = useContextGlobal();
     const {recipeSelected} = state;
     useEffect(() => {
-        dispatch({type: 'GET_SELECTED', payload: url})
+      axios(url)
+      .then((response) => {
+        dispatch({type: 'GET_SELECTED', payload: response.data})
+      })
     }, [])
-    console.log(`Detail - ${recipeSelected}`);
+
   return (
     <Card
         key={recipeSelected.id}

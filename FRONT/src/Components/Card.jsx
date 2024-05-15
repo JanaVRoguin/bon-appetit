@@ -11,6 +11,7 @@ const Card = ({id, title, image, description, category }) => {
 
   return (
     <Link to={`/recipe/${id}`} className='recipe-card'>
+  
       <img src={imageUrl} alt={title} className="recipe-card-image" />
       <h3 className="recipe-card-title">{title}</h3>
       <p className="recipe-card-description">{description}</p>
