@@ -10,5 +10,7 @@ public interface IRecetaService {
 
     public Receta crearReceta(RecetaEntradaDto recetaEntradaDto);
     public List<Receta> listarRecetas();
+    public Receta buscarReceta(Long id);
+
     public void eliminarReceta(Long id);
 }
