@@ -146,3 +146,90 @@
   align-items: center; /* Center vertically */
   text-align: center; /* Center text */
 }
+
+/* Add these styles to your existing AdminPanel.css file */
+
+/* Modal Background Overlay */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Ensure it appears on top */
+  
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  position: relative; /* Ensure the position for close button alignment */
+}
+
+/* Form Wrapper */
+.crear-receta-container .form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Form Title */
+.crear-receta-container .title {
+  margin-bottom: 20px;
+}
+
+/* Form Group */
+.crear-receta-container .form-group {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+/* Form Control */
+.crear-receta-container .form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px; /* Rounded corners */
+  box-sizing: border-box;
+}
+
+/* Form Actions */
+.crear-receta-container .form-actions {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Button Styles */
+.crear-receta-container .btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer;
+}
+
+.crear-receta-container .cancel-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.crear-receta-container .submit-btn {
+  background-color: #4caf50;
+  color: white;
+}
+
+/* Error Text */
+.crear-receta-container .error-text {
+  color: red;
+  font-size: 12px;
+}

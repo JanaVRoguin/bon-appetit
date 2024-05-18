@@ -30,7 +30,7 @@
 }
 
 .form-control {
-  width: 100%;
+  width: calc(100% - 16px); /* Adjusted width */
   padding: 8px;
   border: 1px solid #ddd;
   border-radius: 4px;
