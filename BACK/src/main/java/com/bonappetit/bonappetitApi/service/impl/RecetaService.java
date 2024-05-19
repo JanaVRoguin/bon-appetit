@@ -1,7 +1,6 @@
 package com.bonappetit.bonappetitApi.service.impl;
 
 import com.bonappetit.bonappetitApi.dto.entrada.RecetaEntradaDto;
-import com.bonappetit.bonappetitApi.dto.salida.RecetaSalidaDto;
 import com.bonappetit.bonappetitApi.entity.Categoria;
 import com.bonappetit.bonappetitApi.entity.Imagen;
 import com.bonappetit.bonappetitApi.entity.Receta;

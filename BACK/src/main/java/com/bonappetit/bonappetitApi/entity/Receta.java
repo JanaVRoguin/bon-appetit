@@ -16,13 +16,16 @@ public class Receta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length=50, nullable=false)
     private String nombre;
+    @Column(length=250, nullable=false)
     private String descripcion;
+    @Column(length=500, nullable=false)
     private String ingredientes;
+    @Column(length=500, nullable=false)
     private String instrucciones;
     @ManyToMany
     private List<Categoria> categorias;
     @OneToMany
     private List<Imagen> imagenes;
-    /* AGREGAR LA FUNCIONALIDAD DE IMAGENES EN EL DTO Y SERVICIO Y TODO LO FUCKING DE MAS */
 }
