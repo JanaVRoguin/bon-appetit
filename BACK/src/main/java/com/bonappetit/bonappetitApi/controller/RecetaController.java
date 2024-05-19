@@ -36,6 +36,8 @@ public class RecetaController {
         return new ResponseEntity<>(iRecetaService.buscarReceta(id), HttpStatus.OK);
     }
 
+    /* CREAR EL ENDPOINT DE ATUALIZAR */
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarReceta(@PathVariable Long id){
         iRecetaService.eliminarReceta(id);
