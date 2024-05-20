@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./AdminPanel.css";
 import ListarRecetas from "./gestionRecetas/ListarRecetas";
 import CrearReceta from "./gestionRecetas/CrearReceta";
+import { BASE_URL } from "../../Components/utils/config";
 
 export const AdminPanel = () => {
   const [showRecetas, setShowRecetas] = useState(false);
@@ -23,7 +24,7 @@ export const AdminPanel = () => {
 
   const fetchRecipes = async () => {
     try {
-      const response = await fetch("http://localhost:8080/recetas/listar");
+      const response = await fetch(`${BASE_URL}recetas/listar`);
       if (response.ok) {
         const data = await response.json();
         setRecipes(data);
@@ -55,6 +56,8 @@ export const AdminPanel = () => {
   return (
     <div className="admin-panel-container">
       <h2 className="title">Panel de administración</h2>
+      
+      
 
       <div className="actions">
         <button

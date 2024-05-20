@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./CrearReceta.css";
+import { BASE_URL } from "../../../Components/utils/config";
 
 const CrearReceta = ({ closeModal, fetchRecipes }) => {
   const [validationErrors, setValidationErrors] = useState({});
@@ -28,7 +29,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:8080/recetas/listar");
+      const response = await fetch(`${BASE_URL}recetas/listar`);
       if (!response.ok) {
         throw new Error("Error fetching recipes.");
       }
@@ -50,7 +51,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       };
 
       const createResponse = await fetch(
-        "http://localhost:8080/recetas/crear",
+        `${BASE_URL}recetas/crear`,
         {
           method: "POST",
           headers: {

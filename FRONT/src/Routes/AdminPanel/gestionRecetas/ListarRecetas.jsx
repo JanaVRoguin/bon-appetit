@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { BASE_URL } from "../../../Components/utils/config";
 
 const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
@@ -10,7 +11,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
   }, []);
 
   const getCategorias = () => {
-    fetch("http://localhost:8080/categorias/listar")
+    fetch(`${BASE_URL}categorias/listar`)
       .then((response) => {
         if (response.ok) {
           return response.json();
@@ -27,7 +28,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
 
   const borrarReceta = (id) => {
     if (window.confirm("¿Estás seguro que deseas eliminar esta receta?")) {
-      fetch("http://localhost:8080/recetas/eliminar/" + id, {
+      fetch(`${BASE_URL}recetas/eliminar/`+ id, {
         method: "DELETE",
       })
         .then((response) => {
