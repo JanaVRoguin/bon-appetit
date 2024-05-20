@@ -36,7 +36,11 @@ public class RecetaController {
         return new ResponseEntity<>(iRecetaService.buscarReceta(id), HttpStatus.OK);
     }
 
-    /* CREAR EL ENDPOINT DE ATUALIZAR */
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<String> actualizarReceta(@PathVariable Long id, @RequestBody @Valid RecetaEntradaDto receta) {
+        iRecetaService.actualizarReceta(id, receta);
+        return new ResponseEntity<>("Receta actualizada", HttpStatus.OK);
+    }
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarReceta(@PathVariable Long id){
