@@ -3,6 +3,7 @@ package com.bonappetit.bonappetitApi.service.impl;
 import com.bonappetit.bonappetitApi.entity.Imagen;
 import com.bonappetit.bonappetitApi.repository.IImagenRepository;
 import com.bonappetit.bonappetitApi.service.IImagenService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +29,15 @@ public class ImagenService implements IImagenService {
     @Override
     public Imagen buscarImagen(Long id) {
         return iImagenRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Imagen actualizarImagen(Imagen imagen) {
+        if (iImagenRepository.existsById(imagen.getId())) {
+            return iImagenRepository.save(imagen);
+        } else {
+            throw new EntityNotFoundException("Imagen no encontrada");
+        }
     }
 
     @Override

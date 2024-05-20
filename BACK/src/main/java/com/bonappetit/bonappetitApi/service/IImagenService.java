@@ -9,5 +9,6 @@ public interface IImagenService {
     public Imagen crearImagen(Imagen imagen);
     public List<Imagen> listarImagenes();
     public Imagen buscarImagen(Long id);
+    public Imagen actualizarImagen(Imagen imagen);
     public void eliminarImagen(Long id);
 }

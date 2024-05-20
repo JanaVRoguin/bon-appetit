@@ -11,5 +11,6 @@ public interface ICategoriaService {
 
     public List<Categoria> listarCategorias();
     public Categoria buscarCategoria(Long id);
+    public Categoria actualizarCategoria(Categoria categoria);
     public void eliminarCategoria(Long id);
 }
