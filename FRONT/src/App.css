@@ -4,14 +4,14 @@
   box-sizing: border-box;
 }
 
-#root {
+/* #root {
 
   padding: 0.5rem;
   text-align: center;
-}
+} */
 
 .content {
-  margin-top: 150px;
+  margin-top: 100px;
   min-height: 100vh;
 }
 /*ESTILOS HEADER*/
@@ -20,14 +20,11 @@ nav {
   display: flex;
   position:fixed;
   top: 0;
-  justify-content: space-evenly; /* Alinea elementos a la izquierda y derecha */
+  justify-content: space-between; /* Alinea elementos a la izquierda y derecha */
   align-items: center; /* Centra verticalmente */
   padding: 15px 20px 10px 10px; /* Relleno */
   background-color: #f5f5f5; /* Color de fondo */
   z-index: 1000;
-  
-  
-  
 }
 
 .navbar-left {
@@ -124,9 +121,10 @@ footer {
 
 .card-container {
   width: 100%;
-  height: 600px;
-  display: flex; /* Flexbox para distribuir tarjetas */
-  justify-content: space-around; /* Distribuye uniformemente */
+  /* height: 600px; */
+  display: grid; /* Flexbox para distribuir tarjetas */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuye uniformemente */
+  justify-items: center;
   gap: 20px; /* Espacio entre tarjetas */
 }
 
@@ -139,7 +137,7 @@ footer {
   border-radius: 10px; /* Bordes redondeados */
   padding: 20px; /* Espacio interno */
   text-align: center; /* Centra el texto */
-  width: 350px; /* Ancho fijo para tarjetas */
+  width: 250px; /* Ancho fijo para tarjetas */
   transition: transform 0.3s; /* Efecto suave al pasar el cursor */
 }
 
@@ -187,17 +185,19 @@ footer {
 
 .recommended-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr); /* Cinco columnas */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cinco columnas */
   gap: 20px; /* Espacio entre tarjetas */
 }
 
+/* *Esta parte no es necesaria se puede llegar a quitar
 .recommended-section {
-  
-  display: grid; /* Usar CSS Grid en lugar de Flexbox */
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
-  gap: 20px; /* Espacio entre tarjetas */
-  padding: 20px; /* Espacio interno para la sección */
-}
+  display: grid; Usar CSS Grid en lugar de Flexbox
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho
+  gap: 20px; Espacio entre tarjetas
+  padding: 20px; Espacio interno para la sección
+} 
+*/
+
 .titulo-recomendados{
   margin-top: 60px;
 }
@@ -256,3 +256,113 @@ footer {
   }
 }
 
+/* *SECCION DETALLE */
+.name-container {
+  width: 100%;
+  margin-bottom: 20px;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.recipe-img-container {
+  margin-bottom: 30px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.recipe-img {
+  width: 100%;
+  height: 100%;
+  grid-column: 1 / 3;
+  grid-row: 1 / -1;
+  object-fit: cover;
+  display: block;
+}
+
+.details-container {
+  margin-bottom: 60px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.recipe-detail-data {
+  grid-column: 1 / 3;
+  font-size: 28px;
+  text-align: left;
+}
+
+.side-details-container {
+  font-size: 28px;
+  grid-column: 3 / -1;
+}
+
+.nutritional-details {
+  margin-bottom: 50px;
+}
+
+.week-container {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.week-day {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #ccc;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-hamburguesa {
+  display: none;
+}
+
+@media (max-width: 920px) {
+
+  .nav-list, .navbar-right {
+    display: none;
+  }
+
+  .menu-hamburguesa {
+    display: inline-block;
+    position: relative;
+    z-index: 20;
+  }
+
+  .mobile-nav-list{
+    width: 100%;
+    height: 100vh;
+    font-size: 32px;
+    background-color: #f5f5f5;
+    list-style: none;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    position: absolute;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .mobile-item {
+    border-left: 0;
+  }
+
+  .mobile-item a:link, .mobile-item a:visited {
+    color: #000;
+    text-decoration: none;
+  }
+}
