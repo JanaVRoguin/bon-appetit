@@ -9,6 +9,7 @@ import com.bonappetit.bonappetitApi.repository.IImagenRepository;
 import com.bonappetit.bonappetitApi.repository.IRecetaRepository;
 import com.bonappetit.bonappetitApi.service.IImagenService;
 import com.bonappetit.bonappetitApi.service.IRecetaService;
+import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +64,37 @@ public class RecetaService implements IRecetaService {
     @Override
     public Receta buscarReceta(Long id) {
         return iRecetaRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Receta actualizarReceta(Long id, RecetaEntradaDto recetaEntradaDto) {
+        Receta recetaExistente = iRecetaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Receta no encontrada"));
+
+        // Actualizar campos simples
+        recetaExistente.setNombre(recetaEntradaDto.getNombre());
+        recetaExistente.setDescripcion(recetaEntradaDto.getDescripcion());
+        recetaExistente.setIngredientes(recetaEntradaDto.getIngredientes());
+        recetaExistente.setInstrucciones(recetaEntradaDto.getInstrucciones());
+
+        // Actualizar categorias
+        List<Categoria> categorias = new ArrayList<>();
+        for (Long categoriaId : recetaEntradaDto.getCategorias()) {
+            Categoria categoria = iCategoriaRepository.findById(categoriaId).orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada"));
+            categorias.add(categoria);
+        }
+        recetaExistente.setCategorias(categorias);
+
+        // Actualizar imagenes
+        List<Imagen> imagenes = new ArrayList<>();
+        for (String url : recetaEntradaDto.getImagenes()) {
+            Imagen imagen = new Imagen();
+            imagen.setUrlImg(url);
+            imagen = iImagenService.crearImagen(imagen);
+            imagenes.add(imagen);
+        }
+        recetaExistente.setImagenes(imagenes);
+
+        return iRecetaRepository.save(recetaExistente);
     }
 
     @Override

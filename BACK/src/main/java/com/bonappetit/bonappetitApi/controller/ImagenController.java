@@ -34,6 +34,13 @@ public class ImagenController {
     public ResponseEntity<Imagen> buscarImagen(@PathVariable Long id){
         return new ResponseEntity<>(iImagenService.buscarImagen(id),HttpStatus.OK);
     }
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<String> actualizarImagen(@RequestBody Imagen imagen){
+        iImagenService.actualizarImagen(imagen);
+        return new ResponseEntity<>("Imagen actualizada", HttpStatus.OK);
+    }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarImagen(@PathVariable Long id){
         iImagenService.eliminarImagen(id);
