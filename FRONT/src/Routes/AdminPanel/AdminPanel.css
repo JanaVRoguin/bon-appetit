@@ -130,6 +130,11 @@
   text-align: center; /* Center text */
   cursor: pointer;
 }
+.categoria-card.active {
+  background-color: #007bff;
+  color: white;
+}
+
 
 .categoria-link {
   text-decoration: none; /* Remove underline */
@@ -232,4 +237,29 @@
 .crear-receta-container .error-text {
   color: red;
   font-size: 12px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.page-number {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.page-number:hover {
+  background-color: #f0f0f0;
+}
+
+.page-number.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }

@@ -49,7 +49,7 @@ export const AdminPanel = () => {
   return (
     <div className="admin-panel-container">
       <h2 className="title">Panel de administración</h2>
-
+      
       <div className="actions">
         <button
           type="button"

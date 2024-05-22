@@ -108,7 +108,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
 
             <div className="form-group">
               <label>Categoría</label>
-              <select className="form-control" name="categorias" multiple>
+              <select className="form-control select-categorias" name="categorias" multiple>
                 {categorias.map((categoria) => (
                   <option key={categoria.id} value={categoria.id}>
                     {categoria.categorias}
