@@ -1,9 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CrearReceta.css";
-import { BASE_URL } from "../../../Components/utils/config";
+import { fetchCategories, createRecipe } from "../../../api/api";
 
 const CrearReceta = ({ closeModal, fetchRecipes }) => {
+  const [categorias, setCategorias] = useState([]);
   const [validationErrors, setValidationErrors] = useState({});
+
+  useEffect(() => {
+    // Obtener categorías desde la API
+    const getCategorias = async () => {
+      const data = await fetchCategories();
+      if (data) {
+        setCategorias(data);
+      } else {
+        alert("Error al cargar categorías.");
+      }
+    };
+    getCategorias();
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -29,18 +43,6 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     }
 
     try {
-      const response = await fetch(`${BASE_URL}recetas/listar`);
-      if (!response.ok) {
-        throw new Error("Error fetching recipes.");
-      }
-      const data = await response.json();
-
-      const existingRecipe = data.find((recipe) => recipe.nombre === nombre);
-      if (existingRecipe) {
-        setValidationErrors({ nombre: "Esta receta ya existe" });
-        return;
-      }
-
       const receta = {
         nombre,
         descripcion,
@@ -50,28 +52,16 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
         imagenes: imagenes.map((image) => image.trim()),
       };
 
-      const createResponse = await fetch(
-        `${BASE_URL}recetas/crear`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(receta),
-        }
-      );
+      const createResponse = await createRecipe(receta);
 
-      if (createResponse.ok) {
-        if (createResponse.status === 201) {
-          alert("Receta creada exitosamente.");
-          closeModal();
-          fetchRecipes(); // Actualizar la lista de recetas
-        }
-      } else if (createResponse.status === 400) {
-        const validationData = await createResponse.json();
-        setValidationErrors(validationData);
-      } else {
+      if (createResponse.success) {
+        alert("Receta creada exitosamente.");
+        closeModal();
+        fetchRecipes(); // Actualizar la lista de recetas
+      } else if (createResponse.error) {
         alert("No se pudo cargar la receta.");
+      } else {
+        setValidationErrors(createResponse);
       }
     } catch (error) {
       alert("No se pudo conectar con el servidor.");
@@ -91,7 +81,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
             </div>
 
             <div className="form-group">
-              <label>Descripcion</label>
+              <label>Descripción</label>
               <textarea className="form-control" name="descripcion" rows="4" />
               <span className="error-text">{validationErrors.descripcion}</span>
             </div>
@@ -117,18 +107,19 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
             </div>
 
             <div className="form-group">
-              <label>Categoria</label>
+              <label>Categoría</label>
               <select className="form-control" name="categorias" multiple>
-                <option value="1">Desayuno</option>
-                <option value="2">Almuerzo</option>
-                <option value="3">Merienda</option>
-                <option value="4">Cena</option>
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.id}>
+                    {categoria.categorias}
+                  </option>
+                ))}
               </select>
               <span className="error-text">{validationErrors.categoria}</span>
             </div>
 
             <div className="form-group">
-              <label>Imagenes</label>
+              <label>Imágenes</label>
               <input className="form-control" name="imagenes" />
               <span className="error-text">{validationErrors.imagenes}</span>
             </div>

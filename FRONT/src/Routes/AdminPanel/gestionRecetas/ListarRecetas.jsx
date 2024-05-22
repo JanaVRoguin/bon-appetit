@@ -1,45 +1,41 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { BASE_URL } from "../../../Components/utils/config";
+import EditarReceta from "./EditarReceta";
+import {
+  fetchCategories,
+  fetchRecipes,
+  deleteRecipe,
+  updateRecipe,
+} from "../../../api/api"; // Importa las funciones del API
 
 const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
+  const [showEditarReceta, setShowEditarReceta] = useState(false); // Estado para controlar el modal EditarReceta
+  const [selectedRecipeId, setSelectedRecipeId] = useState(null); // Estado para almacenar el ID de la receta seleccionada
 
   useEffect(() => {
     fetchRecipes();
     getCategorias();
   }, []);
 
-  const getCategorias = () => {
-    fetch(`${BASE_URL}categorias/listar`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new Error();
-      })
-      .then((data) => {
-        setCategorias(data);
-      })
-      .catch((error) => {
-        alert("Error al cargar categorías.");
-      });
+  const getCategorias = async () => {
+    // Función asíncrona para obtener las categorías
+    const data = await fetchCategories(); // Utiliza la función fetchCategories del API
+    if (data) {
+      setCategorias(data);
+    } else {
+      alert("Error al cargar categorías.");
+    }
   };
 
-  const borrarReceta = (id) => {
+  const borrarReceta = async (id) => {
+    // Función asíncrona para borrar una receta
     if (window.confirm("¿Estás seguro que deseas eliminar esta receta?")) {
-      fetch(`${BASE_URL}recetas/eliminar/`+ id, {
-        method: "DELETE",
-      })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error();
-          }
-          fetchRecipes(); // Actualizar la lista después de eliminar
-        })
-        .catch((error) => {
-          alert("Error al eliminar la receta.");
-        });
+      const success = await deleteRecipe(id); // Utiliza la función deleteRecipe del API
+      if (success) {
+        fetchRecipes(); // Actualizar la lista después de eliminar
+      } else {
+        alert("Error al eliminar la receta.");
+      }
     }
   };
 
@@ -58,7 +54,6 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
           <div className="categoria-card mostrar-todas">Mostrar todas</div>
         </div>
       </div>
-
       <table className="recetas-table">
         <thead>
           <tr>
@@ -71,7 +66,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
             <th>Modo de preparación</th>
             <th>Categoria</th>
             <th>Imagenes</th>
-            <th>Accion</th>
+            <th>Acción</th> {/* Corregido "Accion" a "Acción" */}
           </tr>
         </thead>
         <tbody>
@@ -100,12 +95,16 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
                   ))}
                 </td>
                 <td className="action-buttons">
-                  <Link
+                  <button
+                    type="button"
                     className="btn edit-btn"
-                    to={`/administracion/recetas/editar/${receta.id}`}
+                    onClick={() => {
+                      setSelectedRecipeId(receta.id); // Establecer el ID de la receta seleccionada
+                      setShowEditarReceta(true); // Mostrar el modal EditarReceta
+                    }}
                   >
                     Editar
-                  </Link>
+                  </button>
                   <button
                     type="button"
                     className="btn delete-btn"
@@ -118,6 +117,22 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
             ))}
         </tbody>
       </table>
+
+      {showEditarReceta && (
+        <div className="modal">
+          <div className="modal-content">
+            <EditarReceta
+              closeModal={() => setShowEditarReceta(false)}
+              fetchRecipes={fetchRecipes}
+              recipeId={selectedRecipeId} // Pasar el ID de la receta seleccionada al componente EditarReceta
+              updateRecipe={updateRecipe} // Pasar la función updateRecipe del API
+              initialRecipe={recipes.find(
+                (recipe) => recipe.id === selectedRecipeId
+              )} // Pasar datos iniciales de la receta seleccionada
+            />
+          </div>
+        </div>
+      )}
     </>
   );
 };
