@@ -8,5 +8,6 @@ export const routes = {
     detail: '/recipe/:id',
     detailTest: '',
     adminPanel: '/administracion/',
-    crearReceta: '/administracion/crear'
+    crearReceta: '/administracion/crear',
+    formRegistroUsuario: '/formRegistro'
 } 
