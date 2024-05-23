@@ -1,7 +1,6 @@
 package com.bonappetit.bonappetitApi.controller;
 
 import com.bonappetit.bonappetitApi.entity.Categoria;
-import com.bonappetit.bonappetitApi.entity.Receta;
 import com.bonappetit.bonappetitApi.service.ICategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
