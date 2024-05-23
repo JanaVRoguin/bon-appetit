@@ -5,7 +5,7 @@ import { useState } from 'react'
 const Navbar = () => {
 
   const [toggle, setToggle] = useState(false)
-  console.log(toggle)
+  //console.log(toggle)
 
   return (
     <nav className="navbar">
