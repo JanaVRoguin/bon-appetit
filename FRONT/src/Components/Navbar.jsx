@@ -22,7 +22,7 @@ const Navbar = () => {
       </ul>
       
       <div className="navbar-right">
-        <button className="navbar-button">Crear Cuenta</button>
+        <Link to={routes.formRegistroUsuario}><button className="navbar-button">Crear Cuenta</button></Link>
         <button className="navbar-button">Iniciar sesión</button>
       </div>
 

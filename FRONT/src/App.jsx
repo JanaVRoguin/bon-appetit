@@ -12,6 +12,7 @@ import AdminPanel from './Routes/AdminPanel/AdminPanel';
 import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
 
 import './App.css'
+import Form from './Components/Form';
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
             <Route path={routes.detail} element={<Detail/>} /> {/* Página de detalle */}
             <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página panel de admin */}
             <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página para crear comida */}
+            <Route path={routes.formRegistroUsuario} element={<Form/>}/>
           </Routes>
         </div>
            <Footer/>
