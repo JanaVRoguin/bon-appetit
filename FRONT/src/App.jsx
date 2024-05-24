@@ -11,6 +11,7 @@ import Detail from './Routes/Detail';
 import AdminPanel from './Routes/AdminPanel/AdminPanel';
 import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
 
+
 import './App.css'
 import Form from './Components/Form';
 

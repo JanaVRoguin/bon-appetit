@@ -144,11 +144,15 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
                   .join(", ")}
               </td>
               <td>
-                <div style={{ maxWidth: "200px" }}>
+                <div className="carousel-container">
                   <Carousel showThumbs={false}>
                     {receta.imagenes.map((imagen, imgIndex) => (
-                      <div key={imgIndex}>
-                        <img src={imagen.urlImg} alt={`Imagen ${imgIndex}`} />
+                      <div key={imgIndex} className="carousel-slide">
+                        <img
+                          src={imagen.urlImg}
+                          alt={`Imagen ${imgIndex}`}
+                          className="carousel-image"
+                        />
                       </div>
                     ))}
                   </Carousel>
@@ -205,27 +209,6 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
           </div>
         </div>
       )}
-      <style>
-        {`
-          .carousel-container {
-            max-width: 300px;
-            margin: 0 auto;
-          }
-          
-          .carousel-slide {
-            text-align: center;
-          }
-          
-          .carousel-image {
-            max-width: 100%;
-            height: auto;
-          }
-          
-          .carousel .control-arrow:before {
-            color: #666;
-          }
-        `}
-      </style>
     </>
   );
 };
