@@ -34,6 +34,12 @@ public class CategoriaController {
         return new ResponseEntity<>(iCategoriaService.buscarCategoria(id),HttpStatus.OK);
     }
 
+    @PutMapping("/actualizar")
+    public ResponseEntity<String> actualizarCategoria(@RequestBody Categoria categoria){
+            iCategoriaService.actualizarCategoria(categoria);
+            return new ResponseEntity<>("Categoria actualizada", HttpStatus.OK);
+    }
+
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarCategoria(@PathVariable Long id){
         iCategoriaService.eliminarCategoria(id);

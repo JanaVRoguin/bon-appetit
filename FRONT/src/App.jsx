@@ -7,19 +7,21 @@ import Desayuno from './Routes/Desayuno';
 import Almuerzo from './Routes/Almuerzo';
 import Mediatarde from './Routes/Mediatarde';
 import Cena from './Routes/Cena';
-import './App.css'
 import Detail from './Routes/Detail';
+import AdminPanel from './Routes/AdminPanel/AdminPanel';
+import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
+
+import './App.css'
+import Form from './Components/Form';
 
 
 function App() {
   
-
   return (
-  
-     
         <div>
            <Navbar/>
            <div className="content"> {/* El contenedor principal para el contenido */}
+
           <Routes>
             <Route path={routes.home} element={<Home />} /> {/* Página de inicio */}
             <Route path={routes.desayuno} element={<Desayuno />} /> {/* Página de desayuno */}
@@ -27,6 +29,9 @@ function App() {
             <Route path={routes.mediatarde} element={<Mediatarde />} /> {/* Página de mediatarde */}
             <Route path={routes.cena} element={<Cena />} /> {/* Página de cena */}
             <Route path={routes.detail} element={<Detail/>} /> {/* Página de detalle */}
+            <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página panel de admin */}
+            <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página para crear comida */}
+            <Route path={routes.formRegistroUsuario} element={<Form/>}/>
           </Routes>
         </div>
            <Footer/>
