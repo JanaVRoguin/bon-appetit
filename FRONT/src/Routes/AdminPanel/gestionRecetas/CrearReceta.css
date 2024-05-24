@@ -118,3 +118,43 @@
 .add-image-btn:hover {
   background-color: #218838;
 }
+
+.form-group .add-image-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.add-image-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.add-image-btn:hover {
+  background-color: #0056b3;
+}
+
+.preview-image {
+  max-width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.success-message button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+}

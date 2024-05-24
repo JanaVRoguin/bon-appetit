@@ -6,7 +6,8 @@ import {
   deleteRecipe,
   updateRecipe,
 } from "../../../api/api";
-
+import { Carousel } from "react-responsive-carousel";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
@@ -143,14 +144,15 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
                   .join(", ")}
               </td>
               <td>
-                {receta.imagenes.map((imagen, imgIndex) => (
-                  <img
-                    key={imgIndex}
-                    src={imagen.urlImg}
-                    width="100"
-                    alt="Receta"
-                  />
-                ))}
+                <div style={{ maxWidth: "200px" }}>
+                  <Carousel showThumbs={false}>
+                    {receta.imagenes.map((imagen, imgIndex) => (
+                      <div key={imgIndex}>
+                        <img src={imagen.urlImg} alt={`Imagen ${imgIndex}`} />
+                      </div>
+                    ))}
+                  </Carousel>
+                </div>
               </td>
               <td className="action-buttons">
                 <button
@@ -203,6 +205,27 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
           </div>
         </div>
       )}
+      <style>
+        {`
+          .carousel-container {
+            max-width: 300px;
+            margin: 0 auto;
+          }
+          
+          .carousel-slide {
+            text-align: center;
+          }
+          
+          .carousel-image {
+            max-width: 100%;
+            height: auto;
+          }
+          
+          .carousel .control-arrow:before {
+            color: #666;
+          }
+        `}
+      </style>
     </>
   );
 };

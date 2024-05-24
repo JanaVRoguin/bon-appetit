@@ -74,10 +74,16 @@ const EditarReceta = ({
   };
 
   const addImageField = () => {
-    setFormData({
-      ...formData,
-      imagenes: [...formData.imagenes, ""],
-    });
+    // Verifica si el último campo de imagen está vacío antes de agregar uno nuevo
+    if (
+      formData.imagenes.length === 0 ||
+      formData.imagenes[formData.imagenes.length - 1].trim() !== ""
+    ) {
+      setFormData({
+        ...formData,
+        imagenes: [...formData.imagenes, ""],
+      });
+    }
   };
 
   const removeImageField = (index) => {
@@ -209,6 +215,11 @@ const EditarReceta = ({
               <label>Imágenes</label>
               {formData.imagenes.map((imagen, index) => (
                 <div key={index} className="image-field">
+                  <img
+                    src={imagen}
+                    alt={`Imagen ${index + 1}`}
+                    className="preview-image"
+                  />
                   <input
                     className="form-control"
                     name={`imagen-${index}`}
@@ -220,13 +231,15 @@ const EditarReceta = ({
                   </button>
                 </div>
               ))}
-              <button
-                type="button"
-                className="add-image-btn"
-                onClick={addImageField}
-              >
-                +
-              </button>
+              <div className="add-image-btn-container">
+                <button
+                  type="button"
+                  className="add-image-btn"
+                  onClick={addImageField}
+                >
+                  +
+                </button>
+              </div>
               <span className="error-text">{validationErrors.imagenes}</span>
             </div>
 
