@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+:root{
+ --colorFondo: #171D2B;
+ --colorFuente-Gold: #EFB810;
+}
+
 /* #root {
 
   padding: 0.5rem;
@@ -11,12 +16,16 @@
 } */
 
 .content {
-  margin-top: 100px;
+  color: var(--colorFuente-Gold);
+  background-color: var(--colorFondo);
   min-height: 100vh;
+  padding-top: 85px ;
+  padding-bottom: 30px;
 }
 /*ESTILOS HEADER*/
 nav {
   width: 100%; /* El navbar ocupa el 100% del ancho de la página */
+  height: 85px;
   display: flex;
   position:fixed;
   top: 0;
@@ -112,11 +121,11 @@ footer {
 
 /****ESTILOS HOME*****/
 .home {
-  
+  background-color: #171D2B;
   align-items: center;
   margin-top: 60px;
   height: 100%;
-  padding: 20px; /* Espacio interno */
+  
 }
 
 .card-container {
@@ -326,6 +335,102 @@ footer {
 
 .menu-hamburguesa {
   display: none;
+}
+.register {
+  border-color:#000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.register-form {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input.input-error {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+.form-buttons {
+  display: flex;
+  justify-content: space-around;
+  
+}
+.register-button, .cancel-button {
+  padding: 10px;
+  background-color: #010711;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.register-button:hover {
+  background-color: #545556;
+}
+.cancel-button {
+  background-color: #ccc;
+  color: black;
+}
+
+.cancel-button:hover {
+  background-color: #999;
+}
+
+.avatar-container {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: #ccc;
+  background-color: #171D2B;
+  display: flex;
+  font-size: 200%;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.logout-button {
+ 
+  color: rgb(3, 2, 2);
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #9e3b3b;
 }
 
 @media (max-width: 920px) {

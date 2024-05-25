@@ -10,14 +10,16 @@ import Cena from './Routes/Cena';
 import Detail from './Routes/Detail';
 import AdminPanel from './Routes/AdminPanel/AdminPanel';
 import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
-
+import Register from './Components/Register';
 import './App.css'
-import Form from './Components/Form';
+import { AuthProvider } from './Context/Auth/AuthContext';
+
 
 
 function App() {
   
   return (
+    <AuthProvider>
         <div>
            <Navbar/>
            <div className="content"> {/* El contenedor principal para el contenido */}
@@ -31,11 +33,12 @@ function App() {
             <Route path={routes.detail} element={<Detail/>} /> {/* Página de detalle */}
             <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página panel de admin */}
             <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página para crear comida */}
-            <Route path={routes.formRegistroUsuario} element={<Form/>}/>
+            <Route path={routes.register} element={<Register/>}/>
           </Routes>
         </div>
            <Footer/>
         </div>
+    </AuthProvider>
    
   )
 }
