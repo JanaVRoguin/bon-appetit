@@ -15,7 +15,7 @@ const EditarReceta = ({
     ingredientes: "",
     instrucciones: "",
     categorias: [],
-    imagenes: "",
+    imagenes: [],
   });
   const [validationErrors, setValidationErrors] = useState({});
   const [showSuccessMessage, setShowSuccessMessage] = useState(false); // Estado para controlar la visibilidad del mensaje de éxito
@@ -31,8 +31,7 @@ const EditarReceta = ({
           ingredientes: initialRecipe.ingredientes || "",
           instrucciones: initialRecipe.instrucciones || "",
           categorias: initialRecipe.categorias.map((cat) => cat.id) || [],
-          imagenes:
-            initialRecipe.imagenes.map((img) => img.urlImg).join(", ") || "",
+          imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [],
         });
       }
     };
@@ -65,6 +64,36 @@ const EditarReceta = ({
     }
   };
 
+  const handleImageChange = (index, value) => {
+    const updatedImages = [...formData.imagenes];
+    updatedImages[index] = value;
+    setFormData({
+      ...formData,
+      imagenes: updatedImages,
+    });
+  };
+
+  const addImageField = () => {
+    // Verifica si el último campo de imagen está vacío antes de agregar uno nuevo
+    if (
+      formData.imagenes.length === 0 ||
+      formData.imagenes[formData.imagenes.length - 1].trim() !== ""
+    ) {
+      setFormData({
+        ...formData,
+        imagenes: [...formData.imagenes, ""],
+      });
+    }
+  };
+
+  const removeImageField = (index) => {
+    const updatedImages = formData.imagenes.filter((_, i) => i !== index);
+    setFormData({
+      ...formData,
+      imagenes: updatedImages,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -95,7 +124,7 @@ const EditarReceta = ({
       ingredientes,
       instrucciones,
       categorias: categorias.map((category) => parseInt(category)),
-      imagenes: imagenes.split(",").map((image) => image.trim()), // Convertir la cadena de URLs a un array
+      imagenes: imagenes.filter((image) => image.trim() !== ""), // Filtrar imágenes vacías
     };
 
     const success = await updateRecipe(recipeId, updatedRecipe);
@@ -184,12 +213,33 @@ const EditarReceta = ({
 
             <div className="form-group">
               <label>Imágenes</label>
-              <input
-                className="form-control"
-                name="imagenes"
-                value={formData.imagenes}
-                onChange={handleChange}
-              />
+              {formData.imagenes.map((imagen, index) => (
+                <div key={index} className="image-field">
+                  <img
+                    src={imagen}
+                    alt={`Imagen ${index + 1}`}
+                    className="preview-image"
+                  />
+                  <input
+                    className="form-control"
+                    name={`imagen-${index}`}
+                    value={imagen}
+                    onChange={(e) => handleImageChange(index, e.target.value)}
+                  />
+                  <button type="button" onClick={() => removeImageField(index)}>
+                    -
+                  </button>
+                </div>
+              ))}
+              <div className="add-image-btn-container">
+                <button
+                  type="button"
+                  className="add-image-btn"
+                  onClick={addImageField}
+                >
+                  +
+                </button>
+              </div>
               <span className="error-text">{validationErrors.imagenes}</span>
             </div>
 

@@ -76,3 +76,85 @@
 .cancel-btn:hover {
   background-color: #5a6268;
 }
+
+.image-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.image-field input {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.image-field button {
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  background-color: #dc3545;
+  border-radius: 4px;
+}
+
+.image-field button:hover {
+  background-color: #c82333;
+}
+
+.add-image-btn {
+  display: inline-block;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  background-color: #28a745;
+  border-radius: 4px;
+}
+
+.add-image-btn:hover {
+  background-color: #218838;
+}
+
+.form-group .add-image-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.add-image-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #007bff;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 20px;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.add-image-btn:hover {
+  background-color: #0056b3;
+}
+
+.preview-image {
+  max-width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.success-message {
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.success-message button {
+  background: none;
+  border: none;
+  color: blue;
+  cursor: pointer;
+}
