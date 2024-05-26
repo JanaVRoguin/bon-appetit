@@ -13,7 +13,7 @@ import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
 import Register from './Components/Register';
 import './App.css'
 import { AuthProvider } from './Context/Auth/AuthContext';
-
+import Login from './Components/Login';
 
 
 function App() {
@@ -34,11 +34,13 @@ function App() {
             <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página panel de admin */}
             <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página para crear comida */}
             <Route path={routes.register} element={<Register/>}/>
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
            <Footer/>
         </div>
     </AuthProvider>
+    
    
   )
 }
