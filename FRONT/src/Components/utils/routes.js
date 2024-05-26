@@ -9,5 +9,6 @@ export const routes = {
     detailTest: '',
     adminPanel: '/administracion/',
     crearReceta: '/administracion/crear',
-    register: '/register'
+    register: '/register',
+    login: '/login',
 } 

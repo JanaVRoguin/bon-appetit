@@ -45,7 +45,7 @@ const Navbar = () => {
         ) : (
           <>
             <Link to={routes.register}><button className="navbar-button">Crear Cuenta</button></Link>
-            <button className="navbar-button">Iniciar sesión</button>
+            <Link to={routes.login}><button className="navbar-button">Iniciar sesión</button></Link>
           </>
         )}
       </div>
