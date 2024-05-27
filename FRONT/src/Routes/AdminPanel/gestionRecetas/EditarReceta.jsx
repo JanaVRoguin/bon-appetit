@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./CrearReceta.css"; // Importa CrearReceta.css para el estilo
-import { fetchCategories, updateRecipe } from "../../../api/api"; // Importa funciones del API
+import "./CrearReceta.css"; // Importa el mismo archivo CSS que CrearReceta.jsx
+import { fetchCategories, updateRecipe } from "../../../api/api";
 
 const EditarReceta = ({
   closeModal,
@@ -18,10 +18,10 @@ const EditarReceta = ({
     imagenes: [],
   });
   const [validationErrors, setValidationErrors] = useState({});
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false); // Estado para controlar la visibilidad del mensaje de éxito
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
-    // Función para obtener categorías y establecer datos iniciales de la receta
+    document.body.style.overflow = "hidden";
     const initializeForm = async () => {
       await getCategorias();
       if (initialRecipe) {
@@ -36,10 +36,12 @@ const EditarReceta = ({
       }
     };
     initializeForm();
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [recipeId, initialRecipe]);
 
   const getCategorias = async () => {
-    // Función asíncrona para obtener las categorías
     const data = await fetchCategories();
     if (data) {
       setCategorias(data);
@@ -74,7 +76,6 @@ const EditarReceta = ({
   };
 
   const addImageField = () => {
-    // Verifica si el último campo de imagen está vacío antes de agregar uno nuevo
     if (
       formData.imagenes.length === 0 ||
       formData.imagenes[formData.imagenes.length - 1].trim() !== ""
@@ -124,14 +125,14 @@ const EditarReceta = ({
       ingredientes,
       instrucciones,
       categorias: categorias.map((category) => parseInt(category)),
-      imagenes: imagenes.filter((image) => image.trim() !== ""), // Filtrar imágenes vacías
+      imagenes: imagenes.filter((image) => image.trim() !== ""),
     };
 
     const success = await updateRecipe(recipeId, updatedRecipe);
     if (success) {
       fetchRecipes();
       closeModal();
-      setShowSuccessMessage(true); // Mostrar el mensaje de éxito
+      setShowSuccessMessage(true);
     } else {
       alert("Error al actualizar la receta.");
     }
@@ -215,16 +216,16 @@ const EditarReceta = ({
               <label>Imágenes</label>
               {formData.imagenes.map((imagen, index) => (
                 <div key={index} className="image-field">
-                  <img
-                    src={imagen}
-                    alt={`Imagen ${index + 1}`}
-                    className="preview-image"
-                  />
                   <input
                     className="form-control"
                     name={`imagen-${index}`}
                     value={imagen}
                     onChange={(e) => handleImageChange(index, e.target.value)}
+                  />
+                  <img
+                    src={imagen}
+                    alt={`Imagen ${index + 1}`}
+                    className="preview-image"
                   />
                   <button type="button" onClick={() => removeImageField(index)}>
                     -

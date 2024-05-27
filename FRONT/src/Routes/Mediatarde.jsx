@@ -2,6 +2,7 @@ import React from 'react';
 import { fakeRecipes } from "../Components/utils/fakeData";
 import Card from '../Components/Card';
 import { useContextGlobal } from '../Components/global.context'
+import CardCategoria from '../Components/CardCategoria';
 
 export const Mediatarde = () => {
 
@@ -14,7 +15,7 @@ export const Mediatarde = () => {
     <div>
       <div className="category-recipes">
       {meriendaRecipes.map(recipe => (
-          <Card 
+          <CardCategoria 
             key={recipe.id}
             title={recipe.nombre}
             image={recipe.imagenes}
