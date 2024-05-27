@@ -140,144 +140,134 @@ const EditarReceta = ({
 
   return (
     <div className="modal">
+      <div className="modal-content crear-receta-container">
+        <div className="form-wrapper">
+          <h2 className="title">Editar Receta</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Nombre</label>
+              <input
+                className="form-control"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+              />
+              <span className="error-text">{validationErrors.nombre}</span>
+            </div>
 
-        <div className="modal-content crear-receta-container">
-          {" "}
-          {/* Esta clase debe ser crear-receta-container */}
-          <div className="form-wrapper">
-            <h2 className="title">Editar Receta</h2>
-            <form onSubmit={handleSubmit}>
-              <div className="form-group">
-                <label>Nombre</label>
-                <input
-                  className="form-control"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                />
-                <span className="error-text">{validationErrors.nombre}</span>
-              </div>
+            <div className="form-group">
+              <label>Descripción</label>
+              <textarea
+                className="form-control"
+                name="descripcion"
+                rows="4"
+                value={formData.descripcion}
+                onChange={handleChange}
+              />
+              <span className="error-text">{validationErrors.descripcion}</span>
+            </div>
 
-              <div className="form-group">
-                <label>Descripción</label>
-                <textarea
-                  className="form-control"
-                  name="descripcion"
-                  rows="4"
-                  value={formData.descripcion}
-                  onChange={handleChange}
-                />
-                <span className="error-text">
-                  {validationErrors.descripcion}
-                </span>
-              </div>
+            <div className="form-group">
+              <label>Ingredientes</label>
+              <input
+                className="form-control"
+                name="ingredientes"
+                value={formData.ingredientes}
+                onChange={handleChange}
+              />
+              <span className="error-text">
+                {validationErrors.ingredientes}
+              </span>
+            </div>
 
-              <div className="form-group">
-                <label>Ingredientes</label>
-                <input
-                  className="form-control"
-                  name="ingredientes"
-                  value={formData.ingredientes}
-                  onChange={handleChange}
-                />
-                <span className="error-text">
-                  {validationErrors.ingredientes}
-                </span>
-              </div>
+            <div className="form-group">
+              <label>Instrucciones</label>
+              <textarea
+                className="form-control"
+                name="instrucciones"
+                rows="4"
+                value={formData.instrucciones}
+                onChange={handleChange}
+              />
+              <span className="error-text">
+                {validationErrors.instrucciones}
+              </span>
+            </div>
 
-              <div className="form-group">
-                <label>Instrucciones</label>
-                <textarea
-                  className="form-control"
-                  name="instrucciones"
-                  rows="4"
-                  value={formData.instrucciones}
-                  onChange={handleChange}
-                />
-                <span className="error-text">
-                  {validationErrors.instrucciones}
-                </span>
-              </div>
-
-              <div className="form-group">
-                <label>Categoría</label>
-                <select
-                  className="form-control"
-                  name="categorias"
-                  multiple
-                  value={formData.categorias}
-                  onChange={handleChange}
-                >
-                  {categorias.map((categoria) => (
-                    <option key={categoria.id} value={categoria.id}>
-                      {categoria.categorias}
-                    </option>
-                  ))}
-                </select>
-                <span className="error-text">
-                  {validationErrors.categorias}
-                </span>
-              </div>
-
-              <div className="form-group">
-                <label>Imágenes</label>
-                {formData.imagenes.map((imagen, index) => (
-                  <div key={index} className="image-field">
-                    <img
-                      src={imagen}
-                      alt={`Imagen ${index + 1}`}
-                      className="preview-image"
-                    />
-                    <input
-                      className="form-control"
-                      name={`imagen-${index}`}
-                      value={imagen}
-                      onChange={(e) => handleImageChange(index, e.target.value)}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImageField(index)}
-                    >
-                      -
-                    </button>
-                  </div>
+            <div className="form-group">
+              <label>Categoría</label>
+              <select
+                className="form-control"
+                name="categorias"
+                multiple
+                value={formData.categorias}
+                onChange={handleChange}
+              >
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.id}>
+                    {categoria.categorias}
+                  </option>
                 ))}
-                <div className="add-image-btn-container">
-                  <button
-                    type="button"
-                    className="add-image-btn"
-                    onClick={addImageField}
-                  >
-                    +
+              </select>
+              <span className="error-text">{validationErrors.categorias}</span>
+            </div>
+
+            <div className="form-group">
+              <label>Imágenes</label>
+              {formData.imagenes.map((imagen, index) => (
+                <div key={index} className="image-field">
+                  <input
+                    className="form-control"
+                    name={`imagen-${index}`}
+                    value={imagen}
+                    onChange={(e) => handleImageChange(index, e.target.value)}
+                  />
+                  <img
+                    src={imagen}
+                    alt={`Imagen ${index + 1}`}
+                    className="preview-image"
+                  />
+                  <button type="button" onClick={() => removeImageField(index)}>
+                    -
                   </button>
                 </div>
-                <span className="error-text">{validationErrors.imagenes}</span>
-              </div>
-
-              <div className="form-actions">
+              ))}
+              <div className="add-image-btn-container">
                 <button
                   type="button"
-                  className="btn cancel-btn"
-                  onClick={closeModal}
+                  className="add-image-btn"
+                  onClick={addImageField}
                 >
-                  Cancelar
-                </button>
-                <button type="submit" className="btn submit-btn">
-                  Guardar cambios
+                  +
                 </button>
               </div>
-            </form>
-            {showSuccessMessage && (
-              <div className="success-message">
-                ¡La receta fue actualizada con éxito!
-                <button onClick={() => setShowSuccessMessage(false)}>
-                  Cerrar
-                </button>
-              </div>
-            )}
-          </div>
+              <span className="error-text">{validationErrors.imagenes}</span>
+            </div>
+
+            <div className="form-actions">
+              <button
+                type="button"
+                className="btn cancel-btn"
+                onClick={closeModal}
+              >
+                Cancelar
+              </button>
+              <button type="submit" className="btn submit-btn">
+                Guardar cambios
+              </button>
+            </div>
+          </form>
+          {showSuccessMessage && (
+            <div className="success-message">
+              ¡La receta fue actualizada con éxito!
+              <button onClick={() => setShowSuccessMessage(false)}>
+                Cerrar
+              </button>
+            </div>
+          )}
         </div>
       </div>
+    </div>
   );
 };
 

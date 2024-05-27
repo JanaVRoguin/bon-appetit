@@ -71,9 +71,23 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const { nombre, descripcion, ingredientes, instrucciones, categorias, imagenes } = formData;
+    const {
+      nombre,
+      descripcion,
+      ingredientes,
+      instrucciones,
+      categorias,
+      imagenes,
+    } = formData;
 
-    if (!nombre || !descripcion || !ingredientes || !instrucciones || categorias.length === 0 || imagenes.length === 0) {
+    if (
+      !nombre ||
+      !descripcion ||
+      !ingredientes ||
+      !instrucciones ||
+      categorias.length === 0 ||
+      imagenes.length === 0
+    ) {
       alert("Por favor ingrese todos los campos.");
       return;
     }
@@ -112,31 +126,63 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Nombre</label>
-              <input className="form-control" name="nombre" value={formData.nombre} onChange={handleChange} />
+              <input
+                className="form-control"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+              />
               <span className="error-text">{validationErrors.nombre}</span>
             </div>
 
             <div className="form-group">
               <label>Descripción</label>
-              <textarea className="form-control" name="descripcion" rows="4" value={formData.descripcion} onChange={handleChange} />
+              <textarea
+                className="form-control"
+                name="descripcion"
+                rows="4"
+                value={formData.descripcion}
+                onChange={handleChange}
+              />
               <span className="error-text">{validationErrors.descripcion}</span>
             </div>
 
             <div className="form-group">
               <label>Ingredientes</label>
-              <input className="form-control" name="ingredientes" value={formData.ingredientes} onChange={handleChange} />
-              <span className="error-text">{validationErrors.ingredientes}</span>
+              <input
+                className="form-control"
+                name="ingredientes"
+                value={formData.ingredientes}
+                onChange={handleChange}
+              />
+              <span className="error-text">
+                {validationErrors.ingredientes}
+              </span>
             </div>
 
             <div className="form-group">
               <label>Instrucciones</label>
-              <textarea className="form-control" name="instrucciones" rows="4" value={formData.instrucciones} onChange={handleChange} />
-              <span className="error-text">{validationErrors.instrucciones}</span>
+              <textarea
+                className="form-control"
+                name="instrucciones"
+                rows="4"
+                value={formData.instrucciones}
+                onChange={handleChange}
+              />
+              <span className="error-text">
+                {validationErrors.instrucciones}
+              </span>
             </div>
 
             <div className="form-group">
               <label>Categoría</label>
-              <select className="form-control select-categorias" name="categorias" multiple value={formData.categorias} onChange={handleChange}>
+              <select
+                className="form-control select-categorias"
+                name="categorias"
+                multiple
+                value={formData.categorias}
+                onChange={handleChange}
+              >
                 {categorias.map((categoria) => (
                   <option key={categoria.id} value={categoria.id}>
                     {categoria.categorias}
@@ -150,19 +196,49 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
               <label>Imágenes</label>
               {formData.imagenes.map((imagen, index) => (
                 <div key={index} className="image-field">
-                  <input className="form-control" name={`imagen-${index}`} value={imagen} onChange={(e) => handleImageChange(index, e.target.value)} />
-                  <button type="button" onClick={() => removeImageField(index)}> - </button>
+                  <input
+                    className="form-control"
+                    name={`imagen-${index}`}
+                    value={imagen}
+                    onChange={(e) => handleImageChange(index, e.target.value)}
+                  />
+                  {imagen && (
+                    <img
+                      src={imagen}
+                      alt={`Imagen ${index + 1}`}
+                      className="preview-image"
+                    />
+                  )}
+                  <button type="button" onClick={() => removeImageField(index)}>
+                    {" "}
+                    -{" "}
+                  </button>
                 </div>
               ))}
               <div className="add-image-btn-container">
-                <button type="button" className="add-image-btn" onClick={addImageField}> + </button>
+                <button
+                  type="button"
+                  className="add-image-btn"
+                  onClick={addImageField}
+                >
+                  {" "}
+                  +{" "}
+                </button>
               </div>
               <span className="error-text">{validationErrors.imagenes}</span>
             </div>
 
             <div className="form-actions">
-              <button type="button" className="btn cancel-btn" onClick={closeModal}>Cancelar</button>
-              <button type="submit" className="btn submit-btn">Crear</button>
+              <button
+                type="button"
+                className="btn cancel-btn"
+                onClick={closeModal}
+              >
+                Cancelar
+              </button>
+              <button type="submit" className="btn submit-btn">
+                Crear
+              </button>
             </div>
           </form>
         </div>
