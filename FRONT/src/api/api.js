@@ -1,9 +1,15 @@
 import { BASE_URL } from "../Components/utils/config";
 
+const token = localStorage.getItem('token');
 // Listar recetas
 export const fetchRecipes = async () => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/listar`);
+    const response = await fetch(`${BASE_URL}recetas/listar`,
+    { headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -23,7 +29,8 @@ export const createRecipe = async (receta) => {
     const response = await fetch(`${BASE_URL}recetas/crear`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(receta),
     });
@@ -45,7 +52,13 @@ export const createRecipe = async (receta) => {
 // Listar categorias
 export const fetchCategories = async () => {
   try {
-    const response = await fetch(`${BASE_URL}categorias/listar`);
+    const response = await fetch(`${BASE_URL}categorias/listar`,
+    { headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }
+    );
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -64,6 +77,10 @@ export const deleteRecipe = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}recetas/eliminar/${id}`, {
       method: "DELETE",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     });
     if (response.ok) {
       return true;
@@ -83,6 +100,7 @@ export const updateRecipe = async (recipeId, updatedData) => {
     const response = await fetch(`${BASE_URL}recetas/actualizar/${recipeId}`, {
       method: "PUT",
       headers: {
+        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),

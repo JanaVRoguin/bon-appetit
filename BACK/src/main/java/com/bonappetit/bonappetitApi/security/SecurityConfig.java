@@ -43,14 +43,30 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.POST, "/auth/registro").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/recetas/listar").permitAll();
+                    http.requestMatchers(HttpMethod.GET,"/categorias/listar").permitAll();
                     // Config endpoint privados
-                    http.requestMatchers(HttpMethod.GET,"/recetas/{id}").hasRole("USER");
+                    http.requestMatchers(HttpMethod.GET,"/recetas/{id}").hasAnyRole("USER", "ADMIN");
+
                     http.requestMatchers(HttpMethod.POST,"/recetas/crear").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/recetas/eliminar/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.PUT,"/recetas/actualizar/{id}").hasRole("ADMIN");
+
                     http.requestMatchers(HttpMethod.GET,"/usuarios/listar").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.GET,"/usuarios/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/usuarios/eliminar/{id}").hasRole("ADMIN");
+
+                    http.requestMatchers(HttpMethod.POST,"/categorias/crear").hasRole("ADMIN");
+
+                    http.requestMatchers(HttpMethod.GET,"/categorias/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE,"/categorias/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT,"/categorias/actualizar/{id}").hasRole("ADMIN");
+
+                    http.requestMatchers(HttpMethod.POST,"/imagenes/crear").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET,"/imagenes/listar").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET,"/imagenes/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE,"/imagenes/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT,"/imagenes/actualizar/{id}").hasRole("ADMIN");
+
                     http.requestMatchers(HttpMethod.POST,"/admin/rolAdmin/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.POST,"/admin/revokeRole/{id}").hasRole("ADMIN");
 

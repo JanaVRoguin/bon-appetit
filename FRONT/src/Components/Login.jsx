@@ -1,13 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/Auth/AuthContext';
+import axios from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    correo: '',
+    contraseña: '',
   });
   const [errors, setErrors] = useState({});
 
@@ -15,12 +16,8 @@ const Login = () => {
     const errors = {};
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      errors.email = 'El formato del email es inválido';
-    }
-
-    if (formData.password.length < 6) {
-      errors.password = 'La contraseña debe tener al menos 6 caracteres';
+    if (!emailRegex.test(formData.correo)) {
+      errors.correo = 'El formato del email es inválido';
     }
 
     setErrors(errors);
@@ -34,20 +31,17 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Inicio de sesión exitoso', formData);
-      login(formData); // Loguear al usuario
+    try {
+          const response = await axios.post('http://localhost:8080/auth/login', formData);
+          console.log('Inicio de sesión exitoso', response.data);
 
-      //*QUITAR COMENTARIOS PARA PROBAR BACKEND */
-      
-      // try {
-      //   const response = await axios.post('http://localhost:8080/auth/login', formData);
-      //   console.log('Inicio de sesión exitoso', response.data);
-      //   login(response.data); // Loguear al usuario
-      //   navigate('/');
-      // } catch (error) {
-      //   console.error('Error en el inicio de sesión:', error);
-      // }
-      navigate('/');
+          localStorage.setItem('token', response.data.token);
+
+          login(response.data); // Loguear al usuario
+          navigate('/');
+      } catch (error) {
+          console.error('Error en el inicio de sesión:', error);
+      }
     }
   };
 
@@ -60,28 +54,28 @@ const Login = () => {
       <h2>Iniciar sesión</h2>
       <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="correo">Email</label>
           <input
             type="email"
-            id="email"
-            name="email"
-            value={formData.email}
+            id="correo"
+            name="correo"
+            value={formData.correo}
             onChange={handleChange}
-            className={errors.email ? 'input-error' : ''}
+            className={errors.correo ? 'input-error' : ''}
           />
-          {errors.email && <p className="error-message">{errors.email}</p>}
+          {errors.correo && <p className="error-message">{errors.correo}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="password">Contraseña</label>
+          <label htmlFor="contraseña">Contraseña</label>
           <input
             type="password"
-            id="password"
-            name="password"
-            value={formData.password}
+            id="contraseña"
+            name="contraseña"
+            value={formData.contraseña}
             onChange={handleChange}
-            className={errors.password ? 'input-error' : ''}
+            className={errors.contraseña ? 'input-error' : ''}
           />
-          {errors.password && <p className="error-message">{errors.password}</p>}
+          {errors.contraseña && <p className="error-message">{errors.contraseña}</p>}
         </div>
         <div className="form-buttons">
           <button type="submit" className="login-button">Iniciar sesión</button>

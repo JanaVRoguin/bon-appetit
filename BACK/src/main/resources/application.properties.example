@@ -1,0 +1,12 @@
+spring.application.name=bonappetitApi
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/bonappetit?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.username=root
+spring.datasource.password=Campeondelmundo_2022
+
+
+spring.security.user.name=fran
+spring.security.user.password=1234
+
+jwt.secret.key=T60aXsnl5KhoRbOzCA0GXBvSvtZlzV37oxK5L2mzzIwjBrMeBGFPyx4RD6ptU16h
