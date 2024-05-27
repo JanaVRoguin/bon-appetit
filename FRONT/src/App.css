@@ -130,72 +130,152 @@ footer {
 
 .card-container {
   width: 100%;
-  /* height: 600px; */
-  display: grid; /* Flexbox para distribuir tarjetas */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuye uniformemente */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   justify-items: center;
-  gap: 20px; /* Espacio entre tarjetas */
+  gap: 10px;
+  
 }
 
 .card {
-
-  text-decoration: none; /* Quita subrayado en enlaces */
+  perspective: 1000px; /* Añade perspectiva para el efecto de giro */
+  text-decoration: none;
   color: black;
-  background-color: #f5f5f5; /* Color de fondo */
-  border: 1px solid #ccc; /* Borde */
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 20px; /* Espacio interno */
-  text-align: center; /* Centra el texto */
-  width: 250px; /* Ancho fijo para tarjetas */
-  transition: transform 0.3s; /* Efecto suave al pasar el cursor */
 }
 
-.card:hover {
-  transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+.card-front, .card-back {
+  width: 325px;
+  height: 549px; /* Altura fija para las tarjetas */
+  border-radius: 10px;
+  text-align: center;
+  background-color: #f5f5f5;
+  backface-visibility: hidden; /* Oculta el reverso al girar */
+  transition: transform 0.6s;
+  position: absolute;
 }
 
+.card-front {
+  background-size: cover; /* Ajusta la imagen de fondo */
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white; /* Color del texto */
+}
+
+.card-front h1 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  margin: 0;
+}
+
+.card-back {
+  transform: rotateY(180deg); /* Posición inicial del reverso */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #731627; /* Color de fondo del reverso */
+  color: #EFB810;
+  font-size: 120%;
+}
+
+.card:hover .card-front {
+  transform: rotateY(180deg); /* Gira el frente al pasar el mouse */
+}
+
+.card:hover .card-back {
+  transform: rotateY(360deg); /* Gira el reverso al pasar el mouse */
+}
+
+.card {
+  position: relative;
+  width: 321px;
+  height: 549px;
+  transform-style: preserve-3d;
+}
 /****ESTILO CARD RECETAS****/
 .recipe-card {
-  background-color: #f5f5f5; /* Color de fondo */
-  border: 1px solid #ccc; /* Borde */
+  perspective: 1000px; /* Añade perspectiva para el efecto de giro */
+  text-decoration: none;
+  color: black;
+  position: relative;
+  width: 250px; /* Ancho fijo para tarjetas */
+  height: 300px; /* Altura fija para tarjetas */
+  transform-style: preserve-3d;
+}
+
+.recipe-card-front, .recipe-card-back {
+  width: 100%;
+  height: 100%;
   border-radius: 10px; /* Bordes redondeados */
   padding: 15px; /* Espacio interno */
   text-align: center; /* Centra el contenido */
-  transition: transform 0.3s; /* Efecto al pasar el cursor */
+  background-color: #f5f5f5; /* Color de fondo */
+  backface-visibility: hidden; /* Oculta el reverso al girar */
+  transition: transform 0.6s;
+  position: absolute; /* Posiciona las caras de la tarjeta en el mismo lugar */
+  top: 0; /* Alinea la parte superior de ambas caras */
+  left: 0; /* Alinea la parte izquierda de ambas caras */
 }
 
-.recipe-card:hover {
-  transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+.recipe-card-front {
+  background-size: cover; /* Ajusta la imagen de fondo */
+  background-position: center;
+  display: flex;
+  align-items: flex-end; /* Alinea el título en la parte inferior */
+  justify-content: flex-start; /* Alinea el título a la izquierda */
+  color: white; /* Color del texto */
 }
 
-.recipe-card-image {
-  width: 100%; /* Imagen ocupa todo el ancho */
-  border-radius: 10px; /* Bordes redondeados */
+.recipe-card-front h3 {
+  position: absolute;
+  bottom: 10px;
+  left: 10px; /* Posiciona el título a la izquierda */
+  margin: 0;
 }
 
-.recipe-card-title {
-  margin: 10px 0; /* Espacio para el título */
+.recipe-card-back {
+  transform: rotateY(180deg); /* Posición inicial del reverso */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #731627; /* Color de fondo del reverso */
+  flex-direction: column; /* Apila el contenido en columna */
+}
+
+.recipe-card:hover .recipe-card-front {
+  transform: rotateY(180deg); /* Gira el frente al pasar el mouse */
+}
+
+.recipe-card:hover .recipe-card-back {
+  transform: rotateY(360deg); /* Gira el reverso al pasar el mouse */
+}
+
+.recipe-card-category {
+  font-size: 1rem; /* Tamaño de fuente para la categoría */
+  color: #EFB810; /* Color del texto para la categoría */
+  margin-bottom: 10px; /* Espacio entre la categoría y la descripción */
 }
 
 .recipe-card-description {
   font-size: 0.9rem; /* Tamaño de fuente para la descripción */
-  color: #555; /* Color del texto para la descripción */
+  color: #EFB810; /* Color del texto para la descripción */
 }
 
-.category-recipes {
-  margin-top: 80px;
-  display: grid; /* Usar CSS Grid en lugar de Flexbox */
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
-  gap: 20px; /* Espacio entre tarjetas */
-  padding: 20px; /* Espacio interno */
-}
+
+
 
 /*ESTILOS SECCION RECOMENDADOS*/
-
+.recommended-section {
+  padding-top: 2%;
+  padding: 10%;
+}
 .recommended-grid {
+  
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cinco columnas */
-  gap: 20px; /* Espacio entre tarjetas */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cinco columnas */
+  gap: 10px; /* Espacio entre tarjetas */
 }
 
 /* *Esta parte no es necesaria se puede llegar a quitar
@@ -208,7 +288,8 @@ footer {
 */
 
 .titulo-recomendados{
-  margin-top: 60px;
+  margin-bottom: 3%;
+  margin-left: 1%;
 }
 
 /*ESTILO BARRA BUSQUEDA*/
@@ -220,14 +301,22 @@ footer {
   margin: 40px auto; /* Margen para el contenedor */
 }
 
+.search-bar-container {
+  position: relative; /* Posiciona el contenedor relativamente */
+  width: 550px; /* Ancho del contenedor */
+}
+.search-bar input::placeholder {
+  color: #d8d6d6; /* Cambia el color del texto del placeholder */
+  opacity: 100%; /* Asegúrate de que la opacidad esté al 100% */
+}
 .search-bar input {
-  width: 300px; /* Limita el ancho del campo de entrada */
-  padding: 10px; /* Espacio interno */
-  border-radius: 10px; /* Bordes redondeados */
-  border: 1px solid #ccc; /* Borde */
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para un aspecto moderno */
+  background-color: #545556;
+  width: 100%; /* El campo de entrada ocupa todo el ancho del contenedor */
+  padding: 10px 40px 10px 10px; /* Espacio interno con espacio para el botón */
+  border-radius: 30px; /* Bordes redondeados */
   outline: none; /* Quita el contorno azul al enfocar */
   transition: all 0.3s; /* Transición suave para efectos */
+  color: #f0efef;
 }
 
 .search-bar input:hover,
@@ -235,19 +324,82 @@ footer {
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor o enfocar */
 }
 
-.search-bar button {
-  background: rgb(228, 226, 226); /* Fondo transparente */
+.search-button {
+  position: absolute; /* Posiciona el botón absolutamente */
+  right: 1px; /* Desplaza el botón hacia la derecha */
+  top: 50%; /* Centra verticalmente */
+  transform: translateY(-50%); /* Ajusta la posición vertical */
+  background-color: #8f8e8e; /* Color de fondo del botón */
   border: none; /* Sin borde */
-  border-radius: 12px;
-  margin-left: 10px; /* Espacio entre el input y el botón */
-  padding: 10px; /* Espacio interno */
+  border-radius: 50%; /* Hace el botón circular */
+  width: 36px; /* Ancho del botón */
+  height: 36px; /* Alto del botón */
+  display: flex; /* Usar flexbox para centrar el contenido */
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
   cursor: pointer; /* Cambia el cursor al pasar el ratón */
   transition: all 0.3s; /* Transición suave */
 }
 
-.search-bar button:hover {
-  transform: scale(1.1); /* Efecto al pasar el cursor */
+.search-button:hover {
+  transform: translateY(-50%) scale(1.1); /* Efecto al pasar el cursor */
 }
+
+.search-icon {
+  width: 25px; /* Ajusta el tamaño del ícono */
+  height: 25px; /* Ajusta el tamaño del ícono */
+}
+
+/* Estilos para las tarjetas de categorías */
+.card-categoria {
+  background-color: #f5f5f5; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  border-radius: 10px; /* Bordes redondeados */
+  overflow: hidden; /* Ocultar el contenido desbordado */
+  transition: transform 0.3s; /* Efecto al pasar el cursor */
+  text-align: left; /* Alinear el texto a la izquierda */
+}
+
+.card-categoria:hover {
+  transform: scale(1.05); /* Efecto de aumento al pasar el cursor */
+}
+
+.card-categoria img {
+  width: 100%; /* Imagen ocupa todo el ancho */
+  border-bottom: 1px solid #ccc; /* Borde inferior */
+}
+
+.card-categoria-content {
+  padding: 15px; /* Espacio interno */
+}
+
+.card-categoria-title {
+  margin: 10px 0; /* Espacio para el título */
+}
+
+.card-categoria-description {
+  font-size: 0.9rem; /* Tamaño de fuente para la descripción */
+  color: #555; /* Color del texto para la descripción */
+}
+
+.card-categoria-category span {
+  display: inline-block; /* Mostrar como bloque en línea */
+  background-color: #e0e0e0; /* Color de fondo */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 5px 10px; /* Espacio interno */
+  margin-right: 5px; /* Espacio entre etiquetas */
+  font-size: 0.8rem; /* Tamaño de fuente */
+  color: #333; /* Color del texto */
+}
+
+.category-recipes {
+  margin-top: 80px;
+  display: grid; /* Usar CSS Grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
+  gap: 20px; /* Espacio entre tarjetas */
+  padding: 20px; /* Espacio interno */
+}
+
 
 
 @keyframes logo-spin {
@@ -362,7 +514,7 @@ label {
 
 input {
   padding: 10px;
-  border: 1px solid #ccc;
+  
   border-radius: 5px;
   font-size: 16px;
 }
