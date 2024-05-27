@@ -1,6 +1,7 @@
 import React from 'react';
 import { useContextGlobal } from '../Components/global.context'
 import Card from '../Components/Card';
+import CardCategoria from '../Components/CardCategoria';
 
 const Almuerzo = () => {
   const { state } = useContextGlobal();
@@ -13,7 +14,7 @@ const Almuerzo = () => {
     <div>
       <div className="category-recipes">
         {almuerzoRecipes.map(recipe => (
-          <Card 
+          <CardCategoria
             key={recipe.id}
             title={recipe.nombre}
             image={recipe.imagenes}

@@ -2,6 +2,7 @@ import React from 'react';
 import { fakeRecipes } from '../Components/utils/fakeData';
 import Card from '../Components/Card';
 import { useContextGlobal } from '../Components/global.context'
+import CardCategoria from '../Components/CardCategoria';
 
 export const Cena = () => {
   const { state } = useContextGlobal();
@@ -13,7 +14,7 @@ export const Cena = () => {
   return (
     <div className="category-recipes"> {/* Contenedor para las tarjetas */}
         {cenaRecipes.map(recipe => (
-          <Card 
+          <CardCategoria 
             key={recipe.id}
             title={recipe.nombre}
             image={recipe.imagenes}
