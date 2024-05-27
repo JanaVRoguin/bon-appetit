@@ -1,4 +1,5 @@
 import Card from '../Components/Card';
+import CardCategoria from '../Components/CardCategoria';
 import { useContextGlobal } from '../Components/global.context'
 
 export const Desayuno = () => {
@@ -12,7 +13,7 @@ export const Desayuno = () => {
   return (
     <div className="category-recipes"> {/* Contenedor para las tarjetas */}
       {desayunoRecipes.map(recipe => (
-          <Card 
+          <CardCategoria 
             key={recipe.id}
             title={recipe.nombre}
             image={recipe.imagenes}
