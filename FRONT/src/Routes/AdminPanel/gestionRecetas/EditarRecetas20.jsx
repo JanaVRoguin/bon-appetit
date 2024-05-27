@@ -140,7 +140,7 @@ const EditarReceta = ({
 
   return (
     <div className="modal">
-
+      <div className="modal-content-wrapper">
         <div className="modal-content crear-receta-container">
           {" "}
           {/* Esta clase debe ser crear-receta-container */}
@@ -278,6 +278,7 @@ const EditarReceta = ({
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
