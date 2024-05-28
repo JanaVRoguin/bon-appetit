@@ -1,15 +1,13 @@
-import { Link } from 'react-router-dom'
-import { routes } from './utils/routes'
-import { useContext, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { routes } from './utils/routes';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../Context/Auth/AuthContext';
-
 
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
 
   const getInitial = (name) => {
-    console.log(user);
     return name ? name.charAt(0).toUpperCase() : '';
   };
 
@@ -38,7 +36,7 @@ const Navbar = () => {
         {user ? (
           <div className="avatar-container">
             <div className="avatar">
-              {getInitial(user.name)}
+              {getInitial(user.nombre)}
             </div>
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
           </div>
@@ -68,4 +66,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar
+export default Navbar;
