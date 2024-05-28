@@ -138,6 +138,21 @@
   background-color: #c82333;
 }
 
+/* Scrollable container for image fields */
+.image-container {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto;
+  border: 1px solid #ccc; /* Optional: to give a border around the scrollable area */
+  padding: 10px; /* Optional: to add some padding inside the container */
+}
+
+.preview-image {
+  max-width: 100px;
+  height: auto;
+  margin-right: 10px;
+}
+
+/* Add image button styles */
 .add-image-btn-container {
   display: flex;
   justify-content: center;
@@ -157,12 +172,6 @@
 
 .add-image-btn:hover {
   background-color: #0056b3;
-}
-
-.preview-image {
-  max-width: 100px;
-  height: auto;
-  margin-right: 10px;
 }
 
 /* Success message styles */
