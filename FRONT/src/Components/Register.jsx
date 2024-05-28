@@ -1,36 +1,37 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/Auth/AuthContext';
+import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
-    name: '',
-    lastName: '',
-    email: '',
-    password: '',
+    nombre: '',
+    apellido: '',
+    correo: '',
+    contraseña: '',
   });
   const [errors, setErrors] = useState({});
 
   const validate = () => {
     const errors = {};
 
-    if (formData.name.length < 4) {
-      errors.name = 'El nombre debe tener al menos 4 caracteres';
+    if (formData.nombre.length < 4) {
+      errors.nombre = 'El nombre debe tener al menos 4 caracteres';
     }
 
-    if (formData.lastName.length < 4) {
-      errors.lastName = 'El apellido debe tener al menos 4 caracteres';
+    if (formData.apellido.length < 4) {
+      errors.apellido = 'El apellido debe tener al menos 4 caracteres';
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      errors.email = 'El formato del email es inválido';
+    if (!emailRegex.test(formData.correo)) {
+      errors.correo = 'El formato del email es inválido';
     }
 
-    if (!/[A-Z]/.test(formData.password)) {
-      errors.password = 'La contraseña debe tener al menos una letra mayúscula';
+    if (!/[A-Z]/.test(formData.contraseña)) {
+      errors.contraseña = 'La contraseña debe tener al menos una letra mayúscula';
     }
 
     setErrors(errors);
@@ -41,23 +42,36 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Registro exitoso', formData);
-      login(formData); // Loguear al usuario
-      
-      //*QUITAR COMENTARIOS PARA PROBAR BACKEND */
-     
-      // try {
-      //   const response = await axios.post('http://localhost:8080/auth/login', formData);
-      //   console.log('Registro exitoso', response.data);
-      //   login(response.data); // Loguear al usuario
-      //   navigate('/');
-      // } catch (error) {
-      //   console.error('Error en el registro:', error);
-      // }
-      navigate('/');
+
+    try {
+        const response = await axios.post('http://localhost:8080/auth/registro', formData);
+        console.log('Registro exitoso', response.data);
+
+        try {
+          const loginResponse = await axios.post('http://localhost:8080/auth/login', {
+            correo: formData.correo,
+            contraseña: formData.contraseña,
+          });
+          console.log('Inicio de sesión exitoso', loginResponse.data);
+          
+          // Guardar token en localStorage
+          localStorage.setItem('token', loginResponse.data.token);
+          
+          // Loguear al usuario
+          login(loginResponse.data);
+          navigate('/');
+        } catch (loginError) {
+          console.error('Error en el inicio de sesión:', loginError);
+        }
+
+        login(response.data); // Loguear al usuario
+        navigate('/');
+      } catch (error) {
+        console.error('Error en el registro:', error);
+      }
     }
   };
 
@@ -70,52 +84,52 @@ const Register = () => {
       <h2>Registrarse</h2>
       <form onSubmit={handleSubmit} className="register-form">
         <div className="form-group">
-          <label htmlFor="name">Nombre</label>
+          <label htmlFor="nombre">Nombre</label>
           <input
             type="text"
-            id="name"
-            name="name"
-            value={formData.name}
+            id="nombre"
+            name="nombre"
+            value={formData.nombre}
             onChange={handleChange}
-            className={errors.name ? 'input-error' : ''}
+            className={errors.nombre ? 'input-error' : ''}
           />
-          {errors.name && <p className="error-message">{errors.name}</p>}
+          {errors.nombre && <p className="error-message">{errors.nombre}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="lastName">Apellido</label>
+          <label htmlFor="apellido">Apellido</label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
-            value={formData.lastName}
+            id="apellido"
+            name="apellido"
+            value={formData.apellido}
             onChange={handleChange}
-            className={errors.lastName ? 'input-error' : ''}
+            className={errors.apellido ? 'input-error' : ''}
           />
-          {errors.lastName && <p className="error-message">{errors.lastName}</p>}
+          {errors.apellido && <p className="error-message">{errors.apellido}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="correo">Email</label>
           <input
             type="email"
-            id="email"
-            name="email"
-            value={formData.email}
+            id="correo"
+            name="correo"
+            value={formData.correo}
             onChange={handleChange}
-            className={errors.email ? 'input-error' : ''}
+            className={errors.correo ? 'input-error' : ''}
           />
-          {errors.email && <p className="error-message">{errors.email}</p>}
+          {errors.correo && <p className="error-message">{errors.correo}</p>}
         </div>
         <div className="form-group">
-          <label htmlFor="password">Contraseña</label>
+          <label htmlFor="contraseña">Contraseña</label>
           <input
             type="password"
-            id="password"
-            name="password"
-            value={formData.password}
+            id="contraseña"
+            name="contraseña"
+            value={formData.contraseña}
             onChange={handleChange}
-            className={errors.password ? 'input-error' : ''}
+            className={errors.contraseña ? 'input-error' : ''}
           />
-          {errors.password && <p className="error-message">{errors.password}</p>}
+          {errors.contraseña && <p className="error-message">{errors.contraseña}</p>}
         </div>
         <div className="form-buttons">
           <button type="submit" className="register-button">Registrarse</button>

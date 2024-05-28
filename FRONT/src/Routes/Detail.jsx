@@ -13,8 +13,13 @@ export const Detail = () => {
     const url = `http://localhost:8080/recetas/${params.id}`;
     const {dispatch, state} = useContextGlobal();
     const {nombre, imagenes, categorías, descripcion, ingredientes, instrucciones} = state.recipeSelected;
+    const token = localStorage.getItem('token');
+
     useEffect(() => {
-      axios(url)
+      axios(url, { headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      })
       .then((response) => {
         dispatch({type: 'GET_SELECTED', payload: response.data})
       })
