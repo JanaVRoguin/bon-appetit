@@ -1,11 +1,11 @@
 import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"
 import axios from "axios";
-import ImagesContainer from "./ImagesContainer";
 import RecipeDetails from "./RecipeDetails";
 import NutritionalDetails from "./NutritionalDetails";
 import RecipeCalendar from "./RecipeCalendar";
 import { ContextGlobal } from "../../Context";
+import { ImagesContainer } from "./ImagesContainer";
 
 export const Detail = () => {
     const params = useParams();
