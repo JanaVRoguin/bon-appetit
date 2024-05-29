@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../Context/Auth/AuthContext';
 import axios from 'axios';
+import { AuthContext } from '../../Context';
 
-const Register = () => {
+export const Register = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
@@ -139,5 +139,3 @@ const Register = () => {
     </div>
   );
 };
-
-export default Register;

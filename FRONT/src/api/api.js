@@ -1,6 +1,6 @@
-import { BASE_URL } from "../Components/utils/config";
+import { BASE_URL } from "../utils/config";
 
-const token = localStorage.getItem('token');
+const token = JSON.parse( localStorage.getItem('token') );
 // Listar recetas
 export const fetchRecipes = async () => {
   try {
