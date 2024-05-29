@@ -1,8 +1,8 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
-import { reducer } from "./Reducers/reducer"
+import { reducer } from "./reducer"
 
-const ContextGlobal = createContext()
+export const ContextGlobal = createContext()
 
 const initialState = {theme: false, 
                         data: [], 
@@ -10,7 +10,7 @@ const initialState = {theme: false,
                         recipeSelected: {}};
 
 
-const ContextProvider = ({ children }) => {
+export const ContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
     //Petición a la API
@@ -31,5 +31,4 @@ return (
 )
 }
 
-export default ContextProvider
 export const useContextGlobal = () => useContext(ContextGlobal);

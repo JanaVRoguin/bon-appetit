@@ -1,10 +1,10 @@
-import React from 'react';
-import { useContextGlobal } from '../Components/global.context'
-import Card from '../Components/Card';
-import CardCategoria from '../Components/CardCategoria';
+import { useContext } from 'react';
+import { ContextGlobal } from '../Context';
+// import Card from './Card';
+import { CardCategoria } from './CardCategoria';
 
-const Almuerzo = () => {
-  const { state } = useContextGlobal();
+export const Almuerzo = (prop) => {
+  const { state } = useContext(ContextGlobal);
 
   const almuerzoRecipes = state.data.filter(recipe =>
     recipe.categorias.some(category => category.categorias === 'Almuerzo')
@@ -28,4 +28,3 @@ const Almuerzo = () => {
   );
 };
 
-export default Almuerzo;

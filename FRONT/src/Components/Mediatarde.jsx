@@ -1,12 +1,11 @@
-import React from 'react';
-import { fakeRecipes } from "../Components/utils/fakeData";
-import Card from '../Components/Card';
-import { useContextGlobal } from '../Components/global.context'
-import CardCategoria from '../Components/CardCategoria';
+import { useContext } from 'react';
+import { ContextGlobal } from '../Context';
+// import Card from './Card';
+import { CardCategoria } from './CardCategoria';
 
 export const Mediatarde = () => {
 
-  const { state } = useContextGlobal();
+  const { state } = useContext(ContextGlobal);
 
   const meriendaRecipes = state.data.filter(recipe =>
     recipe.categorias.some(category => category.categorias === 'Merienda')
@@ -15,7 +14,7 @@ export const Mediatarde = () => {
     <div>
       <div className="category-recipes">
       {meriendaRecipes.map(recipe => (
-          <CardCategoria 
+          <CardCategoria
             key={recipe.id}
             title={recipe.nombre}
             image={recipe.imagenes}
@@ -29,5 +28,3 @@ export const Mediatarde = () => {
     </div>
   );
 };
-
-export default Mediatarde;

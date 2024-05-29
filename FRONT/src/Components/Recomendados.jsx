@@ -1,11 +1,11 @@
-import React from 'react';
-import { getRandomElements } from '../Components/utils/randomElements'; // Función para elegir aleatoriamente
-import Card from './Card'; // Componente para mostrar cada tarjeta
-import { useContextGlobal } from '../Components/global.context'
+import { useContext } from 'react';
+import { ContextGlobal } from '../Context';
+import { getRandomElements } from '../utils/randomElements'; // Función para elegir aleatoriamente
+import { Card } from './Card';
 
-const Recomendados = () => {
+export const Recomendados = () => {
   
-  const {state} = useContextGlobal()
+  const {state} = useContext(ContextGlobal)
   const randomRecipes = getRandomElements(state.data, 10);
 
   return (
@@ -29,5 +29,3 @@ const Recomendados = () => {
     </>
   );
 };
-
-export default Recomendados;

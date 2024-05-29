@@ -1,7 +1,6 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Card = ({ id, title, image, description, category }) => {
+export const Card = ({ id, title, image, description, category }) => {
   const imageUrl = image?.length > 0 ? image[0].urlImg : '';
 
   // Verifica si category es un array antes de mapearlo
@@ -21,5 +20,3 @@ const Card = ({ id, title, image, description, category }) => {
     </Link>
   );
 };
-
-export default Card;
