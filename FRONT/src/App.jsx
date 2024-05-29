@@ -1,47 +1,18 @@
-import Navbar from './Components/Navbar'
-import Footer from './Components/Footer'
-import {Route, Routes,   } from 'react-router-dom';
-import { routes } from './Components/utils/routes';
-import Home from './Routes/Home';
-import Desayuno from './Routes/Desayuno';
-import Almuerzo from './Routes/Almuerzo';
-import Mediatarde from './Routes/Mediatarde';
-import Cena from './Routes/Cena';
-import Detail from './Routes/Detail';
-import AdminPanel from './Routes/AdminPanel/AdminPanel';
-import CrearReceta from './Routes/AdminPanel/gestionRecetas/CrearReceta';
-import Register from './Components/Register';
-import './App.css'
+import { AppRouter } from './Routes/AppRouter';
 import { AuthProvider } from './Context/Auth/AuthContext';
-import Login from './Components/Login';
-
+import { ContextProvider } from './Context';
+import { Footer, Navbar } from './Layouts';
+import './App.css'
 
 function App() {
-  
   return (
     <AuthProvider>
-        <div>
-           <Navbar/>
-           <div className="content"> {/* El contenedor principal para el contenido */}
-
-          <Routes>
-            <Route path={routes.home} element={<Home />} /> {/* Página de inicio */}
-            <Route path={routes.desayuno} element={<Desayuno />} /> {/* Página de desayuno */}
-            <Route path={routes.almuerzo} element={<Almuerzo />} /> {/* Página de almuerzo */}
-            <Route path={routes.mediatarde} element={<Mediatarde />} /> {/* Página de mediatarde */}
-            <Route path={routes.cena} element={<Cena />} /> {/* Página de cena */}
-            <Route path={routes.detail} element={<Detail/>} /> {/* Página de detalle */}
-            <Route path={routes.adminPanel} element={<AdminPanel/>} /> {/* Página panel de admin */}
-            <Route path={routes.crearReceta} element={<CrearReceta/>} /> {/* Página para crear comida */}
-            <Route path={routes.register} element={<Register/>}/>
-            <Route path="/login" element={<Login />} />
-          </Routes>
-        </div>
-           <Footer/>
-        </div>
+      <ContextProvider>
+        <Navbar/>
+        <AppRouter/>
+        <Footer/>
+      </ContextProvider>
     </AuthProvider>
-    
-   
   )
 }
 

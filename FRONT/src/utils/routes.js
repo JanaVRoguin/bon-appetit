@@ -1,4 +1,3 @@
-
 export const routes = {
     home: '/',
     desayuno: '/desayuno',

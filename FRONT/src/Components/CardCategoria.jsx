@@ -1,8 +1,7 @@
 // CardCategoria.js
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const CardCategoria = ({ id, title, image, description, category }) => {
+export const CardCategoria = ({ id, title, image, description, category }) => {
   const imageUrl = image?.length > 0 ? image[0].urlImg : '';
 
   return (
@@ -22,5 +21,3 @@ const CardCategoria = ({ id, title, image, description, category }) => {
     </div>
   );
 };
-
-export default CardCategoria;

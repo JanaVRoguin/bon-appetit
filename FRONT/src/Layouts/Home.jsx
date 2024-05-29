@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Recomendados from '../Components/Recomendados';
-import SearchBar from '../Components/SearchBar';
+import { Recomendados, SearchBar } from '../Components';
 
 export const Home = () => {
   const handleSearch = (term) => {
@@ -31,10 +30,9 @@ export const Home = () => {
         ))}
       </div>
       <div>
-        <Recomendados/>
+        <Recomendados />
       </div>
     </div>
   );
 };
 
-export default Home;

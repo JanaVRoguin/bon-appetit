@@ -1,19 +1,19 @@
+import { useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom"
-import { useContextGlobal } from "../Components/global.context";
-import { useEffect } from "react";
 import axios from "axios";
-import ImagesContainer from "../Components/Detail/ImagesContainer";
-import RecipeDetails from "../Components/Detail/RecipeDetails";
-import NutritionalDetails from "../Components/Detail/NutritionalDetails";
-import RecipeCalendar from "../Components/Detail/RecipeCalendar";
+import ImagesContainer from "./ImagesContainer";
+import RecipeDetails from "./RecipeDetails";
+import NutritionalDetails from "./NutritionalDetails";
+import RecipeCalendar from "./RecipeCalendar";
+import { ContextGlobal } from "../../Context";
 
 export const Detail = () => {
     const params = useParams();
     const navigate = useNavigate()
     const url = `http://localhost:8080/recetas/${params.id}`;
-    const {dispatch, state} = useContextGlobal();
+    const {dispatch, state} = useContext( ContextGlobal );
     const {nombre, imagenes, categorías, descripcion, ingredientes, instrucciones} = state.recipeSelected;
-    const token = localStorage.getItem('token');
+    const token = JSON.parse(localStorage.getItem('token'));
 
     useEffect(() => {
       axios(url, { headers: {
@@ -50,5 +50,3 @@ export const Detail = () => {
     </>
   )
 }
-
-export default Detail

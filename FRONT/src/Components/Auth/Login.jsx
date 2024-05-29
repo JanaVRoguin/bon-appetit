@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../Context/Auth/AuthContext';
 import axios from 'axios';
+import { AuthContext } from '../../Context';
 
-const Login = () => {
+export const Login = () => {
   const navigate = useNavigate();
   const { login } = useContext(AuthContext);
   const [formData, setFormData] = useState({
@@ -33,12 +33,10 @@ const Login = () => {
     if (validate()) {
     try {
           const response = await axios.post('http://localhost:8080/auth/login', formData);
-          console.log('Inicio de sesión exitoso', response.data);
-
-          localStorage.setItem('token', response.data.token);
-
+          // console.log('Inicio de sesión exitoso', response.data);
+          // localStorage.setItem('token', JSON.stringify(response.data.token) );
           login(response.data); // Loguear al usuario
-          navigate('/');
+          // navigate('/');
       } catch (error) {
           console.error('Error en el inicio de sesión:', error);
       }
@@ -85,5 +83,3 @@ const Login = () => {
     </div>
   );
 };
-
-export default Login;

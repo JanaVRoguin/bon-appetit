@@ -1,10 +1,10 @@
-import { Link } from 'react-router-dom';
-import { routes } from './utils/routes';
-import { useContext, useState } from 'react';
-import { AuthContext } from '../Context/Auth/AuthContext';
+import { useContext, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { routes } from '../utils/routes'
+import { AuthContext } from '../Context';
 
-const Navbar = () => {
-  const { user, logout } = useContext(AuthContext);
+export const Navbar = () => {
+  const { authState: { logged }, logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
 
   const getInitial = (name) => {
@@ -33,10 +33,10 @@ const Navbar = () => {
       </ul>
 
       <div className="navbar-right">
-        {user ? (
+        {logged ? (
           <div className="avatar-container">
             <div className="avatar">
-              {getInitial(user.nombre)}
+              {/* {getInitial(user.name)} */}
             </div>
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
           </div>
@@ -65,5 +65,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;
