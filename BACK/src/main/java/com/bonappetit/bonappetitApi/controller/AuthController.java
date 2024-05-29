@@ -47,10 +47,15 @@ public class AuthController {
                             loginRequest.getCorreo(), loginRequest.getContraseña()
                     )
             );
-
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtil.generateToken(authentication);
-            return ResponseEntity.ok(new JWTResponse(jwt));
+
+            // Obtener el usuario y sus detalles
+            Usuario usuario = usuarioService.findByCorreo(loginRequest.getCorreo());
+            String nombre = usuario.getNombre();
+            String rol = usuario.getRoles().stream().findFirst().get().getRoleEnum().toString();
+
+            return ResponseEntity.ok(new JWTResponse(jwt, nombre, rol));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }
