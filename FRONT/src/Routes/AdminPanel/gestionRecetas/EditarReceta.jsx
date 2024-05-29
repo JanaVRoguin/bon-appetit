@@ -214,24 +214,29 @@ const EditarReceta = ({
 
             <div className="form-group">
               <label>Imágenes</label>
-              {formData.imagenes.map((imagen, index) => (
-                <div key={index} className="image-field">
-                  <input
-                    className="form-control"
-                    name={`imagen-${index}`}
-                    value={imagen}
-                    onChange={(e) => handleImageChange(index, e.target.value)}
-                  />
-                  <img
-                    src={imagen}
-                    alt={`Imagen ${index + 1}`}
-                    className="preview-image"
-                  />
-                  <button type="button" onClick={() => removeImageField(index)}>
-                    -
-                  </button>
-                </div>
-              ))}
+              <div className="image-container">
+                {formData.imagenes.map((imagen, index) => (
+                  <div key={index} className="image-field">
+                    <input
+                      className="form-control"
+                      name={`imagen-${index}`}
+                      value={imagen}
+                      onChange={(e) => handleImageChange(index, e.target.value)}
+                    />
+                    <img
+                      src={imagen}
+                      alt={`Imagen ${index + 1}`}
+                      className="preview-image"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImageField(index)}
+                    >
+                      -
+                    </button>
+                  </div>
+                ))}
+              </div>
               <div className="add-image-btn-container">
                 <button
                   type="button"
