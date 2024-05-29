@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import "./AdminPanel.css";
 import ListarRecetas from "./gestionRecetas/ListarRecetas";
 import CrearReceta from "./gestionRecetas/CrearReceta";
+import ListUsers from "./gestionUsuarios/ListUsers"; // Importa ListUsers
 import { fetchRecipes } from "../../api/api";
 
 export const AdminPanel = () => {
   const [showRecetas, setShowRecetas] = useState(false);
   const [showCrearReceta, setShowCrearReceta] = useState(false);
+  const [showUsers, setShowUsers] = useState(false); // Estado para mostrar ListUsers
   const [isMobile, setIsMobile] = useState(false);
   const [recipes, setRecipes] = useState([]); // Estado para almacenar la lista de recetas
 
@@ -49,7 +51,6 @@ export const AdminPanel = () => {
   return (
     <div className="admin-panel-container">
       <h2 className="title">Panel de administración</h2>
-      
       <div className="actions">
         <button
           type="button"
@@ -66,12 +67,17 @@ export const AdminPanel = () => {
         >
           Agregar Receta
         </button>
+        <button
+          type="button"
+          className="btn create-btn"
+          onClick={() => setShowUsers(!showUsers)}
+        >
+          {showUsers ? "Ocultar usuarios" : "Administrar Usuarios"}
+        </button>
       </div>
-
       {showRecetas && (
         <ListarRecetas recipes={recipes} fetchRecipes={fetchRecipesData} />
       )}
-
       {showCrearReceta && (
         <div className="modal">
           <div className="modal-content">
@@ -82,6 +88,7 @@ export const AdminPanel = () => {
           </div>
         </div>
       )}
+      {showUsers && <ListUsers />} {/* Muestra el componente ListUsers */}
     </div>
   );
 };

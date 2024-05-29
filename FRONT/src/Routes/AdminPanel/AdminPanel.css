@@ -1,14 +1,14 @@
 /* Estilos generales del panel de administración */
 .admin-panel-container {
   margin: 100px 20px 20px;
-  font-family: Arial, sans-serif;
 }
 
 .title {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  margin-bottom: 50px;
+  font-size: 36px;
+  font-weight: bold;
+
 }
 
 .actions {
@@ -283,3 +283,17 @@
 .carousel .control-arrow:hover {
   background: rgba(0, 0, 0, 1); /* Fondo completamente oscuro al pasar el cursor */
 }
+.carousel-container {
+  width: 200px; /* Ancho fijo deseado para la columna de imágenes */
+  overflow: hidden; /* Evita que las imágenes se desborden del contenedor */
+  display: flex;
+  justify-content: center;
+}
+.carousel-cell {
+  text-align: center;
+}
+.imagenes-column {
+  max-width: 150px; /* Define el ancho máximo deseado para la columna de imágenes */
+}
+
+
