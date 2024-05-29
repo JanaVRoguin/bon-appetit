@@ -283,3 +283,17 @@
 .carousel .control-arrow:hover {
   background: rgba(0, 0, 0, 1); /* Fondo completamente oscuro al pasar el cursor */
 }
+.carousel-container {
+  width: 200px; /* Ancho fijo deseado para la columna de imágenes */
+  overflow: hidden; /* Evita que las imágenes se desborden del contenedor */
+  display: flex;
+  justify-content: center;
+}
+.carousel-cell {
+  text-align: center;
+}
+.imagenes-column {
+  max-width: 150px; /* Define el ancho máximo deseado para la columna de imágenes */
+}
+
+

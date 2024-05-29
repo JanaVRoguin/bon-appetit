@@ -143,7 +143,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
                   .map((categoria) => categoria.categorias)
                   .join(", ")}
               </td>
-              <td>
+              <td className="imagenes-column">
                 <div className="carousel-container">
                   <Carousel showThumbs={false}>
                     {receta.imagenes.map((imagen, imgIndex) => (
@@ -158,6 +158,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
                   </Carousel>
                 </div>
               </td>
+
               <td className="action-buttons">
                 <button
                   type="button"
