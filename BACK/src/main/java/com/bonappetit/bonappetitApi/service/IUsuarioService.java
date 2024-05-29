@@ -15,4 +15,5 @@ public interface IUsuarioService {
     public void grantAdminRole(Long id);
     public void revokeAdminRole(Long id);
     public void logout(HttpServletRequest request);
+    public Usuario findByCorreo(String correo);
 }

@@ -38,4 +38,11 @@ public class UsuarioController {
         iUsuarioService.logout(request);
         return ResponseEntity.ok("Cierre de sesión exitoso");
     }
+
+    @GetMapping("/buscar/{correo}")
+    public ResponseEntity<Usuario> buscarUsuarioPorCorreo(@PathVariable String correo) {
+        Usuario usuario = iUsuarioService.findByCorreo(correo);
+        return ResponseEntity.ok(usuario);
+    }
+
 }
