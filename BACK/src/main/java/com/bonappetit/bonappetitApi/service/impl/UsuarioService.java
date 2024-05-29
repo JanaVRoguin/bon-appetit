@@ -84,6 +84,11 @@ public class UsuarioService implements IUsuarioService {
         return null;
     }
     @Override
+    public Usuario findByCorreo(String correo) {
+        return iUsuarioRepository.findUsuarioByCorreo(correo)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con el correo: " + correo));
+    }
+    @Override
     public List<Usuario> findAll() {
         return iUsuarioRepository.findAll();
     }

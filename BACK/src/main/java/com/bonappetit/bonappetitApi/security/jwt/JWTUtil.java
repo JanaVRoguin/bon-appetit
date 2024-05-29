@@ -32,7 +32,7 @@ public class JWTUtil {
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10)) // 10 horas
                 .signWith(SignatureAlgorithm.HS256, secret)
-                .compact();
+                .compact();git push
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
