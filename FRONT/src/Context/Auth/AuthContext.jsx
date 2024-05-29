@@ -10,27 +10,28 @@ const init = () => {
 
   return {
     logged: !!token,
-    user: { id: 'abc', user}, //TODO: esto tiene que ser de la misma manera que esta en el login 
+    user: user,
   }
 }
 
 export const AuthProvider = ({ children }) => {
   const [ authState, dispatch ] = useReducer( authReducer, {}, init )
 
-  const login = ( data ) => {
-    const user = { id: 'abc', data } //TODO: aca hay que esperar lo que manda fran desde el back y se arma bien el objeto
+  const login = ({ token, nombre, rol }) => {
+    const user = { id: 'abc', name: nombre, role: rol }
     const action = {
       type: types.login,
       payload: user
     }
-    localStorage.setItem('token', JSON.stringify(data.token) )
-    localStorage.setItem('user', JSON.stringify(data) )
+    localStorage.setItem('token', JSON.stringify(token) )
+    localStorage.setItem('user', JSON.stringify(user) )
     dispatch(action)
   }
 
   const logout = () => { 
     const action = { type: types.logout }
     localStorage.removeItem('token')
+    localStorage.removeItem('user')
     dispatch(action)
   }
 
