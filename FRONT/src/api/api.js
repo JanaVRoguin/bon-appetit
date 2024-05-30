@@ -1,6 +1,7 @@
 import { BASE_URL } from "../utils/config";
 
-// Función para obtener el token desde localStorage
+
+// Función para obtener el token desde localStorage, asegura response de api en first login
 const getToken = () => JSON.parse(localStorage.getItem("token"));
 
 // Listar recetas
