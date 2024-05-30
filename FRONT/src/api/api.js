@@ -1,19 +1,15 @@
 import { BASE_URL } from "../utils/config";
 
-
-// Función para obtener el token desde localStorage, asegura response de api en first login
-const getToken = () => JSON.parse(localStorage.getItem("token"));
-
+const token = JSON.parse( localStorage.getItem('token') );
 // Listar recetas
+
 export const fetchRecipes = async () => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
-    const response = await fetch(`${BASE_URL}recetas/listar`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(`${BASE_URL}recetas/listar`,
+    { headers: {
+      'Content-Type': 'application/json'
+    }
+  });
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -30,12 +26,11 @@ export const fetchRecipes = async () => {
 // Función para crear una nueva receta
 export const createRecipe = async (receta) => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}recetas/crear`, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(receta),
     });
@@ -54,16 +49,15 @@ export const createRecipe = async (receta) => {
   }
 };
 
-// Listar categorías
+// Listar categorias
 export const fetchCategories = async () => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
-    const response = await fetch(`${BASE_URL}categorias/listar`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(`${BASE_URL}categorias/listar`,
+    { headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+    );
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -80,13 +74,12 @@ export const fetchCategories = async () => {
 // Eliminar receta
 export const deleteRecipe = async (id) => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}recetas/eliminar/${id}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     });
     if (response.ok) {
       return true;
@@ -103,11 +96,10 @@ export const deleteRecipe = async (id) => {
 // Actualizar receta
 export const updateRecipe = async (recipeId, updatedData) => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}recetas/actualizar/${recipeId}`, {
       method: "PUT",
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
@@ -124,10 +116,9 @@ export const updateRecipe = async (recipeId, updatedData) => {
   }
 };
 
-// Listar usuarios
+
 export const fetchUsers = async () => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}usuarios/listar`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -144,10 +135,8 @@ export const fetchUsers = async () => {
   }
 };
 
-// Eliminar usuario
 export const deleteUser = async (id) => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}usuarios/eliminar/${id}`, {
       method: "DELETE",
       headers: {
@@ -164,12 +153,10 @@ export const deleteUser = async (id) => {
   }
 };
 
-// Asignar rol de admin
 export const grantAdminRole = async (userId) => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}admin/rolAdmin/${userId}`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -184,12 +171,10 @@ export const grantAdminRole = async (userId) => {
   }
 };
 
-// Revocar rol de admin
 export const revokeAdminRole = async (userId) => {
   try {
-    const token = getToken(); // Obtener el token cada vez que se llama a la función
     const response = await fetch(`${BASE_URL}admin/revokeRole/${userId}`, {
-      method: "PUT",
+      method: "POST",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -203,3 +188,4 @@ export const revokeAdminRole = async (userId) => {
     throw error;
   }
 };
+
