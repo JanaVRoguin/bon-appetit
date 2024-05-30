@@ -156,7 +156,7 @@ export const deleteUser = async (id) => {
 export const grantAdminRole = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}admin/rolAdmin/${userId}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -174,7 +174,7 @@ export const grantAdminRole = async (userId) => {
 export const revokeAdminRole = async (userId) => {
   try {
     const response = await fetch(`${BASE_URL}admin/revokeRole/${userId}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
