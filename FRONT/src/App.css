@@ -53,7 +53,7 @@ nav {
   padding: 0; /* Elimina el relleno predeterminado */
   margin: 0; /* Elimina el margen predeterminado */
 }
-
+in
 /* Estilos CSS para cada ítem de la lista */
 .nav-item {
   border-left: 1px solid #ccc; /* Agrega una línea vertical a la izquierda */
@@ -63,7 +63,7 @@ nav {
 
 
 .navbar-logo {
-  height: 60px; /* Ajusta la altura del logo */
+  height: 60px; /* Ajusta la altura del logo */q
   margin-right: 10px; /* Espacio entre el logo y el texto */
 }
 
