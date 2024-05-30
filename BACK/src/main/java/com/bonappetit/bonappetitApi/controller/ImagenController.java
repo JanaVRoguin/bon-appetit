@@ -1,6 +1,5 @@
 package com.bonappetit.bonappetitApi.controller;
 
-import com.bonappetit.bonappetitApi.entity.Categoria;
 import com.bonappetit.bonappetitApi.entity.Imagen;
 import com.bonappetit.bonappetitApi.service.IImagenService;
 import org.springframework.beans.factory.annotation.Autowired;

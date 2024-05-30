@@ -1,9 +1,15 @@
-import { BASE_URL } from "../Components/utils/config";
+import { BASE_URL } from "../utils/config";
 
+const token = JSON.parse( localStorage.getItem('token') );
 // Listar recetas
 export const fetchRecipes = async () => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/listar`);
+    const response = await fetch(`${BASE_URL}recetas/listar`,
+    { headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  });
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -23,7 +29,8 @@ export const createRecipe = async (receta) => {
     const response = await fetch(`${BASE_URL}recetas/crear`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(receta),
     });
@@ -45,7 +52,13 @@ export const createRecipe = async (receta) => {
 // Listar categorias
 export const fetchCategories = async () => {
   try {
-    const response = await fetch(`${BASE_URL}categorias/listar`);
+    const response = await fetch(`${BASE_URL}categorias/listar`,
+    { headers: {
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }
+    );
     if (response.ok) {
       const data = await response.json();
       return data;
@@ -64,6 +77,10 @@ export const deleteRecipe = async (id) => {
   try {
     const response = await fetch(`${BASE_URL}recetas/eliminar/${id}`, {
       method: "DELETE",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     });
     if (response.ok) {
       return true;
@@ -83,6 +100,7 @@ export const updateRecipe = async (recipeId, updatedData) => {
     const response = await fetch(`${BASE_URL}recetas/actualizar/${recipeId}`, {
       method: "PUT",
       headers: {
+        'Authorization': `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify(updatedData),
@@ -98,3 +116,77 @@ export const updateRecipe = async (recipeId, updatedData) => {
     return false;
   }
 };
+
+
+export const fetchUsers = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}usuarios/listar`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error al obtener los usuarios");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    throw error;
+  }
+};
+
+export const deleteUser = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}usuarios/eliminar/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error al eliminar el usuario");
+    }
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    throw error;
+  }
+};
+
+export const grantAdminRole = async (userId) => {
+  try {
+    const response = await fetch(`${BASE_URL}admin/rolAdmin/${userId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error al asignar el rol de admin");
+    }
+  } catch (error) {
+    console.error("Error granting admin role:", error);
+    throw error;
+  }
+};
+
+export const revokeAdminRole = async (userId) => {
+  try {
+    const response = await fetch(`${BASE_URL}admin/revokeRole/${userId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Error al revocar el rol de admin");
+    }
+  } catch (error) {
+    console.error("Error revoking admin role:", error);
+    throw error;
+  }
+};
+

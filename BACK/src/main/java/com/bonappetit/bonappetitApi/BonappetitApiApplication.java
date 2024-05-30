@@ -12,7 +12,7 @@ public class BonappetitApiApplication {
 		SpringApplication.run(BonappetitApiApplication.class, args);
 	}
 	@Bean
-	public ModelMapper modelMapper(){
+	public ModelMapper modelMapper() {
 		return new ModelMapper();
 	}
 }

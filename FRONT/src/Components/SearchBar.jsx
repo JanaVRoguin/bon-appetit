@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-
-
-const SearchBar = ({ onSearch }) => {
+export const SearchBar = ({ onSearch }) => {
   const [searchTerm, setSearchTerm] = useState(''); // Estado para el término de búsqueda
 
   const handleInputChange = (e) => {
@@ -23,18 +21,18 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className="search-bar">
-      <input
-        type="text"
-        value={searchTerm} // Valor del campo de entrada
-        onChange={handleInputChange} // Evento para cambiar el valor
-        onKeyDown={handleKeyPress} // Evento para presionar teclas
-        placeholder="Buscar recetas..." // Texto de placeholder
-      />
-      <button onClick={handleSearch}> {/* Botón con ícono de lupa */}
-        Buscar 🔍 {/* Ícono de lupa */}
-      </button>
+      <div className="search-bar-container">
+        <input
+          type="text"
+          value={searchTerm} // Valor del campo de entrada
+          onChange={handleInputChange} // Evento para cambiar el valor
+          onKeyDown={handleKeyPress} // Evento para presionar teclas
+          placeholder="¿QUÉ MENÚ TIENES EN MENTE?" // Texto de placeholder
+        />
+        <button onClick={handleSearch} className="search-button">
+          <img src="../../public/Images/Lupa.png" alt="Buscar" className="search-icon" /> {/* Ruta de la imagen de la lupa */}
+        </button>
+      </div>
     </div>
   );
 };
-
-export default SearchBar;
