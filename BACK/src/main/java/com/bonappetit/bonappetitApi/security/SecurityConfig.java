@@ -67,8 +67,8 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.DELETE,"/imagenes/eliminar/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.PUT,"/imagenes/actualizar/{id}").hasRole("ADMIN");
 
-                    http.requestMatchers(HttpMethod.POST,"/admin/rolAdmin/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.POST,"/admin/revokeRole/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT,"/admin/rolAdmin/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT,"/admin/revokeRole/{id}").hasRole("ADMIN");
 
                     // Config endpoint no especificados
                     http.anyRequest().denyAll();

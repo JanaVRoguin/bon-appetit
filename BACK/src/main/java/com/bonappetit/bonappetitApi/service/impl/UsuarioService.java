@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioService implements IUsuarioService {
@@ -42,33 +43,44 @@ public class UsuarioService implements IUsuarioService {
     public void grantAdminRole(Long id) {
         Usuario usuario = iUsuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
-        // Verificar si el usuario ya tiene el rol de ADMIN
-        boolean isAdmin = usuario.getRoles().stream()
-                .anyMatch(role -> role.getRoleEnum() == RoleEnum.ADMIN);
+        // Buscar el rol actual del usuario
+        Optional<Role> userRoleOptional = usuario.getRoles().stream()
+                .filter(role -> role.getRoleEnum() == RoleEnum.USER)
+                .findFirst();
 
-        if (!isAdmin) {
-            // Si el usuario no tiene el rol de ADMIN, asignarlo
-            Role adminRole = new Role();
-            adminRole.setRoleEnum(RoleEnum.ADMIN);
-            usuario.getRoles().add(adminRole);
+        if (userRoleOptional.isPresent()) {
+            // Si el usuario tiene el rol de USER, cambiarlo a ADMIN
+            Role userRole = userRoleOptional.get();
+            userRole.setRoleEnum(RoleEnum.ADMIN);
             iUsuarioRepository.save(usuario);
-        } else {
+        } else if (usuario.getRoles().stream().anyMatch(role -> role.getRoleEnum() == RoleEnum.ADMIN)) {
+            // Si el usuario ya tiene el rol de ADMIN, lanzar una excepción
             throw new IllegalArgumentException("El usuario ya tiene el rol de ADMIN");
+        } else {
+            // Si el usuario no tiene el rol de USER ni el rol de ADMIN, lanzar una excepción
+            throw new IllegalArgumentException("El usuario no tiene un rol válido para cambiar a ADMIN");
         }
     }
 
     public void revokeAdminRole(Long id) {
         Usuario usuario = iUsuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
-        // Verificar si el usuario tiene el rol de ADMIN
-        boolean isAdmin = usuario.getRoles().removeIf(role -> role.getRoleEnum() == RoleEnum.ADMIN);
+        // Buscar el rol de ADMIN del usuario
+        Optional<Role> adminRoleOptional = usuario.getRoles().stream()
+                .filter(role -> role.getRoleEnum() == RoleEnum.ADMIN)
+                .findFirst();
 
-        if (isAdmin) {
+        if (adminRoleOptional.isPresent()) {
+            // Si el usuario tiene el rol de ADMIN, cambiarlo a USER
+            Role adminRole = adminRoleOptional.get();
+            adminRole.setRoleEnum(RoleEnum.USER);
             iUsuarioRepository.save(usuario);
         } else {
+            // Si el usuario no tiene el rol de ADMIN, lanzar una excepción
             throw new IllegalArgumentException("El usuario no tiene el rol de ADMIN");
         }
     }
+
 
     public void logout(HttpServletRequest request) {
         String token = extractTokenFromRequest(request);
