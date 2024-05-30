@@ -14,7 +14,7 @@ public class AdminController {
     @Autowired
     IUsuarioService iUsuarioService;
 
-    @PostMapping("/rolAdmin/{id}")
+    @PutMapping("/rolAdmin/{id}")
     public ResponseEntity<?> grantAdminRole(@PathVariable Long id) {
         try {
             iUsuarioService.grantAdminRole(id);
@@ -28,7 +28,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/revokeRole/{id}")
+    @PutMapping("/revokeRole/{id}")
     public ResponseEntity<?> revokeAdminRole(@PathVariable Long id) {
         try {
             iUsuarioService.revokeAdminRole(id);

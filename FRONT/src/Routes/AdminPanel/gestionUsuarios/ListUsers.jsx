@@ -6,18 +6,23 @@ import {
   revokeAdminRole,
 } from "../../../api/api";
 
-
 const ListUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  console.log(users)
+
   useEffect(() => {
     const getUsers = async () => {
       try {
         const usersData = await fetchUsers();
-        setUsers(usersData);
-        console.log(usersData);
+        
+        const transformedUsers = usersData.map(user => ({
+          ...user,
+          role: user.roles[0]?.roleEnum
+        }));
+        setUsers(transformedUsers);
         setLoading(false);
       } catch (err) {
         setError(err.message);
