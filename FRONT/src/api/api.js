@@ -2,11 +2,11 @@ import { BASE_URL } from "../utils/config";
 
 const token = JSON.parse( localStorage.getItem('token') );
 // Listar recetas
+
 export const fetchRecipes = async () => {
   try {
     const response = await fetch(`${BASE_URL}recetas/listar`,
     { headers: {
-      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   });
@@ -54,7 +54,6 @@ export const fetchCategories = async () => {
   try {
     const response = await fetch(`${BASE_URL}categorias/listar`,
     { headers: {
-      'Authorization': `Bearer ${token}`,
       'Content-Type': 'application/json'
     }
   }
