@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./CrearReceta.css"; // Importa el mismo archivo CSS que CrearReceta.jsx
+import "./CrearReceta.css";
 import { fetchCategories, updateRecipe } from "../../../api/api";
 
 const EditarReceta = ({
@@ -41,7 +41,7 @@ const EditarReceta = ({
     return () => {
       document.body.style.overflow = "auto";
     };
-  }, [recipeId, initialRecipe]);
+  }, [initialRecipe]);
 
   const getCategorias = async () => {
     const data = await fetchCategories();
@@ -77,7 +77,7 @@ const EditarReceta = ({
     });
 
     const updatedErrors = [...imageLoadError];
-    updatedErrors[index] = false; // Reset error state when the image URL changes
+    updatedErrors[index] = false;
     setImageLoadError(updatedErrors);
   };
 

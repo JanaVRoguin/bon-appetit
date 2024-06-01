@@ -208,6 +208,7 @@
   color: white;
 }
 
+/* ListarRecetas.css */
 /* Modal */
 .listar-recetas-modal {
   position: fixed;
@@ -226,6 +227,8 @@
   padding: 20px;
   border-radius: 5px;
   width: 80%;
-  max-width: 600px;
+  max-width: 400px; /* Reduce the width */
+  max-height: 800px; /* Set a maximum height */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow-y: auto; /* Add scroll if content overflows */
 }

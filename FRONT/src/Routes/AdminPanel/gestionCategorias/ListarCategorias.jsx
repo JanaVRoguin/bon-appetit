@@ -5,10 +5,12 @@ import {
   updateCategory,
   createCategory,
 } from "../../../api/api";
+import CrearCategoria from "./CrearCategoria"; 
 import "./ListarCategorias.css";
 
 const ListarCategorias = () => {
   const [categorias, setCategorias] = useState([]);
+  const [showCrearCategoria, setShowCrearCategoria] = useState(false); // Estado para el modal CrearCategoria
   const [showEditarCategoria, setShowEditarCategoria] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -50,26 +52,13 @@ const ListarCategorias = () => {
     }
   };
 
-  const agregarCategoria = async (categoria) => {
-    try {
-      const success = await createCategory(categoria);
-      if (success) {
-        getCategorias();
-      } else {
-        alert("Error al agregar la categoría.");
-      }
-    } catch (error) {
-      alert("Error al agregar la categoría.");
-    }
-  };
-
   return (
     <div className="listar-categorias-container">
       <div className="listar-categorias-header">
         <h1 className="listar-categorias-title">Lista de Categorías</h1>
         <button
           className="listar-categorias-add-btn"
-          onClick={() => setShowEditarCategoria(true)}
+          onClick={() => setShowCrearCategoria(true)} // Mostrar modal CrearCategoria
         >
           Agregar Categoría
         </button>
@@ -104,7 +93,9 @@ const ListarCategorias = () => {
         <tbody>
           {categorias
             .filter((categoria) =>
-              categoria.categorias?.toLowerCase().includes(searchTerm.toLowerCase())
+              categoria.categorias
+                ?.toLowerCase()
+                .includes(searchTerm.toLowerCase())
             )
             .sort((a, b) => (sortOrder === "asc" ? a.id - b.id : b.id - a.id))
             .map((categoria) => (
@@ -135,6 +126,13 @@ const ListarCategorias = () => {
         </tbody>
       </table>
 
+      {showCrearCategoria && (
+        <CrearCategoria
+          closeModal={() => setShowCrearCategoria(false)} // Cerrar modal CrearCategoria
+          fetchCategories={getCategorias}
+        />
+      )}
+
       {showEditarCategoria && (
         <div className="listar-categorias-modal">
           <div className="listar-categorias-modal-content">
@@ -146,7 +144,6 @@ const ListarCategorias = () => {
               initialCategory={categorias.find(
                 (categoria) => categoria.id === selectedCategoryId
               )}
-              createCategory={agregarCategoria}
             />
           </div>
         </div>

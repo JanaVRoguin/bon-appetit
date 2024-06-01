@@ -161,6 +161,7 @@
 .add-image-btn {
   width: 40px;
   height: 40px;
+  margin-top: 10px;
   background-color: #007bff;
   border: none;
   cursor: pointer;

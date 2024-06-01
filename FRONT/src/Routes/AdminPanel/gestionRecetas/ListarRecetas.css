@@ -125,3 +125,15 @@
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+/* Styles to darken header and footer */
+body.modal-open header,
+body.modal-open footer {
+  background-color: rgba(0, 0, 0, 0.7); /* Oscurece el header y el footer */
+  z-index: 9998; /* Asegura que queden debajo del modal */
+  position: relative; /* Asegura que queden por encima del contenido */
+}
+
+
+

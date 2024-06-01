@@ -13,7 +13,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     imagenes: [""],
   });
   const [validationErrors, setValidationErrors] = useState({});
-  const [imageLoadError, setImageLoadError] = useState([]);
+  const [imageLoadError, setImageLoadError] = useState([false]);
 
   useEffect(() => {
     // Obtener categorías desde la API
@@ -58,13 +58,11 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
   };
 
   const addImageField = () => {
-    if (formData.imagenes[formData.imagenes.length - 1].trim() !== "") {
-      setFormData({
-        ...formData,
-        imagenes: [...formData.imagenes, ""],
-      });
-      setImageLoadError([...imageLoadError, false]);
-    }
+    setFormData({
+      ...formData,
+      imagenes: [...formData.imagenes, ""],
+    });
+    setImageLoadError([...imageLoadError, false]);
   };
 
   const removeImageField = (index) => {
@@ -100,7 +98,8 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       !ingredientes ||
       !instrucciones ||
       categorias.length === 0 ||
-      imagenes.length === 0
+      imagenes.length === 0 ||
+      imagenes.some((image) => image.trim() === "")
     ) {
       alert("Por favor ingrese todos los campos.");
       return;
@@ -136,7 +135,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     <div className="modal">
       <div className="modal-content crear-receta-container">
         <div className="form-wrapper">
-          <h2 className="title">Agregar Receta</h2>
+          <h2 className="title">Agregar Recetas</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Nombre</label>
