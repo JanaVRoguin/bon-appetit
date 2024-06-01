@@ -8,6 +8,7 @@ import {
 } from "../../../api/api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import "./ListarRecetas.css"; // Importar el CSS dedicado
 
 const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
@@ -15,7 +16,10 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const [selectedRecipeId, setSelectedRecipeId] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [recipesPerPage] = useState(10);
-  const [selectedCategory, setSelectedCategory] = useState("Mostrar todas");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [imageLoadError, setImageLoadError] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
     fetchRecipes();
@@ -42,19 +46,34 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
     }
   };
 
+  const handleImageError = (recipeId, imgIndex) => {
+    setImageLoadError((prevErrors) => ({
+      ...prevErrors,
+      [recipeId]: { ...prevErrors[recipeId], [imgIndex]: true },
+    }));
+  };
+
   const indexOfLastRecipe = currentPage * recipesPerPage;
   const indexOfFirstRecipe = indexOfLastRecipe - recipesPerPage;
 
-  const sortedRecipes = recipes.slice().sort((a, b) => b.id - a.id);
+  const sortedRecipes = recipes
+    .slice()
+    .sort((a, b) => (sortOrder === "asc" ? a.id - b.id : b.id - a.id));
 
   const filteredRecipes =
-    selectedCategory === "Mostrar todas"
+    selectedCategories.length === 0
       ? sortedRecipes
       : sortedRecipes.filter((recipe) =>
-          recipe.categorias.some((cat) => cat.categorias === selectedCategory)
+          selectedCategories.some((cat) =>
+            recipe.categorias.map((c) => c.categorias).includes(cat)
+          )
         );
 
-  const currentRecipes = filteredRecipes.slice(
+  const searchedRecipes = filteredRecipes.filter((recipe) =>
+    recipe.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const currentRecipes = searchedRecipes.slice(
     indexOfFirstRecipe,
     indexOfLastRecipe
   );
@@ -64,15 +83,25 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const pageNumbers = [];
   for (
     let i = 1;
-    i <= Math.ceil(filteredRecipes.length / recipesPerPage);
+    i <= Math.ceil(searchedRecipes.length / recipesPerPage);
     i++
   ) {
     pageNumbers.push(i);
   }
 
   const handleCategoryClick = (category) => {
-    setSelectedCategory(category);
-    setCurrentPage(1); // Reset to the first page when changing category
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(
+        selectedCategories.filter((cat) => cat !== category)
+      );
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+    setCurrentPage(1); // Resetear a la primera página al cambiar la selección de categoría
+  };
+
+  const handleSortOrderChange = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
   return (
@@ -86,41 +115,48 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
             <div
               key={index}
               className={`categoria-card ${
-                selectedCategory === categoria.categorias ? "active" : ""
+                selectedCategories.includes(categoria.categorias)
+                  ? "active"
+                  : ""
               }`}
               onClick={() => handleCategoryClick(categoria.categorias)}
             >
               {categoria.categorias}
             </div>
           ))}
-          <div
-            className={`categoria-card ${
-              selectedCategory === "Mostrar todas" ? "active" : ""
-            }`}
-            onClick={() => handleCategoryClick("Mostrar todas")}
-          >
-            Mostrar todas
-          </div>
+          
         </div>
       </div>
 
-      <div className="pagination">
-        {pageNumbers.map((number) => (
-          <button
-            key={number}
-            onClick={() => paginate(number)}
-            className={`page-number ${number === currentPage ? "active" : ""}`}
-          >
-            {number}
-          </button>
-        ))}
+      <div className="filters-container">
+        <div className="search-container">
+          <input
+            type="text"
+            placeholder="Buscar receta..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="sort-container">
+          <label>Ordenar por ID:</label>
+          <select value={sortOrder} onChange={handleSortOrderChange}>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+        </div>
       </div>
 
       <table className="recetas-table">
         <thead>
           <tr>
-            <td colSpan="7">Filtrado por: {selectedCategory}</td>
+            <td colSpan="7">
+              Filtrado por:{" "}
+              {selectedCategories.length === 0
+                ? "Mostrar todas"
+                : selectedCategories.join(", ")}
+            </td>
           </tr>
+          <tr></tr>
           <tr>
             <th>ID</th>
             <th>Nombre</th>
@@ -148,11 +184,21 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
                   <Carousel showThumbs={false}>
                     {receta.imagenes.map((imagen, imgIndex) => (
                       <div key={imgIndex} className="carousel-slide">
-                        <img
-                          src={imagen.urlImg}
-                          alt={`Imagen ${imgIndex}`}
-                          className="carousel-image"
-                        />
+                        {imageLoadError[receta.id] &&
+                        imageLoadError[receta.id][imgIndex] ? (
+                          <div className="no-image-placeholder">
+                            🚫 Imagen no disponible
+                          </div>
+                        ) : (
+                          <img
+                            src={imagen.urlImg}
+                            alt={`Imagen ${imgIndex}`}
+                            className="carousel-image"
+                            onError={() =>
+                              handleImageError(receta.id, imgIndex)
+                            }
+                          />
+                        )}
                       </div>
                     ))}
                   </Carousel>

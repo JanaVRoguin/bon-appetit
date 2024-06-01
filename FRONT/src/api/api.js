@@ -189,3 +189,75 @@ export const revokeAdminRole = async (userId) => {
   }
 };
 
+//CATEGORIAS 
+
+
+// Función para obtener todas las categorías
+export const listarCategorias = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}/categorias/listar`);
+    if (!response.ok) {
+      throw new Error("Error al obtener las categorías");
+    }
+    return await response.json();
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Función para crear una nueva categoría
+export const crearCategoria = async (nuevaCategoria) => {
+  try {
+    const response = await fetch(`${BASE_URL}/categorias/crear`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(nuevaCategoria),
+    });
+    if (!response.ok) {
+      throw new Error("Error al crear la categoría");
+    }
+    return "Categoria creada";
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Función para actualizar una categoría
+export const actualizarCategoria = async (categoria) => {
+  try {
+    const response = await fetch(`${BASE_URL}/categorias/actualizar`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(categoria),
+    });
+    if (!response.ok) {
+      throw new Error('Error al actualizar la categoría');
+    }
+    return 'Categoria actualizada';
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Función para eliminar una categoría
+export const eliminarCategoria = async (idCategoria) => {
+  try {
+    const response = await fetch(`${BASE_URL}/categorias/eliminar/${idCategoria}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error('Error al eliminar la categoría');
+    }
+    return 'Categoria eliminada';
+  } catch (error) {
+    throw error;
+  }
+};
+
+
+
+

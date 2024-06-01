@@ -13,6 +13,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     imagenes: [""],
   });
   const [validationErrors, setValidationErrors] = useState({});
+  const [imageLoadError, setImageLoadError] = useState([]);
 
   useEffect(() => {
     // Obtener categorías desde la API
@@ -50,6 +51,10 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       ...formData,
       imagenes: updatedImages,
     });
+
+    const updatedErrors = [...imageLoadError];
+    updatedErrors[index] = false; // Reset error state when the image URL changes
+    setImageLoadError(updatedErrors);
   };
 
   const addImageField = () => {
@@ -58,15 +63,24 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
         ...formData,
         imagenes: [...formData.imagenes, ""],
       });
+      setImageLoadError([...imageLoadError, false]);
     }
   };
 
   const removeImageField = (index) => {
     const updatedImages = formData.imagenes.filter((_, i) => i !== index);
+    const updatedErrors = imageLoadError.filter((_, i) => i !== index);
     setFormData({
       ...formData,
-      imagenes: updatedImages,
+      imagenes: updatedImages.length > 0 ? updatedImages : [""],
     });
+    setImageLoadError(updatedErrors.length > 0 ? updatedErrors : [false]);
+  };
+
+  const handleImageError = (index) => {
+    const updatedErrors = [...imageLoadError];
+    updatedErrors[index] = true;
+    setImageLoadError(updatedErrors);
   };
 
   const handleSubmit = async (event) => {
@@ -203,19 +217,26 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
                       value={imagen}
                       onChange={(e) => handleImageChange(index, e.target.value)}
                     />
-                    {imagen && (
+                    {imagen && !imageLoadError[index] ? (
                       <img
                         src={imagen}
                         alt={`Imagen ${index + 1}`}
                         className="preview-image"
+                        onError={() => handleImageError(index)}
                       />
+                    ) : (
+                      <div className="no-image-placeholder">
+                        🚫 Imagen no disponible
+                      </div>
                     )}
-                    <button
-                      type="button"
-                      onClick={() => removeImageField(index)}
-                    >
-                      -
-                    </button>
+                    {formData.imagenes.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeImageField(index)}
+                      >
+                        -
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>

@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import "./AdminPanel.css";
 import ListarRecetas from "./gestionRecetas/ListarRecetas";
 import CrearReceta from "./gestionRecetas/CrearReceta";
-import ListUsers from "./gestionUsuarios/ListUsers"; // Importa ListUsers
+import ListUsers from "./gestionUsuarios/ListUsers";
 import { fetchRecipes } from "../../api/api";
 
 export const AdminPanel = () => {
   const [showRecetas, setShowRecetas] = useState(false);
   const [showCrearReceta, setShowCrearReceta] = useState(false);
-  const [showUsers, setShowUsers] = useState(false); // Estado para mostrar ListUsers
+  const [showUsers, setShowUsers] = useState(false);
+  const [showCategorias, setShowCategorias] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [recipes, setRecipes] = useState([]); // Estado para almacenar la lista de recetas
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -37,6 +38,34 @@ export const AdminPanel = () => {
     }
   }, [showRecetas]);
 
+  const handleShowRecetas = () => {
+    setShowRecetas((prev) => !prev);
+    setShowCrearReceta(false);
+    setShowUsers(false);
+    setShowCategorias(false);
+  };
+
+  const handleShowCrearReceta = () => {
+    setShowCrearReceta((prev) => !prev);
+    setShowUsers(false);
+    setShowRecetas(false);
+    setShowCategorias(false);
+  };
+
+  const handleShowUsers = () => {
+    setShowUsers((prev) => !prev);
+    setShowRecetas(false);
+    setShowCrearReceta(false);
+    setShowCategorias(false);
+  };
+
+  const handleShowCategorias = () => {
+    setShowCategorias((prev) => !prev);
+    setShowRecetas(false);
+    setShowCrearReceta(false);
+    setShowUsers(false);
+  };
+
   if (isMobile) {
     return (
       <div className="admin-panel-container">
@@ -54,25 +83,31 @@ export const AdminPanel = () => {
       <div className="actions">
         <button
           type="button"
-          className="btn refresh-btn"
-          onClick={() => setShowRecetas(!showRecetas)}
+          className={`btn refresh-btn ${showRecetas ? "active" : ""}`}
+          onClick={handleShowRecetas}
         >
           {showRecetas ? "Ocultar lista de recetas" : "Lista de recetas"}
         </button>
-
         <button
           type="button"
-          className="btn create-btn"
-          onClick={() => setShowCrearReceta(true)}
+          className={`btn create-btn ${showCrearReceta ? "active" : ""}`}
+          onClick={handleShowCrearReceta}
         >
-          Agregar Receta
+          {showCrearReceta ? "Ocultar formulario" : "Agregar Receta"}
         </button>
         <button
           type="button"
-          className="btn create-btn"
-          onClick={() => setShowUsers(!showUsers)}
+          className={`btn create-btn ${showUsers ? "active" : ""}`}
+          onClick={handleShowUsers}
         >
           {showUsers ? "Ocultar usuarios" : "Administrar Usuarios"}
+        </button>
+        <button
+          type="button"
+          className={`btn create-btn ${showCategorias ? "active" : ""}`}
+          onClick={handleShowCategorias}
+        >
+          {showCategorias ? "Ocultar categorías" : "Administrar Categorías"}
         </button>
       </div>
       {showRecetas && (
@@ -88,7 +123,8 @@ export const AdminPanel = () => {
           </div>
         </div>
       )}
-      {showUsers && <ListUsers />} {/* Muestra el componente ListUsers */}
+      {showUsers && <ListUsers />}
+      {showCategorias && <ListarCategorias />}
     </div>
   );
 };

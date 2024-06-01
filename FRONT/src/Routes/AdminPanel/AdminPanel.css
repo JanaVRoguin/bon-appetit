@@ -50,6 +50,11 @@
   background-color: #5a6268;
 }
 
+.actions .btn.active {
+  background-color: gray;
+}
+
+
 .recetas-table {
   width: calc(100% - 200px);
   margin: 0 100px;
@@ -239,7 +244,8 @@
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  
+  margin-top: 40px;
   margin-bottom: 20px;
 }
 
@@ -283,17 +289,53 @@
 .carousel .control-arrow:hover {
   background: rgba(0, 0, 0, 1); /* Fondo completamente oscuro al pasar el cursor */
 }
+
 .carousel-container {
-  width: 200px; /* Ancho fijo deseado para la columna de imágenes */
   overflow: hidden; /* Evita que las imágenes se desborden del contenedor */
   display: flex;
   justify-content: center;
+  align-items: center; /* Centra verticalmente el contenido */
 }
-.carousel-cell {
+
+.carousel .slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none; /* Elimina el fondo por defecto */
+}
+
+.carousel .carousel-image {
+  max-height: 150px; /* Ajusta la altura máxima de las imágenes */
+  object-fit: cover; /* Mantiene las proporciones de la imagen */
+}
+
+.no-image-placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  height: 150px;
+  background-color: #f0f0f0;
+  color: #999;
+  font-size: 14px;
   text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
+
 .imagenes-column {
   max-width: 150px; /* Define el ancho máximo deseado para la columna de imágenes */
 }
 
+.carousel-container {
+  margin: 0 auto; /* Centra horizontalmente el contenedor del carrusel */
+}
 
+.carousel .slide img {
+  display: block;
+  margin: 0 auto; /* Centra las imágenes dentro de las diapositivas */
+}
+
+.carousel .carousel-status {
+  display: none; /* Oculta el estado del carrusel (por ejemplo, "1 of 3") */
+}
