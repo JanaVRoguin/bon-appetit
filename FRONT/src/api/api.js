@@ -192,72 +192,89 @@ export const revokeAdminRole = async (userId) => {
 //CATEGORIAS 
 
 
-// Función para obtener todas las categorías
-export const listarCategorias = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}/categorias/listar`);
-    if (!response.ok) {
-      throw new Error("Error al obtener las categorías");
-    }
-    return await response.json();
-  } catch (error) {
-    throw error;
-  }
-};
+// CRUD Categorías
 
-// Función para crear una nueva categoría
-export const crearCategoria = async (nuevaCategoria) => {
+// Crear una nueva categoría
+export const createCategory = async (newCategory) => {
   try {
-    const response = await fetch(`${BASE_URL}/categorias/crear`, {
+    const response = await fetch(`${BASE_URL}categorias/crear`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(nuevaCategoria),
+      body: JSON.stringify(newCategory),
     });
     if (!response.ok) {
-      throw new Error("Error al crear la categoría");
+      throw new Error("Error al crear la categoría.");
     }
-    return "Categoria creada";
+    return "Categoría creada";
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };
 
-// Función para actualizar una categoría
-export const actualizarCategoria = async (categoria) => {
+// Actualizar una categoría
+export const updateCategory = async (category) => {
   try {
-    const response = await fetch(`${BASE_URL}/categorias/actualizar`, {
+    const response = await fetch(`${BASE_URL}categorias/actualizar`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(categoria),
+      body: JSON.stringify(category),
     });
     if (!response.ok) {
       throw new Error('Error al actualizar la categoría');
     }
-    return 'Categoria actualizada';
+    return 'Categoría actualizada';
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };
 
-// Función para eliminar una categoría
-export const eliminarCategoria = async (idCategoria) => {
+// Eliminar una categoría
+export const deleteCategory = async (categoryId) => {
   try {
-    const response = await fetch(`${BASE_URL}/categorias/eliminar/${idCategoria}`, {
+    const response = await fetch(`${BASE_URL}categorias/eliminar/${categoryId}`, {
       method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
     });
     if (!response.ok) {
       throw new Error('Error al eliminar la categoría');
     }
-    return 'Categoria eliminada';
+    return 'Categoría eliminada';
   } catch (error) {
+    console.error(error);
     throw error;
   }
 };
 
-
+// Buscar categoría por ID
+export const getCategoryById = async (categoryId) => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/${categoryId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Error al obtener la categoría:", response.statusText);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al obtener la categoría:", error.message);
+    return null;
+  }
+};
 
 

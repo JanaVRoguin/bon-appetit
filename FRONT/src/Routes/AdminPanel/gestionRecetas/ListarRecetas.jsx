@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EditarReceta from "./EditarReceta";
+
 import {
   fetchCategories,
   fetchRecipes,
@@ -104,17 +105,36 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
 
-  return (
-    <>
-      <div className="categorias-container">
-        <div className="categorias-title">
-          <h3>Categorías</h3>
-        </div>
-        <div className="categorias">
+return (
+  <div className="listar-recetas-container">
+    <div className="listar-recetas-header">
+      <div>
+      <h1 className="listar-recetas-title">Lista de Recetas</h1>
+      <p className="listar-recetas-total">Total de recetas: {recipes.length}</p>
+      </div>
+      <button
+        className="listar-recetas-add-btn"
+        onClick={() => setShowEditarReceta(true)}
+      >
+        Agregar Receta
+      </button>
+    </div>
+
+    <div className="listar-recetas-filters">
+      <div className="listar-recetas-search">
+        <input
+          type="text"
+          placeholder="Buscar receta..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+      <div className="listar-recetas-category-sort">
+        <div className="listar-recetas-category-filter">
           {categorias.map((categoria, index) => (
             <div
               key={index}
-              className={`categoria-card ${
+              className={`listar-recetas-categoria-card ${
                 selectedCategories.includes(categoria.categorias)
                   ? "active"
                   : ""
@@ -124,140 +144,131 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
               {categoria.categorias}
             </div>
           ))}
-          
         </div>
       </div>
-
-      <div className="filters-container">
-        <div className="search-container">
-          <input
-            type="text"
-            placeholder="Buscar receta..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </div>
-        <div className="sort-container">
-          <label>Ordenar por ID:</label>
-          <select value={sortOrder} onChange={handleSortOrderChange}>
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
-          </select>
-        </div>
+      <div className="listar-recetas-sort">
+        <label>Ordenar por ID:</label>
+        <select value={sortOrder} onChange={handleSortOrderChange}>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
+        </select>
       </div>
+    </div>
 
-      <table className="recetas-table">
-        <thead>
-          <tr>
-            <td colSpan="7">
-              Filtrado por:{" "}
-              {selectedCategories.length === 0
-                ? "Mostrar todas"
-                : selectedCategories.join(", ")}
+    <table className="listar-recetas-table">
+      <thead>
+        <tr>
+          <td colSpan="7">
+            Filtrado por:{" "}
+            {selectedCategories.length === 0
+              ? "Mostrar todas"
+              : selectedCategories.join(", ")}
+          </td>
+        </tr>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Ingredientes</th>
+          <th>Modo de preparación</th>
+          <th>Categoría</th>
+          <th>Imágenes</th>
+          <th>Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {currentRecipes.map((receta, index) => (
+          <tr key={index}>
+            <td>{receta.id}</td>
+            <td>{receta.nombre}</td>
+            <td>{receta.ingredientes}</td>
+            <td>{receta.instrucciones}</td>
+            <td>
+              {receta.categorias
+                .map((categoria) => categoria.categorias)
+                .join(", ")}
+            </td>
+            <td className="listar-recetas-imagenes-column">
+              <div className="listar-recetas-carousel-container">
+                <Carousel showThumbs={false}>
+                  {receta.imagenes.map((imagen, imgIndex) => (
+                    <div
+                      key={imgIndex}
+                      className="listar-recetas-carousel-slide"
+                    >
+                      {imageLoadError[receta.id] &&
+                      imageLoadError[receta.id][imgIndex] ? (
+                        <div className="listar-recetas-no-image-placeholder">
+                          🚫 Imagen no disponible
+                        </div>
+                      ) : (
+                        <img
+                          src={imagen.urlImg}
+                          alt={`Imagen ${imgIndex}`}
+                          className="listar-recetas-carousel-image"
+                          onError={() => handleImageError(receta.id, imgIndex)}
+                        />
+                      )}
+                    </div>
+                  ))}
+                </Carousel>
+              </div>
+            </td>
+            <td className="listar-recetas-action-buttons">
+              <button
+                type="button"
+                className="listar-recetas-btn listar-recetas-edit-btn"
+                onClick={() => {
+                  setSelectedRecipeId(receta.id);
+                  setShowEditarReceta(true);
+                }}
+              >
+                Editar
+              </button>
+              <button
+                type="button"
+                className="listar-recetas-btn listar-recetas-delete-btn"
+                onClick={() => borrarReceta(receta.id)}
+              >
+                Borrar
+              </button>
             </td>
           </tr>
-          <tr></tr>
-          <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Ingredientes</th>
-            <th>Modo de preparación</th>
-            <th>Categoría</th>
-            <th>Imágenes</th>
-            <th>Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentRecipes.map((receta, index) => (
-            <tr key={index}>
-              <td>{receta.id}</td>
-              <td>{receta.nombre}</td>
-              <td>{receta.ingredientes}</td>
-              <td>{receta.instrucciones}</td>
-              <td>
-                {receta.categorias
-                  .map((categoria) => categoria.categorias)
-                  .join(", ")}
-              </td>
-              <td className="imagenes-column">
-                <div className="carousel-container">
-                  <Carousel showThumbs={false}>
-                    {receta.imagenes.map((imagen, imgIndex) => (
-                      <div key={imgIndex} className="carousel-slide">
-                        {imageLoadError[receta.id] &&
-                        imageLoadError[receta.id][imgIndex] ? (
-                          <div className="no-image-placeholder">
-                            🚫 Imagen no disponible
-                          </div>
-                        ) : (
-                          <img
-                            src={imagen.urlImg}
-                            alt={`Imagen ${imgIndex}`}
-                            className="carousel-image"
-                            onError={() =>
-                              handleImageError(receta.id, imgIndex)
-                            }
-                          />
-                        )}
-                      </div>
-                    ))}
-                  </Carousel>
-                </div>
-              </td>
-
-              <td className="action-buttons">
-                <button
-                  type="button"
-                  className="btn edit-btn"
-                  onClick={() => {
-                    setSelectedRecipeId(receta.id);
-                    setShowEditarReceta(true);
-                  }}
-                >
-                  Editar
-                </button>
-                <button
-                  type="button"
-                  className="btn delete-btn"
-                  onClick={() => borrarReceta(receta.id)}
-                >
-                  Borrar
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      <div className="pagination">
-        {pageNumbers.map((number) => (
-          <button
-            key={number}
-            onClick={() => paginate(number)}
-            className={`page-number ${number === currentPage ? "active" : ""}`}
-          >
-            {number}
-          </button>
         ))}
-      </div>
+      </tbody>
+    </table>
 
-      {showEditarReceta && (
-        <div className="modal">
-          <div className="modal-content">
-            <EditarReceta
-              closeModal={() => setShowEditarReceta(false)}
-              fetchRecipes={fetchRecipes}
-              recipeId={selectedRecipeId}
-              updateRecipe={updateRecipe}
-              initialRecipe={recipes.find(
-                (recipe) => recipe.id === selectedRecipeId
-              )}
-            />
-          </div>
+    <div className="listar-recetas-pagination">
+      {pageNumbers.map((number) => (
+        <button
+          key={number}
+          onClick={() => paginate(number)}
+          className={`listar-recetas-page-number ${
+            number === currentPage ? "active" : ""
+          }`}
+        >
+          {number}
+        </button>
+      ))}
+    </div>
+
+    {showEditarReceta && (
+      <div className="listar-recetas-modal">
+        <div className="listar-recetas-modal-content">
+          <EditarReceta
+            closeModal={() => setShowEditarReceta(false)}
+            fetchRecipes={fetchRecipes}
+            recipeId={selectedRecipeId}
+            updateRecipe={updateRecipe}
+            initialRecipe={recipes.find(
+              (recipe) => recipe.id === selectedRecipeId
+            )}
+          />
         </div>
-      )}
-    </>
-  );
+      </div>
+    )}
+  </div>
+);
+
 };
 
 export default ListarRecetas;
