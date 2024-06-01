@@ -4,7 +4,7 @@ import { routes } from '../utils/routes'
 import { AuthContext } from '../Context';
 
 export const Navbar = () => {
-  const { authState: { logged }, logout } = useContext(AuthContext);
+  const { authState: { logged, user }, logout } = useContext(AuthContext);
   const [toggle, setToggle] = useState(false);
 
   const getInitial = (name) => {
@@ -26,24 +26,28 @@ export const Navbar = () => {
       </Link>
 
       <ul className='nav-list'>
-        <Link to="/"><li className='nav-item'>Inicio</li></Link>
-        <li className='nav-item'>Contacto</li>
-        <li className='nav-item'>Sobre Nosotros</li>
-        <li className='nav-item'><Link to={routes.adminPanel}>Panel de administrador</Link></li>
+        <Link to="/" className='nav-item'><li>Inicio</li></Link>
+        <Link to="/" className='nav-item'><li>Contacto</li></Link>
+        <Link to="/" className='nav-item'><li>Sobre Nosotros</li></Link>
+        { user?.role === 'ADMIN' && 
+            <Link to={routes.adminPanel} className='nav-item'>
+              <li>Panel de administrador</li>
+            </Link> 
+        }
       </ul>
 
       <div className="navbar-right">
         {logged ? (
           <div className="avatar-container">
             <div className="avatar">
-              {/* {getInitial(user.name)} */}
+              {getInitial(user.name)}
             </div>
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
           </div>
         ) : (
           <>
-            <Link to={routes.register}><button className="navbar-button">Crear Cuenta</button></Link>
-            <Link to={routes.login}><button className="navbar-button">Iniciar sesión</button></Link>
+            <Link to={routes.login}><button className="navbar-button btn-login">Iniciar sesión</button></Link>
+            <Link to={routes.register}><button className="navbar-button btn-register">Crear Cuenta</button></Link>
           </>
         )}
       </div>
