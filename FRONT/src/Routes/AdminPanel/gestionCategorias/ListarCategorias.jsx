@@ -5,8 +5,9 @@ import {
   updateCategory,
   createCategory,
 } from "../../../api/api";
+import "./ListarCategorias.css";
 
-const ListarCategorias = ({ fetchCategories }) => {
+const ListarCategorias = () => {
   const [categorias, setCategorias] = useState([]);
   const [showEditarCategoria, setShowEditarCategoria] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
@@ -14,15 +15,18 @@ const ListarCategorias = ({ fetchCategories }) => {
   const [sortOrder, setSortOrder] = useState("desc");
 
   useEffect(() => {
-    fetchCategories();
     getCategorias();
   }, []);
 
   const getCategorias = async () => {
-    const data = await fetchCategories();
-    if (data) {
-      setCategorias(data);
-    } else {
+    try {
+      const data = await fetchCategories();
+      if (data) {
+        setCategorias(data);
+      } else {
+        alert("Error al cargar categorías.");
+      }
+    } catch (error) {
       alert("Error al cargar categorías.");
     }
   };
@@ -33,20 +37,28 @@ const ListarCategorias = ({ fetchCategories }) => {
 
   const borrarCategoria = async (id) => {
     if (window.confirm("¿Estás seguro que deseas eliminar esta categoría?")) {
-      const success = await deleteCategory(id);
-      if (success) {
-        fetchCategories();
-      } else {
+      try {
+        const success = await deleteCategory(id);
+        if (success) {
+          getCategorias();
+        } else {
+          alert("Error al eliminar la categoría.");
+        }
+      } catch (error) {
         alert("Error al eliminar la categoría.");
       }
     }
   };
 
   const agregarCategoria = async (categoria) => {
-    const success = await createCategory(categoria);
-    if (success) {
-      fetchCategories();
-    } else {
+    try {
+      const success = await createCategory(categoria);
+      if (success) {
+        getCategorias();
+      } else {
+        alert("Error al agregar la categoría.");
+      }
+    } catch (error) {
       alert("Error al agregar la categoría.");
     }
   };
@@ -92,13 +104,13 @@ const ListarCategorias = ({ fetchCategories }) => {
         <tbody>
           {categorias
             .filter((categoria) =>
-              categoria.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+              categoria.categorias?.toLowerCase().includes(searchTerm.toLowerCase())
             )
             .sort((a, b) => (sortOrder === "asc" ? a.id - b.id : b.id - a.id))
             .map((categoria) => (
               <tr key={categoria.id}>
                 <td>{categoria.id}</td>
-                <td>{categoria.nombre}</td>
+                <td>{categoria.categorias}</td>
                 <td className="listar-categorias-action-buttons">
                   <button
                     type="button"
@@ -128,7 +140,7 @@ const ListarCategorias = ({ fetchCategories }) => {
           <div className="listar-categorias-modal-content">
             <EditarCategoria
               closeModal={() => setShowEditarCategoria(false)}
-              fetchCategories={fetchCategories}
+              fetchCategories={getCategorias}
               categoryId={selectedCategoryId}
               updateCategory={updateCategory}
               initialCategory={categorias.find(

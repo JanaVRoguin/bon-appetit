@@ -9,7 +9,7 @@ import {
 } from "../../../api/api";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import "./ListarRecetas.css"; // Importar el CSS dedicado
+import "./ListarRecetas.css"; 
 
 const ListarRecetas = ({ recipes, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);

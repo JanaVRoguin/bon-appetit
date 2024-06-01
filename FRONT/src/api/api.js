@@ -49,27 +49,6 @@ export const createRecipe = async (receta) => {
   }
 };
 
-// Listar categorias
-export const fetchCategories = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}categorias/listar`,
-    { headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      console.error("Error al obtener las categorías:", response.statusText);
-      return null;
-    }
-  } catch (error) {
-    console.error("Error al obtener las categorías:", error.message);
-    return null;
-  }
-};
 
 // Eliminar receta
 export const deleteRecipe = async (id) => {
@@ -194,6 +173,27 @@ export const revokeAdminRole = async (userId) => {
 
 // CRUD Categorías
 
+// Listar categorias
+export const fetchCategories = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/listar`,
+    { headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+    );
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Error al obtener las categorías:", response.statusText);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al obtener las categorías:", error.message);
+    return null;
+  }
+};
 // Crear una nueva categoría
 export const createCategory = async (newCategory) => {
   try {
