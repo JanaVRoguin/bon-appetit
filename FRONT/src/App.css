@@ -753,6 +753,9 @@ input.input-error {
   border-radius: 5px;
   cursor: pointer;
 }
+.mobile-nav-list {
+  display: none;
+}
 
 .logout-button:hover {
   background-color: #9e3b3b;
@@ -794,5 +797,8 @@ input.input-error {
   .mobile-item a:link, .mobile-item a:visited {
     color: #000;
     text-decoration: none;
+  }
+  .nav-item:hover,  .mobile-item:hover {
+    cursor: pointer;
   }
 }
