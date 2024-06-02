@@ -63,7 +63,21 @@ export const Navbar = () => {
           <li className='nav-item mobile-item'><Link to="/">Inicio</Link></li>
           <li className='nav-item mobile-item'>Contacto</li>
           <li className='nav-item mobile-item'>Sobre Nosotros</li>
-          <li className='nav-item mobile-item'><Link to={routes.adminPanel}>Panel de administrador</Link></li>
+          { user?.role === 'ADMIN' && 
+            <li className='nav-item mobile-item'><Link to={routes.adminPanel}>Panel de administrador</Link></li>
+          }
+          {logged ? (
+            <>
+              <li className='nav-item mobile-item'>Mi cuenta</li>
+              <li className="nav-item mobile-item" onClick={handleLogout}>Cerrar Sesión</li>
+            </>
+          
+        ) : (
+          <>
+            <li className="nav-item mobile-item"><Link to={routes.login}>Iniciar sesión</Link></li>
+            <li className="nav-item mobile-item"><Link to={routes.register}>Crear Cuenta</Link></li>
+          </>
+        )}
         </ul>
       )}
     </nav>
