@@ -1,5 +1,7 @@
 package com.bonappetit.bonappetitApi.service.impl;
 
+import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioActualizarDto;
+import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioSalidaDto;
 import com.bonappetit.bonappetitApi.entity.Role;
 import com.bonappetit.bonappetitApi.entity.RoleEnum;
 import com.bonappetit.bonappetitApi.entity.Usuario;
@@ -8,6 +10,7 @@ import com.bonappetit.bonappetitApi.security.jwt.JWTUtil;
 import com.bonappetit.bonappetitApi.service.IUsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,8 @@ public class UsuarioService implements IUsuarioService {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private JWTUtil jwtUtil;
+    @Autowired
+    private ModelMapper modelMapper;
     @Override
     public Usuario registerUser(Usuario usuario) {
         if (iUsuarioRepository.findUsuarioByCorreo(usuario.getCorreo()).isPresent()) {
@@ -40,8 +45,51 @@ public class UsuarioService implements IUsuarioService {
         return iUsuarioRepository.save(usuario);
     }
 
+    @Override
+    public Usuario findByCorreo(String correo) {
+        return iUsuarioRepository.findUsuarioByCorreo(correo)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con el correo: " + correo));
+    }
+    @Override
+    public List<UsuarioSalidaDto> listarUsuarios() {
+        List<UsuarioSalidaDto> usuarioSalidaDto = iUsuarioRepository.findAll()
+                .stream().map(usuario -> modelMapper.map(usuario, UsuarioSalidaDto.class)).toList();
+        return usuarioSalidaDto;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        iUsuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public UsuarioSalidaDto buscarUsuario(Long id) {
+        Usuario usuario = iUsuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con el id: " + id));
+        UsuarioSalidaDto usuarioSalidaDto = modelMapper.map(usuario, UsuarioSalidaDto.class);
+        return usuarioSalidaDto;
+    }
+
+    @Override
+    public UsuarioSalidaDto actualizarUsuario(UsuarioActualizarDto usuario) {
+        Usuario usuarioRecibido = modelMapper.map(usuario, Usuario.class);
+        Usuario usuarioAActualizar = iUsuarioRepository.findById(usuarioRecibido.getId())
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+
+        if (usuarioAActualizar != null) {
+
+            usuarioAActualizar.setNombre(usuarioRecibido.getNombre());
+            usuarioAActualizar.setApellido(usuarioRecibido.getApellido());
+            usuarioAActualizar.setCorreo(usuarioRecibido.getCorreo());
+
+            iUsuarioRepository.save(usuarioAActualizar);
+        }
+        UsuarioSalidaDto usuarioSalidaDto = modelMapper.map(usuarioAActualizar, UsuarioSalidaDto.class);
+        return usuarioSalidaDto;
+    }
+
     public void grantAdminRole(Long id) {
-        Usuario usuario = iUsuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
+        Usuario usuario = iUsuarioRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
         // Buscar el rol actual del usuario
         Optional<Role> userRoleOptional = usuario.getRoles().stream()
@@ -94,24 +142,5 @@ public class UsuarioService implements IUsuarioService {
         }
 
         return null;
-    }
-    @Override
-    public Usuario findByCorreo(String correo) {
-        return iUsuarioRepository.findUsuarioByCorreo(correo)
-                .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con el correo: " + correo));
-    }
-    @Override
-    public List<Usuario> findAll() {
-        return iUsuarioRepository.findAll();
-    }
-
-    @Override
-    public void deleteById(Long id) {
-        iUsuarioRepository.deleteById(id);
-    }
-
-    @Override
-    public Usuario findById(Long id) {
-        return iUsuarioRepository.findById(id).orElse(null);
     }
 }

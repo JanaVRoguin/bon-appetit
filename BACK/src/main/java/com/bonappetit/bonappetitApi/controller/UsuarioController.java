@@ -1,5 +1,7 @@
 package com.bonappetit.bonappetitApi.controller;
 
+import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioActualizarDto;
+import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioSalidaDto;
 import com.bonappetit.bonappetitApi.entity.Usuario;
 import com.bonappetit.bonappetitApi.service.IUsuarioService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -8,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,14 +20,13 @@ public class UsuarioController {
     @Autowired
     IUsuarioService iUsuarioService;
     @GetMapping("/listar")
-    public ResponseEntity<List<Usuario>> listarUsuarios(){
-        List<Usuario> listarImagenes = iUsuarioService.findAll();
-        return new ResponseEntity<>(listarImagenes, HttpStatus.OK);
+    public ResponseEntity<List<UsuarioSalidaDto>> listarUsuarios(){
+        return new ResponseEntity<>(iUsuarioService.listarUsuarios(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id){
-        return new ResponseEntity<>(iUsuarioService.findById(id),HttpStatus.OK);
+    public ResponseEntity<UsuarioSalidaDto> buscarUsuario(@PathVariable Long id){
+        return new ResponseEntity<>(iUsuarioService.buscarUsuario(id),HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
@@ -45,4 +47,8 @@ public class UsuarioController {
         return ResponseEntity.ok(usuario);
     }
 
+    @PutMapping("/actualizar")
+    public ResponseEntity<UsuarioSalidaDto> actualizarUsuario(@RequestBody @Valid UsuarioActualizarDto usuario){
+        return new ResponseEntity<>(iUsuarioService.actualizarUsuario(usuario), HttpStatus.OK);
+    }
 }
