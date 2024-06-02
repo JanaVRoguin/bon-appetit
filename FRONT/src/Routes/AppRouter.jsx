@@ -6,18 +6,19 @@ import { Home } from "../Layouts"
 import { Almuerzo, Cena, Desayuno, Detail, Login, Mediatarde, Register } from "../Components"
 import AdminPanel from "./AdminPanel/AdminPanel"
 import CrearReceta from "./AdminPanel/gestionRecetas/CrearReceta"
+import MyAccount from "../Components/MyAccount"
 
 export const AppRouter = () => {
   return (
     <div className="content"> {/* El contenedor principal para el contenido */}
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.desayuno} element={<Desayuno />} /> categoria categoria="desayuno"
+        <Route path={routes.desayuno} element={<Desayuno />} />
         <Route path={routes.almuerzo} element={<Almuerzo />} />
         <Route path={routes.mediatarde} element={<Mediatarde />} /> 
         <Route path={routes.cena} element={<Cena />} />
         <Route path={routes.detail} element={<Detail />} />
-
+        <Route path={routes.myAccount} element={<MyAccount/>} />
         <Route path={routes.adminPanel} element={
           <PrivateRoute>
             <AdminPanel />
