@@ -56,12 +56,11 @@ public class SecurityConfig {
 
                     http.requestMatchers(HttpMethod.GET,"/usuarios/listar").hasAnyRole("SUPER", "ADMIN");
                     http.requestMatchers(HttpMethod.GET,"/usuarios/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.GET,"/buscar/{correo}").hasAnyRole("USER", "ADMIN");
+                    http.requestMatchers(HttpMethod.GET,"/usuarios/buscar/{correo}").hasAnyRole("USER", "ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/usuarios/eliminar/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.PUT,"/usuarios/actualizar").hasAnyRole("USER", "ADMIN");
 
                     http.requestMatchers(HttpMethod.POST,"/categorias/crear").hasRole("ADMIN");
-
                     http.requestMatchers(HttpMethod.GET,"/categorias/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/categorias/eliminar/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.PUT,"/categorias/actualizar/{id}").hasRole("ADMIN");
