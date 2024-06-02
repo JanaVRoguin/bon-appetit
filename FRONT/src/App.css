@@ -12,6 +12,7 @@
   --colorFondo-secundario: #697185;
   --colorFuente-Gold: #ad793f;
   --colorFuente-bordo: #731627;
+  --colorFondo-hueso: #f5ead0; 
   --fontGordita: 'Cinzel Decorative', sans-serif;
   /* #ad793f */
   /* #f5ead0 */
@@ -33,7 +34,7 @@ html {
   background-color: var(--colorFondo-primario);
   min-height: 100vh;
   padding-top: 85px ;
-  padding-bottom: 30px;
+  
 }
 /*ESTILOS HEADER*/
 nav {
@@ -77,8 +78,8 @@ nav {
 
 
 .navbar-logo {
-  height: 60px; /* Ajusta la altura del logo */
-  margin-right: 10px; /* Espacio entre el logo y el texto */
+  height: 100px; /* Ajusta la altura del logo */
+  margin-right: 2px; /* Espacio entre el logo y el texto */
 }
 
 .navbar-heading {
@@ -118,37 +119,129 @@ nav {
 }
 
 /*ESTILOS FOOTER*/
-footer {
+footer{
   width: 100%; /* Ocupa el ancho completo */
-  padding: 10px; /* Relleno */
+  padding: 20px; /* Relleno */
   background-color: #f5f5f5; /* Color de fondo */
-  display: flex; /* Usa Flexbox para distribuir elementos */
-  justify-content: space-between; /* Alinea el texto a la izquierda y los logotipos a la derecha */
-  align-items: center; /* Centra verticalmente */
-  position: sticky; /* Mantiene el footer en el flujo normal */
+  position: relative;
   z-index: 1000;
 }
+.footer-content {
+  
+  display: flex; /* Usa Flexbox para distribuir elementos */
+  justify-self: baseline;/* Alinea el contenido a los lados opuestos */
+  align-items: center; /* Alinea verticalmente */
 
-.footer-texto {
-  width: 200px;
-  font-size: 20px;
-  text-align: left;
- 
 }
 
-.footer-logos {
+.footer-left {
+  padding: 1%;
+  width: 25%;
+  display: flex;
+  flex-direction: column; /* Distribuye en columna */
+  align-items: center; /* Alinea al centro */
+  border-right: 5px solid #000;
+  border-radius: 8px;
+}
+
+.footer-logo-large {
+  height: 180px; /* Tamaño del logo principal */
+  width: 180px;
+}
+
+.footer-text {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: -25px; /* Espacio entre el logo y el texto */
+  text-align: center; /* Centra el texto */
+}
+
+.footer-socials {
   display: flex; /* Distribuye las imágenes de los logotipos en línea */
-   
+  margin-top: 10px; /* Espacio entre el texto y los iconos */
+  justify-content: center; /* Centra los iconos */
 }
 
 .footer-logo {
-  height: 65px; /* Ajusta el tamaño del logo */
+  height: 80px; /* Ajusta el tamaño del logo */
+  margin: 0 3px; /* Espacio entre los iconos */
   cursor: pointer; /* Cambia el cursor para hacer clic */
   transition: transform 0.3s; /* Efecto de transición al pasar el cursor */
 }
 
 .footer-logo:hover {
   transform: scale(1.1); /* Efecto de aumento al pasar el cursor */
+}
+
+
+.footer-right {
+  width: 75%;
+  margin-left: 10%;
+  font-family: var(--fontGordita);
+  display: flex;
+  flex-direction: column;
+}
+.footer-lists {
+  display: flex; /* Usa flexbox para alinear las listas una al lado de la otra */
+  justify-content: space-around;
+  margin-bottom: 5%;
+}
+.footer-list {
+  list-style: none; /* Quita los puntos de la lista */
+  padding: 0;
+  margin: 0 20px; /* Espacio entre las listas */
+  font-weight: bold;
+}
+
+.footer-list li {
+  margin-bottom: 10px; /* Espacio entre los elementos de la lista */
+  cursor: pointer; /* Cambia el cursor para hacer clic */
+  transition: color 0.3s; /* Efecto de transición al pasar el cursor */
+}
+
+.footer-list li:hover {
+  color: #007BFF; /* Color al pasar el cursor */
+}
+.footer-divider {
+  width: 30%; /* El 30% del ancho de footer-right */
+  height: 1px; /* Altura de la línea */
+  background-color: #000; /* Color de la línea */
+  margin: 20px auto; /* Margen superior e inferior, centrado horizontalmente */
+}
+
+.footer-ingredients {
+  width: 100%; /* Ancho completo de footer-right */
+  text-align: center; /* Texto centrado */
+}
+
+.footer-ingredients p {
+  margin: 0; /* Sin margen */
+}
+.footer-horizontal-line {
+  width: 100%; /* Ocupa el ancho completo de footer-right */
+  height: 1px; /* Altura de la línea */
+  background-color: #000; /* Color de la línea */
+  margin: 5px 0; /* Margen superior e inferior */
+}
+
+.footer-additional {
+  text-align: center; /* Texto centrado */
+  margin-bottom: 10px; /* Margen inferior */
+}
+
+.footer-additional p {
+  font-size: 14px; /* Tamaño de fuente del texto adicional */
+}
+
+.footer-additional a {
+  color: #000; /* Color de los enlaces */
+  text-decoration: none; /* Quita el subrayado de los enlaces */
+  margin: 0 10px; /* Espacio entre los enlaces */
+  transition: color 0.3s; /* Efecto de transición de color */
+}
+
+.footer-additional a:hover {
+  color: #007BFF; /* Color al pasar el cursor sobre los enlaces */
 }
 
 /****ESTILOS HOME*****/
@@ -166,6 +259,7 @@ footer {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   justify-items: center;
   gap: 10px;
+  margin-bottom: 10%;
   
 }
 
@@ -317,8 +411,9 @@ footer {
 
 /*ESTILOS SECCION RECOMENDADOS*/
 .recommended-section {
-  padding-top: 2%;
-  padding: 10%;
+  margin-top: 2%;
+  padding: 2% 10% 4% 10%;
+  background-color:var(--colorFondo-hueso);
 }
 .recommended-grid {
   
@@ -382,7 +477,7 @@ footer {
   right: 1px; /* Desplaza el botón hacia la derecha */
   top: 50%; /* Centra verticalmente */
   transform: translateY(-50%); /* Ajusta la posición vertical */
-  background-color: #8f8e8e; /* Color de fondo del botón */
+  background-color: #f1f1f1; /* Color de fondo del botón */
   border: none; /* Sin borde */
   border-radius: 50%; /* Hace el botón circular */
   width: 36px; /* Ancho del botón */
@@ -763,7 +858,7 @@ input.input-error {
   .nav-list, .navbar-right {
     display: none;
   }
-
+  logo grisAzul.png
   .menu-hamburguesa {
     display: inline-block;
     position: relative;

@@ -21,7 +21,7 @@ export const Navbar = () => {
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-left">
-        <img className='navbar-logo' src="/Images/Logo-generico.jpg" alt="Logo Marca" />
+        <img className='navbar-logo' src="/Images/Logo.png" alt="Logo Marca" />
         <h2 className="navbar-heading">BonAppetit</h2>
       </Link>
 
