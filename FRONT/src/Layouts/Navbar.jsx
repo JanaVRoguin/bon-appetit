@@ -68,7 +68,7 @@ export const Navbar = () => {
           }
           {logged ? (
             <>
-              <li className='nav-item mobile-item'>Mi cuenta</li>
+              <li className='nav-item mobile-item'><Link to={routes.myAccount}>Mi cuenta</Link></li>
               <li className="nav-item mobile-item" onClick={handleLogout}>Cerrar Sesión</li>
             </>
           
