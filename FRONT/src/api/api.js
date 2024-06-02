@@ -49,27 +49,6 @@ export const createRecipe = async (receta) => {
   }
 };
 
-// Listar categorias
-export const fetchCategories = async () => {
-  try {
-    const response = await fetch(`${BASE_URL}categorias/listar`,
-    { headers: {
-      'Content-Type': 'application/json'
-    }
-  }
-    );
-    if (response.ok) {
-      const data = await response.json();
-      return data;
-    } else {
-      console.error("Error al obtener las categorías:", response.statusText);
-      return null;
-    }
-  } catch (error) {
-    console.error("Error al obtener las categorías:", error.message);
-    return null;
-  }
-};
 
 // Eliminar receta
 export const deleteRecipe = async (id) => {
@@ -188,4 +167,114 @@ export const revokeAdminRole = async (userId) => {
     throw error;
   }
 };
+
+//CATEGORIAS 
+
+
+// CRUD Categorías
+
+// Listar categorias
+export const fetchCategories = async () => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/listar`,
+    { headers: {
+      'Content-Type': 'application/json'
+    }
+  }
+    );
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Error al obtener las categorías:", response.statusText);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al obtener las categorías:", error.message);
+    return null;
+  }
+};
+// Crear una nueva categoría
+export const createCategory = async (newCategory) => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/crear`, {
+      method: "POST",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newCategory),
+    });
+    if (!response.ok) {
+      throw new Error("Error al crear la categoría.");
+    }
+    return "Categoría creada";
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// Actualizar una categoría
+export const updateCategory = async (category) => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/actualizar`, {
+      method: "PUT",
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(category),
+    });
+    if (!response.ok) {
+      throw new Error('Error al actualizar la categoría');
+    }
+    return 'Categoría actualizada';
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// Eliminar una categoría
+export const deleteCategory = async (categoryId) => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/eliminar/${categoryId}`, {
+      method: 'DELETE',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      }
+    });
+    if (!response.ok) {
+      throw new Error('Error al eliminar la categoría');
+    }
+    return 'Categoría eliminada';
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+// Buscar categoría por ID
+export const getCategoryById = async (categoryId) => {
+  try {
+    const response = await fetch(`${BASE_URL}categorias/${categoryId}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      console.error("Error al obtener la categoría:", response.statusText);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error al obtener la categoría:", error.message);
+    return null;
+  }
+};
+
 
