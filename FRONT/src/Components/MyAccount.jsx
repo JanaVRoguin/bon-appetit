@@ -9,7 +9,7 @@ const MyAccount = () => {
         correo: JSON.parse(localStorage.getItem('email'))
     }
     const {nombre, apellido, correo} = userHardcodeado;
-    const url = `${BASE_URL}usuarios/buscar/${localStorage.getItem('email')}`;
+    const url = `${BASE_URL}usuarios/buscar/${correo}`;
     // console.log(JSON.parse(localStorage.getItem('email')));
     
     useEffect(() => {
