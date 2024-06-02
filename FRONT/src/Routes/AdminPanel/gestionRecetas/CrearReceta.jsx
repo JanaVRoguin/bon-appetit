@@ -13,6 +13,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     imagenes: [""],
   });
   const [validationErrors, setValidationErrors] = useState({});
+  const [imageLoadError, setImageLoadError] = useState([false]);
 
   useEffect(() => {
     // Obtener categorías desde la API
@@ -50,23 +51,34 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       ...formData,
       imagenes: updatedImages,
     });
+
+    const updatedErrors = [...imageLoadError];
+    updatedErrors[index] = false; // Reset error state when the image URL changes
+    setImageLoadError(updatedErrors);
   };
 
   const addImageField = () => {
-    if (formData.imagenes[formData.imagenes.length - 1].trim() !== "") {
-      setFormData({
-        ...formData,
-        imagenes: [...formData.imagenes, ""],
-      });
-    }
+    setFormData({
+      ...formData,
+      imagenes: [...formData.imagenes, ""],
+    });
+    setImageLoadError([...imageLoadError, false]);
   };
 
   const removeImageField = (index) => {
     const updatedImages = formData.imagenes.filter((_, i) => i !== index);
+    const updatedErrors = imageLoadError.filter((_, i) => i !== index);
     setFormData({
       ...formData,
-      imagenes: updatedImages,
+      imagenes: updatedImages.length > 0 ? updatedImages : [""],
     });
+    setImageLoadError(updatedErrors.length > 0 ? updatedErrors : [false]);
+  };
+
+  const handleImageError = (index) => {
+    const updatedErrors = [...imageLoadError];
+    updatedErrors[index] = true;
+    setImageLoadError(updatedErrors);
   };
 
   const handleSubmit = async (event) => {
@@ -86,7 +98,8 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       !ingredientes ||
       !instrucciones ||
       categorias.length === 0 ||
-      imagenes.length === 0
+      imagenes.length === 0 ||
+      imagenes.some((image) => image.trim() === "")
     ) {
       alert("Por favor ingrese todos los campos.");
       return;
@@ -122,7 +135,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     <div className="modal">
       <div className="modal-content crear-receta-container">
         <div className="form-wrapper">
-          <h2 className="title">Agregar Receta</h2>
+          <h2 className="title">Agregar Recetas</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Nombre</label>
@@ -203,19 +216,26 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
                       value={imagen}
                       onChange={(e) => handleImageChange(index, e.target.value)}
                     />
-                    {imagen && (
+                    {imagen && !imageLoadError[index] ? (
                       <img
                         src={imagen}
                         alt={`Imagen ${index + 1}`}
                         className="preview-image"
+                        onError={() => handleImageError(index)}
                       />
+                    ) : (
+                      <div className="no-image-placeholder">
+                        🚫 Imagen no disponible
+                      </div>
                     )}
-                    <button
-                      type="button"
-                      onClick={() => removeImageField(index)}
-                    >
-                      -
-                    </button>
+                    {formData.imagenes.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeImageField(index)}
+                      >
+                        -
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
