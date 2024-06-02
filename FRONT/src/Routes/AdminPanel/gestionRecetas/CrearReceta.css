@@ -161,6 +161,7 @@
 .add-image-btn {
   width: 40px;
   height: 40px;
+  margin-top: 10px;
   background-color: #007bff;
   border: none;
   cursor: pointer;
@@ -186,4 +187,19 @@
   border: none;
   color: blue;
   cursor: pointer;
+}
+.no-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px; /* Ajusta el tamaño según tus necesidades */
+  height: 80px; /* Ajusta el tamaño según tus necesidades */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #f0f0f0;
+  color: #999;
+  font-size: 14px;
+  text-align: center;
+  padding: 10px;
+  margin: 10px;
 }

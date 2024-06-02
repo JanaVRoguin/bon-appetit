@@ -2,7 +2,7 @@ package com.bonappetit.bonappetitApi.controller;
 
 import com.bonappetit.bonappetitApi.security.jwt.JWTUtil;
 import com.bonappetit.bonappetitApi.dto.entrada.LoginRequest;
-import com.bonappetit.bonappetitApi.dto.salida.JWTResponse;
+import com.bonappetit.bonappetitApi.dto.salida.Jwt.JWTResponse;
 import com.bonappetit.bonappetitApi.entity.*;
 import com.bonappetit.bonappetitApi.service.impl.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +54,9 @@ public class AuthController {
             Usuario usuario = usuarioService.findByCorreo(loginRequest.getCorreo());
             String nombre = usuario.getNombre();
             String rol = usuario.getRoles().stream().findFirst().get().getRoleEnum().toString();
+            String correo = usuario.getCorreo();
 
-            return ResponseEntity.ok(new JWTResponse(jwt, nombre, rol));
+            return ResponseEntity.ok(new JWTResponse(jwt, nombre, rol, correo));
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }

@@ -5,22 +5,23 @@ import {
   grantAdminRole,
   revokeAdminRole,
 } from "../../../api/api";
+import "./ListUsers.css";
 
 const ListUsers = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  console.log(users)
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("desc");
+  const [filterRole, setFilterRole] = useState(null);
 
   useEffect(() => {
     const getUsers = async () => {
       try {
         const usersData = await fetchUsers();
-        
-        const transformedUsers = usersData.map(user => ({
+        const transformedUsers = usersData.map((user) => ({
           ...user,
-          role: user.roles[0]?.roleEnum
+          role: user.roles[0]?.roleEnum,
         }));
         setUsers(transformedUsers);
         setLoading(false);
@@ -69,6 +70,29 @@ const ListUsers = () => {
     }
   };
 
+  const handleSortOrderChange = () => {
+    setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+
+  const handleFilterRole = (role) => {
+    setFilterRole(role);
+    setSearchTerm(""); // Resetear el término de búsqueda al cambiar el filtro de rol
+  };
+
+  const filteredUsers = users.filter(
+    (user) =>
+      user.nombre.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (!filterRole || user.role === filterRole)
+  );
+
+  const sortedUsers = filteredUsers.slice().sort((a, b) => {
+    if (sortOrder === "asc") {
+      return a.id - b.id;
+    } else {
+      return b.id - a.id;
+    }
+  });
+
   if (loading) {
     return <div>Cargando usuarios...</div>;
   }
@@ -78,9 +102,60 @@ const ListUsers = () => {
   }
 
   return (
-    <div>
-      <h2 className="title">Lista de Usuarios</h2>
-      <table className="recetas-table">
+    <div className="listar-recetas-container">
+      <div className="listar-recetas-header">
+        <div>
+          <h1 className="listar-recetas-title">Lista de Usuarios</h1>
+          <p className="listar-recetas-total">Total de usuarios: {users.length}</p>
+        </div>
+      </div>
+
+      <div className="listar-recetas-filters">
+        <div className="listar-recetas-search">
+          <input
+            type="text"
+            placeholder="Buscar usuario..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
+        <div className="listar-recetas-category-sort">
+          <div
+            className={`listar-recetas-categoria-card ${
+              filterRole === null ? "active" : ""
+            }`}
+            onClick={() => handleFilterRole(null)}
+          >
+            Todos
+          </div>
+          <div
+            className={`listar-recetas-categoria-card ${
+              filterRole === "ADMIN" ? "active" : ""
+            }`}
+            onClick={() => handleFilterRole("ADMIN")}
+          >
+            Admin
+          </div>
+          <div
+            className={`listar-recetas-categoria-card ${
+              filterRole === "USER" ? "active" : ""
+            }`}
+            onClick={() => handleFilterRole("USER")}
+          >
+            User
+          </div>
+        </div>
+
+        <div className="listar-recetas-sort">
+          <label>Ordenar por ID:</label>
+          <select value={sortOrder} onChange={handleSortOrderChange}>
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+          </select>
+        </div>
+      </div>
+
+      <table className="listar-recetas-table">
         <thead>
           <tr>
             <th>ID</th>
@@ -91,24 +166,19 @@ const ListUsers = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {sortedUsers.map((user) => (
             <tr key={user.id}>
               <td>{user.id}</td>
-              <td>{user.nombre} {user.apellido}</td>
+              <td>
+                {user.nombre} {user.apellido}
+              </td>
               <td>{user.correo}</td>
               <td>{user.role}</td>
-              <td className="action-buttons">
-                <button
-                  type="button"
-                  className="btn delete-btn"
-                  onClick={() => handleDelete(user.id)}
-                >
-                  Eliminar
-                </button>
+              <td className="listar-recetas-action-buttons">
                 {user.role === "USER" ? (
                   <button
                     type="button"
-                    className="btn edit-btn"
+                    className="listar-recetas-btn listar-recetas-edit-btn"
                     onClick={() => handleGrantAdminRole(user.id)}
                   >
                     Asignar Admin
@@ -116,12 +186,19 @@ const ListUsers = () => {
                 ) : (
                   <button
                     type="button"
-                    className="btn edit-btn"
+                    className="listar-recetas-btn listar-recetas-edit-btn"
                     onClick={() => handleRevokeAdminRole(user.id)}
                   >
                     Revocar Admin
                   </button>
                 )}
+                <button
+                  type="button"
+                  className="listar-recetas-btn listar-recetas-delete-btn"
+                  onClick={() => handleDelete(user.id)}
+                >
+                  Eliminar
+                </button>
               </td>
             </tr>
           ))}

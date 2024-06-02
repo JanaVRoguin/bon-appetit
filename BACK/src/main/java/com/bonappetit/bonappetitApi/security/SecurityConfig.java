@@ -39,6 +39,9 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
+                    // Configuración de endpoints de Swagger y OpenAPI
+                    http.requestMatchers("/swagger-ui.html").permitAll();
+
                     // Config endpoints publicos
                     http.requestMatchers(HttpMethod.POST, "/auth/registro").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
@@ -51,9 +54,11 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.DELETE,"/recetas/eliminar/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.PUT,"/recetas/actualizar/{id}").hasRole("ADMIN");
 
-                    http.requestMatchers(HttpMethod.GET,"/usuarios/listar").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET,"/usuarios/listar").hasAnyRole("SUPER", "ADMIN");
                     http.requestMatchers(HttpMethod.GET,"/usuarios/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET,"/buscar/{correo}").hasAnyRole("USER", "ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/usuarios/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT,"/usuarios/actualizar").hasAnyRole("USER", "ADMIN");
 
                     http.requestMatchers(HttpMethod.POST,"/categorias/crear").hasRole("ADMIN");
 
