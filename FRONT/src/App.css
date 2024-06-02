@@ -856,6 +856,17 @@ input.input-error {
   background-color: #9e3b3b;
 }
 
+.root-myAccount {
+  background-color: var(--colorFondo-hueso
+  );
+  border-radius: 10px;
+  color: var(--colorFondo-primario);
+  margin: 2rem 15%;
+  padding: 30px;
+  box-shadow: 0 4px 8px var(--colorFondo-hueso);
+
+}
+
 @media (max-width: 920px) {
 
   .nav-list, .navbar-right {
