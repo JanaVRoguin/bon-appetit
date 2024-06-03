@@ -6,8 +6,13 @@ import NutritionalDetails from "./NutritionalDetails";
 import RecipeCalendar from "./RecipeCalendar";
 import { ContextGlobal } from "../../Context";
 import { ImagesContainer } from "./ImagesContainer";
+import { SearchBar } from "../SearchBar";
+
 
 export const Detail = () => {
+  const handleSearch = (term) => {
+    console.log('Buscando recetas para:', term); // Aquí puedes implementar la lógica de búsqueda
+  };
     const params = useParams();
     const navigate = useNavigate()
     const url = `http://localhost:8080/recetas/${params.id}`;
@@ -27,9 +32,11 @@ export const Detail = () => {
 
   return (
     <>
+    <div className="detail">
+    <SearchBar onSearch={handleSearch}/>
       <div className="name-container">
         <h1>{ nombre }</h1>
-        <button onClick={() => navigate(-1)}>volver atrás</button>
+        <button className="button-back" onClick={() => navigate(-1)}>VOLVER</button>
       </div>
       
       <ImagesContainer imagenes={imagenes}/>
@@ -47,6 +54,7 @@ export const Detail = () => {
           <RecipeCalendar />
         </div>
       </div>
+    </div>
     </>
   )
 }

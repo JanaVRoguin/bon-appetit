@@ -40,7 +40,10 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     // Configuración de endpoints de Swagger y OpenAPI
-                    http.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll();
+                    http.requestMatchers("/v3/api-docs/**").permitAll();
+                    http.requestMatchers("/swagger-ui/**").permitAll();
+                    http.requestMatchers("/swagger-ui.html").permitAll();
+
 
                     // Config endpoints publicos
                     http.requestMatchers(HttpMethod.POST, "/auth/registro").permitAll();
@@ -63,7 +66,7 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.POST,"/categorias/crear").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.GET,"/categorias/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/categorias/eliminar/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.PUT,"/categorias/actualizar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT,"/categorias/actualizar").hasRole("ADMIN");
 
                     http.requestMatchers(HttpMethod.POST,"/imagenes/crear").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.GET,"/imagenes/listar").hasRole("ADMIN");
