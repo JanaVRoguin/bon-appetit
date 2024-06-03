@@ -98,6 +98,14 @@ export const updateRecipe = async (recipeId, updatedData) => {
 
 // CRUD USUARIOS
 export const fetchUsers = async () => {
+  const token = JSON.parse(localStorage.getItem("token"));
+
+  // Check if token is available
+  if (!token) {
+    console.error("No se encontró el token en el localStorage");
+    throw new Error("Token de autenticación faltante.");
+  }
+
   try {
     const response = await fetch(`${BASE_URL}usuarios/listar`, {
       headers: {
@@ -105,12 +113,17 @@ export const fetchUsers = async () => {
         "Content-Type": "application/json",
       },
     });
+
     if (!response.ok) {
-      throw new Error("Error al obtener los usuarios");
+      // Check for specific error messages
+      const errorMessage = await response.text();
+      console.error("Error de respuesta de servidor:", errorMessage);
+      throw new Error(`Error al obtener los usuarios: ${errorMessage}`);
     }
+
     return await response.json();
   } catch (error) {
-    console.error("Error fetching users:", error);
+    console.error("Error buscando usuarios:", error);
     throw error;
   }
 };

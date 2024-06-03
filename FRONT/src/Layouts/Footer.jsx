@@ -32,7 +32,7 @@ export const Footer = () => {
           </div>
           <hr className='footer-divider' />
           <div className='footer-ingredients'>
-            <p>Ingredientes: Exequiel Godoy, Francisco Heredia, Hernan Suarez, Jana Roguin, Martin Cinalli, Wilfren Pereira, Stefano, Franco Lopez</p>
+            <p>Ingredientes: Exequiel Godoy, Francisco Heredia, Hernan Suarez, Jana Roguin, Martin Cinalli, Wilfren Pereira, Stefano Luzi, Franco Lopez</p>
           </div>
         </div>
       </div>
