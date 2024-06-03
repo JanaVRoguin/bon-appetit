@@ -17,14 +17,26 @@ export const ImagesContainer = ({imagenes}) => {
   return (
     <>
       <div className="recipe-img-container">
-        {
-          imagenes?.map( (imagen, i) => 
-            <img key={i} src={imagen.urlImg} alt={`algo${i}`} className={`recipe-img img-${i+1}`}/>
-          )
-        }
-        <p className='ver-mas img-5' onClick={() => handleImageClick()}>Ver más</p>
+        {imagenes?.map((imagen, i) => (
+          <img
+            key={i}
+            src={imagen.urlImg}
+            alt={`algo${i}`}
+            className={`recipe-img img-${i + 1}`}
+            onClick={() => handleImageClick(i)} // Aquí agregamos el onClick en cada imagen
+          />
+        ))}
+        <p className='ver-mas img-5' onClick={() => handleImageClick(4)}>Ver más</p>
       </div>
-      {isOpen && <ImagesCarousel imagenes={imagenes} selectedIndex={selectedImageIndex} onClose={handleClose} />}
+      {isOpen && (
+        <ImagesCarousel
+          imagenes={imagenes}
+          selectedIndex={selectedImageIndex}
+          onClose={handleClose}
+        />
+      )}
     </>
-  )
+  );
+  
+  
 }
