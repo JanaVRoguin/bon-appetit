@@ -33,6 +33,7 @@ export const Login = () => {
     if (validate()) {
     try {
           const response = await axios.post('http://localhost:8080/auth/login', formData);
+          localStorage.setItem('email', JSON.stringify(formData.correo));
           // console.log('Inicio de sesión exitoso', response.data);
           // localStorage.setItem('token', JSON.stringify(response.data.token) );
           login(response.data); // Loguear al usuario

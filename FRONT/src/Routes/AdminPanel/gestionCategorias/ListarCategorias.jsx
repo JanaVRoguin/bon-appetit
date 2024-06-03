@@ -5,12 +5,12 @@ import {
   updateCategory,
   createCategory,
 } from "../../../api/api";
-import CrearCategoria from "./CrearCategoria"; 
+import CrearCategoria from "./CrearCategoria";
 import "./ListarCategorias.css";
 
 const ListarCategorias = () => {
   const [categorias, setCategorias] = useState([]);
-  const [showCrearCategoria, setShowCrearCategoria] = useState(false); // Estado para el modal CrearCategoria
+  const [showCrearCategoria, setShowCrearCategoria] = useState(false);
   const [showEditarCategoria, setShowEditarCategoria] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -55,10 +55,15 @@ const ListarCategorias = () => {
   return (
     <div className="listar-categorias-container">
       <div className="listar-categorias-header">
-        <h1 className="listar-categorias-title">Lista de Categorías</h1>
+        <div>
+          <h1 className="listar-categorias-title">Lista de Categorías</h1>
+          <p className="listar-recetas-total">
+            Total de recetas: {categorias.length}
+          </p>
+        </div>
         <button
           className="listar-categorias-add-btn"
-          onClick={() => setShowCrearCategoria(true)} // Mostrar modal CrearCategoria
+          onClick={() => setShowCrearCategoria(true)}
         >
           Agregar Categoría
         </button>
@@ -128,7 +133,7 @@ const ListarCategorias = () => {
 
       {showCrearCategoria && (
         <CrearCategoria
-          closeModal={() => setShowCrearCategoria(false)} // Cerrar modal CrearCategoria
+          closeModal={() => setShowCrearCategoria(false)}
           fetchCategories={getCategorias}
         />
       )}

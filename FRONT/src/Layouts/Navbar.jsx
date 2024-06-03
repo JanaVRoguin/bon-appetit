@@ -34,16 +34,21 @@ export const Navbar = () => {
               <li>Panel de administrador</li>
             </Link> 
         }
+        {logged && (
+          <Link to={routes.myAccount} className='nav-item'><li>Mi cuenta</li></Link>
+        )}
       </ul>
 
       <div className="navbar-right">
         {logged ? (
-          <div className="avatar-container">
-            <div className="avatar">
-              {getInitial(user.name)}
+          <>
+            <div className="avatar-container">
+              <div className="avatar">
+                {getInitial(user.name)}
+              </div>
+              <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
             </div>
-            <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
-          </div>
+          </>
         ) : (
           <>
             <Link to={routes.login}><button className="navbar-button btn-login">Iniciar sesión</button></Link>
