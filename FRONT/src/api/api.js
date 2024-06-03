@@ -1,8 +1,9 @@
 import { BASE_URL } from "../utils/config";
 
 const token = JSON.parse( localStorage.getItem('token') );
-// Listar recetas
 
+//CRUD RECETAS
+// Listar recetas
 export const fetchRecipes = async () => {
   try {
     const response = await fetch(`${BASE_URL}recetas/listar`,
@@ -95,7 +96,7 @@ export const updateRecipe = async (recipeId, updatedData) => {
   }
 };
 
-
+// CRUD USUARIOS
 export const fetchUsers = async () => {
   try {
     const response = await fetch(`${BASE_URL}usuarios/listar`, {
