@@ -1,18 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { fetchCategories, createCategory } from "../../../api/api";
 
-const CrearCategoria = ({ closeModal, fetchCategories }) => {
+const CrearCategoria = ({
+  closeModal,
+  fetchCategories: fetchCategoriesParent,
+}) => {
   const [categorias, setCategorias] = useState([]);
   const [nombre, setNombre] = useState("");
   const [validationError, setValidationError] = useState("");
 
   useEffect(() => {
     const getCategorias = async () => {
-      const data = await fetchCategories();
-      if (data) {
-        setCategorias(data);
-      } else {
-        alert("Error al cargar categorías.");
+      try {
+        const data = await fetchCategories();
+        if (data) {
+          setCategorias(data);
+        } else {
+          alert("Error al cargar categorías.");
+        }
+      } catch (error) {
+        alert("Error al conectar con el servidor para cargar categorías.");
       }
     };
     getCategorias();
@@ -28,20 +35,22 @@ const CrearCategoria = ({ closeModal, fetchCategories }) => {
     // Validar si la categoría ya existe
     if (
       categorias.some(
-        (categoria) => categoria.nombre.toLowerCase() === nombre.toLowerCase()
+        (categoria) =>
+          categoria.categorias &&
+          categoria.categorias.toLowerCase() === nombre.toLowerCase()
       )
     ) {
-      setValidationError("La categoría ya existe.");
+      setValidationError("Categoría ya existente.");
       return;
     }
 
     // Crear la nueva categoría
     try {
-      const success = await createCategory({ nombre });
+      const success = await createCategory({ categorias: nombre });
       if (success) {
         alert("Categoría creada exitosamente.");
         closeModal();
-        fetchCategories(); // Actualizar la lista de categorías
+        fetchCategoriesParent(); // Actualizar la lista de categorías
       } else {
         alert("No se pudo crear la categoría.");
       }
