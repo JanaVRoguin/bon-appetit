@@ -567,6 +567,9 @@ footer{
 }
 
 /* *SECCION DETALLE */
+.detail{
+  padding: 1% 5% 5% 5%;
+}
 .name-container {
   width: 100%;
   margin-bottom: 20px;
@@ -574,9 +577,22 @@ footer{
   display: flex;
   justify-content: space-between;
 }
+.button-back{
+  background-color: var(--colorFuente-bordo);
+  color: var(--colorBlanco);
+  border-radius: 10px;
+  width: 10%;
+  
+  
+}
+.button-back:hover {
+  background-color: var(--colorBlanco); /* Cambia el fondo al color blanco al pasar el cursor */
+  color: var(--colorFuente-bordo); /* Cambia el texto al color original */
+}
 
 .recipe-img-container {
-  margin-bottom: 30px;
+  margin-bottom: 5%;
+  margin-top: 5%;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -589,16 +605,34 @@ footer{
   height: 100%;
   object-fit: cover;
   display: block;
+  transition: opacity 0.3s ease; /* Transición suave de opacidad */
+  cursor: pointer;
+}
+
+.recipe-img:hover {
+  opacity: 0.8; /* Reducir la opacidad al pasar el cursor */
+}
+.img-2,
+.img-3
+ {
+  padding-top: 25px ; /* Ajusta el padding superior e inferior */
+}
+.img-4,
+.img-5,
+.ver-mas {
+  padding-bottom: 25px ; /* Ajusta el padding superior e inferior */
 }
 
 .img-1 {
   grid-column: 1 / 3;
   grid-row: 1 / -1;
+  
 }
 
 .img-2 {
   grid-column: 3 / 4;
   grid-row: 1 / 2;
+  
 }
 
 .img-3 {
@@ -609,22 +643,33 @@ footer{
 .img-4 {
   grid-column: 3 / 4;
   grid-row: 2 / -1;
+  
 }
 
 .img-5 {
   grid-column: 4 / 5;
   grid-row: 2 / -1;
+  padding-bottom: 25px ; /* Ajusta el padding superior e inferior */
 }
 
 .ver-mas {
   width: 100%;
-  height: 100%;
+  height: 92%;
   font-size: 50px;
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,.8));
-
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Transición suave para la transformación */
+ 
+}
+.ver-mas p {
+  font-size: 15px;
+  transition: transform 0.3s ease;
+}
+.ver-mas:hover {
+  transform: scale(1.2); /* Aumenta el tamaño al pasar el cursor */
 }
 
 .carousel-overlay {
@@ -642,25 +687,32 @@ footer{
 
 .carousel-popup {
   position: relative;
-  width: 60%;
-  height: 60%;
-  background: white;
-  border: 5px solid gold;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  width: 80%;
+  height: 80%;
+  background: var(--colorFondo-primario);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
+.carousel-popup img{
+  max-width: 70%;
+ }
 
 .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: none;
-  border: none;
+  width: 2%;
+  height: 4%;
+  background: var(--colorFuente-Gold);
+  border-radius: 100%;
   font-size: 1.5rem;
   cursor: pointer;
+}
+.close-button:hover {
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
+  background-color: var(--colorFondo-hueso); /* Cambia el color de fondo al pasar el cursor */
 }
 
 .carousel.carousel-slider .control-arrow {
@@ -669,10 +721,11 @@ footer{
 
 .details-container {
   margin-bottom: 60px;
-
+  background-color: var(--colorFondo-hueso);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
+  padding: 5%;
 }
 
 .recipe-detail-data {
@@ -820,29 +873,100 @@ input.input-error {
   max-width: 400px;
   font-size: 1rem;
 }
-/*ESTILOS LOGIN*/
+/* Estilos para el Login */
+
 .login {
-  border-color:#000;
+  height: 30vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 50px auto;
+  width: 80%; /* Ajusta el ancho según tu diseño */
 }
 
-.login h2 {
+.login-columns {
+  border: 2px solid var(--colorFuente-Gold); /* Borde sólido de 2px con el color personalizado */
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-top:5%;
+  padding: 10px; /* Añade un padding para separar el contenido del borde */
+  box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
+}
+
+.login-column {
+  flex: 1;
+  margin-right: 20px;
   text-align: center;
-  margin-bottom: 20px;
   
 }
 
-/* Styles for the form */
-.login-form {
-  display: flex;
-  flex-direction: column;
+.login h1 {
+  font-size: 10vh;
+  margin-top:5% ;
+  margin-bottom: 10px;
 }
+
+.login-column p {
+  margin-bottom: 10px;
+}
+
+.login-column a {
+  color:var(--colorFuente-Gold);
+  text-decoration: none;
+}
+
+.login-column a:hover {
+  text-decoration: underline;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 100%; /* Ajusta el ancho máximo del formulario según tu diseño */
+  border: 1px solid var(--colorFondo-hueso);
+  border-radius: 4px;
+  padding: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.input-error {
+  border-color: var(--colorFondo-hueso);
+}
+
+.error-message {
+  color: var(--colorFondo-hueso);
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
 .login-button,
 .cancel-button {
-  padding: 10px;
+  padding: 10px 20px;
   font-size: 14px;
   border: none;
   border-radius: 4px;
@@ -852,13 +976,29 @@ input.input-error {
 }
 
 .login-button {
-  background-color: #3498db;
-  color: #fff;
+  background-color: var(--colorFuente-bordo);
+  color: var(--colorBlanco);
 }
 
 .login-button:hover {
-  background-color: #2980b9;
+  background-color: var(--colorFondo-secundario);
 }
+
+.cancel-button {
+  background-color: var(--colorFondo-secundario);
+  color: var(--colorBlanco);
+}
+
+.cancel-button:hover {
+  background-color: #bbb;
+}
+.login-horizontal-line {
+  width: 100%; /* Ocupa el ancho completo de footer-right */
+  height: 1px; /* Altura de la línea */
+  color: var(--colorFuente-Gold); /* Color de la línea */
+  margin: 10px 10px; /* Margen superior e inferior */
+}
+
 
 .avatar-container {
   display: flex;

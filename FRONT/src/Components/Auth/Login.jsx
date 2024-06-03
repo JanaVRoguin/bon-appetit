@@ -31,15 +31,13 @@ export const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-    try {
-          const response = await axios.post('http://localhost:8080/auth/login', formData);
-          localStorage.setItem('email', JSON.stringify(formData.correo));
-          // console.log('Inicio de sesión exitoso', response.data);
-          // localStorage.setItem('token', JSON.stringify(response.data.token) );
-          login(response.data); // Loguear al usuario
-          // navigate('/');
+      try {
+        const response = await axios.post('http://localhost:8080/auth/login', formData);
+        localStorage.setItem('email', JSON.stringify(formData.correo));
+        login(response.data); // Loguear al usuario
+        // navigate('/');
       } catch (error) {
-          console.error('Error en el inicio de sesión:', error);
+        console.error('Error en el inicio de sesión:', error);
       }
     }
   };
@@ -50,37 +48,51 @@ export const Login = () => {
 
   return (
     <div className="login">
-      <h2>Iniciar sesión</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="correo">Email</label>
-          <input
-            type="email"
-            id="correo"
-            name="correo"
-            value={formData.correo}
-            onChange={handleChange}
-            className={errors.correo ? 'input-error' : ''}
-          />
-          {errors.correo && <p className="error-message">{errors.correo}</p>}
+      <div className="login-columns">
+        {/* Columna de Bienvenida y Enlaces */}
+        <div className="login-column">
+          <h1>Bienvenido/a</h1>
+          <hr className='login-horizontal-line' />
+          <p><a href="#">¡Olvidaste tu contraseña?</a></p>
+          <hr className='login-horizontal-line' />
+          <p>¿No tienes cuenta? <a href="#">Registrarse</a></p>
         </div>
-        <div className="form-group">
-          <label htmlFor="contraseña">Contraseña</label>
-          <input
-            type="password"
-            id="contraseña"
-            name="contraseña"
-            value={formData.contraseña}
-            onChange={handleChange}
-            className={errors.contraseña ? 'input-error' : ''}
-          />
-          {errors.contraseña && <p className="error-message">{errors.contraseña}</p>}
+        
+        {/* Columna del Formulario de Login */}
+        <div className="login-column">
+          <h2>Iniciar sesión</h2>
+          <form onSubmit={handleSubmit} className="login-form">
+            <div className="form-group">
+              <label htmlFor="correo">Email</label>
+              <input
+                type="email"
+                id="correo"
+                name="correo"
+                value={formData.correo}
+                onChange={handleChange}
+                className={errors.correo ? 'input-error' : ''}
+              />
+              {errors.correo && <p className="error-message">{errors.correo}</p>}
+            </div>
+            <div className="form-group">
+              <label htmlFor="contraseña">Contraseña</label>
+              <input
+                type="password"
+                id="contraseña"
+                name="contraseña"
+                value={formData.contraseña}
+                onChange={handleChange}
+                className={errors.contraseña ? 'input-error' : ''}
+              />
+              {errors.contraseña && <p className="error-message">{errors.contraseña}</p>}
+            </div>
+            <div className="form-buttons">
+              <button type="submit" className="login-button">Iniciar sesión</button>
+              <button type="button" className="cancel-button" onClick={handleCancel}>Cancelar</button>
+            </div>
+          </form>
         </div>
-        <div className="form-buttons">
-          <button type="submit" className="login-button">Iniciar sesión</button>
-          <button type="button" className="cancel-button" onClick={handleCancel}>Cancelar</button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };
