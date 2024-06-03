@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(http -> {
                     // Configuración de endpoints de Swagger y OpenAPI
-                    http.requestMatchers("/swagger-ui.html").permitAll();
+                    http.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll();
 
                     // Config endpoints publicos
                     http.requestMatchers(HttpMethod.POST, "/auth/registro").permitAll();
