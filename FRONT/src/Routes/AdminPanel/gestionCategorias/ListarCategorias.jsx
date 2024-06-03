@@ -6,7 +6,6 @@ import {
   createCategory,
 } from "../../../api/api";
 import CrearCategoria from "./CrearCategoria";
-import EditarCategoria from "./EditarCategoria";
 import "./ListarCategorias.css";
 
 const ListarCategorias = () => {
@@ -145,7 +144,11 @@ const ListarCategorias = () => {
             <EditarCategoria
               closeModal={() => setShowEditarCategoria(false)}
               fetchCategories={getCategorias}
-              id={selectedCategoryId} // Aquí pasamos el id como prop
+              categoryId={selectedCategoryId}
+              updateCategory={updateCategory}
+              initialCategory={categorias.find(
+                (categoria) => categoria.id === selectedCategoryId
+              )}
             />
           </div>
         </div>

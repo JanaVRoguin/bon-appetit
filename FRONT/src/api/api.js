@@ -262,7 +262,6 @@ export const getCategoryById = async (categoryId) => {
   try {
     const response = await fetch(`${BASE_URL}categorias/${categoryId}`, {
       headers: {
-        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     });
