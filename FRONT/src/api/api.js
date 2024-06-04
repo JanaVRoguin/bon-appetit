@@ -202,6 +202,7 @@ export const fetchCategories = async () => {
     return null;
   }
 };
+
 // Crear una nueva categoría
 export const createCategory = async (newCategory) => {
   try {
