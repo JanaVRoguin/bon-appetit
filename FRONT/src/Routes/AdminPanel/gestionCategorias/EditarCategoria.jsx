@@ -8,6 +8,10 @@ const EditarCategoria = ({
 }) => {
   const [nombre, setNombre] = useState("");
   const [validationError, setValidationError] = useState("");
+  const [data, setData] = useState({
+    id: '',
+    categorias: ''
+  });
 
   useEffect(() => {
     const getCategoria = async () => {
@@ -15,6 +19,7 @@ const EditarCategoria = ({
         const data = await getCategoryById(id);
         if (data) {
           setNombre(data.categorias);
+          setData(data);
         } else {
           alert("Error al cargar la categoría.");
         }
@@ -24,6 +29,13 @@ const EditarCategoria = ({
     };
     getCategoria();
   }, [id]);
+
+  useEffect(() => {
+    setData(prevData => ({
+      ...prevData,
+      categorias: nombre
+    }));
+  }, [nombre]);
 
   const handleChange = (e) => {
     setNombre(e.target.value);
@@ -40,7 +52,7 @@ const EditarCategoria = ({
 
     // Actualizar la categoría existente
     try {
-      const success = await updateCategory(id, { categorias: nombre });
+      const success = await updateCategory(data);
       if (success) {
         alert("Categoría actualizada exitosamente.");
         closeModal();
