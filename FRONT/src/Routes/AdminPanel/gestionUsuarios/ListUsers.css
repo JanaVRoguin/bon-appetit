@@ -229,3 +229,29 @@
   max-width: 600px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
+
+/* Estilos para el select de roles */
+.listar-recetas-role-select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  background-color: #f8f9fa;
+  cursor: pointer;
+}
+
+.listar-recetas-role-select:hover {
+  border-color: #007bff;
+}
+
+.listar-recetas-role-select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.listar-recetas-role-option {
+  padding: 10px;
+}
+

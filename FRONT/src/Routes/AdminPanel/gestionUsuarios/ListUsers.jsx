@@ -44,29 +44,20 @@ const ListUsers = () => {
     }
   };
 
-  const handleGrantAdminRole = async (userId) => {
+  const handleRoleChange = async (userId, newRole) => {
     try {
-      await grantAdminRole(userId);
+      if (newRole === "ADMIN") {
+        await grantAdminRole(userId);
+      } else {
+        await revokeAdminRole(userId);
+      }
       setUsers(
         users.map((user) =>
-          user.id === userId ? { ...user, role: "ADMIN" } : user
+          user.id === userId ? { ...user, role: newRole } : user
         )
       );
     } catch (err) {
-      alert("Error al asignar el rol de admin.");
-    }
-  };
-
-  const handleRevokeAdminRole = async (userId) => {
-    try {
-      await revokeAdminRole(userId);
-      setUsers(
-        users.map((user) =>
-          user.id === userId ? { ...user, role: "USER" } : user
-        )
-      );
-    } catch (err) {
-      alert("Error al revocar el rol de admin.");
+      alert("Error al actualizar el rol del usuario.");
     }
   };
 
@@ -106,7 +97,9 @@ const ListUsers = () => {
       <div className="listar-recetas-header">
         <div>
           <h1 className="listar-recetas-title">Lista de Usuarios</h1>
-          <p className="listar-recetas-total">Total de usuarios: {users.length}</p>
+          <p className="listar-recetas-total">
+            Total de usuarios: {users.length}
+          </p>
         </div>
       </div>
 
@@ -173,25 +166,21 @@ const ListUsers = () => {
                 {user.nombre} {user.apellido}
               </td>
               <td>{user.correo}</td>
-              <td>{user.role}</td>
+              <td>
+                <select
+                  value={user.role}
+                  onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                  className="listar-recetas-role-select"
+                >
+                  <option value="USER" className="listar-recetas-role-option">
+                    USER
+                  </option>
+                  <option value="ADMIN" className="listar-recetas-role-option">
+                    ADMIN
+                  </option>
+                </select>
+              </td>
               <td className="listar-recetas-action-buttons">
-                {user.role === "USER" ? (
-                  <button
-                    type="button"
-                    className="listar-recetas-btn listar-recetas-edit-btn"
-                    onClick={() => handleGrantAdminRole(user.id)}
-                  >
-                    Asignar Admin
-                  </button>
-                ) : (
-                  <button
-                    type="button"
-                    className="listar-recetas-btn listar-recetas-edit-btn"
-                    onClick={() => handleRevokeAdminRole(user.id)}
-                  >
-                    Revocar Admin
-                  </button>
-                )}
                 <button
                   type="button"
                   className="listar-recetas-btn listar-recetas-delete-btn"

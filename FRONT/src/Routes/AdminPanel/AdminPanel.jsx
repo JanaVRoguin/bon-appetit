@@ -3,7 +3,6 @@ import "./AdminPanel.css";
 import ListarRecetas from "./gestionRecetas/ListarRecetas";
 import ListUsers from "./gestionUsuarios/ListUsers";
 import ListarCategorias from "./gestionCategorias/ListarCategorias";
-
 import { fetchRecipes } from "../../api/api";
 
 export const AdminPanel = () => {
