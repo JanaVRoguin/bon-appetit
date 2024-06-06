@@ -2,8 +2,6 @@ package com.bonappetit.bonappetitApi.dto.salida.Usuario;
 
 
 import com.bonappetit.bonappetitApi.entity.Role;
-import jakarta.persistence.Column;
-import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.util.Set;

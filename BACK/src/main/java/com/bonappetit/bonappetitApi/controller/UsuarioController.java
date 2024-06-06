@@ -31,20 +31,13 @@ public class UsuarioController {
 
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<String> eliminarUsuario(@PathVariable Long id){
-        iUsuarioService.deleteById(id);
+        iUsuarioService.eliminarUsuario(id);
         return new ResponseEntity<>("Usuario eliminado", HttpStatus.OK) ;
     }
 
-    @PostMapping("/logout")
-    public ResponseEntity<?> logout(HttpServletRequest request) {
-        iUsuarioService.logout(request);
-        return ResponseEntity.ok("Cierre de sesión exitoso");
-    }
-
     @GetMapping("/buscar/{correo}")
-    public ResponseEntity<Usuario> buscarUsuarioPorCorreo(@PathVariable String correo) {
-        Usuario usuario = iUsuarioService.findByCorreo(correo);
-        return ResponseEntity.ok(usuario);
+    public ResponseEntity<UsuarioSalidaDto> buscarUsuarioPorCorreo(@PathVariable String correo) {
+        return ResponseEntity.ok(iUsuarioService.buscarPorCorreo(correo));
     }
 
     @PutMapping("/actualizar")
