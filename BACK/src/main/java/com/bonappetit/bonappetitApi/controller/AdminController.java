@@ -15,9 +15,9 @@ public class AdminController {
     IUsuarioService iUsuarioService;
 
     @PutMapping("/rolAdmin/{id}")
-    public ResponseEntity<?> grantAdminRole(@PathVariable Long id) {
+    public ResponseEntity<?> permisoAdminRol(@PathVariable Long id) {
         try {
-            iUsuarioService.grantAdminRole(id);
+            iUsuarioService.permisoAdminRol(id);
             return ResponseEntity.ok("Rol de ADMIN asignado correctamente al usuario con ID " + id);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
@@ -29,9 +29,9 @@ public class AdminController {
     }
 
     @PutMapping("/revokeRole/{id}")
-    public ResponseEntity<?> revokeAdminRole(@PathVariable Long id) {
+    public ResponseEntity<?> dengarAdminRol(@PathVariable Long id) {
         try {
-            iUsuarioService.revokeAdminRole(id);
+            iUsuarioService.dengarAdminRol(id);
             return ResponseEntity.ok("Rol de ADMIN revocado correctamente al usuario con ID " + id);
         } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();

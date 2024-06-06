@@ -30,7 +30,7 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     private ModelMapper modelMapper;
     @Override
-    public Usuario registerUser(Usuario usuario) {
+    public Usuario registrarUsuario(Usuario usuario) {
         if (iUsuarioRepository.findUsuarioByCorreo(usuario.getCorreo()).isPresent()) {
             throw new IllegalArgumentException("El correo ya está en uso");
         }
@@ -46,9 +46,11 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public Usuario findByCorreo(String correo) {
-        return iUsuarioRepository.findUsuarioByCorreo(correo)
+    public UsuarioSalidaDto buscarPorCorreo(String correo) {
+        Usuario usuario = iUsuarioRepository.findUsuarioByCorreo(correo)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado con el correo: " + correo));
+        UsuarioSalidaDto usuarioSalidaDto = modelMapper.map(usuario, UsuarioSalidaDto.class);
+        return usuarioSalidaDto;
     }
     @Override
     public List<UsuarioSalidaDto> listarUsuarios() {
@@ -58,7 +60,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void eliminarUsuario(Long id) {
         iUsuarioRepository.deleteById(id);
     }
 
@@ -87,7 +89,7 @@ public class UsuarioService implements IUsuarioService {
         return usuarioSalidaDto;
     }
 
-    public void grantAdminRole(Long id) {
+    public void permisoAdminRol(Long id) {
         Usuario usuario = iUsuarioRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
@@ -110,7 +112,7 @@ public class UsuarioService implements IUsuarioService {
         }
     }
 
-    public void revokeAdminRole(Long id) {
+    public void dengarAdminRol(Long id) {
         Usuario usuario = iUsuarioRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Usuario no encontrado"));
 
         // Buscar el rol de ADMIN del usuario
@@ -129,18 +131,4 @@ public class UsuarioService implements IUsuarioService {
         }
     }
 
-
-    public void logout(HttpServletRequest request) {
-        String token = extractTokenFromRequest(request);
-    }
-
-    private String extractTokenFromRequest(HttpServletRequest request) {
-        final String authorizationHeader = request.getHeader("Authorization");
-
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            return authorizationHeader.substring(7); // "Bearer " tiene 7 caracteres
-        }
-
-        return null;
-    }
 }

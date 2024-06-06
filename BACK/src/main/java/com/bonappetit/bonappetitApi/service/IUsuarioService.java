@@ -10,13 +10,12 @@ import java.util.List;
 
 public interface IUsuarioService {
 
-    public Usuario registerUser(Usuario usuario);
+    public Usuario registrarUsuario(Usuario usuario);
     public List<UsuarioSalidaDto> listarUsuarios();
-    public void deleteById(Long id);
+    public void eliminarUsuario(Long id);
     public UsuarioSalidaDto buscarUsuario(Long id);
-    public  UsuarioSalidaDto actualizarUsuario(UsuarioActualizarDto usuario);
-    public void grantAdminRole(Long id);
-    public void revokeAdminRole(Long id);
-    public void logout(HttpServletRequest request);
-    public Usuario findByCorreo(String correo);
+    public UsuarioSalidaDto actualizarUsuario(UsuarioActualizarDto usuario);
+    public void permisoAdminRol(Long id);
+    public void dengarAdminRol(Long id);
+    public UsuarioSalidaDto buscarPorCorreo(String correo);
 }
