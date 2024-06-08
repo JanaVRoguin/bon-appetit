@@ -30,31 +30,45 @@ export const Detail = () => {
       })
     }, [])
 
-  return (
-    <>
-    <div className="detail">
-    <SearchBar onSearch={handleSearch}/>
-      <div className="name-container">
-        <h1>{ nombre }</h1>
-        <button className="button-back" onClick={() => navigate(-1)}>VOLVER</button>
-      </div>
-      
-      <ImagesContainer imagenes={imagenes}/>
-
-      <div className="details-container">
-        <RecipeDetails 
-          categorías={categorías}
-          descripcion={descripcion}
-          ingredientes={ingredientes}
-          instrucciones={instrucciones}
-        />
-
-        <div className="side-details-container">
-          <NutritionalDetails />
-          <RecipeCalendar />
+    return (
+      <>
+        <div className="detail">
+          <SearchBar onSearch={handleSearch} />
+          <div className="name-container">
+            <h1>{nombre}</h1>
+            <button className="button-back" onClick={() => navigate(-1)}>VOLVER</button>
+          </div>
+  
+          <ImagesContainer imagenes={imagenes} />
+  
+          <div className="details-container">
+            <div className="main-details">
+              <div className="ingredientes">
+                <h1>Ingredientes:</h1>
+                <RecipeDetails
+                  categorías={categorías}
+                  descripcion={null}
+                  ingredientes={ingredientes}
+                  instrucciones={null} // Solo mostramos los ingredientes aquí
+                />
+              </div>
+              <div className="side-details-container">
+                <NutritionalDetails />
+                <div className="separator"></div>
+                <RecipeCalendar />
+              </div>
+            </div>
+            <div className="instructions-container">
+              <h1>Modo de preparación:</h1>
+              <RecipeDetails
+                categorías={categorías}
+                descripcion={null} // No mostramos la descripción aquí
+                ingredientes={null} // No mostramos los ingredientes aquí
+                instrucciones={instrucciones}
+              />
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    </>
-  )
+      </>
+    )
 }

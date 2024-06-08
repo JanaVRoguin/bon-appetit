@@ -4,7 +4,12 @@ const NutritionalDetails = () => {
   return (
     <div className='nutritional-details'>
       <h3>Características nutricionales</h3>
-      <p>jajaja seria hermoso tener algo aca pero imaginen iconitos e información copadas</p>
+      <ul>
+         <li>Calorias</li>
+         <li>Proteinas</li>
+         <li>Carbohidratos</li>
+         <li>Grasas</li>
+      </ul>
     </div>
   )
 }
