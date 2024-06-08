@@ -18,13 +18,9 @@ export const Detail = () => {
     const url = `http://localhost:8080/recetas/${params.id}`;
     const {dispatch, state} = useContext( ContextGlobal );
     const {nombre, imagenes, categorías, descripcion, ingredientes, instrucciones} = state.recipeSelected;
-    const token = JSON.parse(localStorage.getItem('token'));
 
     useEffect(() => {
-      axios(url, { headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      axios(url)
       .then((response) => {
         dispatch({type: 'GET_SELECTED', payload: response.data})
       })

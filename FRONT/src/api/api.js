@@ -28,6 +28,7 @@ export const fetchRecipes = async () => {
 export const createRecipe = async (receta) => {
   try {
     const token = JSON.parse( localStorage.getItem('token') );
+    console.log(token)
     const response = await fetch(`${BASE_URL}recetas/crear`, {
       method: "POST",
       headers: {

@@ -50,9 +50,8 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/recetas/listar").permitAll();
                     http.requestMatchers(HttpMethod.GET,"/categorias/listar").permitAll();
+                    http.requestMatchers(HttpMethod.GET,"/recetas/{id}").permitAll();
                     // Config endpoint privados
-                    http.requestMatchers(HttpMethod.GET,"/recetas/{id}").hasAnyRole("USER", "ADMIN");
-
                     http.requestMatchers(HttpMethod.POST,"/recetas/crear").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE,"/recetas/eliminar/{id}").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.PUT,"/recetas/actualizar/{id}").hasRole("ADMIN");
