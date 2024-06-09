@@ -22,8 +22,8 @@ export const Register = () => {
       errors.nombre = 'El nombre debe tener al menos 4 caracteres';
     }
 
-    if (formData.apellido.length < 4) {
-      errors.apellido = 'El apellido debe tener al menos 4 caracteres';
+    if (formData.apellido.length < 2) {
+      errors.apellido = 'El apellido debe tener al menos 2 caracteres';
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -33,6 +33,9 @@ export const Register = () => {
 
     if (!/[A-Z]/.test(formData.contraseña)) {
       errors.contraseña = 'La contraseña debe tener al menos una letra mayúscula';
+    }
+    if (formData.contraseña.length < 6) {
+      errors.contraseña = 'La contraseña debe tener al menos 6 caracteres';
     }
 
     setErrors(errors);
@@ -75,7 +78,6 @@ export const Register = () => {
           // Loguear al usuario
           login(loginResponse.data);
 
-         
 
           // Navegar al home después de un tiempo
           setTimeout(() => {
