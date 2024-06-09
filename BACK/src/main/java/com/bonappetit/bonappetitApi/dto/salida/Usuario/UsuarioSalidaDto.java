@@ -2,7 +2,10 @@ package com.bonappetit.bonappetitApi.dto.salida.Usuario;
 
 
 import com.bonappetit.bonappetitApi.entity.Role;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 

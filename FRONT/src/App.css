@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Anton&family=Cinzel+Decorative:wght@400;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Della+Respira&display=swap');
+@import '@fortawesome/fontawesome-free/css/all.css';
 
 *, *::after, *::before{
   margin: 0;
@@ -15,6 +17,7 @@
   --colorFondo-hueso: #f5ead0; 
   --colorBlanco: #fffaff; 
   --fontGordita: 'Cinzel Decorative', sans-serif;
+  --fontMinuscula: 'Della Respira';
   /* #ad793f */
   /* #f5ead0 */
   /* #D9D9D9 */
@@ -542,7 +545,7 @@ footer{
 }
 
 .category-recipes {
-  margin-top: 80px;
+  margin-top: 30px;
   display: grid; /* Usar CSS Grid */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
   gap: 20px; /* Espacio entre tarjetas */
@@ -567,13 +570,18 @@ footer{
 }
 
 /* *SECCION DETALLE */
-.detail{
+.detail {
   padding: 1% 5% 5% 5%;
+  background-image: url('/Images/Fondo-claro.png'); /* Ruta a tu imagen de fondo */
+  background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
 }
 .name-container {
+  color: var(--colorFondo-primario);
   width: 100%;
   margin-bottom: 20px;
-
   display: flex;
   justify-content: space-between;
 }
@@ -581,7 +589,8 @@ footer{
   background-color: var(--colorFuente-bordo);
   color: var(--colorBlanco);
   border-radius: 10px;
-  width: 10%;
+  width: 15%;
+  opacity: 0.8;
   
   
 }
@@ -612,16 +621,9 @@ footer{
 .recipe-img:hover {
   opacity: 0.8; /* Reducir la opacidad al pasar el cursor */
 }
-.img-2,
-.img-3
- {
-  padding-top: 25px ; /* Ajusta el padding superior e inferior */
-}
-.img-4,
-.img-5,
-.ver-mas {
-  padding-bottom: 25px ; /* Ajusta el padding superior e inferior */
-}
+
+ 
+
 
 .img-1 {
   grid-column: 1 / 3;
@@ -649,12 +651,12 @@ footer{
 .img-5 {
   grid-column: 4 / 5;
   grid-row: 2 / -1;
-  padding-bottom: 25px ; /* Ajusta el padding superior e inferior */
+  
 }
 
 .ver-mas {
   width: 100%;
-  height: 92%;
+  height: 100%;
   font-size: 50px;
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,.8));
   display: flex;
@@ -664,12 +666,9 @@ footer{
   transition: transform 0.3s ease; /* Transición suave para la transformación */
  
 }
-.ver-mas p {
-  font-size: 15px;
-  transition: transform 0.3s ease;
-}
+
 .ver-mas:hover {
-  transform: scale(1.2); /* Aumenta el tamaño al pasar el cursor */
+  transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
 }
 
 .carousel-overlay {
@@ -721,44 +720,197 @@ footer{
 
 .details-container {
   margin-bottom: 60px;
-  background-color: var(--colorFondo-hueso);
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 25px;
-  padding: 5%;
+  color: var(--colorFondo-primario);
+  display: flex;
+  flex-direction: column;
+  gap: 20%;
+  padding: 2%;
 }
-
+.ingredientes{
+  display: flex;
+  flex-direction: column;
+}
+.ingredientes p{
+  font-family: var(--fontMinuscula);
+}
+.main-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
 .recipe-detail-data {
-  grid-column: 1 / 3;
   font-size: 28px;
   text-align: left;
 }
-
-.side-details-container {
-  font-size: 28px;
-  grid-column: 3 / -1;
+.recipe-detail-data p{
+  font-family: var(--fontMinuscula);
 }
 
+.side-details-container {
+  align-items: center;
+  color: var(--colorFondo-hueso);
+  font-size: 28px;
+  grid-column: 3 / -1;
+  background-color: var(--colorFondo-primario); /* Fondo azul */
+  padding: 20px; /* Añadir padding para el contenido */
+  position: relative; /* Necesario para el pseudo-elemento */
+  max-height: 90%;
+  text-align: center;
+  max-width: 45%;
+}
+
+
+
+.side-details-container::before {
+  content: "";
+  position: absolute;
+  top: 12px; /* Ajusta para centrar verticalmente */
+  left: 12px; /* Ajusta para centrar horizontalmente */
+  right: 12px; /* Ajusta para centrar horizontalmente */
+  bottom: 12px; /* Ajusta para centrar verticalmente */
+  border: 2px solid var(--colorFuente-Gold); /* Línea dorada */
+  pointer-events: none; /* Asegura que no interfiera con los eventos del ratón */
+  border-radius: 10px;
+}
+
+.separator {
+  height: 3px;
+  width: 85%; /* Ajusta el ancho al 60% */
+  display: flex;
+  justify-content: center;
+  background-color: var(--colorFuente-Gold); /* Línea dorada */
+  margin: 20px auto; /* Espaciado alrededor de la línea y centra el elemento */
+  border-radius: 80px;
+}
+
+
 .nutritional-details {
-  margin-bottom: 50px;
+  text-align: center;
+  
+}
+
+.nutritional-details ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content:center;
+  gap: 30px;
+}
+
+.nutritional-details li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nutritional-details li p {
+  font-family:var(--fontMinuscula) ;
+  margin-top: 15px;
+  font-size: 18px;
+  color: var(--colorFondo-hueso); /* Ajusta este color según sea necesario */
+}
+
+.nutritional-details li svg {
+  margin-top: 20px;
+  color: var(--colorFuente-Gold); /* Ajusta este color según sea necesario */
 }
 
 .week-container {
+  margin-top: 5%;
   display: flex;
-  justify-content: center;
-  gap: 5px;
+  justify-content:center;
+  align-items: center;
+  gap: 5%;
 }
 
 .week-day {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background-color: #ccc;
+  background-color: var(--colorFuente-bordo);
   cursor: pointer;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+  transition: background-color 0.3s ease;
+}
+.week-day:hover {
+  background-color: var(--colorFondo-secundario); /* Change to a lighter color on hover */
+}
+.instructions-container {
+  margin-top: 20px;
+}
 
+/* Línea dorada con sombra inferior para h1 en name-container */
+.name-container h1::after {
+  content: "";
+  display: inline-block;
+  width: 280px; /* Ajusta el ancho según sea necesario */
+  height: 2px; /* Ajusta la altura según sea necesario */
+  background-color: var(--colorFuente-Gold);
+  margin-left: 10px; /* Espacio entre el texto y la línea */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
+  vertical-align: middle;
+}
+
+/* Línea dorada con sombra inferior para h1 en ingredientes y modo de preparación */
+.ingredientes h1::after,
+.instructions-container h1::after {
+  content: "";
+  display: inline-block;
+  width: 280px; /* Ajusta el ancho según sea necesario */
+  height: 2px; /* Ajusta la altura según sea necesario */
+  background-color: var(--colorFuente-Gold);
+  margin-left: 30px; /* Espacio entre el texto y la línea */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
+  vertical-align: middle;
+}
+
+.nav-button {
+  background-color: var(--colorFuente-bordo);
+  color: var(--colorBlanco);
+  border-radius: 10px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.navigation-buttons{
+  display: flex;
+  justify-content: center;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: black; /* Color de las flechas */
+  font-size: 18px;
+  margin: 10px;
+  font-family: var(--fontGordita);
+  font-weight: bold;
+}
+
+.nav-button i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  height: 40px;
+  width: 40px;
+  color: var(--colorBlanco);
+  margin-right: 5px; /* Espacio entre la flecha y el texto */
+  background-color: var(--colorFondo-primario);
+  transition: background-color 0.3s, color 0.3s; /* Transición suave */
+}
+
+.nav-button:hover i {
+  background-color: var(--colorFondo-secundario); /* Nuevo color de fondo al pasar el mouse */
+  color: var(--colorFondo-primario); /* Nuevo color del ícono al pasar el mouse */
 }
 
 .menu-hamburguesa {
@@ -1043,6 +1195,20 @@ input[type="password"] {
   padding: 30px;
   box-shadow: 0 4px 8px var(--colorFondo-hueso);
 
+}
+
+/* FAVORITOS */
+
+.favoritos-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.favoritos-title>h3 {
+  margin-top: 30px;
+  padding: 20px;
+  font-size: 2rem;
 }
 
 @media (max-width: 920px) {

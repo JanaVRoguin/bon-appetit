@@ -9,20 +9,21 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Receta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length=100, nullable=false)
+    @Column(length = 100, nullable = false)
     private String nombre;
-    @Column(length=250, nullable=false)
+    @Column(length = 250, nullable = false)
     private String descripcion;
-    @Column(length=500, nullable=false)
+    @Column(length = 500, nullable = false)
     private String ingredientes;
-    @Column(length=500, nullable=false)
+    @Column(length = 500, nullable = false)
     private String instrucciones;
     @ManyToMany
     private List<Categoria> categorias;

@@ -9,7 +9,6 @@ import com.bonappetit.bonappetitApi.repository.IUsuarioRepository;
 import com.bonappetit.bonappetitApi.security.jwt.JWTUtil;
 import com.bonappetit.bonappetitApi.service.IUsuarioService;
 import jakarta.persistence.EntityNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -29,6 +28,7 @@ public class UsuarioService implements IUsuarioService {
     private JWTUtil jwtUtil;
     @Autowired
     private ModelMapper modelMapper;
+
     @Override
     public Usuario registrarUsuario(Usuario usuario) {
         if (iUsuarioRepository.findUsuarioByCorreo(usuario.getCorreo()).isPresent()) {
@@ -41,7 +41,6 @@ public class UsuarioService implements IUsuarioService {
         Role userRole = new Role();
         userRole.setRoleEnum(RoleEnum.USER);
         usuario.getRoles().add(userRole);
-
         return iUsuarioRepository.save(usuario);
     }
 
@@ -52,6 +51,7 @@ public class UsuarioService implements IUsuarioService {
         UsuarioSalidaDto usuarioSalidaDto = modelMapper.map(usuario, UsuarioSalidaDto.class);
         return usuarioSalidaDto;
     }
+
     @Override
     public List<UsuarioSalidaDto> listarUsuarios() {
         List<UsuarioSalidaDto> usuarioSalidaDto = iUsuarioRepository.findAll()

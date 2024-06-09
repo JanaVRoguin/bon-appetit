@@ -4,8 +4,8 @@ const semana = [{day:'L'}, {day:'M'}, {day:'M'}, {day:'J'}, {day:'V'}, {day:'S'}
 
 const RecipeCalendar = () => {
   return (
-    <div>
-      <h4>¿Agregarlo al calendario?</h4>
+    <div className='calendar'>
+      <h4>¿QUIERES AGENDARLO?</h4>
       <div className='week-container'>
         {
           semana.map( (diaSemana, i) =>

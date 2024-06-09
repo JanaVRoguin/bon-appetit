@@ -8,11 +8,12 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class BonappetitApiApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(BonappetitApiApplication.class, args);
-	}
-	@Bean
-	public ModelMapper modelMapper() {
-		return new ModelMapper();
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(BonappetitApiApplication.class, args);
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    }
 }
