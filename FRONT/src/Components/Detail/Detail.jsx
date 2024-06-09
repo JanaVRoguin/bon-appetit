@@ -25,11 +25,7 @@ export const Detail = () => {
 
   useEffect(() => {
     if (token) {
-      axios(url, {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
+      axios(url)
       .then((response) => {
         dispatch({ type: 'GET_SELECTED', payload: response.data });
       })
@@ -42,12 +38,13 @@ export const Detail = () => {
         }
       });
 
-      axios.get('http://localhost:8080/recetas/ids', {
+      axios.get('http://localhost:8080/recetas/listar', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
       .then((response) => {
+        console.log(response.data);
         setRecipeIds(response.data);
       })
       .catch((error) => {
