@@ -35,7 +35,10 @@ export const Navbar = () => {
             </Link> 
         }
         {logged && (
-          <Link to={routes.myAccount} className='nav-item'><li>Mi cuenta</li></Link>
+          <>
+            <Link to={routes.myAccount} className='nav-item'><li>Mi cuenta</li></Link>
+            <Link to={routes.favs} className='nav-item'><li>Favoritos</li></Link>
+          </>
         )}
       </ul>
 

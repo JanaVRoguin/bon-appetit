@@ -7,8 +7,10 @@ import RecipeCalendar from "./RecipeCalendar";
 import { ContextGlobal } from "../../Context";
 import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
+import { AuthContext } from '../../Context';
 
 export const Detail = () => {
+  const { authState: { logged } } = useContext(AuthContext);
   const handleSearch = (term) => {
     console.log('Buscando recetas para:', term); // Aquí puedes implementar la lógica de búsqueda
   };
@@ -22,7 +24,6 @@ export const Detail = () => {
 
   const [recipeIds, setRecipeIds] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(-1);
-
   useEffect(() => {
     if (token) {
       axios(url)
@@ -44,7 +45,7 @@ export const Detail = () => {
         }
       })
       .then((response) => {
-        console.log(response.data);
+        //console.log(response.data);
         setRecipeIds(response.data);
       })
       .catch((error) => {
@@ -82,6 +83,11 @@ export const Detail = () => {
     }
   };
 
+  const addFav = () => {
+    dispatch({type: 'ADD_FAV', payload: state.recipeSelected});
+    alert(`Se agregó la receta ${nombre} a favoritos`);
+  }
+
   return (
     <>
       <div className="detail">
@@ -91,6 +97,11 @@ export const Detail = () => {
           <button className="button-back" onClick={() => navigate(-1)}>
             <i className="fas fa-reply"></i> VOLVER A LA CARTA
           </button>
+          {logged && (   
+            <button className="button-back" onClick={addFav}>
+              <i class="fa-regular fa-heart"></i> FAVORITOS
+            </button>
+          )}
         </div>
 
         <ImagesContainer imagenes={imagenes} />

@@ -545,7 +545,7 @@ footer{
 }
 
 .category-recipes {
-  margin-top: 80px;
+  margin-top: 30px;
   display: grid; /* Usar CSS Grid */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho */
   gap: 20px; /* Espacio entre tarjetas */
@@ -590,7 +590,7 @@ footer{
   color: var(--colorBlanco);
   border-radius: 10px;
   width: 15%;
-  
+  opacity: 0.8;
   
   
 }
@@ -1199,6 +1199,20 @@ input[type="password"] {
   padding: 30px;
   box-shadow: 0 4px 8px var(--colorFondo-hueso);
 
+}
+
+/* FAVORITOS */
+
+.favoritos-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.favoritos-title>h3 {
+  margin-top: 30px;
+  padding: 20px;
+  font-size: 2rem;
 }
 
 @media (max-width: 920px) {
