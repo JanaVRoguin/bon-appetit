@@ -44,8 +44,8 @@ public class UsuarioService implements IUsuarioService {
         Role userRole = new Role();
         userRole.setRoleEnum(RoleEnum.USER);
         usuario.getRoles().add(userRole);
-        //Enviar el mail al usuario
-        emailService.sendRegistrationEmail(usuario.getCorreo(), usuario);
+        //Enviar el mail al usuario, descomentar abajo cuando esto funcione
+        //emailService.sendRegistrationEmail(usuario.getCorreo(), usuario);
         return iUsuarioRepository.save(usuario);
     }
 

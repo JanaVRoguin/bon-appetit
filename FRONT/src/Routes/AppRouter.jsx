@@ -7,6 +7,7 @@ import { Almuerzo, Cena, Desayuno, Detail, Login, Mediatarde, Register } from ".
 import AdminPanel from "./AdminPanel/AdminPanel"
 import CrearReceta from "./AdminPanel/gestionRecetas/CrearReceta"
 import MyAccount from "../Components/MyAccount"
+import Favs from "../Layouts/Favs"
 
 export const AppRouter = () => {
   return (
@@ -19,6 +20,7 @@ export const AppRouter = () => {
         <Route path={routes.cena} element={<Cena />} />
         <Route path={routes.detail} element={<Detail />} />
         <Route path={routes.myAccount} element={<MyAccount/>} />
+        <Route path={routes.favs} element={<Favs/>} />
         <Route path={routes.adminPanel} element={
           <PrivateRoute>
             <AdminPanel />
