@@ -10,5 +10,6 @@ export const routes = {
     crearReceta: '/administracion/crear',
     register: '/register',
     login: '/login',
-    myAccount: '/myAccount'
+    myAccount: '/myAccount',
+    favs: '/favoritos'
 } 
