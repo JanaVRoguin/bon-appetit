@@ -2,9 +2,7 @@ package com.bonappetit.bonappetitApi.controller;
 
 import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioActualizarDto;
 import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioSalidaDto;
-import com.bonappetit.bonappetitApi.entity.Usuario;
 import com.bonappetit.bonappetitApi.service.IUsuarioService;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,20 +17,21 @@ import java.util.List;
 public class UsuarioController {
     @Autowired
     IUsuarioService iUsuarioService;
+
     @GetMapping("/listar")
-    public ResponseEntity<List<UsuarioSalidaDto>> listarUsuarios(){
+    public ResponseEntity<List<UsuarioSalidaDto>> listarUsuarios() {
         return new ResponseEntity<>(iUsuarioService.listarUsuarios(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UsuarioSalidaDto> buscarUsuario(@PathVariable Long id){
-        return new ResponseEntity<>(iUsuarioService.buscarUsuario(id),HttpStatus.OK);
+    public ResponseEntity<UsuarioSalidaDto> buscarUsuario(@PathVariable Long id) {
+        return new ResponseEntity<>(iUsuarioService.buscarUsuario(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable Long id){
+    public ResponseEntity<String> eliminarUsuario(@PathVariable Long id) {
         iUsuarioService.eliminarUsuario(id);
-        return new ResponseEntity<>("Usuario eliminado", HttpStatus.OK) ;
+        return new ResponseEntity<>("Usuario eliminado", HttpStatus.OK);
     }
 
     @GetMapping("/buscar/{correo}")
@@ -41,7 +40,7 @@ public class UsuarioController {
     }
 
     @PutMapping("/actualizar")
-    public ResponseEntity<UsuarioSalidaDto> actualizarUsuario(@RequestBody @Valid UsuarioActualizarDto usuario){
+    public ResponseEntity<UsuarioSalidaDto> actualizarUsuario(@RequestBody @Valid UsuarioActualizarDto usuario) {
         return new ResponseEntity<>(iUsuarioService.actualizarUsuario(usuario), HttpStatus.OK);
     }
 }

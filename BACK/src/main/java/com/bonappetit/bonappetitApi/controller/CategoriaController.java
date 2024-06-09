@@ -18,30 +18,31 @@ public class CategoriaController {
     ICategoriaService iCategoriaService;
 
     @PostMapping("/crear")
-    public ResponseEntity<String> crearCategoria(@RequestBody Categoria categoria){
+    public ResponseEntity<String> crearCategoria(@RequestBody Categoria categoria) {
         iCategoriaService.crearCategoria(categoria);
         return new ResponseEntity<>("Categoria creada", HttpStatus.CREATED);
     }
+
     @GetMapping("/listar")
-    public ResponseEntity<List<Categoria>> listarCategorias(){
+    public ResponseEntity<List<Categoria>> listarCategorias() {
         List<Categoria> listarCategorias = iCategoriaService.listarCategorias();
-        return new ResponseEntity<>(listarCategorias,HttpStatus.OK);
+        return new ResponseEntity<>(listarCategorias, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Categoria> buscarCategoria(@PathVariable Long id){
-        return new ResponseEntity<>(iCategoriaService.buscarCategoria(id),HttpStatus.OK);
+    public ResponseEntity<Categoria> buscarCategoria(@PathVariable Long id) {
+        return new ResponseEntity<>(iCategoriaService.buscarCategoria(id), HttpStatus.OK);
     }
 
     @PutMapping("/actualizar")
-    public ResponseEntity<String> actualizarCategoria(@RequestBody Categoria categoria){
-            iCategoriaService.actualizarCategoria(categoria);
-            return new ResponseEntity<>("Categoria actualizada", HttpStatus.OK);
+    public ResponseEntity<String> actualizarCategoria(@RequestBody Categoria categoria) {
+        iCategoriaService.actualizarCategoria(categoria);
+        return new ResponseEntity<>("Categoria actualizada", HttpStatus.OK);
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarCategoria(@PathVariable Long id){
+    public ResponseEntity<String> eliminarCategoria(@PathVariable Long id) {
         iCategoriaService.eliminarCategoria(id);
-        return new ResponseEntity<>("Categoria eliminada", HttpStatus.OK) ;
+        return new ResponseEntity<>("Categoria eliminada", HttpStatus.OK);
     }
 }

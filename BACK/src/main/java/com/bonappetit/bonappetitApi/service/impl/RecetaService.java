@@ -30,12 +30,13 @@ public class RecetaService implements IRecetaService {
     private IImagenService iImagenService;
     @Autowired
     private ModelMapper modelMapper;
+
     @Override
     public Receta crearReceta(RecetaEntradaDto recetaEntradaDto) {
         List<Categoria> categorias = new ArrayList<>();
         List<Imagen> imagenes = new ArrayList<>();
 
-        for (Long categoriaId : recetaEntradaDto.getCategorias()){
+        for (Long categoriaId : recetaEntradaDto.getCategorias()) {
             Categoria categoria = iCategoriaRepository.findById(categoriaId).orElse(null);
             categorias.add(categoria);
         }

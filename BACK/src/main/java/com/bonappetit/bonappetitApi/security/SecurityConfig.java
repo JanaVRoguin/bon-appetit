@@ -49,32 +49,32 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.POST, "/auth/registro").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/recetas/listar").permitAll();
-                    http.requestMatchers(HttpMethod.GET,"/categorias/listar").permitAll();
-                    http.requestMatchers(HttpMethod.GET,"/recetas/{id}").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/categorias/listar").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/recetas/{id}").permitAll();
                     // Config endpoint privados
-                    http.requestMatchers(HttpMethod.POST,"/recetas/crear").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.DELETE,"/recetas/eliminar/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.PUT,"/recetas/actualizar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.POST, "/recetas/crear").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE, "/recetas/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/recetas/actualizar/{id}").hasRole("ADMIN");
 
-                    http.requestMatchers(HttpMethod.GET,"/usuarios/listar").hasAnyRole("SUPER", "ADMIN");
-                    http.requestMatchers(HttpMethod.GET,"/usuarios/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.GET,"/usuarios/buscar/{correo}").hasAnyRole("USER", "ADMIN");
-                    http.requestMatchers(HttpMethod.DELETE,"/usuarios/eliminar/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.PUT,"/usuarios/actualizar").hasAnyRole("USER", "ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/usuarios/listar").hasAnyRole("SUPER", "ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/usuarios/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/usuarios/buscar/{correo}").hasAnyRole("USER", "ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE, "/usuarios/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/usuarios/actualizar").hasAnyRole("USER", "ADMIN");
 
-                    http.requestMatchers(HttpMethod.POST,"/categorias/crear").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.GET,"/categorias/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.DELETE,"/categorias/eliminar/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.PUT,"/categorias/actualizar").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.POST, "/categorias/crear").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/categorias/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE, "/categorias/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/categorias/actualizar").hasRole("ADMIN");
 
-                    http.requestMatchers(HttpMethod.POST,"/imagenes/crear").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.GET,"/imagenes/listar").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.GET,"/imagenes/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.DELETE,"/imagenes/eliminar/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.PUT,"/imagenes/actualizar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.POST, "/imagenes/crear").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/imagenes/listar").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/imagenes/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.DELETE, "/imagenes/eliminar/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/imagenes/actualizar/{id}").hasRole("ADMIN");
 
-                    http.requestMatchers(HttpMethod.PUT,"/admin/rolAdmin/{id}").hasRole("ADMIN");
-                    http.requestMatchers(HttpMethod.PUT,"/admin/revokeRole/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/admin/rolAdmin/{id}").hasRole("ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/admin/revokeRole/{id}").hasRole("ADMIN");
 
                     // Config endpoint no especificados
                     http.anyRequest().denyAll();
@@ -89,7 +89,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider(UserDatailServiceImpl userDetailsService){
+    public AuthenticationProvider authenticationProvider(UserDatailServiceImpl userDetailsService) {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService);
@@ -97,7 +97,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

@@ -8,11 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class CategoriaService implements ICategoriaService {
 
     @Autowired
     ICategoriaRepository iCategoriaRepository;
+
     @Override
     public Categoria crearCategoria(Categoria categoria) {
         return iCategoriaRepository.save(categoria);
