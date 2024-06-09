@@ -17,9 +17,10 @@ import java.util.List;
 public class UserDatailServiceImpl implements UserDetailsService {
     @Autowired
     private IUsuarioRepository iUsuarioRepository;
+
     @Override
     public UserDetails loadUserByUsername(String correo) throws UsernameNotFoundException {
-        Usuario usuario = iUsuarioRepository.findUsuarioByCorreo(correo).orElseThrow(()-> new UsernameNotFoundException("El correo " + correo + "no existe."));
+        Usuario usuario = iUsuarioRepository.findUsuarioByCorreo(correo).orElseThrow(() -> new UsernameNotFoundException("El correo " + correo + "no existe."));
 
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
@@ -27,11 +28,11 @@ public class UserDatailServiceImpl implements UserDetailsService {
                 .forEach(role -> authorityList.add(new SimpleGrantedAuthority("ROLE_".concat(role.getRoleEnum().name()))));
 
         return new User(usuario.getCorreo(),
-                        usuario.getContraseña(),
-                        usuario.isEnabled(),
-                        usuario.isAccountNoExpired(),
-                        usuario.isCredentialNoExpired(),
-                        usuario.isAccountNoLocked(),
-                        authorityList);
+                usuario.getContraseña(),
+                usuario.isEnabled(),
+                usuario.isAccountNoExpired(),
+                usuario.isCredentialNoExpired(),
+                usuario.isAccountNoLocked(),
+                authorityList);
     }
 }

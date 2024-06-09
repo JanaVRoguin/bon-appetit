@@ -1,7 +1,6 @@
 package com.bonappetit.bonappetitApi.controller;
 
 import com.bonappetit.bonappetitApi.dto.entrada.RecetaEntradaDto;
-
 import com.bonappetit.bonappetitApi.entity.Receta;
 import com.bonappetit.bonappetitApi.service.IRecetaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,18 +20,19 @@ public class RecetaController {
     IRecetaService iRecetaService;
 
     @PostMapping("/crear")
-    public ResponseEntity<String> crearReceta(@RequestBody @Valid RecetaEntradaDto receta){
+    public ResponseEntity<String> crearReceta(@RequestBody @Valid RecetaEntradaDto receta) {
         iRecetaService.crearReceta(receta);
         return new ResponseEntity<>("Receta creada", HttpStatus.CREATED);
     }
+
     @GetMapping("/listar")
-    public ResponseEntity<List<Receta>> listarRecetas(){
+    public ResponseEntity<List<Receta>> listarRecetas() {
         List<Receta> listarRecetas = iRecetaService.listarRecetas();
-        return new ResponseEntity<>(listarRecetas,HttpStatus.OK);
+        return new ResponseEntity<>(listarRecetas, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Receta> buscarReceta(@PathVariable Long id){
+    public ResponseEntity<Receta> buscarReceta(@PathVariable Long id) {
         return new ResponseEntity<>(iRecetaService.buscarReceta(id), HttpStatus.OK);
     }
 
@@ -43,8 +43,8 @@ public class RecetaController {
     }
 
     @DeleteMapping("/eliminar/{id}")
-    public ResponseEntity<String> eliminarReceta(@PathVariable Long id){
+    public ResponseEntity<String> eliminarReceta(@PathVariable Long id) {
         iRecetaService.eliminarReceta(id);
-        return new ResponseEntity<>("Receta eliminada", HttpStatus.OK) ;
+        return new ResponseEntity<>("Receta eliminada", HttpStatus.OK);
     }
 }

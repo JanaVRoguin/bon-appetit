@@ -9,14 +9,15 @@ import lombok.Setter;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(length=100, nullable=false)
+    @Column(length = 100, nullable = false)
     @NotNull
     private String categorias;
 }
