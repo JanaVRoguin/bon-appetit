@@ -99,7 +99,7 @@ export const Detail = () => {
           </button>
           {logged && (   
             <button className="button-back" onClick={addFav}>
-              <i class="fa-regular fa-heart"></i> FAVORITOS
+              <i className="fa-regular fa-heart"></i> FAVORITOS
             </button>
           )}
         </div>
