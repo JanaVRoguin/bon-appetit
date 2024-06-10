@@ -34,10 +34,19 @@ export const Login = () => {
       try {
         const response = await axios.post('http://localhost:8080/auth/login', formData);
         localStorage.setItem('email', JSON.stringify(formData.correo));
-        login(response.data); // Loguear al usuario
-        // navigate('/');
+        login(response.data); 
       } catch (error) {
-        console.error('Error en el inicio de sesión:', error);
+        const apiErrors = {};
+        if (error.response) {
+          if (error.response.status === 401) {
+            apiErrors.contraseña = 'Contraseña incorrecta';
+          } else if (error.response.status === 404) {
+            apiErrors.correo = 'Correo no encontrado';
+          } else {
+            apiErrors.general = 'Ocurrió un error inesperado';
+          }
+        }
+        setErrors(apiErrors);
       }
     }
   };
@@ -90,6 +99,7 @@ export const Login = () => {
               <button type="submit" className="login-button">Iniciar sesión</button>
               <button type="button" className="cancel-button" onClick={handleCancel}>Cancelar</button>
             </div>
+            {errors.general && <p className="error-message">{errors.general}</p>}
           </form>
         </div>
       </div>
