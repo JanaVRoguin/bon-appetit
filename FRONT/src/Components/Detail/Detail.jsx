@@ -87,7 +87,7 @@ export const Detail = () => {
     dispatch({type: 'ADD_FAV', payload: state.recipeSelected});
     alert(`Se agregó la receta ${nombre} a favoritos`);
   }
-
+ 
   return (
     <>
       <div className="detail">
