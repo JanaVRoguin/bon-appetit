@@ -1,23 +1,32 @@
-// CardCategoria.js
 import { Link } from 'react-router-dom';
 
-export const CardCategoria = ({ id, title, image, description, category }) => {
+
+export const CardCategoria = ({ id, title, image, ingredients, category }) => {
   const imageUrl = image?.length > 0 ? image[0].urlImg : '';
 
   return (
     <div className="card-categoria">
-      <Link to={`/recipe/${id}`}>
-        <img src={imageUrl} alt={title} className="card-categoria-image" />
+      <div className="card-categoria-link">
+        <div className="card-categoria-image-wrapper">
+          <img src={imageUrl} alt={title} className="card-categoria-image" />
+        </div>
         <div className="card-categoria-content">
           <h3 className="card-categoria-title">{title}</h3>
-          <p className="card-categoria-description">{description}</p>
-          <div className="card-categoria-category">
-            {category.map((cat) => (
-              <span key={cat.id}>{cat.categorias}</span>
-            ))}
+          <ul className="card-categoria-nutrition">
+          <li>Proteína: 32g</li>
+          <li>Kcal: 120</li>
+        </ul>
+          
+          <div className="card-categoria-description">
+            <h3>Ingredientes:</h3>
+            <span>{ingredients}</span>
           </div>
+          <Link to={`/recipe/${id}`} className="card-categoria-button">
+            Detalle...
+          </Link>
         </div>
-      </Link>
+        
+      </div>
     </div>
   );
 };
