@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./AdminPanel.css";
-import ListarRecetas from "./gestionRecetas/ListarRecetas";
-import ListUsers from "./gestionUsuarios/ListUsers";
-import ListarCategorias from "./gestionCategorias/ListarCategorias";
-import { fetchRecipes } from "../../api/api";
+import "../Components/AdminPanel/AdminPanel.css";
+import ListarRecetas from "../Components/AdminPanel/gestionRecetas/ListarRecetas";
+import ListUsers from "../Components/AdminPanel/gestionUsuarios/ListUsers";
+import ListarCategorias from "../Components/AdminPanel/gestionCategorias/ListarCategorias";
+import { fetchRecipes } from "../api/api";
 
 export const AdminPanel = () => {
   const [showRecetas, setShowRecetas] = useState(false);
