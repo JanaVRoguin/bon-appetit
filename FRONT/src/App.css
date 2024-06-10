@@ -1119,11 +1119,7 @@ input.input-error {
   border-color:var(--colorFuente-bordo);
 }
 
-.error-message {
-  color: var(--colorFondo-hueso);
-  font-size: 14px;
-  margin-top: 5px; /* Añade un espacio entre el input y el mensaje de error */
-}
+
 .form-buttons {
   display: flex;
   justify-content: space-around;
@@ -1247,7 +1243,7 @@ input[type="password"] {
 
 .error-message {
   color: var(--colorFondo-hueso);
-  font-size: 12px;
+  font-size: 14px;
   margin-top: 5px;
 }
 
