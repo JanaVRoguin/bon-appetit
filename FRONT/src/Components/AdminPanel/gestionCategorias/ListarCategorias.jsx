@@ -39,7 +39,7 @@ const ListarCategorias = () => {
   };
 
   const borrarCategoria = async (id) => {
-    if (window.confirm("¿Estás seguro que deseas eliminar esta categoría?")) {
+    if (window.confirm("¿Estás seguro que deseas eliminar esta categoría? Si lo haces, las recetas vinculadas se borrarán de la base de datos.")) {
       try {
         const success = await deleteCategory(id);
         if (success) {
@@ -92,8 +92,10 @@ const ListarCategorias = () => {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Nombre</th>
-            <th>Acción</th>
+            <th>Título</th>
+            <th>Descripción</th>
+            <th>Imagen</th>
+            <th>Acciónes</th>
           </tr>
         </thead>
         <tbody>
@@ -108,6 +110,8 @@ const ListarCategorias = () => {
               <tr key={categoria.id}>
                 <td>{categoria.id}</td>
                 <td>{categoria.categorias}</td>
+                <td>{categoria.descripcion}</td>
+                <td>{categoria.urlImg}</td>
                 <td className="listar-categorias-action-buttons">
                   <button
                     type="button"
