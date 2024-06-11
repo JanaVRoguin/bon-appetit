@@ -1393,3 +1393,30 @@ input[type="password"] {
     cursor: pointer;
   }
 }
+
+/* PLANNER */
+
+.meal-area {
+  min-height: 150px;
+  height: 150px;
+  width: 180px; /* Ancho fijo */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.day-column {
+  width: 180px; /* Ancho fijo */
+  height: auto;
+}
+
+.week-planner {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  margin-top: 0px; 
+}

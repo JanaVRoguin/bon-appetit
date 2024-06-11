@@ -11,5 +11,6 @@ export const routes = {
     register: '/register',
     login: '/login',
     myAccount: '/myAccount',
-    favs: '/favoritos'
-} 
+    favs: '/favoritos',
+    planner: '/planificador',
+}
