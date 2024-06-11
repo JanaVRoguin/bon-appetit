@@ -20,4 +20,10 @@ public class Categoria {
     @Column(length = 100, nullable = false)
     @NotNull
     private String categorias;
+    @Column(length = 100, nullable = false)
+    @NotNull
+    private String descripcion;
+    @Column(length = 500, nullable = false)
+    @NotNull
+    private String urlImg;
 }
