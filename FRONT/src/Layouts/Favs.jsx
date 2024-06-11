@@ -3,7 +3,7 @@ import { ContextGlobal } from "../Context";
 import { CardCategoria } from '../Components/CardCategoria';
 
 const Favs = () => {
-    const { dispatch, state } = useContext(ContextGlobal);
+    const { state } = useContext(ContextGlobal);
     console.log(state);
   return (
     <>    

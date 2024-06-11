@@ -1,6 +1,8 @@
 import { createContext, useReducer, useContext } from 'react';
 import { authReducer } from './authReducer';
 import { types } from './types/types';
+import { useNavigate } from 'react-router-dom';
+import { routes } from '../../utils/routes';
 
 export const AuthContext = createContext();
 
@@ -16,6 +18,7 @@ const init = () => {
 };
 
 export const AuthProvider = ({ children }) => {
+  const navigate = useNavigate();
   const [authState, dispatch] = useReducer(authReducer, {}, init);
 
   const login = ({ token, nombre, rol, correo }) => {
@@ -35,6 +38,7 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('user');
     localStorage.removeItem('email');
     dispatch(action);
+    navigate(`${routes.home}`);
   };
 
   return (
