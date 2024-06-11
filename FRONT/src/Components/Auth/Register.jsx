@@ -88,7 +88,33 @@ export const Register = () => {
           console.error('Error en el inicio de sesión:', loginError);
         }
       } catch (error) {
-        console.error('Error en el registro:', error);
+        if (error.response) {
+          // La solicitud se realizó y el servidor respondió con un código de estado
+          // que cae fuera del rango de 2xx
+          if (error.response.status === 409) {
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              correo: 'El correo ya está en uso',
+            }));
+          } else {
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              general: 'Ocurrió un error inesperado',
+            }));
+          }
+        } else if (error.request) {
+          // La solicitud se realizó pero no se recibió respuesta
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            general: 'No se recibió respuesta del servidor',
+          }));
+        } else {
+          // Algo sucedió al configurar la solicitud que provocó un error
+          setErrors((prevErrors) => ({
+            ...prevErrors,
+            general: 'Error al configurar la solicitud',
+          }));
+        }
       }
     }
   };
