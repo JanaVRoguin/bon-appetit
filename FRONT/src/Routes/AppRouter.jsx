@@ -8,6 +8,7 @@ import AdminPanel from "../Layouts/AdminPanel"
 import CrearReceta from "../Components/AdminPanel/gestionRecetas/CrearReceta"
 import MyAccount from "../Components/MyAccount"
 import Favs from "../Layouts/Favs"
+import Planner from "../Layouts/Planner";
 
 export const AppRouter = () => {
   return (
@@ -46,6 +47,7 @@ export const AppRouter = () => {
           }>
         </Route>
         {/* <Route path="/login" element={<Login />} /> */}
+        <Route path={routes.planner} element={<Planner/>}/>
       </Routes>
     </div>
   )
