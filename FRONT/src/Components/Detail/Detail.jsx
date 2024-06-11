@@ -19,7 +19,8 @@ export const Detail = () => {
   const navigate = useNavigate();
   const url = `http://localhost:8080/recetas/${params.id}`;
   const { dispatch, state } = useContext(ContextGlobal);
-  const { nombre, imagenes, categorías, descripcion, ingredientes, instrucciones } = state.recipeSelected;
+  const { favs, recipeSelected } = state;
+  const { nombre, imagenes, categorías, descripcion, ingredientes, instrucciones, id } = state.recipeSelected;
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [recipeIds, setRecipeIds] = useState([]);
@@ -87,7 +88,15 @@ export const Detail = () => {
     dispatch({type: 'ADD_FAV', payload: state.recipeSelected});
     alert(`Se agregó la receta ${nombre} a favoritos`);
   }
- 
+  useEffect(() => {
+    localStorage.setItem('favs', JSON.stringify(state.favs));
+  }, [state.favs])
+  console.log(state);
+  const removeFav = () => {
+      dispatch({ type: 'REMOVE_FAVORITE', payload: id })
+      alert(`Se eliminó la receta ${nombre} de favoritos`);
+  }
+  const includesArray = favs.map(item => item.id).includes(recipeSelected.id);
   return (
     <>
       <div className="detail">
@@ -97,10 +106,19 @@ export const Detail = () => {
           <button className="button-back" onClick={() => navigate(-1)}>
             <i className="fas fa-reply"></i> VOLVER A LA CARTA
           </button>
-          {logged && (   
-            <button className="button-back" onClick={addFav}>
-              <i className="fa-regular fa-heart"></i> FAVORITOS
-            </button>
+          {logged && (
+            <>
+              {
+                includesArray ?
+                  <button className="button-back" onClick={removeFav}>
+                    <i className="fa-solid fa-heart"></i> FAVORITOS
+                  </button>
+                :
+                  <button className="button-back" onClick={addFav}>
+                      <i class="fa-regular fa-heart"></i> FAVORITOS
+                  </button>
+              }
+            </>
           )}
         </div>
 
