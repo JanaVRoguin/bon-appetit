@@ -37,7 +37,9 @@ public class AuthController {
             Usuario registrado = usuarioService.registrarUsuario(usuario);
             return ResponseEntity.ok("Usuario registrado con éxito");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error inesperado");
         }
     }
 

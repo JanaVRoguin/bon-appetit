@@ -87,7 +87,7 @@ export const Detail = () => {
     dispatch({type: 'ADD_FAV', payload: state.recipeSelected});
     alert(`Se agregó la receta ${nombre} a favoritos`);
   }
-
+ 
   return (
     <>
       <div className="detail">
@@ -99,7 +99,7 @@ export const Detail = () => {
           </button>
           {logged && (   
             <button className="button-back" onClick={addFav}>
-              <i class="fa-regular fa-heart"></i> FAVORITOS
+              <i className="fa-regular fa-heart"></i> FAVORITOS
             </button>
           )}
         </div>
