@@ -27,15 +27,17 @@ const WeekNavigation = ({
       <Box display="flex" alignItems="center" justifyContent="center">
         {!isThisWeek && (
           <IconButton onClick={onPreviousWeek}>
-            <ArrowBack />
+            <ArrowBack className="white-icon" />
           </IconButton>
         )}
         <Typography
           variant="h6"
           style={{ margin: "0 16px" }}
-        >{`${startOfWeek} - ${endOfWeek}`}</Typography>
+        >
+          <h4></h4>
+          {`${startOfWeek} - ${endOfWeek}`}</Typography>
         <IconButton onClick={onNextWeek}>
-          <ArrowForward />
+          <ArrowForward className="white-icon" />
         </IconButton>
       </Box>
       <Box display="flex" justifyContent="center" mt={2}>
@@ -45,10 +47,10 @@ const WeekNavigation = ({
           style={{
             marginRight: "8px",
             backgroundColor: isThisWeek ? "#1976d2" : "transparent",
-            color: isThisWeek ? "white" : "black",
+            color: isThisWeek ? "white" : "dddfdc",
           }}
         >
-          Esta semana
+          <h4>Semana actual</h4>
         </Button>
       </Box>
     </Box>

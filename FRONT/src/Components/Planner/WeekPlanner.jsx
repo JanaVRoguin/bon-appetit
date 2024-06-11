@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import DayColumn from "./DayColumn";
 import WeekNavigation from "./WeekNavigation";
 import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 import { useTransition, animated } from "@react-spring/web";
+
 
 dayjs.extend(isoWeek);
 
@@ -28,8 +29,6 @@ const WeekPlanner = () => {
   });
 
   const moveRecipe = (date, meal, recipe) => {
-    console.log("moveRecipe called with:", { date, meal, recipe });
-
     const week = date.startOf("isoWeek").format("YYYY-MM-DD");
     const day = date.format("dddd").toLowerCase();
 
@@ -44,7 +43,6 @@ const WeekPlanner = () => {
     };
 
     const translatedDay = daysMap[day];
-    console.log(`Translated day: ${translatedDay}`);
 
     setPlannedWeeks((prev) => {
       const newPlannedWeeks = { ...prev };
@@ -58,29 +56,12 @@ const WeekPlanner = () => {
       // Assign the new recipe
       newPlannedRecipes[translatedDay][meal] = recipe;
 
-      // Ensure the day keys are correct
-      const validDays = Object.values(daysMap);
-      const filteredPlannedRecipes = Object.keys(newPlannedRecipes)
-        .filter((key) => validDays.includes(key))
-        .reduce((obj, key) => {
-          obj[key] = newPlannedRecipes[key];
-          return obj;
-        }, {});
+      newPlannedWeeks[week] = newPlannedRecipes;
 
-      newPlannedWeeks[week] = filteredPlannedRecipes;
-
-      console.log("Filtered plannedRecipes:", filteredPlannedRecipes);
-      console.log("Saving to localStorage:", newPlannedWeeks);
       localStorage.setItem("plannedWeeks", JSON.stringify(newPlannedWeeks));
 
       return newPlannedWeeks;
     });
-
-    // Log the updated localStorage
-    console.log(
-      "LocalStorage plannedWeeks:",
-      localStorage.getItem("plannedWeeks")
-    );
   };
 
   const days = [
@@ -146,11 +127,10 @@ const WeekPlanner = () => {
       flexDirection="column"
       alignItems="center"
       width="100%"
-      height="90vh"
+      height="100%"
     >
-      <Typography variant="h5" style={{ fontWeight: 600 }} gutterBottom>
-        {currentMonth}
-      </Typography>
+      <h2>{currentMonth}</h2>
+
       <WeekNavigation
         currentWeek={currentWeek}
         onPreviousWeek={handlePreviousWeek}
@@ -158,38 +138,25 @@ const WeekPlanner = () => {
         onThisWeek={handleThisWeek}
         onNextNextWeek={handleNextNextWeek}
       />
-      <Box position="relative" width="100%" flexGrow={1} overflow="hidden">
+      <Box position="relative" width="100%" flexGrow={1}>
         {transitions((style, item) => (
           <animated.div
-            style={{ ...style, width: "100%", height: "150%" }}
+            style={{ ...style, width: "100%", height: "100%" }}
             key={item}
           >
-            <Grid
-              container
-              spacing={2}
-              style={{
-                flexWrap: "nowrap",
-                whiteSpace: "nowrap",
-                height: "100%",
-                overflow: "hidden",
-              }}
-            >
+            <div className="days-container">
               {dates.map((date, index) => (
-                <Grid
-                  item
-                  key={days[index]}
-                  style={{ flex: 1, minWidth: "14.285%" }}
-                >
+                <div key={days[index]} className="day-column">
                   <DayColumn
                     day={days[index]}
                     date={date}
                     plannedRecipes={plannedRecipes[days[index]]}
-                    moveRecipe={moveRecipe} // Pasar moveRecipe directamente
+                    moveRecipe={moveRecipe}
                     isToday={date.isSame(today, "day")}
                   />
-                </Grid>
+                </div>
               ))}
-            </Grid>
+            </div>
           </animated.div>
         ))}
       </Box>

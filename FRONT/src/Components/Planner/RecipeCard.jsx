@@ -17,7 +17,7 @@ const RecipeCard = ({ recipe, onDelete }) => {
       ref={drag}
       style={{
         opacity: isDragging ? 0.5 : 1,
-        backgroundColor: "#fafafa",
+        backgroundColor: "#dddfdc",
         borderRadius: "8px",
         width: "100%",
         display: "flex",
@@ -27,10 +27,9 @@ const RecipeCard = ({ recipe, onDelete }) => {
       }}
     >
       <CardContent style={{ flexGrow: 1 }}>
-        <Typography variant="h6">{recipe.nombre}</Typography>
-        {/* <Typography variant="body2">{recipe.descripcion}</Typography> */}
+        <h4>{recipe.nombre}</h4>
         {recipe.imagenes && recipe.imagenes[0] && (
-          <img src={recipe.imagenes[0].urlImg} alt={recipe.nombre} width="50" />
+          <img src={recipe.imagenes[0].urlImg} alt={recipe.nombre} width="60" />
         )}
       </CardContent>
       {onDelete && (

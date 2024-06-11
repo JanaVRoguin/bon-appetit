@@ -1,33 +1,18 @@
 import React from "react";
-import { Paper, Typography, Grid } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import MealArea from "./MealArea";
 
 const DayColumn = ({ day, date, plannedRecipes, moveRecipe, isToday }) => {
-  console.log(
-    `Rendering DayColumn for ${day} on ${date.format(
-      "YYYY-MM-DD"
-    )} with plannedRecipes:`,
-    plannedRecipes
-  );
-
   return (
-    <Paper
-      style={{
-        padding: "8px",
-        marginBottom: "8px",
-        width: "100%",
-        minHeight: "100%",
-        boxSizing: "border-box",
-      }}
-    >
+    <Box display="flex" flexDirection="column" className="day-column">
       <Typography
         variant="h6"
         gutterBottom
-        style={{ fontWeight: isToday ? "bold" : "normal" }}
+        className={`day-title ${isToday ? "today" : ""}`}
       >
         {day} {date.date()}
       </Typography>
-      <Grid container spacing={1}>
+      <Box flex="1">
         <MealArea
           title="Desayuno"
           date={date}
@@ -52,8 +37,8 @@ const DayColumn = ({ day, date, plannedRecipes, moveRecipe, isToday }) => {
           plannedRecipe={plannedRecipes?.Cena}
           moveRecipe={moveRecipe}
         />
-      </Grid>
-    </Paper>
+      </Box>
+    </Box>
   );
 };
 

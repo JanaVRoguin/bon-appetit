@@ -60,16 +60,17 @@ const MealArea = ({ title, date, plannedRecipe, moveRecipe }) => {
           justifyContent: "center",
           alignItems: "center",
           boxSizing: "border-box",
+          borderRadius: "15px",
         }}
       >
         <Typography variant="body1" gutterBottom style={{ color: "#fff" }}>
-          {title}
+          <h4>{title}</h4>
         </Typography>
         {plannedRecipe ? (
           <RecipeCard recipe={plannedRecipe} onDelete={handleDelete} />
         ) : (
           <Typography variant="body2" style={{ color: "#fff" }}>
-            Arrastra una receta aquí
+            <h5>Arrastre una receta aqui</h5>
           </Typography>
         )}
       </Paper>

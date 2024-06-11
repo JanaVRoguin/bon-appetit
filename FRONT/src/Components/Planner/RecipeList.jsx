@@ -12,9 +12,7 @@ const RecipeList = ({ recipes }) => {
         borderRadius: "8px",
       }}
     >
-      <Typography variant="h5" gutterBottom>
-        Lista de Recetas
-      </Typography>
+      <h2>Lista de Recetas</h2>
       <List>
         {recipes.map((recipe) => (
           <ListItem key={recipe.id} style={{ padding: "8px 0" }}>

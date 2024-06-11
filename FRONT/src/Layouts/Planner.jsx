@@ -1,18 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import {
-  Container,
-  Grid,
-  Typography,
-  IconButton,
-  Drawer,
-  Box,
-} from "@mui/material";
+import { Container, Typography, IconButton, Drawer, Box } from "@mui/material";
 import { Menu as MenuIcon } from "@mui/icons-material";
 import WeekPlanner from "../Components/Planner/WeekPlanner";
 import RecipeList from "../Components/Planner/RecipeList";
 import { fetchRecipes } from "../api/api";
+
 
 const Planner = () => {
   const [recipes, setRecipes] = useState([]);
@@ -32,58 +26,34 @@ const Planner = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <Container
-        maxWidth="xl"
-        style={{
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          paddingTop: "20px",
-        }}
-      >
-        <Box display="flex" alignItems="center" mb={2}>
-          <IconButton onClick={toggleDrawer} edge="start">
-            <MenuIcon />
-          </IconButton>
-        </Box>
-        <Grid
-          container
-          spacing={3}
-          style={{ flex: 1, justifyContent: "center", overflowX: "auto" }}
-        >
+      <div className="planner-container">
+
+        <div className="planner-content">
           <h1 className="title-planner">Planificador Semanal de Recetas</h1>
+          <IconButton onClick={toggleDrawer}>
+            <MenuIcon className="white-icon" />
+          </IconButton>
+
           <Drawer
             anchor="left"
             open={drawerOpen}
             onClose={toggleDrawer}
             variant="persistent"
-            PaperProps={{ style: { width: 300, position: "absolute" } }}
+            PaperProps={{ className: "drawer-content" }}
           >
             <Box
               role="presentation"
               onClick={toggleDrawer}
               onKeyDown={toggleDrawer}
-              style={{ width: 300 }}
             >
               <RecipeList recipes={recipes} />
             </Box>
           </Drawer>
-          <Grid
-            item
-            xs={12}
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "flex-start",
-              width: "100%",
-            }}
-          >
-            <div className="week-planner" style={{ width: "100%" }}>
-              <WeekPlanner />
-            </div>
-          </Grid>
-        </Grid>
-      </Container>
+          <div className="week-planner">
+            <WeekPlanner />
+          </div>
+        </div>
+      </div>
     </DndProvider>
   );
 };
