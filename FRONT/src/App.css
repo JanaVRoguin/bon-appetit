@@ -1419,4 +1419,9 @@ input[type="password"] {
   flex-wrap: nowrap;
   overflow-x: hidden;
   margin-top: 0px; 
+  margin-bottom: 100px;
+}
+
+.title-planner{
+  margin-bottom: 0;
 }

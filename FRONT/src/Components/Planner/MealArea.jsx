@@ -31,19 +31,19 @@ const MealArea = ({ title, date, plannedRecipe, moveRecipe }) => {
   let color;
   switch (title) {
     case "Desayuno":
-      color = "#f44336";
+      color = "#731627";
       break;
     case "Almuerzo":
-      color = "#2196f3";
+      color = "#736830";
       break;
     case "Merienda":
-      color = "#ff9800";
+      color = "#bf9969";
       break;
     case "Cena":
-      color = "#4caf50";
+      color = "#59483e";
       break;
     default:
-      color = "#ccc";
+      color = "#dddfdc";
   }
 
   return (

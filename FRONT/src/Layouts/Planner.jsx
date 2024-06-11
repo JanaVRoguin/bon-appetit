@@ -41,17 +41,17 @@ const Planner = () => {
           paddingTop: "20px",
         }}
       >
-        <Box display="flex" alignItems="center" >
+        <Box display="flex" alignItems="center" mb={2}>
           <IconButton onClick={toggleDrawer} edge="start">
             <MenuIcon />
           </IconButton>
-          <h1 className="title">Planificador Semanal de Recetas</h1>
         </Box>
         <Grid
           container
           spacing={3}
           style={{ flex: 1, justifyContent: "center", overflowX: "auto" }}
         >
+          <h1 className="title-planner">Planificador Semanal de Recetas</h1>
           <Drawer
             anchor="left"
             open={drawerOpen}
