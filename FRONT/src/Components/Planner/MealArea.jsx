@@ -3,7 +3,14 @@ import { useDrop } from "react-dnd";
 import { Paper, Typography, Grid } from "@mui/material";
 import RecipeCard from "./RecipeCard";
 
-const MealArea = ({ title, date, plannedRecipe, moveRecipe }) => {
+const MealArea = ({
+  title,
+  date,
+  plannedRecipe,
+  moveRecipe,
+  onDragStart,
+  onDragEnd,
+}) => {
   const [{ isOver }, drop] = useDrop({
     accept: "RECIPE_CARD",
     drop: (item) => {
@@ -63,15 +70,17 @@ const MealArea = ({ title, date, plannedRecipe, moveRecipe }) => {
           borderRadius: "15px",
         }}
       >
-        <Typography variant="body1" gutterBottom style={{ color: "#fff" }}>
-          <h4>{title}</h4>
-        </Typography>
+        <h4 className="meal-area-h4">{title}</h4>
+
         {plannedRecipe ? (
-          <RecipeCard recipe={plannedRecipe} onDelete={handleDelete} />
+          <RecipeCard
+            recipe={plannedRecipe}
+            onDelete={handleDelete}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+          />
         ) : (
-          <Typography variant="body2" style={{ color: "#fff" }}>
-            <h5>Arrastre una receta aqui</h5>
-          </Typography>
+          <h6>Arrastre una receta aqui</h6>
         )}
       </Paper>
     </Grid>

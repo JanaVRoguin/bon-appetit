@@ -138,7 +138,7 @@ export const Detail = () => {
             <div className="side-details-container">
               <NutritionalDetails />
               <div className="separator"></div>
-              <RecipeCalendar />
+              <RecipeCalendar recipeId={id} />
             </div>
           </div>
           <div className="instructions-container">

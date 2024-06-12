@@ -2,7 +2,7 @@ import React from "react";
 import { List, ListItem, Paper, Typography } from "@mui/material";
 import RecipeCard from "./RecipeCard";
 
-const RecipeList = ({ recipes }) => {
+const RecipeList = ({ recipes, onDragStart, onDragEnd }) => {
   return (
     <Paper
       elevation={1}
@@ -16,7 +16,11 @@ const RecipeList = ({ recipes }) => {
       <List>
         {recipes.map((recipe) => (
           <ListItem key={recipe.id} style={{ padding: "8px 0" }}>
-            <RecipeCard recipe={recipe} />
+            <RecipeCard
+              recipe={recipe}
+              onDragStart={onDragStart}
+              onDragEnd={onDragEnd}
+            />
           </ListItem>
         ))}
       </List>

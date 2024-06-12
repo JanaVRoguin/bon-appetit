@@ -6,10 +6,9 @@ import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 import { useTransition, animated } from "@react-spring/web";
 
-
 dayjs.extend(isoWeek);
 
-const WeekPlanner = () => {
+const WeekPlanner = ({ onDragStart, onDragEnd }) => {
   const [currentWeek, setCurrentWeek] = useState(dayjs().startOf("isoWeek"));
   const [plannedWeeks, setPlannedWeeks] = useState(() => {
     const savedWeeks = localStorage.getItem("plannedWeeks");
@@ -127,7 +126,7 @@ const WeekPlanner = () => {
       flexDirection="column"
       alignItems="center"
       width="100%"
-      height="100%"
+      height="100vh"
     >
       <h2>{currentMonth}</h2>
 
@@ -153,6 +152,8 @@ const WeekPlanner = () => {
                     plannedRecipes={plannedRecipes[days[index]]}
                     moveRecipe={moveRecipe}
                     isToday={date.isSame(today, "day")}
+                    onDragStart={onDragStart}
+                    onDragEnd={onDragEnd}
                   />
                 </div>
               ))}
