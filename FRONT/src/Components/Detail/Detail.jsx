@@ -9,6 +9,8 @@ import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
 
+
+
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
   const handleSearch = (term) => {
@@ -25,38 +27,39 @@ export const Detail = () => {
 
   const [recipeIds, setRecipeIds] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(-1);
+
   useEffect(() => {
     if (token) {
       axios(url)
-      .then((response) => {
-        dispatch({ type: 'GET_SELECTED', payload: response.data });
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          console.error("Unauthorized. Please check your token.");
-          // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
-        } else {
-          console.error("Error fetching recipe details:", error);
-        }
-      });
+        .then((response) => {
+          dispatch({ type: 'GET_SELECTED', payload: response.data });
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            console.error("Unauthorized. Please check your token.");
+            // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
+          } else {
+            console.error("Error fetching recipe details:", error);
+          }
+        });
 
       axios.get('http://localhost:8080/recetas/listar', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
       })
-      .then((response) => {
-        //console.log(response.data);
-        setRecipeIds(response.data);
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          console.error("Unauthorized. Please check your token.");
-          // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
-        } else {
-          console.error("Error fetching recipe IDs:", error);
-        }
-      });
+        .then((response) => {
+          //console.log(response.data);
+          setRecipeIds(response.data);
+        })
+        .catch((error) => {
+          if (error.response && error.response.status === 401) {
+            console.error("Unauthorized. Please check your token.");
+            // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
+          } else {
+            console.error("Error fetching recipe IDs:", error);
+          }
+        });
     } else {
       console.error("No token found. Please log in.");
       // Aquí puedes redirigir al usuario a la página de inicio de sesión.
@@ -85,45 +88,42 @@ export const Detail = () => {
   };
 
   const addFav = () => {
-    dispatch({type: 'ADD_FAV', payload: state.recipeSelected});
+    dispatch({ type: 'ADD_FAV', payload: state.recipeSelected });
     alert(`Se agregó la receta ${nombre} a favoritos`);
-  }
-  useEffect(() => {
-    localStorage.setItem('favs', JSON.stringify(state.favs));
-  }, [state.favs])
-  console.log(state);
+  };
+
   const removeFav = () => {
-      dispatch({ type: 'REMOVE_FAVORITE', payload: id })
-      alert(`Se eliminó la receta ${nombre} de favoritos`);
-  }
+    dispatch({ type: 'REMOVE_FAVORITE', payload: id });
+    alert(`Se eliminó la receta ${nombre} de favoritos`);
+  };
+
   const includesArray = favs.map(item => item.id).includes(recipeSelected.id);
+
   return (
     <>
       <div className="detail">
         <SearchBar onSearch={handleSearch} />
         <div className="name-container">
           <h1>{nombre}</h1>
-          {logged && (
-            <>
-              {
-                includesArray ?
-                  <button className="button-back" onClick={removeFav}>
-                    <i className="fa-solid fa-heart"></i> FAVORITOS
-                  </button>
-                :
-                  <button className="button-back" onClick={addFav}>
-                      <i class="fa-regular fa-heart"></i> FAVORITOS
-                  </button>
-              }
-            </>
-          )}
           <button className="button-back" onClick={() => navigate(-1)}>
             <i className="fas fa-reply"></i> VOLVER A LA CARTA
           </button>
         </div>
-
+        {logged && (
+          <>
+            {
+              includesArray ?
+                <button className="fav-button" onClick={removeFav}>
+                  <i className="fa-solid fa-heart"></i>
+                </button>
+                :
+                <button className="fav-button" onClick={addFav}>
+                  <i className="fa-regular fa-heart"></i>
+                </button>
+            }
+          </>
+        )}
         <ImagesContainer imagenes={imagenes} />
-
         <div className="details-container">
           <div className="main-details">
             <div className="ingredientes">
@@ -151,19 +151,18 @@ export const Detail = () => {
             />
           </div>
         </div>
-
         <div className="navigation-buttons">
-            <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
-              <i className="fas fa-chevron-left"></i>
-            </button>
-            <button className="nav-button" onClick={() => navigate('/')}>
-              Volver al Menú Principal
-            </button>
-            <button className="nav-button" onClick={handleNext} disabled={currentIndex >= recipeIds.length - 1}>
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
+          <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
+            <i className="fas fa-chevron-left"></i>
+          </button>
+          <button className="nav-button" onClick={() => navigate('/')}>
+            Volver al Menú Principal
+          </button>
+          <button className="nav-button" onClick={handleNext} disabled={currentIndex >= recipeIds.length - 1}>
+            <i className="fas fa-chevron-right"></i>
+          </button>
         </div>
+      </div>
     </>
   );
 };
