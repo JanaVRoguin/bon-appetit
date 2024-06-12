@@ -46,4 +46,9 @@ public class RecetaEntradaDto {
     @Valid
     @NotEmpty(message = "Debe especificarse al menos una imagen")
     private List<String> imagenes;
+
+    @NotNull(message = "Las características no pueden ser nulas")
+    @Valid
+    @NotEmpty(message = "Debe especificarse al menos una característica")
+    private List<Long> caracteristicas;
 }

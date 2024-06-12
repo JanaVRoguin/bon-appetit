@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../../Context';
+import { routes } from '../../utils/routes'
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ export const Login = () => {
           <hr className='login-horizontal-line' />
           <p><a href="#">¡Olvidaste tu contraseña?</a></p>
           <hr className='login-horizontal-line' />
-          <p>¿No tienes cuenta? <a href="#">Registrarse</a></p>
+          <p>¿No tienes cuenta? <Link to={routes.register}>Registrarse</Link></p>
         </div>
         
         {/* Columna del Formulario de Login */}

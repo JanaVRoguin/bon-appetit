@@ -29,4 +29,6 @@ public class Receta {
     private List<Categoria> categorias;
     @OneToMany
     private List<Imagen> imagenes;
+    @ManyToMany
+    private List<Caracteristica> caracteristicas;
 }
