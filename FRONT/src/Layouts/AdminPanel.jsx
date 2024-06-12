@@ -3,12 +3,14 @@ import "../Components/AdminPanel/AdminPanel.css";
 import ListarRecetas from "../Components/AdminPanel/gestionRecetas/ListarRecetas";
 import ListUsers from "../Components/AdminPanel/gestionUsuarios/ListUsers";
 import ListarCategorias from "../Components/AdminPanel/gestionCategorias/ListarCategorias";
+import { ListarCaracteristicas } from "../Components/AdminPanel/gestionCaracteristicas/ListarCaracteristicas";
 import { fetchRecipes } from "../api/api";
 
 export const AdminPanel = () => {
   const [showRecetas, setShowRecetas] = useState(false);
   const [showUsers, setShowUsers] = useState(false);
   const [showCategorias, setShowCategorias] = useState(false);
+  const [showCaracteristicas, setShowCaracteristicas] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [recipes, setRecipes] = useState([]);
 
@@ -41,17 +43,27 @@ export const AdminPanel = () => {
     setShowRecetas((prev) => !prev);
     setShowUsers(false);
     setShowCategorias(false);
+    setShowCaracteristicas(false);
   };
 
   const handleShowUsers = () => {
     setShowUsers((prev) => !prev);
     setShowRecetas(false);
     setShowCategorias(false);
+    setShowCaracteristicas(false);
   };
 
   const handleShowCategorias = () => {
     setShowCategorias((prev) => !prev);
     setShowRecetas(false);
+    setShowUsers(false);
+    setShowCaracteristicas(false);
+  };
+
+  const handleShowCaracteristicas = () => {
+    setShowCaracteristicas((prev) => !prev);
+    setShowRecetas(false);
+    setShowCategorias(false);
     setShowUsers(false);
   };
 
@@ -86,6 +98,13 @@ export const AdminPanel = () => {
         </button>
         <button
           type="button"
+          className={`btn create-btn ${showCaracteristicas ? "active" : ""}`}
+          onClick={handleShowCaracteristicas}
+        >
+          {showCaracteristicas ? "Ocultar lista de características" : "Administrar Características"}
+        </button>
+        <button
+          type="button"
           className={`btn create-btn ${showUsers ? "active" : ""}`}
           onClick={handleShowUsers}
         >
@@ -93,11 +112,10 @@ export const AdminPanel = () => {
         </button>
       </div>
 
-      {showRecetas && (
-        <ListarRecetas recipes={recipes} fetchRecipes={fetchRecipesData} />
-      )}
+      {showRecetas && <ListarRecetas recipes={recipes} fetchRecipes={fetchRecipesData} />}
       {showUsers && <ListUsers />}
       {showCategorias && <ListarCategorias />}
+      {showCaracteristicas && <ListarCaracteristicas />}
     </div>
   );
 };
