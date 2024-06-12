@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import "./CrearReceta.css";
-import { fetchCategories, createRecipe } from "../../../api/api";
+import { fetchCategories, createRecipe, fetchCaracteristicas } from "../../../api/api";
 
 const CrearReceta = ({ closeModal, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
+  const [caracteristicas, setCaracteristicas] = useState([]);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
     ingredientes: "",
     instrucciones: "",
+    caracteristicas: [],
     categorias: [],
     imagenes: [""],
   });
@@ -17,15 +19,21 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
 
   useEffect(() => {
     // Obtener categorías desde la API
-    const getCategorias = async () => {
-      const data = await fetchCategories();
+    const getData = async () => {
+      let data = await fetchCategories();
       if (data) {
         setCategorias(data);
       } else {
         alert("Error al cargar categorías.");
       }
+      data = await fetchCaracteristicas();
+      if (data) {
+        setCaracteristicas(data);
+      } else {
+        alert("Error al cargar características.");
+      }
     };
-    getCategorias();
+    getData();
   }, []);
 
   const handleChange = (e) => {
@@ -88,6 +96,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       descripcion,
       ingredientes,
       instrucciones,
+      caracteristicas,
       categorias,
       imagenes,
     } = formData;
@@ -97,6 +106,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
       !descripcion ||
       !ingredientes ||
       !instrucciones ||
+      caracteristicas.length === 0 ||
       categorias.length === 0 ||
       imagenes.length === 0 ||
       imagenes.some((image) => image.trim() === "")
@@ -111,6 +121,7 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
         descripcion,
         ingredientes,
         instrucciones,
+        caracteristicas: caracteristicas.map((category) => parseInt(category)),
         categorias: categorias.map((category) => parseInt(category)),
         imagenes: imagenes.filter((image) => image.trim() !== ""),
       };
@@ -203,6 +214,24 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
                 ))}
               </select>
               <span className="error-text">{validationErrors.categoria}</span>
+            </div>
+
+            <div className="form-group">
+              <label>Características</label>
+              <select
+                className="form-control select-categorias"
+                name="caracteristicas"
+                multiple
+                value={formData.caracteristicas}
+                onChange={handleChange}
+              >
+                {caracteristicas.map((caracteristica) => (
+                  <option key={caracteristica.id} value={caracteristica.id}>
+                    {caracteristica.nombre}
+                  </option>
+                ))}
+              </select>
+              <span className="error-text">{validationErrors.caracteristica}</span>
             </div>
 
             <div className="form-group">

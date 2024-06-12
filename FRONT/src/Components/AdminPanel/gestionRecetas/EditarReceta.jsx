@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CrearReceta.css";
-import { fetchCategories, updateRecipe } from "../../../api/api";
+import { fetchCaracteristicas, fetchCategories, updateRecipe } from "../../../api/api";
 
 const EditarReceta = ({
   closeModal,
@@ -9,11 +9,13 @@ const EditarReceta = ({
   initialRecipe,
 }) => {
   const [categorias, setCategorias] = useState([]);
+  const [caracteristicas, setCaracteristicas] = useState([]);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
     ingredientes: "",
     instrucciones: "",
+    caracteristicas: [],
     categorias: [],
     imagenes: [],
   });
@@ -24,13 +26,14 @@ const EditarReceta = ({
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const initializeForm = async () => {
-      await getCategorias();
+      await getData();
       if (initialRecipe) {
         setFormData({
           nombre: initialRecipe.nombre || "",
           descripcion: initialRecipe.descripcion || "",
           ingredientes: initialRecipe.ingredientes || "",
           instrucciones: initialRecipe.instrucciones || "",
+          caracteristicas: initialRecipe.caracteristicas.map((car) => car.id) || [],
           categorias: initialRecipe.categorias.map((cat) => cat.id) || [],
           imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [],
         });
@@ -43,12 +46,18 @@ const EditarReceta = ({
     };
   }, [initialRecipe]);
 
-  const getCategorias = async () => {
-    const data = await fetchCategories();
+  const getData = async () => {
+    let data = await fetchCategories();
     if (data) {
       setCategorias(data);
     } else {
       alert("Error al cargar categorías.");
+    }
+    data = await fetchCaracteristicas();
+    if (data) {
+      setCaracteristicas(data);
+    } else {
+      alert("Error al cargar características.");
     }
   };
 
@@ -115,6 +124,7 @@ const EditarReceta = ({
       descripcion,
       ingredientes,
       instrucciones,
+      caracteristicas,
       categorias,
       imagenes,
     } = formData;
@@ -124,6 +134,7 @@ const EditarReceta = ({
       !descripcion ||
       !ingredientes ||
       !instrucciones ||
+      caracteristicas.length === 0 ||
       categorias.length === 0 ||
       imagenes.length === 0
     ) {
@@ -136,6 +147,7 @@ const EditarReceta = ({
       descripcion,
       ingredientes,
       instrucciones,
+      caracteristicas: caracteristicas.map((caracteristica) => parseInt(caracteristica)),
       categorias: categorias.map((category) => parseInt(category)),
       imagenes: imagenes.filter((image) => image.trim() !== ""),
     };
@@ -222,6 +234,24 @@ const EditarReceta = ({
                 ))}
               </select>
               <span className="error-text">{validationErrors.categoria}</span>
+            </div>
+
+            <div className="form-group">
+              <label>Características</label>
+              <select
+                className="form-control select-categorias"
+                name="caracteristicas"
+                multiple
+                value={formData.caracteristicas}
+                onChange={handleChange}
+              >
+                {caracteristicas.map((caracteristica) => (
+                  <option key={caracteristica.id} value={caracteristica.id}>
+                    {caracteristica.nombre}
+                  </option>
+                ))}
+              </select>
+              <span className="error-text">{validationErrors.caracteristica}</span>
             </div>
 
             <div className="form-group">

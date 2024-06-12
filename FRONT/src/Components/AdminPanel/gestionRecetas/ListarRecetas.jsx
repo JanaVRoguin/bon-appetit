@@ -175,6 +175,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
             <th>Ingredientes</th>
             <th>Modo de preparación</th>
             <th>Categoría</th>
+            <th>Características</th>
             <th>Imágenes</th>
             <th>Acción</th>
           </tr>
@@ -189,6 +190,11 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
               <td>
                 {receta.categorias
                   .map((categoria) => categoria.categorias)
+                  .join(", ")}
+              </td>
+              <td>
+                {receta.caracteristicas
+                  .map((caracteristica) => caracteristica.nombre)
                   .join(", ")}
               </td>
               <td className="listar-recetas-imagenes-column">

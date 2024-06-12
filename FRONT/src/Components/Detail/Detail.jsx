@@ -29,41 +29,41 @@ export const Detail = () => {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   useEffect(() => {
-    if (token) {
-      axios(url)
-        .then((response) => {
-          dispatch({ type: 'GET_SELECTED', payload: response.data });
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 401) {
-            console.error("Unauthorized. Please check your token.");
-            // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
-          } else {
-            console.error("Error fetching recipe details:", error);
-          }
-        });
+    axios(url)
+    .then((response) => {
+      dispatch({ type: 'GET_SELECTED', payload: response.data });
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 401) {
+        console.error("Unauthorized. Please check your token.");
+        // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
+      } else {
+        console.error("Error fetching recipe details:", error);
+      }
+    });
 
-      axios.get('http://localhost:8080/recetas/listar', {
-        headers: {
-          'Authorization': `Bearer ${token}`
-        }
-      })
-        .then((response) => {
-          //console.log(response.data);
-          setRecipeIds(response.data);
-        })
-        .catch((error) => {
-          if (error.response && error.response.status === 401) {
-            console.error("Unauthorized. Please check your token.");
-            // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
-          } else {
-            console.error("Error fetching recipe IDs:", error);
-          }
-        });
-    } else {
-      console.error("No token found. Please log in.");
-      // Aquí puedes redirigir al usuario a la página de inicio de sesión.
-    }
+    axios.get('http://localhost:8080/recetas/listar', {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
+    .then((response) => {
+      //console.log(response.data);
+      setRecipeIds(response.data);
+    })
+    .catch((error) => {
+      if (error.response && error.response.status === 401) {
+        console.error("Unauthorized. Please check your token.");
+        // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
+      } else {
+        console.error("Error fetching recipe IDs:", error);
+      }
+    });
+    // if (token) {
+    // } else {
+    //   console.error("No token found. Please log in.");
+    //   // Aquí puedes redirigir al usuario a la página de inicio de sesión.
+    // }
   }, [params.id, token]);
 
   useEffect(() => {
@@ -90,8 +90,10 @@ export const Detail = () => {
   const addFav = () => {
     dispatch({ type: 'ADD_FAV', payload: state.recipeSelected });
     alert(`Se agregó la receta ${nombre} a favoritos`);
-  };
-
+  }
+  useEffect(() => {
+    localStorage.setItem('favs', JSON.stringify(state.favs));
+  }, [state.favs])
   const removeFav = () => {
     dispatch({ type: 'REMOVE_FAVORITE', payload: id });
     alert(`Se eliminó la receta ${nombre} de favoritos`);
