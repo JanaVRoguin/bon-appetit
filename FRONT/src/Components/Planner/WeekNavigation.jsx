@@ -1,7 +1,8 @@
 import React from "react";
-import { IconButton, Typography, Box, Button } from "@mui/material";
+import { IconButton, Typography, Button } from "@mui/material";
 import { ArrowBack, ArrowForward } from "@mui/icons-material";
 import dayjs from "dayjs";
+
 
 const WeekNavigation = ({
   currentWeek,
@@ -17,43 +18,28 @@ const WeekNavigation = ({
   const isThisWeek = currentWeek.isSame(dayjs().startOf("isoWeek"), "week");
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      alignItems="center"
-      width="100%"
-      mb={2}
-    >
-      <Box display="flex" alignItems="center" justifyContent="center">
+    <div className="week-navigation-container">
+      <div className="week-navigation-header">
         {!isThisWeek && (
           <IconButton onClick={onPreviousWeek}>
             <ArrowBack className="white-icon" />
           </IconButton>
         )}
-        <Typography
-          variant="h6"
-          style={{ margin: "0 16px" }}
-        >
-          <h4></h4>
-          {`${startOfWeek} - ${endOfWeek}`}</Typography>
+        <h3>{`${startOfWeek} - ${endOfWeek}`}</h3>
+
         <IconButton onClick={onNextWeek}>
           <ArrowForward className="white-icon" />
         </IconButton>
-      </Box>
-      <Box display="flex" justifyContent="center" mt={2}>
-        <Button
-          variant="outlined"
+      </div>
+      <div className="week-navigation-buttons">
+        <h5
           onClick={onThisWeek}
-          style={{
-            marginRight: "8px",
-            backgroundColor: isThisWeek ? "#1976d2" : "transparent",
-            color: isThisWeek ? "white" : "dddfdc",
-          }}
+          className={`week-button ${isThisWeek ? "active" : ""}`}
         >
-          <h4>Semana actual</h4>
-        </Button>
-      </Box>
-    </Box>
+          Semana actual
+        </h5>
+      </div>
+    </div>
   );
 };
 

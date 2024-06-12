@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import isoWeek from "dayjs/plugin/isoWeek";
 import { useTransition, animated } from "@react-spring/web";
 
-
 dayjs.extend(isoWeek);
 
 const WeekPlanner = () => {
@@ -127,7 +126,7 @@ const WeekPlanner = () => {
       flexDirection="column"
       alignItems="center"
       width="100%"
-      height="100%"
+      height="100vh"
     >
       <h2>{currentMonth}</h2>
 

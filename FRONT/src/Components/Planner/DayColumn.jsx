@@ -5,13 +5,10 @@ import MealArea from "./MealArea";
 const DayColumn = ({ day, date, plannedRecipes, moveRecipe, isToday }) => {
   return (
     <Box display="flex" flexDirection="column" className="day-column">
-      <Typography
-        variant="h6"
-        gutterBottom
-        className={`day-title ${isToday ? "today" : ""}`}
-      >
+      <h4 className={`day-title ${isToday ? "today" : ""}`}>
         {day} {date.date()}
-      </Typography>
+      </h4>
+
       <Box flex="1">
         <MealArea
           title="Desayuno"
