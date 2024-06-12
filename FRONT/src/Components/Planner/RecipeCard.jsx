@@ -10,23 +10,27 @@ import {
   faTint,
 } from "@fortawesome/free-solid-svg-icons";
 
+const getShortenedName = (name) => {
+  if (name.length > 14) {
+    return name.split(" ")[0]; // Retorna solo la primera palabra
+  }
+  return name;
+};
 
- const getShortenedName = (name) => {
-   if (name.length > 14) {
-     return name.split(" ")[0]; // Retorna solo la primera palabra
-   }
-   return name;
- };
-
-const RecipeCard = ({ recipe, onDelete }) => {
+const RecipeCard = ({ recipe, onDragStart, onDragEnd, onDelete }) => {
   const [{ isDragging }, drag] = useDrag({
     type: "RECIPE_CARD",
-    item: { recipe },
+    item: () => {
+      onDragStart();
+      return { recipe };
+    },
+    end: () => {
+      onDragEnd();
+    },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
     }),
   });
-
 
   return (
     <Card
@@ -40,7 +44,6 @@ const RecipeCard = ({ recipe, onDelete }) => {
         justifyContent: "space-between",
         alignItems: "center",
         border: "1px solid grey",
-        padding: "10px",
       }}
     >
       <CardContent
@@ -48,7 +51,6 @@ const RecipeCard = ({ recipe, onDelete }) => {
           flexGrow: 1,
           display: "flex",
           alignItems: "center",
-          padding: 0,
         }}
       >
         <div
@@ -66,7 +68,7 @@ const RecipeCard = ({ recipe, onDelete }) => {
             <img
               src={recipe.imagenes[0].urlImg}
               alt={recipe.nombre}
-              width="60"
+              width="55"
               style={{ borderRadius: "6px", marginTop: "4px" }}
             />
           )}
