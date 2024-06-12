@@ -1,9 +1,11 @@
 package com.bonappetit.bonappetitApi.service.impl;
 
 import com.bonappetit.bonappetitApi.dto.entrada.RecetaEntradaDto;
+import com.bonappetit.bonappetitApi.entity.Caracteristica;
 import com.bonappetit.bonappetitApi.entity.Categoria;
 import com.bonappetit.bonappetitApi.entity.Imagen;
 import com.bonappetit.bonappetitApi.entity.Receta;
+import com.bonappetit.bonappetitApi.repository.ICaracteristicaRepository;
 import com.bonappetit.bonappetitApi.repository.ICategoriaRepository;
 import com.bonappetit.bonappetitApi.repository.IImagenRepository;
 import com.bonappetit.bonappetitApi.repository.IRecetaRepository;
@@ -25,6 +27,8 @@ public class RecetaService implements IRecetaService {
     @Autowired
     private ICategoriaRepository iCategoriaRepository;
     @Autowired
+    private ICaracteristicaRepository iCaracteristicaRepository;
+    @Autowired
     private IImagenRepository iImagenRepository;
     @Autowired
     private IImagenService iImagenService;
@@ -35,9 +39,10 @@ public class RecetaService implements IRecetaService {
     public Receta crearReceta(RecetaEntradaDto recetaEntradaDto) {
         List<Categoria> categorias = new ArrayList<>();
         List<Imagen> imagenes = new ArrayList<>();
+        List<Caracteristica> caracteristicas = new ArrayList<>();
 
         for (Long categoriaId : recetaEntradaDto.getCategorias()) {
-            Categoria categoria = iCategoriaRepository.findById(categoriaId).orElse(null);
+            Categoria categoria = iCategoriaRepository.findById(categoriaId).orElseThrow(() -> new EntityNotFoundException("Categoria no encontrada"));
             categorias.add(categoria);
         }
 
@@ -48,23 +53,27 @@ public class RecetaService implements IRecetaService {
             imagenes.add(imagen);
         }
 
+        for (Long caracteristicaId : recetaEntradaDto.getCaracteristicas()) {
+            Caracteristica caracteristica = iCaracteristicaRepository.findById(caracteristicaId).orElseThrow(() -> new EntityNotFoundException("Caracteristica no encontrada"));
+            caracteristicas.add(caracteristica);
+        }
+
         Receta receta = modelMapper.map(recetaEntradaDto, Receta.class);
         receta.setCategorias(categorias);
         receta.setImagenes(imagenes);
-
+        receta.setCaracteristicas(caracteristicas);
 
         return iRecetaRepository.save(receta);
     }
 
     @Override
     public List<Receta> listarRecetas() {
-        List<Receta> listarRecetas = iRecetaRepository.findAll();
-        return listarRecetas;
+        return iRecetaRepository.findAll();
     }
 
     @Override
     public Receta buscarReceta(Long id) {
-        return iRecetaRepository.findById(id).orElse(null);
+        return iRecetaRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Receta no encontrada"));
     }
 
     @Override
@@ -95,6 +104,14 @@ public class RecetaService implements IRecetaService {
         }
         recetaExistente.setImagenes(imagenes);
 
+        // Actualizar caracteristicas
+        List<Caracteristica> caracteristicas = new ArrayList<>();
+        for (Long caracteristicaId : recetaEntradaDto.getCaracteristicas()) {
+            Caracteristica caracteristica = iCaracteristicaRepository.findById(caracteristicaId).orElseThrow(() -> new EntityNotFoundException("Caracteristica no encontrada"));
+            caracteristicas.add(caracteristica);
+        }
+        recetaExistente.setCaracteristicas(caracteristicas);
+
         return iRecetaRepository.save(recetaExistente);
     }
 
@@ -102,5 +119,4 @@ public class RecetaService implements IRecetaService {
     public void eliminarReceta(Long id) {
         iRecetaRepository.deleteById(id);
     }
-
 }
