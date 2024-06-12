@@ -1601,7 +1601,7 @@ input[type="password"] {
   background-color: #e0e0e0 !important;
 }
 
-.recipe-card {
+/* .recipe-card {
   opacity: 1;
   background-color: #fafafa;
   border-radius: 8px;
@@ -1610,7 +1610,7 @@ input[type="password"] {
   justify-content: space-between;
   align-items: center;
   border: 1px solid grey;
-}
+} */
 
 .recipe-card.dragging {
   opacity: 0.5;
