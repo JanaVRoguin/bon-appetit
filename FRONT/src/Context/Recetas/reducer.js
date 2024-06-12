@@ -8,5 +8,7 @@ export const reducer = (state, action) => {
             return {...state, recipeSelected: action.payload};
         case 'CHANGE_THEME':
             return {...state, theme: action.payload}
+        case 'REMOVE_FAVORITE':
+            return {...state, favs: state.favs.filter(item => item.id !== action.payload)}
     }
 }

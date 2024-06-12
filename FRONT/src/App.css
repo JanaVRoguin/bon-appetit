@@ -444,64 +444,100 @@ footer{
 /*ESTILO BARRA BUSQUEDA*/
 
 .search-bar {
-  display: flex; /* Flexbox para alinear elementos */
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  margin: 40px auto; /* Margen para el contenedor */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px auto;
   margin-bottom: 70px;
 }
 
 .search-bar-container {
-  position: relative; /* Posiciona el contenedor relativamente */
-  width: 550px; /* Ancho del contenedor */
+  position: relative;
+  width: 550px;
 }
 
 .search-bar input::placeholder {
-  color: #d8d6d6; /* Cambia el color del texto del placeholder */
-  opacity: 100%; /* Asegúrate de que la opacidad esté al 100% */
+  color: #d8d6d6;
+  opacity: 100%;
 }
 
 .search-bar input {
+  font-family: var(--fontGordita);
   background-color: var(--colorFondo-secundario);
-  width: 100%; /* El campo de entrada ocupa todo el ancho del contenedor */
-  padding: 10px 40px 10px 10px; /* Espacio interno con espacio para el botón */
+  width: 100%;
+  padding: 10px 40px 10px 10px;
   border: none;
-  border-radius: 30px; /* Bordes redondeados */
-  outline: none; /* Quita el contorno azul al enfocar */
-  transition: all 0.3s; /* Transición suave para efectos */
+  border-radius: 30px;
+  outline: none;
+  transition: all 0.3s;
   color: #f0efef;
 }
 
 .search-bar input:hover,
 .search-bar input:focus {
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor o enfocar */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
 }
 
 .search-button {
-  position: absolute; /* Posiciona el botón absolutamente */
-  right: 1px; /* Desplaza el botón hacia la derecha */
-  top: 50%; /* Centra verticalmente */
-  transform: translateY(-50%); /* Ajusta la posición vertical */
-  background-color: #f1f1f1; /* Color de fondo del botón */
-  border: none; /* Sin borde */
-  border-radius: 50%; /* Hace el botón circular */
-  width: 36px; /* Ancho del botón */
-  height: 36px; /* Alto del botón */
-  display: flex; /* Usar flexbox para centrar el contenido */
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-  cursor: pointer; /* Cambia el cursor al pasar el ratón */
-  transition: all 0.3s; /* Transición suave */
+  position: absolute;
+  right: 1px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s;
 }
 
 .search-button:hover {
-  transform: translateY(-50%) scale(1.1); /* Efecto al pasar el cursor */
+  transform: translateY(-50%) scale(1.1);
 }
 
 .search-icon {
-  width: 25px; /* Ajusta el tamaño del ícono */
-  height: 25px; /* Ajusta el tamaño del ícono */
+  width: 25px;
+  height: 25px;
 }
+
+.suggestions {
+  position: absolute;
+  width: 100%;
+  background-color: var(--colorFondo-hueso);
+  border-radius: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-height: 200px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease-out;
+  color: var(--colorFondo-primario);
+  font-family: var(--fontMinuscula);
+  font-weight: 500;
+  z-index: 1000;
+}
+
+.suggestion {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.suggestion:hover {
+  background-color: var(--colorFondo-secundario);
+}
+
+.suggestion-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
 
 /* Estilos para las tarjetas de categorías */
 .category-container {
