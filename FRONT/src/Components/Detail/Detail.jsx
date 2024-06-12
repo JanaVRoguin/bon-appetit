@@ -105,16 +105,15 @@ export const Detail = () => {
           <h1>{nombre}</h1>
           {logged && (
             <>
-              {
-                includesArray ?
-                  <button className="button-back" onClick={removeFav}>
-                    <i className="fa-solid fa-heart"></i> FAVORITOS
-                  </button>
-                :
-                  <button className="button-back" onClick={addFav}>
-                      <i class="fa-regular fa-heart"></i> FAVORITOS
-                  </button>
-              }
+              {includesArray ? (
+                <button className="button-back" onClick={removeFav}>
+                  <i className="fa-solid fa-heart"></i> FAVORITOS
+                </button>
+              ) : (
+                <button className="button-back" onClick={addFav}>
+                  <i class="fa-regular fa-heart"></i> FAVORITOS
+                </button>
+              )}
             </>
           )}
           <button className="button-back" onClick={() => navigate(-1)}>
@@ -138,7 +137,7 @@ export const Detail = () => {
             <div className="side-details-container">
               <NutritionalDetails />
               <div className="separator"></div>
-              <RecipeCalendar />
+              <RecipeCalendar recipeId={id} />
             </div>
           </div>
           <div className="instructions-container">
@@ -153,17 +152,25 @@ export const Detail = () => {
         </div>
 
         <div className="navigation-buttons">
-            <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
-              <i className="fas fa-chevron-left"></i>
-            </button>
-            <button className="nav-button" onClick={() => navigate('/')}>
-              Volver al Menú Principal
-            </button>
-            <button className="nav-button" onClick={handleNext} disabled={currentIndex >= recipeIds.length - 1}>
-              <i className="fas fa-chevron-right"></i>
-            </button>
-          </div>
+          <button
+            className="nav-button"
+            onClick={handlePrevious}
+            disabled={currentIndex <= 0}
+          >
+            <i className="fas fa-chevron-left"></i>
+          </button>
+          <button className="nav-button" onClick={() => navigate("/")}>
+            Volver al Menú Principal
+          </button>
+          <button
+            className="nav-button"
+            onClick={handleNext}
+            disabled={currentIndex >= recipeIds.length - 1}
+          >
+            <i className="fas fa-chevron-right"></i>
+          </button>
         </div>
+      </div>
     </>
   );
 };

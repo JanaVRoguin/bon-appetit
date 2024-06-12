@@ -1004,7 +1004,7 @@ footer{
 .week-container {
   margin-top: 5%;
   display: flex;
-  justify-content:center;
+  justify-content: center;
   align-items: center;
   gap: 5%;
 }
@@ -1013,16 +1013,19 @@ footer{
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background-color: var(--colorFuente-bordo);
+  background-color: grey; /* Color inicial en gris */
   cursor: pointer;
   display: flex;
-  align-items:center;
-  justify-content:center;
+  align-items: center;
+  justify-content: center;
   transition: background-color 0.3s ease;
 }
+
 .week-day:hover {
-  background-color: var(--colorFondo-secundario); /* Change to a lighter color on hover */
+  background-color: lightgrey; /* Cambia a un color más claro al pasar el ratón */
 }
+
+
 .instructions-container {
   margin-top: 20px;
 }

@@ -38,6 +38,7 @@ export const Navbar = () => {
           <>
             <Link to={routes.myAccount} className='nav-item'><li>Mi cuenta</li></Link>
             <Link to={routes.favs} className='nav-item'><li>Favoritos</li></Link>
+            <Link to={routes.planner} className='nav-item'><li>Planificador</li></Link>
           </>
         )}
       </ul>
