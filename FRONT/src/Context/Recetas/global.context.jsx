@@ -6,7 +6,7 @@ export const ContextGlobal = createContext()
 
 const initialState = {theme: false, 
                         data: [], 
-                        favs: JSON.stringify(localStorage.getItem('favs')) || [], 
+                        favs: [], 
                         recipeSelected: {}};
 
 

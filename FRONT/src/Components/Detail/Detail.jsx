@@ -103,9 +103,6 @@ export const Detail = () => {
         <SearchBar onSearch={handleSearch} />
         <div className="name-container">
           <h1>{nombre}</h1>
-          <button className="button-back" onClick={() => navigate(-1)}>
-            <i className="fas fa-reply"></i> VOLVER A LA CARTA
-          </button>
           {logged && (
             <>
               {
@@ -120,6 +117,9 @@ export const Detail = () => {
               }
             </>
           )}
+          <button className="button-back" onClick={() => navigate(-1)}>
+            <i className="fas fa-reply"></i> VOLVER A LA CARTA
+          </button>
         </div>
 
         <ImagesContainer imagenes={imagenes} />

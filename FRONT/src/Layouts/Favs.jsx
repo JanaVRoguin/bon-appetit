@@ -4,17 +4,17 @@ import { CardCategoria } from '../Components/CardCategoria';
 
 const Favs = () => {
     const { state } = useContext(ContextGlobal);
-    console.log(state);
+    const { favs } = state;
   return (
     <>    
         <div className="favoritos-title">
-            {state.favs.length == 0 ? 
+            {favs.length == 0 ? 
                 <h3>Tu colección de recetas favoritas está vacía por ahora. ¡Vamos a llenarla con algunas delicias!</h3>
                 :
                 <>
                     <h3>Favoritos</h3>
                     <div className="category-recipes">
-                        {state.favs.map(recipe => (
+                        {favs.map(recipe => (
                             <CardCategoria
                                 key={recipe.id}
                                 title={recipe.nombre}
