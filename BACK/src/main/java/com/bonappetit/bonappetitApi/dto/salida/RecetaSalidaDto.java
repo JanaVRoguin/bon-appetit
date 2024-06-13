@@ -1,5 +1,6 @@
 package com.bonappetit.bonappetitApi.dto.salida;
 
+import com.bonappetit.bonappetitApi.entity.Caracteristica;
 import com.bonappetit.bonappetitApi.entity.Categoria;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -17,4 +19,5 @@ public class RecetaSalidaDto {
     private String ingredientes;
     private String instrucciones;
     private List<Categoria> categorias;
+    private List<Caracteristica> caracteristicas;
 }

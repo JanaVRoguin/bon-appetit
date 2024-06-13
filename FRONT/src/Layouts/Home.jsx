@@ -20,8 +20,11 @@ export const Home = () => {
       <div className="card-container">
         {categories.map((category, index) => (
           <Link to={category.path} className="card" key={index}>
-            <div className="card-front" style={{ backgroundImage: `url(${category.image})` }}>
-              <h1>{category.title}</h1>
+            <div className="card-front"
+              style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2),
+                                                          rgba(0, 0, 0, 0.4)
+                                                        ),url(${category.image})` }}>
+              <h1 className='bordelindo title-card'>{category.title}</h1>
             </div>
             <div className="card-back">
               <p>{category.description}</p>

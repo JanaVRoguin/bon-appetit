@@ -1,54 +1,40 @@
 import React, { useEffect, useState } from "react";
-import "./CrearReceta.css"; // Importa el mismo archivo CSS que CrearReceta.jsx
-import { fetchCategories, updateRecipe } from "../../../api/api";
+import "./CrearReceta.css";
+import { fetchCategories, createRecipe, fetchCaracteristicas } from "../../../api/api";
 
-const EditarReceta = ({
-  closeModal,
-  fetchRecipes,
-  recipeId,
-  initialRecipe,
-}) => {
+const CrearReceta = ({ closeModal, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
+  const [caracteristicas, setCaracteristicas] = useState([]);
   const [formData, setFormData] = useState({
     nombre: "",
     descripcion: "",
     ingredientes: "",
     instrucciones: "",
+    caracteristicas: [],
     categorias: [],
-    imagenes: [],
+    imagenes: [""],
   });
   const [validationErrors, setValidationErrors] = useState({});
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [imageLoadError, setImageLoadError] = useState([false]);
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
-    const initializeForm = async () => {
-      await getCategorias();
-      if (initialRecipe) {
-        setFormData({
-          nombre: initialRecipe.nombre || "",
-          descripcion: initialRecipe.descripcion || "",
-          ingredientes: initialRecipe.ingredientes || "",
-          instrucciones: initialRecipe.instrucciones || "",
-          categorias: initialRecipe.categorias.map((cat) => cat.id) || [],
-          imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [],
-        });
+    // Obtener categorías desde la API
+    const getData = async () => {
+      let data = await fetchCategories();
+      if (data) {
+        setCategorias(data);
+      } else {
+        alert("Error al cargar categorías.");
+      }
+      data = await fetchCaracteristicas();
+      if (data) {
+        setCaracteristicas(data);
+      } else {
+        alert("Error al cargar características.");
       }
     };
-    initializeForm();
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, [recipeId, initialRecipe]);
-
-  const getCategorias = async () => {
-    const data = await fetchCategories();
-    if (data) {
-      setCategorias(data);
-    } else {
-      alert("Error al cargar categorías.");
-    }
-  };
+    getData();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, selectedOptions } = e.target;
@@ -73,36 +59,44 @@ const EditarReceta = ({
       ...formData,
       imagenes: updatedImages,
     });
+
+    const updatedErrors = [...imageLoadError];
+    updatedErrors[index] = false; // Reset error state when the image URL changes
+    setImageLoadError(updatedErrors);
   };
 
   const addImageField = () => {
-    if (
-      formData.imagenes.length === 0 ||
-      formData.imagenes[formData.imagenes.length - 1].trim() !== ""
-    ) {
-      setFormData({
-        ...formData,
-        imagenes: [...formData.imagenes, ""],
-      });
-    }
+    setFormData({
+      ...formData,
+      imagenes: [...formData.imagenes, ""],
+    });
+    setImageLoadError([...imageLoadError, false]);
   };
 
   const removeImageField = (index) => {
     const updatedImages = formData.imagenes.filter((_, i) => i !== index);
+    const updatedErrors = imageLoadError.filter((_, i) => i !== index);
     setFormData({
       ...formData,
-      imagenes: updatedImages,
+      imagenes: updatedImages.length > 0 ? updatedImages : [""],
     });
+    setImageLoadError(updatedErrors.length > 0 ? updatedErrors : [false]);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleImageError = (index) => {
+    const updatedErrors = [...imageLoadError];
+    updatedErrors[index] = true;
+    setImageLoadError(updatedErrors);
+  };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const {
       nombre,
       descripcion,
       ingredientes,
       instrucciones,
+      caracteristicas,
       categorias,
       imagenes,
     } = formData;
@@ -112,29 +106,39 @@ const EditarReceta = ({
       !descripcion ||
       !ingredientes ||
       !instrucciones ||
+      caracteristicas.length === 0 ||
       categorias.length === 0 ||
-      imagenes.length === 0
+      imagenes.length === 0 ||
+      imagenes.some((image) => image.trim() === "")
     ) {
       alert("Por favor ingrese todos los campos.");
       return;
     }
 
-    const updatedRecipe = {
-      nombre,
-      descripcion,
-      ingredientes,
-      instrucciones,
-      categorias: categorias.map((category) => parseInt(category)),
-      imagenes: imagenes.filter((image) => image.trim() !== ""),
-    };
+    try {
+      const receta = {
+        nombre,
+        descripcion,
+        ingredientes,
+        instrucciones,
+        caracteristicas: caracteristicas.map((category) => parseInt(category)),
+        categorias: categorias.map((category) => parseInt(category)),
+        imagenes: imagenes.filter((image) => image.trim() !== ""),
+      };
 
-    const success = await updateRecipe(recipeId, updatedRecipe);
-    if (success) {
-      fetchRecipes();
-      closeModal();
-      setShowSuccessMessage(true);
-    } else {
-      alert("Error al actualizar la receta.");
+      const createResponse = await createRecipe(receta);
+
+      if (createResponse.success) {
+        alert("Receta creada exitosamente.");
+        closeModal();
+        fetchRecipes(); // Actualizar la lista de recetas
+      } else if (createResponse.error) {
+        alert("No se pudo cargar la receta.");
+      } else {
+        setValidationErrors(createResponse);
+      }
+    } catch (error) {
+      alert("No se pudo conectar con el servidor.");
     }
   };
 
@@ -142,7 +146,7 @@ const EditarReceta = ({
     <div className="modal">
       <div className="modal-content crear-receta-container">
         <div className="form-wrapper">
-          <h2 className="title">Editar Receta</h2>
+          <h2 className="title">Agregar Recetas</h2>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Nombre</label>
@@ -197,7 +201,7 @@ const EditarReceta = ({
             <div className="form-group">
               <label>Categoría</label>
               <select
-                className="form-control"
+                className="form-control select-categorias"
                 name="categorias"
                 multiple
                 value={formData.categorias}
@@ -209,7 +213,25 @@ const EditarReceta = ({
                   </option>
                 ))}
               </select>
-              <span className="error-text">{validationErrors.categorias}</span>
+              <span className="error-text">{validationErrors.categoria}</span>
+            </div>
+
+            <div className="form-group">
+              <label>Características</label>
+              <select
+                className="form-control select-categorias"
+                name="caracteristicas"
+                multiple
+                value={formData.caracteristicas}
+                onChange={handleChange}
+              >
+                {caracteristicas.map((caracteristica) => (
+                  <option key={caracteristica.id} value={caracteristica.id}>
+                    {caracteristica.nombre}
+                  </option>
+                ))}
+              </select>
+              <span className="error-text">{validationErrors.caracteristica}</span>
             </div>
 
             <div className="form-group">
@@ -223,17 +245,26 @@ const EditarReceta = ({
                       value={imagen}
                       onChange={(e) => handleImageChange(index, e.target.value)}
                     />
-                    <img
-                      src={imagen}
-                      alt={`Imagen ${index + 1}`}
-                      className="preview-image"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImageField(index)}
-                    >
-                      -
-                    </button>
+                    {imagen && !imageLoadError[index] ? (
+                      <img
+                        src={imagen}
+                        alt={`Imagen ${index + 1}`}
+                        className="preview-image"
+                        onError={() => handleImageError(index)}
+                      />
+                    ) : (
+                      <div className="no-image-placeholder">
+                        🚫 Imagen no disponible
+                      </div>
+                    )}
+                    {formData.imagenes.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => removeImageField(index)}
+                      >
+                        -
+                      </button>
+                    )}
                   </div>
                 ))}
               </div>
@@ -258,22 +289,14 @@ const EditarReceta = ({
                 Cancelar
               </button>
               <button type="submit" className="btn submit-btn">
-                Guardar cambios
+                Crear
               </button>
             </div>
           </form>
-          {showSuccessMessage && (
-            <div className="success-message">
-              ¡La receta fue actualizada con éxito!
-              <button onClick={() => setShowSuccessMessage(false)}>
-                Cerrar
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-export default EditarReceta;
+export default CrearReceta;

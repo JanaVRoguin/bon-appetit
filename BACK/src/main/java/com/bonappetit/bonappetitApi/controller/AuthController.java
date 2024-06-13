@@ -1,10 +1,12 @@
 package com.bonappetit.bonappetitApi.controller;
 
+import com.bonappetit.bonappetitApi.dto.entrada.LoginEntradaDto;
+import com.bonappetit.bonappetitApi.dto.salida.Jwt.JwtSalidaDto;
+import com.bonappetit.bonappetitApi.dto.salida.Usuario.UsuarioSalidaDto;
+import com.bonappetit.bonappetitApi.entity.Usuario;
 import com.bonappetit.bonappetitApi.security.jwt.JWTUtil;
-import com.bonappetit.bonappetitApi.dto.entrada.LoginRequest;
-import com.bonappetit.bonappetitApi.dto.salida.JWTResponse;
-import com.bonappetit.bonappetitApi.entity.*;
 import com.bonappetit.bonappetitApi.service.impl.UsuarioService;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,32 +34,39 @@ public class AuthController {
     @PostMapping("/registro")
     public ResponseEntity<?> registerUser(@RequestBody Usuario usuario) {
         try {
-            Usuario registrado = usuarioService.registerUser(usuario);
+            Usuario registrado = usuarioService.registrarUsuario(usuario);
             return ResponseEntity.ok("Usuario registrado con éxito");
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error inesperado");
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginEntradaDto loginEntradaDto) {
         try {
+            UsuarioSalidaDto usuarioSalidaDto = usuarioService.buscarPorCorreo(loginEntradaDto.getCorreo());
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            loginRequest.getCorreo(), loginRequest.getContraseña()
+                            loginEntradaDto.getCorreo(), loginEntradaDto.getContraseña()
                     )
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
             String jwt = jwtUtil.generateToken(authentication);
 
-            // Obtener el usuario y sus detalles
-            Usuario usuario = usuarioService.findByCorreo(loginRequest.getCorreo());
-            String nombre = usuario.getNombre();
-            String rol = usuario.getRoles().stream().findFirst().get().getRoleEnum().toString();
 
-            return ResponseEntity.ok(new JWTResponse(jwt, nombre, rol));
+            String nombre = usuarioSalidaDto.getNombre();
+            String rol = usuarioSalidaDto.getRoles().stream().findFirst().get().getRoleEnum().toString();
+            String correo = usuarioSalidaDto.getCorreo();
+
+            return ResponseEntity.ok(new JwtSalidaDto(jwt, nombre, rol, correo));
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Contraseña incorrecta");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Correo no encontrado");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocurrió un error inesperado");
         }
     }
 

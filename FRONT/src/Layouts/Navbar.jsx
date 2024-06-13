@@ -4,8 +4,8 @@ import { routes } from '../utils/routes'
 import { AuthContext } from '../Context';
 
 export const Navbar = () => {
-  const { authState: { logged }, logout } = useContext(AuthContext);
-  const [toggle, setToggle] = useState(false);
+  const { authState: { logged, user }, logout } = useContext(AuthContext);
+  const [showCalendar, setShowCalendar] = useState(false); // Estado para mostrar el div del calendario
 
   const getInitial = (name) => {
     return name ? name.charAt(0).toUpperCase() : '';
@@ -18,32 +18,56 @@ export const Navbar = () => {
     }
   };
 
+  const toggleCalendar = () => {
+    setShowCalendar(!showCalendar);
+  };
+
+  const closeCalendar = () => {
+    setShowCalendar(false);
+  };
+
   return (
     <nav className="navbar">
       <Link to="/" className="navbar-left">
-        <img className='navbar-logo' src="/Images/Logo-generico.jpg" alt="Logo Marca" />
+        <img className='navbar-logo' src="/Images/Logo.png" alt="Logo Marca" />
         <h2 className="navbar-heading">BonAppetit</h2>
       </Link>
 
       <ul className='nav-list'>
-        <Link to="/"><li className='nav-item'>Inicio</li></Link>
-        <li className='nav-item'>Contacto</li>
-        <li className='nav-item'>Sobre Nosotros</li>
-        <li className='nav-item'><Link to={routes.adminPanel}>Panel de administrador</Link></li>
+        <Link to="/" className='nav-item'><li>Inicio</li></Link>
+        <Link to="/" className='nav-item'><li>Contacto</li></Link>
+        <Link to="/" className='nav-item'><li>Sobre Nosotros</li></Link>
+        { user?.role === 'ADMIN' && 
+            <Link to={routes.adminPanel} className='nav-item'>
+              <li>Panel de administrador</li>
+            </Link> 
+        }
+        {logged && (
+          <>
+            
+          </>
+        )}
       </ul>
 
       <div className="navbar-right">
         {logged ? (
           <div className="avatar-container">
-            <div className="avatar">
-              {/* {getInitial(user.name)} */}
+            <div className="avatar" onClick={toggleCalendar}>
+              {getInitial(user.name)}
+              {showCalendar && (
+                <div className="calendar-dropdown">
+                  <Link to={routes.planner} onClick={closeCalendar}>Mi Calendario</Link>
+                  <Link to={routes.favs} onClick={closeCalendar}>Favoritos</Link>
+                  <Link to={routes.myAccount} onClick={closeCalendar}>Mi Cuenta</Link>
+                </div>
+              )}
             </div>
             <button className="logout-button" onClick={handleLogout}>Cerrar Sesión</button>
           </div>
         ) : (
           <>
-            <Link to={routes.register}><button className="navbar-button">Crear Cuenta</button></Link>
-            <Link to={routes.login}><button className="navbar-button">Iniciar sesión</button></Link>
+            <Link to={routes.login}><button className="navbar-button btn-login">Iniciar sesión</button></Link>
+            <Link to={routes.register}><button className="navbar-button btn-register">Crear Cuenta</button></Link>
           </>
         )}
       </div>
@@ -54,14 +78,6 @@ export const Navbar = () => {
         </button>
       </div>
 
-      {toggle && (
-        <ul className='mobile-nav-list'>
-          <li className='nav-item mobile-item'><Link to="/">Inicio</Link></li>
-          <li className='nav-item mobile-item'>Contacto</li>
-          <li className='nav-item mobile-item'>Sobre Nosotros</li>
-          <li className='nav-item mobile-item'><Link to={routes.adminPanel}>Panel de administrador</Link></li>
-        </ul>
-      )}
     </nav>
   );
 };

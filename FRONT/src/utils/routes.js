@@ -10,4 +10,7 @@ export const routes = {
     crearReceta: '/administracion/crear',
     register: '/register',
     login: '/login',
-} 
+    myAccount: '/myAccount',
+    favs: '/favoritos',
+    planner: '/planificador',
+}

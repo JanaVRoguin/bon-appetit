@@ -11,5 +11,3 @@ export * from './SearchBar'
 export { Login, Register } from './Auth'
 export * from './Detail/Detail'
 
-
-
