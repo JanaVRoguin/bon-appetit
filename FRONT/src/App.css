@@ -73,7 +73,7 @@ nav {
   margin: 0; /* Elimina el margen predeterminado */
   text-decoration: none;
 }
-
+in
 /* Estilos CSS para cada ítem de la lista */
 .nav-item {
   padding: 0 10px; /* Añade espacio interno */
@@ -85,6 +85,8 @@ nav {
 .navbar-logo {
   height: 100px; /* Ajusta la altura del logo */
   margin-right: 2px; /* Espacio entre el logo y el texto */
+  height: 60px; /* Ajusta la altura del logo */
+  margin-right: 10px; /* Espacio entre el logo y el texto */
 }
 
 .navbar-heading {
