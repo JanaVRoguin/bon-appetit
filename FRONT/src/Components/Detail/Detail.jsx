@@ -9,8 +9,6 @@ import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
 
-
-
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
   const handleSearch = (term) => {
@@ -30,40 +28,32 @@ export const Detail = () => {
 
   useEffect(() => {
     axios(url)
-    .then((response) => {
-      dispatch({ type: 'GET_SELECTED', payload: response.data });
-    })
-    .catch((error) => {
-      if (error.response && error.response.status === 401) {
-        console.error("Unauthorized. Please check your token.");
-        // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
-      } else {
-        console.error("Error fetching recipe details:", error);
-      }
-    });
+      .then((response) => {
+        dispatch({ type: 'GET_SELECTED', payload: response.data });
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          console.error("Unauthorized. Please check your token.");
+        } else {
+          console.error("Error fetching recipe details:", error);
+        }
+      });
 
     axios.get('http://localhost:8080/recetas/listar', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
     })
-    .then((response) => {
-      //console.log(response.data);
-      setRecipeIds(response.data);
-    })
-    .catch((error) => {
-      if (error.response && error.response.status === 401) {
-        console.error("Unauthorized. Please check your token.");
-        // Aquí puedes redirigir al usuario a la página de inicio de sesión o mostrar un mensaje.
-      } else {
-        console.error("Error fetching recipe IDs:", error);
-      }
-    });
-    // if (token) {
-    // } else {
-    //   console.error("No token found. Please log in.");
-    //   // Aquí puedes redirigir al usuario a la página de inicio de sesión.
-    // }
+      .then((response) => {
+        setRecipeIds(response.data);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 401) {
+          console.error("Unauthorized. Please check your token.");
+        } else {
+          console.error("Error fetching recipe IDs:", error);
+        }
+      });
   }, [params.id, token]);
 
   useEffect(() => {
@@ -101,15 +91,36 @@ export const Detail = () => {
 
   const includesArray = favs.map(item => item.id).includes(recipeSelected.id);
 
+  const handleShare = () => {
+    const shareData = {
+      title: nombre,
+      text: 'Mira esta receta increíble que encontré!',
+      url: window.location.href
+    };
+
+    if (navigator.share) {
+      navigator.share(shareData)
+        .then(() => console.log('Successful share'))
+        .catch((error) => console.log('Error sharing', error));
+    } else {
+      alert('La funcionalidad de compartir no es soportada por tu navegador.');
+    }
+  };
+
   return (
     <>
       <div className="detail">
         <SearchBar onSearch={handleSearch} />
         <div className="name-container">
           <h1>{nombre}</h1>
-          <button className="button-back" onClick={() => navigate(-1)}>
-            <i className="fas fa-reply"></i> VOLVER A LA CARTA
-          </button>
+          <div className="button-group">
+            <button className="button-back" onClick={() => navigate(-1)}>
+              <i className="fas fa-reply"></i> VOLVER A LA CARTA
+            </button>
+            <button className="button-back" onClick={handleShare}>
+              <i className="fas fa-share"></i> Compartir
+            </button>
+          </div>
         </div>
         {logged && (
           <>
