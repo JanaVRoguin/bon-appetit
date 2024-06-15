@@ -8,6 +8,8 @@ import { ContextGlobal } from "../../Context";
 import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
+import Rating from "./Rating";
+
 
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
@@ -163,6 +165,7 @@ export const Detail = () => {
               instrucciones={instrucciones}
             />
           </div>
+          <Rating/>
         </div>
         <div className="navigation-buttons">
           <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>

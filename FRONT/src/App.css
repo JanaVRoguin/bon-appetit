@@ -1081,6 +1081,29 @@ footer{
   vertical-align: middle;
 }
 
+.rating-container {
+  margin-top: 5%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem; /* Ajusta el tamaño de las estrellas según sea necesario */
+}
+
+.rating-container .fa-star {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.rating-container .fa-star.fas {
+  color: var(--colorFuente-Gold); /* Estrella llena */
+}
+
+.rating-container .fa-star.far {
+  color: var(--colorFondo-primario); /* Estrella vacía */
+}
+
+
 
 .navigation-buttons{
   display: flex;
