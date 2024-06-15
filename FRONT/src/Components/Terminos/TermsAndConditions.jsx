@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './TermsAndConditions.css';
 
 export const TermsAndConditions = ({ onClose }) => {
+  const modalRef = useRef();
+
+  const handleClickOutside = (event) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
+
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <span className="close-button" onClick={onClose}>&times;</span>
+    <div className="modal" onClick={handleClickOutside}>
+      <div className="modal-content" ref={modalRef}>
         <div className="terms-container">
           <h2>Términos y Condiciones</h2>
           <p>Última actualización: [Fecha]</p>
@@ -23,6 +30,7 @@ export const TermsAndConditions = ({ onClose }) => {
             <p>Usted reconoce que ha leído este Acuerdo y acepta todos sus términos y condiciones. Al utilizar el Sitio web o sus Servicios, usted acepta estar sujeto a este Acuerdo. Si no acepta cumplir con los términos de este Acuerdo, no está autorizado a usar o acceder al Sitio web y sus Servicios.</p>
           </div>
         </div>
+        <button className='button-close-term' onClick={onClose}>CERRAR</button>
       </div>
     </div>
   );
