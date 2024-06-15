@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createCaracteristica, fetchCaracteristicas } from '../../../api/api';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
+import { firebaseDB } from '../../../api/firebase';
 
 export const CrearCaracteristica = ({
   closeModal,
@@ -12,26 +14,27 @@ export const CrearCaracteristica = ({
   const [validationError, setValidationError] = useState("");
 
   useEffect(() => {
-    const getCaracteristicas = async () => {
+    getCaracteristicas();
+  }, []);
+
+  const getCaracteristicas = async () => {
       try {
         const data = await fetchCaracteristicas();
         if (data) {
           setCaracteristicas(data);
         } else {
-          alert("Error al cargar categorías.");
+          alert("Error al cargar características.");
         }
       } catch (error) {
-        alert("Error al conectar con el servidor para cargar categorías.");
+        alert("Error al conectar con el servidor para cargar características.");
       }
     };
-    getCaracteristicas();
-  }, []);
 
   const handleChangeName = (e) => {
     setNombre(e.target.value);
   };
   const handleChangeIcono = (e) => {
-    setIcono(e.target.value);
+    setIcono(e.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
@@ -49,9 +52,13 @@ export const CrearCaracteristica = ({
       return;
     }
 
+    const storageRef = ref(firebaseDB, `/caracteristicas/${icono.name}`)
+
     // Crear la nueva característica
     try {
-      const success = await createCaracteristica({ nombre: nombre, urlImg: icono });
+      await uploadBytes(storageRef, icono)
+      const url = await getDownloadURL(storageRef)
+      const success = await createCaracteristica({ nombre: nombre, urlImg: url });
       if (success) {
         alert("Caracteristica creada exitosamente.");
         closeModal();
@@ -82,8 +89,9 @@ export const CrearCaracteristica = ({
           <label>Icono</label>
           <input
             className="form-control"
+            type='file'
             name="icono"
-            value={icono}
+            // value={icono}
             onChange={handleChangeIcono}
           />
           <span className="error-text">{validationError}</span>

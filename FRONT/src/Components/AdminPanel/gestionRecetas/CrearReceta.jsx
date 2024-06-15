@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./CrearReceta.css";
+import { useEffect, useState } from "react";
 import { fetchCategories, createRecipe, fetchCaracteristicas } from "../../../api/api";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { firebaseDB } from "../../../api/firebase";
+import "./CrearReceta.css";
 
 const CrearReceta = ({ closeModal, fetchRecipes }) => {
   const [categorias, setCategorias] = useState([]);
@@ -18,23 +20,23 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
   const [imageLoadError, setImageLoadError] = useState([false]);
 
   useEffect(() => {
-    // Obtener categorías desde la API
-    const getData = async () => {
-      let data = await fetchCategories();
-      if (data) {
-        setCategorias(data);
-      } else {
-        alert("Error al cargar categorías.");
-      }
-      data = await fetchCaracteristicas();
-      if (data) {
-        setCaracteristicas(data);
-      } else {
-        alert("Error al cargar características.");
-      }
-    };
     getData();
   }, []);
+
+  const getData = async () => {
+    let data = await fetchCategories();
+    if (data) {
+      setCategorias(data);
+    } else {
+      alert("Error al cargar categorías.");
+    }
+    data = await fetchCaracteristicas();
+    if (data) {
+      setCaracteristicas(data);
+    } else {
+      alert("Error al cargar características.");
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, type, selectedOptions } = e.target;
@@ -52,13 +54,22 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
     }
   };
 
-  const handleImageChange = (index, value) => {
+  const handleImageChange = async (index, imagen) => {
     const updatedImages = [...formData.imagenes];
-    updatedImages[index] = value;
-    setFormData({
-      ...formData,
-      imagenes: updatedImages,
-    });
+    const storageRef = ref(firebaseDB, `/recetas/${formData.nombre}/${imagen.name}`)
+
+    try {
+      await uploadBytes(storageRef, imagen)
+      const url = await getDownloadURL(storageRef)
+      updatedImages[index] = url;
+
+      setFormData({
+        ...formData,
+        imagenes: updatedImages,
+      });
+    } catch (e){
+      console.log("hubo algun error")
+    }
 
     const updatedErrors = [...imageLoadError];
     updatedErrors[index] = false; // Reset error state when the image URL changes
@@ -242,8 +253,9 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
                     <input
                       className="form-control"
                       name={`imagen-${index}`}
-                      value={imagen}
-                      onChange={(e) => handleImageChange(index, e.target.value)}
+                      type="file"
+                      // value={imagen}
+                      onChange={(e) => handleImageChange(index, e.target.files[0])}
                     />
                     {imagen && !imageLoadError[index] ? (
                       <img

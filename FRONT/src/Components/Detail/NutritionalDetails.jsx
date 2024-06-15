@@ -3,32 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFire, faDrumstickBite, faBreadSlice, faTint } from '@fortawesome/free-solid-svg-icons';
 import { fetchCaracteristicas } from '../../api/api';
 
-const NutritionalDetails = () => {
-
-  const [caracteristicas, setCaracteristicas] = useState([])
-
-  useEffect(() => {
-    getData()
-  }, [])
-
-  const getData = async () => {
-    let data = await fetchCaracteristicas();
-    if (data) {
-      setCaracteristicas(data);
-    } else {
-      alert("Error al cargar características.");
-    }
-  };
+const NutritionalDetails = ({ caracteristicas }) => {
 
   return (
     <div className='nutritional-details'>
       <h3>Detalles Nutricionales</h3>
       <br />
-      <h4>Característiscas</h4>
+      <h4>Características</h4>
         <ul>
           {
-            caracteristicas.map( caracteristica => 
+            caracteristicas?.map( caracteristica => 
               <li key={caracteristica.id}>
+                <img src={caracteristica.urlImg} alt={caracteristica.nombre} className="detail-icon"/>
                 <p>{caracteristica.nombre}</p>
               </li>
             )

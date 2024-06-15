@@ -104,9 +104,10 @@ export const ListarCaracteristicas = () => {
               <tr key={caracteristica.id}>
                 <td>{caracteristica.id}</td>
                 <td>{caracteristica.nombre}</td>
-                {/* <td>{caracteristica.descripcion}</td> */}
-                <td>{caracteristica.urlImg}</td>
-                <td className="listar-categorias-action-buttons">
+                <td className='image-cell'>
+                  <img src={caracteristica.urlImg} alt={caracteristica.nombre} className='characteristic-img'/>
+                </td>
+                <td>
                   <button
                     type="button"
                     className="listar-categorias-btn listar-categorias-edit-btn"
