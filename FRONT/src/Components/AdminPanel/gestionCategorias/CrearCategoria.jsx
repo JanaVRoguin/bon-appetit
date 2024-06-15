@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { fetchCategories, createCategory } from "../../../api/api";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { firebaseDB } from "../../../api/firebase";
 
 const CrearCategoria = ({
   closeModal,
@@ -7,6 +9,8 @@ const CrearCategoria = ({
 }) => {
   const [categorias, setCategorias] = useState([]);
   const [nombre, setNombre] = useState("");
+  const [descripcion, setDescripcion] = useState("");
+  const [imagen, setImagen] = useState("");
   const [validationError, setValidationError] = useState("");
 
   useEffect(() => {
@@ -25,8 +29,16 @@ const CrearCategoria = ({
     getCategorias();
   }, []);
 
-  const handleChange = (e) => {
+  const handleChangeNombre = (e) => {
     setNombre(e.target.value);
+  };
+
+  const handleChangeDescripcion = (e) => {
+    setDescripcion(e.target.value);
+  };
+
+  const handleChangeImagen = (e) => {
+    setImagen(e.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
@@ -44,9 +56,12 @@ const CrearCategoria = ({
       return;
     }
 
+    const storageRef = ref(firebaseDB, `/categorias/${imagen.name}`)
     // Crear la nueva categoría
     try {
-      const success = await createCategory({ categorias: nombre });
+      await uploadBytes(storageRef, imagen)
+      const url = await getDownloadURL(storageRef)
+      const success = await createCategory({ categorias: nombre, descripcion: descripcion, urlImg: url });
       if (success) {
         alert("Categoría creada exitosamente.");
         closeModal();
@@ -71,7 +86,28 @@ const CrearCategoria = ({
                 className="form-control"
                 name="nombre"
                 value={nombre}
-                onChange={handleChange}
+                onChange={handleChangeNombre}
+              />
+              <span className="error-text">{validationError}</span>
+            </div>
+            <div className="form-group">
+              <label>Descripción</label>
+              <input
+                className="form-control"
+                name="descripcion"
+                value={descripcion}
+                onChange={handleChangeDescripcion}
+              />
+              <span className="error-text">{validationError}</span>
+            </div>
+            <div className="form-group">
+              <label>Imágen</label>
+              <input
+                className="form-control"
+                type="file"
+                name="imagen"
+                // value={nombre}
+                onChange={handleChangeImagen}
               />
               <span className="error-text">{validationError}</span>
             </div>

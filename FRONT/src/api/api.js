@@ -326,10 +326,9 @@ export const createCaracteristica = async (newCaracteristica) => {
   }
 };
 
-// Actualizar una categoría
+// Actualizar una característica
 export const updateCaracteristica = async (caracteristica) => {
   try {
-    console.log(caracteristica)
     const response = await fetch(`${BASE_URL}caracteristicas/actualizar`, {
       method: "PUT",
       headers: {
@@ -348,7 +347,7 @@ export const updateCaracteristica = async (caracteristica) => {
   }
 };
 
-// Eliminar una categoría
+// Eliminar una característica
 export const deleteCaracteristica = async (caracteristicaId) => {
   try {
     const response = await fetch(`${BASE_URL}caracteristicas/eliminar/${caracteristicaId}`, {
@@ -368,7 +367,7 @@ export const deleteCaracteristica = async (caracteristicaId) => {
   }
 };
 
-// Buscar categoría por ID
+// Buscar característica por ID
 export const getCaracteristicaById = async (caracterisitcaId) => {
   try {
     const response = await fetch(`${BASE_URL}caracteristicas/${caracterisitcaId}`, {

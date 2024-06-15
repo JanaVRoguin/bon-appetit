@@ -20,7 +20,7 @@ export const Detail = () => {
   const url = `http://localhost:8080/recetas/${params.id}`;
   const { dispatch, state } = useContext(ContextGlobal);
   const { favs, recipeSelected } = state;
-  const { nombre, imagenes, categorías, descripcion, ingredientes, instrucciones, id } = state.recipeSelected;
+  const { nombre, imagenes, categorías, caracteristicas, descripcion, ingredientes, instrucciones, id } = state.recipeSelected;
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [recipeIds, setRecipeIds] = useState([]);
@@ -149,7 +149,7 @@ export const Detail = () => {
               />
             </div>
             <div className="side-details-container">
-              <NutritionalDetails />
+              <NutritionalDetails caracteristicas={caracteristicas}/>
               <div className="separator"></div>
               <RecipeCalendar recipeId={id} />
             </div>
