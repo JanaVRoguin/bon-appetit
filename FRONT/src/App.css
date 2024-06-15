@@ -784,7 +784,13 @@ footer{
   background-color: var(--colorBlanco); /* Cambia el fondo al color blanco al pasar el cursor */
   color: var(--colorFuente-bordo); /* Cambia el texto al color original */
 }
-.fav-button {
+.fav-container{
+  display: flex;
+  gap: 2%;
+  
+}
+
+.fav-button, .button-share {
   display: flex;
   align-items: center;
   background: none;
@@ -793,6 +799,11 @@ footer{
   font-size: 3rem; /* Tamaño del icono */
   cursor: pointer;
   margin-left: 1rem; /* Espacio entre el icono y el nombre */
+  transition: transform 0.3s ease; /* Transición suave */
+}
+
+.fav-button:hover, .button-share:hover {
+  transform: scale(1.1); /* Aumenta el tamaño a 110% */
 }
 
 .recipe-img-container {
@@ -1751,5 +1762,64 @@ input[type="password"] {
 .week-button:hover {
   background-color: #434855;
   color: white;
+}
+/*estilos a terminos y condiciones modal*/
+.modal {
+  margin-top: 4%;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 90%;
+  max-width: 800px;
+  border-radius: 8px;
+  max-height: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.terms-container {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.terms-scroll {
+  margin-top: 10px;
+}
+
+.modal-content h3 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button-close-term {
+  width: 50%;
+  height: 8%;
+  color: var(--colorFondo-hueso);
+  background-color: var(--colorFuente-bordo);
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  align-self: center;
+  margin-top: 20px;
+}
+
+.button-close-term:hover {
+  background-color:var(--colorFondo-hueso);
+  color:var(--colorFondo-primario) ;
+  text-decoration: none;
 }
 

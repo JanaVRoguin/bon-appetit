@@ -113,15 +113,11 @@ export const Detail = () => {
         <SearchBar onSearch={handleSearch} />
         <div className="name-container">
           <h1>{nombre}</h1>
-          <div className="button-group">
-            <button className="button-back" onClick={() => navigate(-1)}>
+          <button className="button-back" onClick={() => navigate(-1)}>
               <i className="fas fa-reply"></i> VOLVER A LA CARTA
-            </button>
-            <button className="button-back" onClick={handleShare}>
-              <i className="fas fa-share"></i> Compartir
-            </button>
-          </div>
+          </button>
         </div>
+        <div className="fav-container">
         {logged && (
           <>
             {
@@ -134,8 +130,12 @@ export const Detail = () => {
                   <i className="fa-regular fa-heart"></i>
                 </button>
             }
+            <button className="button-share" onClick={handleShare}>
+              <i className="fas fa-share-nodes"></i> 
+            </button>
           </>
         )}
+        </div>
         <ImagesContainer imagenes={imagenes} />
         <div className="details-container">
           <div className="main-details">
