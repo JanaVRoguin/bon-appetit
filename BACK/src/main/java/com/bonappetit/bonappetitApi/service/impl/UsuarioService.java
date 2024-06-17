@@ -44,8 +44,8 @@ public class UsuarioService implements IUsuarioService {
         Role userRole = new Role();
         userRole.setRoleEnum(RoleEnum.USER);
         usuario.getRoles().add(userRole);
-        //Enviar Email
-        iEmailService.sendEmail(usuario);
+        //Enviar mail al usuario
+        iEmailService.sendEmail(usuario.getCorreo(), "Bienvenido a Bonappetit", "Hola " + usuario.getNombre() + " ¡Tu registro fue exitoso en Bonappetit!");
         return iUsuarioRepository.save(usuario);
     }
 
