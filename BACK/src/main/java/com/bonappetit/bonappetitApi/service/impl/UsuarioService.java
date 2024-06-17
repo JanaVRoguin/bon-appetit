@@ -7,6 +7,7 @@ import com.bonappetit.bonappetitApi.entity.RoleEnum;
 import com.bonappetit.bonappetitApi.entity.Usuario;
 import com.bonappetit.bonappetitApi.repository.IUsuarioRepository;
 import com.bonappetit.bonappetitApi.security.jwt.JWTUtil;
+import com.bonappetit.bonappetitApi.service.IEmailService;
 import com.bonappetit.bonappetitApi.service.IUsuarioService;
 import jakarta.persistence.EntityNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -27,6 +28,8 @@ public class UsuarioService implements IUsuarioService {
     @Autowired
     private JWTUtil jwtUtil;
     @Autowired
+    private IEmailService iEmailService;
+    @Autowired
     private ModelMapper modelMapper;
 
     @Override
@@ -41,6 +44,8 @@ public class UsuarioService implements IUsuarioService {
         Role userRole = new Role();
         userRole.setRoleEnum(RoleEnum.USER);
         usuario.getRoles().add(userRole);
+        //Enviar Email
+        iEmailService.sendEmail(usuario);
         return iUsuarioRepository.save(usuario);
     }
 
