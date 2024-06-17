@@ -3,5 +3,5 @@ package com.bonappetit.bonappetitApi.service;
 import com.bonappetit.bonappetitApi.entity.Usuario;
 
 public interface IEmailService {
-    void sendEmail(Usuario usuario);
+    void sendEmail(String toEmail, String subject, String body);
 }
