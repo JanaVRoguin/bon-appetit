@@ -1096,7 +1096,7 @@ footer{
 }
 
 .rating-container .fa-star.fas {
-  color: var(--colorFuente-Gold); /* Estrella llena */
+  color: var(--colorFuente-bordo); /* Estrella llena */
 }
 
 .rating-container .fa-star.far {
