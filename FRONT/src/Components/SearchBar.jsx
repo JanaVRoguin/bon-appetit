@@ -13,7 +13,7 @@ export const SearchBar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log("State data:", state.data); // Para verificar la estructura de los datos
+    // console.log("State data:", state.data); // Para verificar la estructura de los datos
   }, [state.data]);
 
   const handleInputChange = (e) => {
@@ -73,7 +73,7 @@ export const SearchBar = () => {
           <div className="suggestions" ref={suggestionsRef}>
             {suggestions.map((suggestion, index) => {
               const imageUrl = suggestion.imagenes?.length > 0 ? suggestion.imagenes[0].urlImg : '';
-              console.log("Image URL:", imageUrl); // Para verificar la URL de la imagen
+              // console.log("Image URL:", imageUrl); // Para verificar la URL de la imagen
               return (
                 <div
                   key={index}
