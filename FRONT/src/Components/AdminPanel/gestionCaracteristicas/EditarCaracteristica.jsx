@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getCaracteristicaById, updateCaracteristica } from '../../../api/api';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { firebaseDB } from '../../../api/firebase';
 
 export const EditarCaracteristica = ({
   closeModal,
@@ -16,22 +18,23 @@ export const EditarCaracteristica = ({
   });
 
   useEffect(() => {
-    const getCaracteristica = async () => {
-      try {
-        const data = await getCaracteristicaById(id);
-        if (data) {
-          setNombre(data.nombre);
-          setIcono(data.urlImg);
-          setData(data);
-        } else {
-          alert("Error al cargar la característica.");
-        }
-      } catch (error) {
-        alert("Error al conectar con el servidor para cargar la característica.");
-      }
-    };
     getCaracteristica();
   }, [id]);
+
+  const getCaracteristica = async () => {
+    try {
+      const data = await getCaracteristicaById(id);
+      if (data) {
+        setNombre(data.nombre);
+        setIcono(data.urlImg);
+        setData(data);
+      } else {
+        alert("Error al cargar la característica.");
+      }
+    } catch (error) {
+      alert("Error al conectar con el servidor para cargar la característica.");
+    }
+  };
 
   useEffect(() => {
     setData(prevData => ({
@@ -46,7 +49,7 @@ export const EditarCaracteristica = ({
   };
 
   const handleChangeIcono = (e) => {
-    setIcono(e.target.value);
+    setIcono(e.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
@@ -58,14 +61,18 @@ export const EditarCaracteristica = ({
       return;
     }
 
-    if (!icono.trim()) {
-      setValidationError("La imagen para el icono de la característica no puede estar vacío.");
-      return;
-    }
+    // if (!icono.trim()) {
+    //   setValidationError("La imagen para el icono de la característica no puede estar vacío.");
+    //   return;
+    // }
+
+    const storageRef = ref(firebaseDB, `/caracteristicas/${icono.name}`)
 
     // Actualizar la categoría existente
     try {
-      const success = await updateCaracteristica(data);
+      await uploadBytes(storageRef, icono)
+      const url = await getDownloadURL(storageRef)
+      const success = await updateCaracteristica({ id: data.id, nombre: data.nombre, urlImg: url });
       if (success) {
         alert("Característica actualizada exitosamente.");
         closeModal();
@@ -97,7 +104,8 @@ export const EditarCaracteristica = ({
           <input
             className="form-control"
             name="nombre"
-            value={icono}
+            type='file'
+            // value={icono}
             onChange={handleChangeIcono}
           />
           <span className="error-text">{validationError}</span>

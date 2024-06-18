@@ -59,7 +59,7 @@ const ListarCategorias = () => {
         <div>
           <h1 className="listar-categorias-title">Lista de Categorías</h1>
           <p className="listar-recetas-total">
-            Total de recetas: {categorias.length}
+            Total: {categorias.length}
           </p>
         </div>
         <button
@@ -111,8 +111,10 @@ const ListarCategorias = () => {
                 <td>{categoria.id}</td>
                 <td>{categoria.categorias}</td>
                 <td>{categoria.descripcion}</td>
-                <td>{categoria.urlImg}</td>
-                <td className="listar-categorias-action-buttons">
+                <td className="image-cell">
+                  <img src={categoria.urlImg} alt={categoria.categorias} className="category-img"/>
+                </td>
+                <td >
                   <button
                     type="button"
                     className="listar-categorias-btn listar-categorias-edit-btn"

@@ -8,6 +8,8 @@ import { ContextGlobal } from "../../Context";
 import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
+import Rating from "./Rating";
+
 
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
@@ -20,7 +22,7 @@ export const Detail = () => {
   const url = `http://localhost:8080/recetas/${params.id}`;
   const { dispatch, state } = useContext(ContextGlobal);
   const { favs, recipeSelected } = state;
-  const { nombre, imagenes, categorías, descripcion, ingredientes, instrucciones, id } = state.recipeSelected;
+  const { nombre, imagenes, categorías, caracteristicas, descripcion, ingredientes, instrucciones, id } = state.recipeSelected;
   const token = JSON.parse(localStorage.getItem('token'));
 
   const [recipeIds, setRecipeIds] = useState([]);
@@ -113,15 +115,11 @@ export const Detail = () => {
         <SearchBar onSearch={handleSearch} />
         <div className="name-container">
           <h1>{nombre}</h1>
-          <div className="button-group">
-            <button className="button-back" onClick={() => navigate(-1)}>
+          <button className="button-back" onClick={() => navigate(-1)}>
               <i className="fas fa-reply"></i> VOLVER A LA CARTA
-            </button>
-            <button className="button-back" onClick={handleShare}>
-              <i className="fas fa-share"></i> Compartir
-            </button>
-          </div>
+          </button>
         </div>
+        <div className="fav-container">
         {logged && (
           <>
             {
@@ -134,8 +132,12 @@ export const Detail = () => {
                   <i className="fa-regular fa-heart"></i>
                 </button>
             }
+            <button className="button-share" onClick={handleShare}>
+              <i className="fas fa-share-nodes"></i> 
+            </button>
           </>
         )}
+        </div>
         <ImagesContainer imagenes={imagenes} />
         <div className="details-container">
           <div className="main-details">
@@ -149,7 +151,7 @@ export const Detail = () => {
               />
             </div>
             <div className="side-details-container">
-              <NutritionalDetails />
+              <NutritionalDetails caracteristicas={caracteristicas}/>
               <div className="separator"></div>
               <RecipeCalendar recipeId={id} />
             </div>
@@ -163,6 +165,7 @@ export const Detail = () => {
               instrucciones={instrucciones}
             />
           </div>
+          <Rating/>
         </div>
         <div className="navigation-buttons">
           <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>

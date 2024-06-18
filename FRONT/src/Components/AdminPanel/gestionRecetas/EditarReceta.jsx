@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from "react";
-import "./CrearReceta.css";
+import { useEffect, useState } from "react";
 import { fetchCaracteristicas, fetchCategories, updateRecipe } from "../../../api/api";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { firebaseDB } from "../../../api/firebase";
+import "./CrearReceta.css";
 
 const EditarReceta = ({
   closeModal,
@@ -25,26 +27,27 @@ const EditarReceta = ({
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
-    const initializeForm = async () => {
-      await getData();
-      if (initialRecipe) {
-        setFormData({
-          nombre: initialRecipe.nombre || "",
-          descripcion: initialRecipe.descripcion || "",
-          ingredientes: initialRecipe.ingredientes || "",
-          instrucciones: initialRecipe.instrucciones || "",
-          caracteristicas: initialRecipe.caracteristicas.map((car) => car.id) || [],
-          categorias: initialRecipe.categorias.map((cat) => cat.id) || [],
-          imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [],
-        });
-        setImageLoadError(new Array(initialRecipe.imagenes.length).fill(false));
-      }
-    };
     initializeForm();
     return () => {
       document.body.style.overflow = "auto";
     };
   }, [initialRecipe]);
+  
+  const initializeForm = async () => {
+    await getData();
+    if (initialRecipe) {
+      setFormData({
+        nombre: initialRecipe.nombre || "",
+        descripcion: initialRecipe.descripcion || "",
+        ingredientes: initialRecipe.ingredientes || "",
+        instrucciones: initialRecipe.instrucciones || "",
+        caracteristicas: initialRecipe.caracteristicas.map((car) => car.id) || [],
+        categorias: initialRecipe.categorias.map((cat) => cat.id) || [],
+        imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [],
+      });
+      setImageLoadError(new Array(initialRecipe.imagenes.length).fill(false));
+    }
+  };
 
   const getData = async () => {
     let data = await fetchCategories();
@@ -77,16 +80,25 @@ const EditarReceta = ({
     }
   };
 
-  const handleImageChange = (index, value) => {
+  const handleImageChange = async (index, imagen) => {
     const updatedImages = [...formData.imagenes];
-    updatedImages[index] = value;
-    setFormData({
-      ...formData,
-      imagenes: updatedImages,
-    });
+    const storageRef = ref(firebaseDB, `/recetas/${formData.nombre}/${imagen.name}`)
+
+    try {
+      await uploadBytes(storageRef, imagen)
+      const url = await getDownloadURL(storageRef)
+      updatedImages[index] = url;
+
+      setFormData({
+        ...formData,
+        imagenes: updatedImages,
+      });
+    } catch (e){
+      console.log("hubo algun error")
+    }
 
     const updatedErrors = [...imageLoadError];
-    updatedErrors[index] = false;
+    updatedErrors[index] = false; // Reset error state when the image URL changes
     setImageLoadError(updatedErrors);
   };
 
@@ -262,8 +274,9 @@ const EditarReceta = ({
                     <input
                       className="form-control"
                       name={`imagen-${index}`}
-                      value={imagen}
-                      onChange={(e) => handleImageChange(index, e.target.value)}
+                      type="file"
+                      // value={imagen}
+                      onChange={(e) => handleImageChange(index, e.target.files[0])}
                     />
                     {imagen && !imageLoadError[index] ? (
                       <img
