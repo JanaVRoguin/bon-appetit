@@ -2,7 +2,7 @@ export const routes = {
     home: '/',
     desayuno: '/desayuno',
     almuerzo: '/almuerzo',
-    mediatarde:'/mediatarde',
+    mediatarde:'/merienda',
     cena: '/cena',
     detail: '/recipe/:id',
     detailTest: '',
