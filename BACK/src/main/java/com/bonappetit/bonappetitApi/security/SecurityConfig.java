@@ -52,6 +52,8 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.GET, "/categorias/listar").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/caracteristicas/listar").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/recetas/{id}").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/recetas/{recetaId}/calificar").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/recetas/{recetaId}/puntaje").permitAll();
                     // Config endpoint privados
                     http.requestMatchers(HttpMethod.POST, "/recetas/crear").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE, "/recetas/eliminar/{id}").hasRole("ADMIN");
