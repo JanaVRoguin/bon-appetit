@@ -9,7 +9,7 @@ import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
 import Rating from "./Rating";
-
+import { BASE_URL } from "../../utils/config";
 
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
@@ -19,7 +19,7 @@ export const Detail = () => {
 
   const params = useParams();
   const navigate = useNavigate();
-  const url = `http://localhost:8080/recetas/${params.id}`;
+  const url = `${BASE_URL}recetas/${params.id}`;
   const { dispatch, state } = useContext(ContextGlobal);
   const { favs, recipeSelected } = state;
   const { nombre, imagenes, categorías, caracteristicas, descripcion, ingredientes, instrucciones, id } = state.recipeSelected;
@@ -41,11 +41,12 @@ export const Detail = () => {
         }
       });
 
-    axios.get('http://localhost:8080/recetas/listar', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    axios
+      .get(`${BASE_URL}recetas/listar`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         setRecipeIds(response.data);
       })

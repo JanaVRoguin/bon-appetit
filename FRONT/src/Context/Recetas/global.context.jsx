@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
 import axios from "axios";
 import { reducer } from "./reducer";
+import { BASE_URL } from "../../utils/config";
 
 export const ContextGlobal = createContext();
 
@@ -15,7 +16,7 @@ export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   // Petición a la API
-  const url = `http://localhost:8080/recetas/listar`;
+  const url = `${BASE_URL}recetas/listar`;
 
   useEffect(() => {
     axios(url)
