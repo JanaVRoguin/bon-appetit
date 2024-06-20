@@ -3,6 +3,7 @@ package com.bonappetit.bonappetitApi.controller;
 import com.bonappetit.bonappetitApi.dto.entrada.RecetaEntradaDto;
 import com.bonappetit.bonappetitApi.entity.Receta;
 import com.bonappetit.bonappetitApi.service.IRecetaService;
+import com.bonappetit.bonappetitApi.service.impl.CalificacionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,8 @@ public class RecetaController {
 
     @Autowired
     IRecetaService iRecetaService;
-
+    @Autowired
+    private CalificacionService calificacionService;
     @PostMapping("/crear")
     public ResponseEntity<String> crearReceta(@RequestBody @Valid RecetaEntradaDto receta) {
         iRecetaService.crearReceta(receta);
@@ -46,5 +48,17 @@ public class RecetaController {
     public ResponseEntity<String> eliminarReceta(@PathVariable Long id) {
         iRecetaService.eliminarReceta(id);
         return new ResponseEntity<>("Receta eliminada", HttpStatus.OK);
+    }
+
+    @PostMapping("/{recetaId}/calificar")
+    public ResponseEntity<String> calificarReceta(@PathVariable Long recetaId, @RequestParam Integer puntaje) {
+        calificacionService.calificarReceta(recetaId, puntaje);
+        return new ResponseEntity<>("Receta calificada", HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{recetaId}/puntaje")
+    public ResponseEntity<Double> obtenerPuntajePromedio(@PathVariable Long recetaId) {
+        Double puntajePromedio = calificacionService.obtenerPuntajePromedio(recetaId);
+        return new ResponseEntity<>(puntajePromedio, HttpStatus.OK);
     }
 }
