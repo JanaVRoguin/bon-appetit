@@ -31,4 +31,8 @@ public class Receta {
     private List<Imagen> imagenes;
     @ManyToMany
     private List<Caracteristica> caracteristicas;
+    @OneToMany
+    private List<Calificacion> calificaciones;
+    @Column(nullable = false)
+    private Double puntajePromedio = 0.0;
 }
