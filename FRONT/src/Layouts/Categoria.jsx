@@ -11,7 +11,6 @@ export const Categoria = ({ categoriaNombre }) => {
   const categoryRecipes = state.data.filter(recipe =>
     recipe.categorias.some( category => category.categorias === categoriaNombre )
   );
-  console.log(categoryRecipes);
   // Definir el título de la categoría basado en la primera receta encontrada
   const categoryTitle = categoryRecipes.length > 0 ? categoryRecipes[0].categorias.find( category => category.categorias === categoriaNombre ).categorias : categoriaNombre;
 
@@ -48,20 +47,19 @@ export const Categoria = ({ categoriaNombre }) => {
       </div>
       <div className="category-recipes">
         {categoryRecipes.length > 0 ? (
-            recipes.map(recipe => (
-              <CardCategoria
-                key={recipe.id}
-                title={recipe.nombre}
-                image={recipe.imagenes}
-                description={recipe.descripcion}
-                category={recipe.categorias}
-                id={recipe.id}
-                ingredients={recipe.ingredientes}
-              />
-            ))
-          ) :( 
-            <h1>Aún no hay recetas para esta categoría</h1>
-           
+          recipes.map(recipe => (
+            <CardCategoria
+              key={recipe.id}
+              title={recipe.nombre}
+              image={recipe.imagenes}
+              description={recipe.descripcion}
+              category={recipe.categorias}
+              id={recipe.id}
+              ingredients={recipe.ingredientes}
+            />
+          ))
+        ) : (
+          <h1>Aún no hay recetas para esta categoría</h1>
         )}
       </div>
       <div className="pagination">
