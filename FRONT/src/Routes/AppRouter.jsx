@@ -19,7 +19,7 @@ export const AppRouter = () => {
     { path: 'almuerzo', nombre: 'Almuerzo'},
     { path: 'merienda', nombre: 'Merienda'},
     { path: 'cena', nombre: 'Cena'},
-    { path: 'sdadsa', nombre: 'Sdadsa'},
+    { path: 'colaciones', nombre: 'Colaciones' },
   ]
 
   return (
