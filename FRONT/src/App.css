@@ -438,25 +438,22 @@ footer{
 }
 
 .titulo-recomendados {
- 
-  
   color: var(--colorFuente-Gold);
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100%;
-
   transform: translate(-50%, -50%);
   text-align: center;
   font-size: 13rem;
   font-weight: bold;
   z-index: 1; /* Asegura que el texto esté por encima del fondo pero debajo del grid */
 }
+
 .titulo-uno{
   margin-top: 5%;
- margin-left: 10%;
+  margin-left: 10%;
   text-align: left;
-  
 }
 .titulo-tres{
   margin-left: 10%;
