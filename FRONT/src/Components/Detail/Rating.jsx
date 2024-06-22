@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
+import { rateRecipe } from '../../api/api';
 const Rating = ({ recipeId }) => {
   const [rating, setRating] = useState(0);
 
-  // Cargar la puntuación desde el localStorage al inicio
   useEffect(() => {
     const savedRating = localStorage.getItem(`rating_${recipeId}`);
     if (savedRating !== null) {
@@ -11,14 +11,24 @@ const Rating = ({ recipeId }) => {
     }
   }, [recipeId]);
 
-  const handleRating = (index) => {
+  const handleRating = async (index) => {
     if (index === rating) {
-      // Si se hace clic en la misma estrella, desactivar todas
       setRating(0);
       localStorage.removeItem(`rating_${recipeId}`);
+      await sendRatingToBackend(0);
     } else {
       setRating(index);
       localStorage.setItem(`rating_${recipeId}`, index);
+      await sendRatingToBackend(index);
+    }
+  };
+
+  const sendRatingToBackend = async (rating) => {
+    try {
+      await rateRecipe(recipeId, rating);
+      console.log('Receta calificada');
+    } catch (error) {
+      console.error('Error al calificar la receta:', error);
     }
   };
 
