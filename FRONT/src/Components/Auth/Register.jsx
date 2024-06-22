@@ -51,7 +51,7 @@ export const Register = () => {
     if (validate()) {
       try {
         const response = await axios.post('http://localhost:8080/auth/registro', formData);
-        console.log('Registro exitoso', response.data);
+        // console.log('Registro exitoso', response.data);
 
         toast.success('Registro Exitoso, BON APPETIT', {
           icon: '✔️',
@@ -70,7 +70,7 @@ export const Register = () => {
             correo: formData.correo,
             contraseña: formData.contraseña,
           });
-          console.log('Inicio de sesión exitoso', loginResponse.data);
+          // console.log('Inicio de sesión exitoso', loginResponse.data);
 
           // Guardar token en localStorage
           localStorage.setItem('token', loginResponse.data.token);
@@ -81,7 +81,7 @@ export const Register = () => {
 
           // Navegar al home después de un tiempo
           setTimeout(() => {
-            console.log('Redirigiendo al home...');
+            // console.log('Redirigiendo al home...');
             navigate('/');
           }, 25000); // Ajusta el tiempo según sea necesario (5000ms = 5 segundos)
         } catch (loginError) {
