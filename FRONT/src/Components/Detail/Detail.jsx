@@ -10,11 +10,10 @@ import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
 import Rating from "./Rating";
 
-
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
   const handleSearch = (term) => {
-    console.log('Buscando recetas para:', term); // Aquí puedes implementar la lógica de búsqueda
+    console.log('Buscando recetas para:', term);
   };
 
   const params = useParams();
@@ -147,7 +146,7 @@ export const Detail = () => {
                 categorías={categorías}
                 descripcion={null}
                 ingredientes={ingredientes}
-                instrucciones={null} // Solo mostramos los ingredientes aquí
+                instrucciones={null}
               />
             </div>
             <div className="side-details-container">
@@ -160,12 +159,12 @@ export const Detail = () => {
             <h1>Modo de preparación:</h1>
             <RecipeDetails
               categorías={categorías}
-              descripcion={null} // No mostramos la descripción aquí
-              ingredientes={null} // No mostramos los ingredientes aquí
+              descripcion={null}
+              ingredientes={null}
               instrucciones={instrucciones}
             />
           </div>
-          <Rating/>
+          <Rating recipeId={id}/>
         </div>
         <div className="navigation-buttons">
           <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
