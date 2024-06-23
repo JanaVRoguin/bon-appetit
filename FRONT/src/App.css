@@ -1110,6 +1110,7 @@ footer{
 .rating-container {
   margin-top: 5%;
   display: flex;
+  flex-direction: column;
   gap: 10px;
   justify-content: center;
   align-items: center;
@@ -1127,6 +1128,51 @@ footer{
 
 .rating-container .fa-star.far {
   color: var(--colorFondo-primario); /* Estrella vacía */
+}
+
+.average-rating {
+  font-size: 1.5em;
+  margin: 10px 0;
+}
+
+.high-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2em;
+  color: var(--colorFuente-bordo); 
+}
+
+.laurel-leaves {
+  display: flex;
+  align-items: center;
+}
+
+.laurel-leaves i {
+  margin: 0 5px;
+}
+
+.vertical-line {
+  height: 100px;
+  width: 4px;
+  background-color: var(--colorFondo-primario);
+  margin: 0 10px;
+}
+
+.rating-count {
+  text-align: center;
+}
+.evaluation-cant {
+  font-size: 50px;
+  color:var(--colorFondo-primario);
+  margin-top: 5px;
+}
+.evaluation-label {
+  font-size: 20px;
+  color:var(--colorFondo-primario);
+  margin-top: 1px;
+  margin-left: 15px;
+  font-weight: bold;
 }
 
 
