@@ -14,7 +14,6 @@ export const Register = () => {
     contraseña: '',
   });
   const [errors, setErrors] = useState({});
-  const [hideButtons, setHideButtons] = useState(false);
   const validate = () => {
     const errors = {};
 
