@@ -1,18 +1,25 @@
-import { useContext, useState } from 'react'
-import { CardCategoria, SearchBar } from '../Components'
+import { useContext, useState, useEffect } from 'react';
+import { CardCategoria, SearchBar } from '../Components';
 import { ContextGlobal } from '../Context';
 
 export const Categoria = ({ categoriaNombre }) => {
   const { state } = useContext(ContextGlobal);
   const [currentPage, setCurrentPage] = useState(1);
+  const [categoryRecipes, setCategoryRecipes] = useState([]);
+  const [categoryTitle, setCategoryTitle] = useState('');
+
   const recipesPerPage = 8; // 4 por columna
 
-  // Filtrar las recetas por Categoría
-  const categoryRecipes = state.data.filter(recipe =>
-    recipe.categorias.some( category => category.categorias === categoriaNombre )
-  );
-  // Definir el título de la categoría basado en la primera receta encontrada
-  const categoryTitle = categoryRecipes.length > 0 ? categoryRecipes[0].categorias.find( category => category.categorias === categoriaNombre ).categorias : categoriaNombre;
+  useEffect(() => {
+    const filteredRecipes = state.data.filter(recipe =>
+      recipe.categorias.some(category => category.categorias === categoriaNombre)
+    );
+    setCategoryRecipes(filteredRecipes);
+    const title = filteredRecipes.length > 0 
+      ? filteredRecipes[0].categorias.find(category => category.categorias === categoriaNombre).categorias 
+      : categoriaNombre;
+    setCategoryTitle(title);
+  }, [categoriaNombre, state.data]);
 
   // Calcular el número total de páginas
   const totalPages = Math.ceil(categoryRecipes.length / recipesPerPage);
@@ -72,5 +79,5 @@ export const Categoria = ({ categoriaNombre }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};

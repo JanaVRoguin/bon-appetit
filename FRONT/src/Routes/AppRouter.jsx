@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { routes } from "../utils/routes";
 import { PublicRoute } from "./PublicRoute";
@@ -12,21 +12,9 @@ import Favs from "../Layouts/Favs";
 import Planner from "../Layouts/Planner";
 import { UserRoute } from "./UserRoute";
 import { Categoria } from "../Layouts/Categoria";
-import { fetchCategories } from "../api/api";
-
+import { useContextGlobal } from "../Context";
 export const AppRouter = () => {
-  const [categorias, setCategorias] = useState([]);
-
-  useEffect(() => {
-    const getCategorias = async () => {
-      const categoriasData = await fetchCategories();
-      if (categoriasData) {
-        setCategorias(categoriasData);
-      }
-    };
-
-    getCategorias();
-  }, []);
+  const { categorias } = useContextGlobal();
 
   if (categorias.length === 0) {
     return <div>Loading...</div>; // O cualquier componente de carga que prefieras

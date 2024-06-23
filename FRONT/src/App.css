@@ -418,15 +418,15 @@ footer{
 
 /*ESTILOS SECCION RECOMENDADOS*/
 .recommended-section {
-  
   padding: 5% 10% 4% 10%;
-  background-color: var(--colorFondo-hueso);
-  background-image: url('/Images/Fondo-claro.png'); /* Ruta a tu imagen de fondo */
+  background: linear-gradient(var(--colorFondo-hueso), rgba(255, 255, 255, 0.5)), 
+              url('/Images/Fondo-claro.png'); /* Ruta a tu imagen de fondo */
   background-size: cover;
   background-position: center;
   position: relative;
   color: var(--colorBlanco);
 }
+
 
 .recommended-grid {
   display: grid;
@@ -497,7 +497,7 @@ footer{
   border-radius: 30px; /* Bordes redondeados */
   outline: none; /* Quita el contorno azul al enfocar */
   transition: all 0.3s; /* Transición suave para efectos */
-  color: #f0efef;
+  color:var(--colorFondo-hueso);
 }
 
 .search-bar input:hover,
