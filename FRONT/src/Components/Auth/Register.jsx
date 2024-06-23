@@ -13,6 +13,7 @@ export const Register = () => {
     correo: '',
     contraseña: '',
   });
+  const [hideButtons, setHideButtons] = useState(false);
   const [errors, setErrors] = useState({});
   const validate = () => {
     const errors = {};
