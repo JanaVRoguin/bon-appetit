@@ -36,5 +36,5 @@ public class Receta {
     @Column(nullable = false)
     private Double puntajePromedio = 0.0;
     @Column(nullable = false)
-    private int cantCalificaciones = 0;
+    private Integer cantCalificaciones = 0;
 }
