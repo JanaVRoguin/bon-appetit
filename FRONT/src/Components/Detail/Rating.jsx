@@ -4,6 +4,7 @@ import axios from 'axios';
 const Rating = ({ recipeId }) => {
   const [rating, setRating] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
+  const [cantRating, setCantRating] = useState(0);
 
   useEffect(() => {
     const savedRating = localStorage.getItem(`rating_${recipeId}`);
@@ -12,6 +13,7 @@ const Rating = ({ recipeId }) => {
     }
     if (recipeId) {
       fetchAverageRating();
+      fetchCantRating();
     }
   }, [recipeId]);
 
@@ -22,6 +24,16 @@ const Rating = ({ recipeId }) => {
       })
       .catch(error => {
         console.error('Error fetching average rating:', error);
+      });
+  };
+
+  const fetchCantRating = () => {
+    axios.get(`http://localhost:8080/recetas/${recipeId}/cantCalificaciones`) 
+      .then(response => {
+        setCantRating(response.data); 
+      })
+      .catch(error => {
+        console.error('Error fetching rating count:', error);
       });
   };
 
@@ -44,6 +56,7 @@ const Rating = ({ recipeId }) => {
     })
     .then(() => {
       fetchAverageRating();
+      fetchCantRating();
     })
     .catch(error => {
       console.error('Error submitting rating:', error);
@@ -52,7 +65,8 @@ const Rating = ({ recipeId }) => {
 
   return (
     <div className="rating-container">
-      <div className="average-rating">Average Rating: {averageRating.toFixed(1)}</div>
+      <div className="average-rating">Valoración: {averageRating.toFixed(1)}</div>
+      <div className="rating-count">Valoraciones: {cantRating}</div> 
       {[1, 2, 3, 4, 5].map((index) => (
         <i
           key={index}
