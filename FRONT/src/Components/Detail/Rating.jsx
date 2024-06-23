@@ -11,6 +11,10 @@ const Rating = ({ recipeId }) => {
     if (savedRating !== null) {
       setRating(parseInt(savedRating));
     }
+    const savedCantRating = localStorage.getItem(`cantRating_${recipeId}`);
+    if (savedCantRating !== null) {
+      setCantRating(parseInt(savedCantRating));
+    }
     if (recipeId) {
       fetchAverageRating();
       fetchCantRating();
@@ -44,9 +48,14 @@ const Rating = ({ recipeId }) => {
     } else {
       setRating(index);
       localStorage.setItem(`rating_${recipeId}`, index);
-    }
-    if (recipeId) {
-      submitRating(index);
+
+      const newCantRating = cantRating + 1;
+      setCantRating(newCantRating);
+      localStorage.setItem(`cantRating_${recipeId}`, newCantRating);
+
+      if (recipeId) {
+        submitRating(index);
+      }
     }
   };
 
@@ -65,15 +74,42 @@ const Rating = ({ recipeId }) => {
 
   return (
     <div className="rating-container">
-      <div className="average-rating">Valoración: {averageRating.toFixed(1)}</div>
-      <div className="rating-count">Valoraciones: {cantRating}</div> 
-      {[1, 2, 3, 4, 5].map((index) => (
-        <i
-          key={index}
-          className={`fa-star ${index <= rating ? 'fas' : 'far'}`}
-          onClick={() => handleRating(index)}
-        ></i>
-      ))}
+      {averageRating > 4 ? (
+        <div className="high-rating">
+          <div className="laurel-leaves">
+            <i className="fas fa-medal"></i>
+            <span className="average-rating">{averageRating.toFixed(1)}</span>
+            
+          </div>
+          <div className="vertical-line"></div>
+          <div className="rating-count">
+            <span className='evaluation-cant'>{cantRating}</span>
+            <div className="evaluation-label">evaluaciones</div>
+          </div>
+        </div>
+      ) : (
+        <>
+        <div className="high-rating">
+          <div className="laurel-leaves">
+            <span className="average-rating">{averageRating.toFixed(1)}</span> 
+          </div>
+          <div className="vertical-line"></div>
+          <div className="rating-count">
+            <span className='evaluation-cant'>{cantRating}</span>
+            <div className="evaluation-label">evaluaciones</div>
+          </div>
+        </div>
+        </>
+      )}
+        <div>
+            {[1, 2, 3, 4, 5].map((index) => (
+              <i
+                key={index}
+                className={`fa-star ${index <= rating ? 'fas' : 'far'}`}
+                onClick={() => handleRating(index)}
+              ></i>
+            ))}
+        </div>
     </div>
   );
 };
