@@ -21,5 +21,5 @@ public class RecetaSalidaDto {
     private List<Categoria> categorias;
     private List<Caracteristica> caracteristicas;
     private Double puntajePromedio;
-    private int cantCalificaciones;
+    private Integer cantCalificaciones;
 }

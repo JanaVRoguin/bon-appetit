@@ -46,11 +46,14 @@ public class CalificacionService {
         receta.setPuntajePromedio(puntajePromedio);
         recetaRepository.save(receta);
     }
-
     private void incrementarCantCalificaciones(Long recetaId) {
         Receta receta = recetaRepository.findById(recetaId).orElseThrow(() -> new EntityNotFoundException("Receta no encontrada"));
         receta.setCantCalificaciones(receta.getCantCalificaciones() + 1);
         recetaRepository.save(receta);
+    }
+    public Integer obtenerCantCalificaciones(Long recetaId) {
+        Receta receta = recetaRepository.findById(recetaId).orElseThrow(() -> new EntityNotFoundException("Receta no encontrada"));
+        return receta.getCantCalificaciones();
     }
 }
 
