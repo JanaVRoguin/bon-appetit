@@ -109,7 +109,7 @@ in
   background-color: var(--colorBlanco);
 }
 
-.btn-login:hover {
+.btn-login:hover, .btn-agendar {
   color: var(--colorBlanco);
   background-color: var(--colorFuente-bordo);
 }
@@ -981,7 +981,7 @@ footer{
 
 .side-details-container {
   align-items: center;
-  color: var(--colorFondo-hueso);
+  color: var(--colorBlanco);
   font-size: 28px;
   grid-column: 3 / -1;
   background-color: var(--colorFondo-primario); /* Fondo azul */
@@ -1054,7 +1054,7 @@ footer{
 }
 
 .week-container {
-  margin-top: 5%;
+  margin: 5% 0 5% 0;
   display: flex;
   justify-content: center;
   align-items: center;
