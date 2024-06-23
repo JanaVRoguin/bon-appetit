@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer, useState } from "react";
 import axios from "axios";
 import { reducer } from "./reducer";
 
@@ -14,6 +14,7 @@ const initialState = {
 
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [categorias, setCategorias] = useState([]);
 
   const initializeWeek = () => ({
     Lunes: { Desayuno: null, Almuerzo: null, Merienda: null, Cena: null },
@@ -40,7 +41,7 @@ export const ContextProvider = ({ children }) => {
     };
 
     const translatedDay = daysMap[day];
-    const newPlannedWeeks = { ...state.plannedWeeks};
+    const newPlannedWeeks = { ...state.plannedWeeks };
 
     if (!newPlannedWeeks[week]) newPlannedWeeks[week] = initializeWeek();
     const newPlannedRecipes = { ...newPlannedWeeks[week] };
@@ -49,7 +50,7 @@ export const ContextProvider = ({ children }) => {
     newPlannedWeeks[week] = newPlannedRecipes;
 
     localStorage.setItem("plannedWeeks", JSON.stringify(newPlannedWeeks));
-    dispatch({ type: 'EDIT_WEEK', payload: newPlannedWeeks })
+    dispatch({ type: 'EDIT_WEEK', payload: newPlannedWeeks });
   };
 
   // Petición a la API
@@ -66,8 +67,21 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem('favs', JSON.stringify(state.favs));
   }, [state.favs]);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:8080/categorias/listar");
+        setCategorias(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
-    <ContextGlobal.Provider value={{ state, dispatch, initializeWeek, moveRecipe }}>
+    <ContextGlobal.Provider value={{ state, dispatch, initializeWeek, moveRecipe, categorias }}>
       {children}
     </ContextGlobal.Provider>
   );
