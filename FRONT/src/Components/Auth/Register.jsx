@@ -13,8 +13,8 @@ export const Register = () => {
     correo: '',
     contraseña: '',
   });
+  const [hideButtons, setHideButtons] = useState(false);
   const [errors, setErrors] = useState({});
-
   const validate = () => {
     const errors = {};
 
@@ -39,19 +39,23 @@ export const Register = () => {
     }
 
     setErrors(errors);
+    disabledButtons();
     return Object.keys(errors).length === 0;
   };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
+  const disabledButtons = () => {
+    setHideButtons(!hideButtons);
+  }
+  console.log(hideButtons);
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       try {
         const response = await axios.post('http://localhost:8080/auth/registro', formData);
-        // console.log('Registro exitoso', response.data);
+        console.log('Registro exitoso', response.data);
 
         toast.success('Registro Exitoso, BON APPETIT', {
           icon: '✔️',
@@ -199,8 +203,14 @@ export const Register = () => {
               {errors.contraseña && <p className="error-message">{errors.contraseña}</p>}
             </div>
             <div className="form-buttons">
-              <button type="submit" className="register-button">Registrarse</button>
-              <button type="button" className="cancel-button" onClick={handleCancel}>Cancelar</button>
+              {!hideButtons ?
+                <>
+                  <button type="submit" className="register-button">Registrarse</button>
+                  <button type="button" className="cancel-button" onClick={handleCancel}>Cancelar</button>
+                </> 
+                :
+                  <button type="submit" className="register-button" disabled>Registrando...</button>
+              }
             </div>
           </form>
           
