@@ -9,19 +9,48 @@ import CrearReceta from "../Components/AdminPanel/gestionRecetas/CrearReceta"
 import MyAccount from "../Components/MyAccount"
 import Favs from "../Layouts/Favs"
 import Planner from "../Layouts/Planner";
+import { UserRoute } from "./UserRoute"
+import { Categoria } from "../Layouts/Categoria"
+
 
 export const AppRouter = () => {
+  const categoriasRoutes = [
+    { path: 'desayuno', nombre: 'Desayuno'},
+    { path: 'almuerzo', nombre: 'Almuerzo'},
+    { path: 'merienda', nombre: 'Merienda'},
+    { path: 'cena', nombre: 'Cena'},
+    { path: 'sdadsa', nombre: 'Sdadsa'},
+  ]
+
   return (
     <div className="content"> {/* El contenedor principal para el contenido */}
       <Routes>
         <Route path={routes.home} element={<Home />} />
-        <Route path={routes.desayuno} element={<Desayuno />} />
+
+        {
+          categoriasRoutes.map( (categoria, i) =>
+            <Route key={i} path={categoria.path} element={<Categoria categoriaNombre={categoria.nombre} />} />
+          )
+        }
+
+        {/* <Route path={routes.desayuno} element={<Desayuno />} />
         <Route path={routes.almuerzo} element={<Almuerzo />} />
         <Route path={routes.mediatarde} element={<Mediatarde />} /> 
-        <Route path={routes.cena} element={<Cena />} />
+        <Route path={routes.cena} element={<Cena />} /> */}
+
         <Route path={routes.detail} element={<Detail />} />
-        <Route path={routes.myAccount} element={<MyAccount/>} />
-        <Route path={routes.favs} element={<Favs/>} />
+
+        <Route path={routes.myAccount} element={
+          <UserRoute>
+            <MyAccount/>
+          </UserRoute>
+        } />
+        <Route path={routes.favs} element={
+          <UserRoute>
+            <Favs/>
+          </UserRoute>
+        } />
+
         <Route path={routes.adminPanel} element={
           <PrivateRoute>
             <AdminPanel />

@@ -44,14 +44,16 @@ public class SecurityConfig {
                     http.requestMatchers("/swagger-ui/**").permitAll();
                     http.requestMatchers("/swagger-ui.html").permitAll();
 
-
                     // Config endpoints publicos
+                    http.requestMatchers("/**", "/index.html").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/registro").permitAll();
                     http.requestMatchers(HttpMethod.POST, "/auth/login").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/recetas/listar").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/categorias/listar").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/caracteristicas/listar").permitAll();
                     http.requestMatchers(HttpMethod.GET, "/recetas/{id}").permitAll();
+                    http.requestMatchers(HttpMethod.POST, "/recetas/{recetaId}/calificar").permitAll();
+                    http.requestMatchers(HttpMethod.GET, "/recetas/{recetaId}/puntaje").permitAll();
                     // Config endpoint privados
                     http.requestMatchers(HttpMethod.POST, "/recetas/crear").hasRole("ADMIN");
                     http.requestMatchers(HttpMethod.DELETE, "/recetas/eliminar/{id}").hasRole("ADMIN");
@@ -85,6 +87,7 @@ public class SecurityConfig {
                     // Config endpoint no especificados
                     http.anyRequest().denyAll();
                 })
+                .httpBasic(httpBasic -> httpBasic.disable())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }

@@ -14,8 +14,8 @@
   --colorFondo-secundario: #697185;
   --colorFuente-Gold: #ad793f;
   --colorFuente-bordo: #731627;
-  --colorFondo-hueso: #f5ead0; 
-  --colorBlanco: #fffaff; 
+  --colorFondo-hueso: #f5ead0;
+  --colorBlanco: #fffaff;
   --colorGris-Claro:#D9D9D9;
   --fontGordita: 'Cinzel Decorative', sans-serif;
   --fontMinuscula: 'Della Respira';
@@ -39,7 +39,7 @@ html {
   background-color: var(--colorFondo-primario);
   min-height: 100vh;
   padding-top: 85px ;
-  
+
 }
 /*ESTILOS HEADER*/
 nav {
@@ -109,7 +109,7 @@ in
   background-color: var(--colorBlanco);
 }
 
-.btn-login:hover {
+.btn-login:hover, .btn-agendar {
   color: var(--colorBlanco);
   background-color: var(--colorFuente-bordo);
 }
@@ -134,7 +134,7 @@ footer{
   z-index: 1000;
 }
 .footer-content {
-  
+
   display: flex; /* Usa Flexbox para distribuir elementos */
   justify-self: baseline;/* Alinea el contenido a los lados opuestos */
   align-items: center; /* Alinea verticalmente */
@@ -257,7 +257,7 @@ footer{
   align-items: center;
   /* margin-top: 60px; */
   height: 100%;
-  
+
 }
 
 .card-container {
@@ -267,7 +267,7 @@ footer{
   justify-items: center;
   gap: 10px;
   margin-bottom: 10%;
-  
+
 }
 
 .card {
@@ -423,7 +423,7 @@ footer{
   background-color:var(--colorFondo-hueso);
 }
 .recommended-grid {
-  
+
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cinco columnas */
   gap: 10px; /* Espacio entre tarjetas */
@@ -435,7 +435,7 @@ footer{
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); Distribuir automáticamente las tarjetas en columnas de al menos 250px de ancho
   gap: 20px; Espacio entre tarjetas
   padding: 20px; Espacio interno para la sección
-} 
+}
 */
 
 .titulo-recomendados{
@@ -648,7 +648,7 @@ footer{
 
 }
 .card-categoria-button {
-  
+
   align-self: flex-end;
   margin-top: auto;
   background-color: var(--colorFuente-bordo);
@@ -720,7 +720,7 @@ footer{
 }
 
 .page-number {
-  
+
   color: var(--colorGris-Claro);
   background-color: var(--colorFondo-primario);
   border: 5px solid var(--colorGris-Claro);
@@ -777,8 +777,8 @@ footer{
   border-radius: 10px;
   width: 15%;
   opacity: 0.8;
-  
-  
+
+
 }
 .button-back:hover {
   background-color: var(--colorBlanco); /* Cambia el fondo al color blanco al pasar el cursor */
@@ -787,7 +787,7 @@ footer{
 .fav-container{
   display: flex;
   gap: 2%;
-  
+
 }
 
 .fav-button, .button-share {
@@ -829,19 +829,19 @@ footer{
   opacity: 0.8; /* Reducir la opacidad al pasar el cursor */
 }
 
- 
+
 
 
 .img-1 {
   grid-column: 1 / 3;
   grid-row: 1 / -1;
-  
+
 }
 
 .img-2 {
   grid-column: 3 / 4;
   grid-row: 1 / 2;
-  
+
 }
 
 .img-3 {
@@ -852,13 +852,13 @@ footer{
 .img-4 {
   grid-column: 3 / 4;
   grid-row: 2 / -1;
-  
+
 }
 
 .img-5 {
   grid-column: 4 / 5;
   grid-row: 2 / -1;
-  
+
 }
 
 .ver-mas {
@@ -871,7 +871,7 @@ footer{
   justify-content: center;
   cursor: pointer;
   transition: transform 0.3s ease; /* Transición suave para la transformación */
- 
+
 }
 
 .ver-mas:hover {
@@ -955,7 +955,7 @@ footer{
 
 .side-details-container {
   align-items: center;
-  color: var(--colorFondo-hueso);
+  color: var(--colorBlanco);
   font-size: 28px;
   grid-column: 3 / -1;
   background-color: var(--colorFondo-primario); /* Fondo azul */
@@ -993,7 +993,7 @@ footer{
 
 .nutritional-details {
   text-align: center;
-  
+
 }
 
 .nutritional-details ul {
@@ -1028,7 +1028,7 @@ footer{
 }
 
 .week-container {
-  margin-top: 5%;
+  margin: 5% 0 5% 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1151,11 +1151,11 @@ footer{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;   
+  margin-top: 50px;
   margin-bottom: 50px;
 }
 .register-image-container {
-  
+
   width: 10VH;
   flex: 1;
   display: flex;
@@ -1211,7 +1211,7 @@ input.input-error {
 .form-buttons {
   display: flex;
   justify-content: space-around;
-  
+
 }
 .register-button, .cancel-button {
   padding: 10px;
@@ -1239,7 +1239,7 @@ input.input-error {
   background-color: var(--colorFondo-secundario);
 }
 .Toastify{
-  
+
   display: flex;
   flex-direction: column;
   position: relative;
@@ -1276,7 +1276,7 @@ input.input-error {
   flex: 1;
   margin-right: 20px;
   text-align: center;
-  
+
 }
 
 .login h1 {
@@ -1400,7 +1400,7 @@ input[type="password"] {
 }
 
 .logout-button {
- 
+
   color: rgb(3, 2, 2);
   border: none;
   padding: 5px 10px;
@@ -1512,17 +1512,17 @@ input[type="password"] {
     font-size: 32px;
     background-color: #f5f5f5;
     list-style: none;
-    
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    
+
     position: absolute;
     top: 0;
     z-index: 10;
   }
-  
+
   .mobile-item {
     border-left: 0;
   }
@@ -1787,7 +1787,7 @@ input[type="password"] {
   color: white;
 }
 /*estilos a terminos y condiciones modal*/
-.modal {
+/* .modal {
   margin-top: 4%;
   position: fixed;
   z-index: 1;
@@ -1800,7 +1800,7 @@ input[type="password"] {
   display: flex;
   align-items: center;
   justify-content: center;
-}
+} */
 
 .modal-content {
   background-color: #fefefe;
