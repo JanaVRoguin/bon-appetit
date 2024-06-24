@@ -1,15 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDrag } from "react-dnd";
-import { Card, CardContent, IconButton } from "@mui/material";
+import { Card, CardContent, IconButton, Modal, Box, Button } from "@mui/material";
 import { Delete as DeleteIcon } from "@mui/icons-material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faFire,
-  faDrumstickBite,
-  faBreadSlice,
-  faTint,
-} from "@fortawesome/free-solid-svg-icons";
+import { faFire, faDrumstickBite, faBreadSlice, faTint, faCheck } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import Rating from "../Detail/RatingModal";
 
 const getShortenedName = (name) => {
   if (name.length > 14) {
@@ -33,6 +29,35 @@ const RecipeCard = ({ recipe, onDragStart, onDragEnd, onDelete }) => {
     }),
   });
 
+  const [openRatingModal, setOpenRatingModal] = useState(false);
+  const [openConfirmModal, setOpenConfirmModal] = useState(false);
+  const [checkClicked, setCheckClicked] = useState(false);
+
+  useEffect(() => {
+    const savedRating = localStorage.getItem(`rating_${recipe.id}`);
+    if (savedRating !== null) {
+      setCheckClicked(true);
+    }
+  }, [recipe.id]);
+
+  const handleCheckClick = () => {
+    setCheckClicked(true);
+    setOpenConfirmModal(true);
+  };
+
+  const handleConfirm = () => {
+    setOpenConfirmModal(false);
+    setOpenRatingModal(true);
+  };
+
+  const handleCloseRatingModal = () => {
+    setOpenRatingModal(false);
+  };
+
+  const handleCloseConfirmModal = () => {
+    setOpenConfirmModal(false);
+  };
+
   return (
     <Card
       ref={drag}
@@ -48,61 +73,110 @@ const RecipeCard = ({ recipe, onDragStart, onDragEnd, onDelete }) => {
       }}
     >
       <Link to={`/recipe/${recipe.id}`}>
-      <CardContent
-        style={{
-          flexGrow: 1,
-          display: "flex",
-          alignItems: "center",
-        }}
-      >
-        <div
+        <CardContent
           style={{
+            flexGrow: 1,
             display: "flex",
-            flexDirection: "column",
             alignItems: "center",
-            width: "75px",
           }}
         >
-          <h5 style={{ margin: 0, fontWeight: "600" }}>
-            {getShortenedName(recipe.nombre)}
-          </h5>
-          {recipe.imagenes && recipe.imagenes[0] && (
-            <img
-              src={recipe.imagenes[0].urlImg}
-              alt={recipe.nombre}
-              width="55"
-              style={{ borderRadius: "6px", marginTop: "4px" }}
-            />
-          )}
-        </div>
-        <div className="recipecard-nutri-details">
-          <ul>
-            <li>
-              <FontAwesomeIcon icon={faFire} />
-              <p>100 Kcal</p>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faDrumstickBite} />
-              <p>80%</p>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faBreadSlice} />
-              <p>25%</p>
-            </li>
-            <li>
-              <FontAwesomeIcon icon={faTint} />
-              <p>12%</p>
-            </li>
-          </ul>
-        </div>
-      </CardContent>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              width: "75px",
+            }}
+          >
+            <h5 style={{ margin: 0, fontWeight: "600" }}>
+              {getShortenedName(recipe.nombre)}
+            </h5>
+            {recipe.imagenes && recipe.imagenes[0] && (
+              <img
+                src={recipe.imagenes[0].urlImg}
+                alt={recipe.nombre}
+                width="55"
+                style={{ borderRadius: "6px", marginTop: "4px" }}
+              />
+            )}
+          </div>
+          <div className="recipecard-nutri-details">
+            <ul>
+              <li>
+                <FontAwesomeIcon icon={faFire} />
+                <p>100 Kcal</p>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faDrumstickBite} />
+                <p>80%</p>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faBreadSlice} />
+                <p>25%</p>
+              </li>
+              <li>
+                <FontAwesomeIcon icon={faTint} />
+                <p>12%</p>
+              </li>
+            </ul>
+          </div>
+        </CardContent>
       </Link>
 
-      {onDelete && (
-        <IconButton onClick={onDelete} style={{ padding: "5px" }}>
-          <DeleteIcon />
+      <div>
+        <IconButton onClick={handleCheckClick} style={{ padding: "5px", color: checkClicked ? 'green' : 'inherit' }}>
+          <FontAwesomeIcon icon={faCheck} />
         </IconButton>
-      )}
+        {onDelete && (
+          <IconButton onClick={onDelete} style={{ padding: "5px" }}>
+            <DeleteIcon />
+          </IconButton>
+        )}
+      </div>
+
+      <Modal open={openConfirmModal} onClose={handleCloseConfirmModal}>
+        <Box
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 300,
+            height: 500,
+            backgroundColor: "white",
+            borderRadius: "8px",
+            boxShadow: 24,
+            padding: "16px",
+            textAlign: "center",
+          }}
+        >
+          <h2>¿Deseas calificar esta receta?</h2>
+          <Button variant="contained" color="primary" onClick={handleConfirm} style={{ marginRight: "8px" }}>
+            Sí
+          </Button>
+          <Button variant="contained" onClick={handleCloseConfirmModal}>
+            No
+          </Button>
+        </Box>
+      </Modal>
+
+      <Modal open={openRatingModal} onClose={handleCloseRatingModal}>
+        <Box
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 400,
+            backgroundColor: "white",
+            borderRadius: "8px",
+            boxShadow: 24,
+            padding: "16px",
+          }}
+        >
+          <Rating recipeId={recipe.id} recipeName={recipe.nombre} onClose={handleCloseRatingModal} />
+        </Box>
+      </Modal>
     </Card>
   );
 };

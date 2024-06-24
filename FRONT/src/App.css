@@ -1918,3 +1918,54 @@ input[type="password"] {
   text-decoration: none;
 }
 
+.modal-rait{
+  height: 400px;
+}
+
+.rating-container-modal {
+  margin-top: 5%;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem; /* Ajusta el tamaño de las estrellas según sea necesario */
+}
+
+
+.buttons-modal-rait{
+  width: 100%;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 30px;
+}
+
+.btn-modal-rait {
+  border: 1px solid var(--colorFuente-bordo);
+  color: var(--colorBlanco);
+  background-color: var(--colorFuente-bordo); 
+  height: 32px;
+  width: 60px;
+  border-radius: 5px;
+}
+
+.btn-modal-rait:hover, .btn-agendar {
+
+  color: var(--colorFuente-bordo);
+  background-color: var(--colorBlanco);
+}
+
+.rating-container .fa-star {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.rating-container-modal .fa-star.fas {
+  color: var(--colorFuente-bordo); /* Estrella llena */
+}
+
+.rating-container-modal .fa-star.far {
+  color: var(--colorFondo-primario); /* Estrella vacía */
+}
+
