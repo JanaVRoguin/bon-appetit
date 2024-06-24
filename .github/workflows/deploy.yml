@@ -82,7 +82,7 @@ jobs:
     # Replace API endpoint in config.js
     - name: Replace API endpoint in config.js
       run: |
-        sed -i 's|http://localhost:8080/|http://'"$AWS_EC2_HOST"':8080/|g' FRONT/src/utils/config.js
+        sed -i 's|import.meta.env.VITE_API_URL/|http://'"$AWS_EC2_HOST"':8080/|g' FRONT/src/utils/config.js
 
     - name: Install dependencies
       run: cd FRONT && npm install
