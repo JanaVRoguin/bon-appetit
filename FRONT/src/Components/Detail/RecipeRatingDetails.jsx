@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { bonappetitApi } from '../../api/axiosConfig';
 
 const RecipeRatingDetails = ({ recipeId }) => {
   const [averageRating, setAverageRating] = useState(0);
@@ -13,7 +14,7 @@ const RecipeRatingDetails = ({ recipeId }) => {
   }, [recipeId]);
 
   const fetchAverageRating = () => {
-    axios.get(`http://localhost:8080/recetas/${recipeId}/puntaje`)
+    bonappetitApi.get(`/recetas/${recipeId}/puntaje`)
       .then(response => {
         setAverageRating(response.data);
       })
@@ -23,7 +24,7 @@ const RecipeRatingDetails = ({ recipeId }) => {
   };
 
   const fetchCantRating = () => {
-    axios.get(`http://localhost:8080/recetas/${recipeId}/cantCalificaciones`)
+    bonappetitApi.get(`/recetas/${recipeId}/cantCalificaciones`)
       .then(response => {
         setCantRating(response.data);
       })

@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useContextGlobal } from "../../Context";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import dayjs from "dayjs";
+import { useNavigate } from "react-router-dom";
 
 const RecipeCalendar = () => {
 
@@ -41,20 +44,30 @@ const RecipeCalendar = () => {
     setWeek(newWeek)
   }
 
+  const navigate = useNavigate();
+
   const handleSave = () =>{
     if(window.confirm('¿Desea guardar esta receta en el calendario?')){
       dates.map( (day, i) => {
         if( week[i].selected ) moveRecipe(day, recipeSelected.categorias[0].categorias, recipeSelected)
-
         const dia = Object.values(plannedWeeks[currentWeekStr])[i]
         const recetaAgendada = Object.values(dia).some( savedRecipe => savedRecipe?.id === recipeSelected.id )
         if( !week[i].selected && recetaAgendada) moveRecipe(day, recipeSelected.categorias[0].categorias, null)
       })
+
+      toast.success(
+        <div>
+          <p>Se guardó exitosamente la receta en el calendario semanal</p>
+          <br />
+          <button onClick={() => navigate(`/planificador`)}>Ir al calendario</button>
+        </div>
+      );
     }
   }
 
   return (
     <div className="calendar">
+      <ToastContainer/>
       <h4>¿QUIERES AGENDARLO?</h4>
       <div className="week-container">
         {week.map((diaSemana, i) => (

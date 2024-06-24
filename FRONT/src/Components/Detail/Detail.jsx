@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import RecipeDetails from "./RecipeDetails";
 import NutritionalDetails from "./NutritionalDetails";
 import RecipeCalendar from "./RecipeCalendar";
@@ -9,16 +8,13 @@ import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
 import RecipeRatingDetails from "./RecipeRatingDetails";
+import { bonappetitApi } from "../../api/axiosConfig";
 
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
-  const handleSearch = (term) => {
-    console.log('Buscando recetas para:', term);
-  };
 
   const params = useParams();
   const navigate = useNavigate();
-  const url = `http://localhost:8080/recetas/${params.id}`;
   const { dispatch, state } = useContext(ContextGlobal);
   const { favs, recipeSelected } = state;
   const { nombre, imagenes, categorías, caracteristicas, descripcion, ingredientes, instrucciones, id } = recipeSelected;
@@ -28,7 +24,11 @@ export const Detail = () => {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   useEffect(() => {
-    axios(url)
+    bonappetitApi.get(`/recetas/${params.id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then((response) => {
         dispatch({ type: 'GET_SELECTED', payload: response.data });
       })
@@ -40,7 +40,7 @@ export const Detail = () => {
         }
       });
 
-    axios.get('http://localhost:8080/recetas/listar', {
+    bonappetitApi.get('/recetas/listar', {
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -111,7 +111,7 @@ export const Detail = () => {
   return (
     <>
       <div className="detail">
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar />
         <div className="name-container">
           <h1>{nombre}</h1>
           <button className="button-back" onClick={() => navigate(-1)}>
@@ -151,8 +151,13 @@ export const Detail = () => {
             </div>
             <div className="side-details-container">
               <NutritionalDetails caracteristicas={caracteristicas}/>
-              <div className="separator"></div>
-              <RecipeCalendar recipeId={state.recipeSelected} />
+              {
+                logged && 
+                  <>
+                    <div className="separator"></div>
+                    <RecipeCalendar recipeId={state.recipeSelected} />
+                  </>
+              }
             </div>
           </div>
           <div className="instructions-container">

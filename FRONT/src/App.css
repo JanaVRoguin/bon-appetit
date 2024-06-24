@@ -900,9 +900,9 @@ footer{
 
 }
 
-.ver-mas:hover {
-  transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
-}
+/* .ver-mas:hover {
+  transform: scale(1.1);
+} */
 
 .carousel-overlay {
   position: fixed;

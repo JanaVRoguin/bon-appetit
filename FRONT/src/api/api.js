@@ -6,7 +6,7 @@ const token = JSON.parse( localStorage.getItem('token') );
 // Listar recetas
 export const fetchRecipes = async () => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/listar`,
+    const response = await fetch(`${BASE_URL}/recetas/listar`,
     { headers: {
       'Content-Type': 'application/json'
     }
@@ -27,7 +27,7 @@ export const fetchRecipes = async () => {
 // Función para crear una nueva receta
 export const createRecipe = async (receta) => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/crear`, {
+    const response = await fetch(`${BASE_URL}/recetas/crear`, {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -54,7 +54,7 @@ export const createRecipe = async (receta) => {
 // Eliminar receta
 export const deleteRecipe = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/eliminar/${id}`, {
+    const response = await fetch(`${BASE_URL}/recetas/eliminar/${id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -76,7 +76,7 @@ export const deleteRecipe = async (id) => {
 // Actualizar receta
 export const updateRecipe = async (recipeId, updatedData) => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/actualizar/${recipeId}`, {
+    const response = await fetch(`${BASE_URL}/recetas/actualizar/${recipeId}`, {
       method: "PUT",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -99,7 +99,7 @@ export const updateRecipe = async (recipeId, updatedData) => {
 // CRUD USUARIOS
 export const fetchUsers = async () => {
   try {
-    const response = await fetch(`${BASE_URL}usuarios/listar`, {
+    const response = await fetch(`${BASE_URL}/usuarios/listar`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -117,7 +117,7 @@ export const fetchUsers = async () => {
 
 export const deleteUser = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}usuarios/eliminar/${id}`, {
+    const response = await fetch(`${BASE_URL}/usuarios/eliminar/${id}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -135,7 +135,7 @@ export const deleteUser = async (id) => {
 
 export const grantAdminRole = async (userId) => {
   try {
-    const response = await fetch(`${BASE_URL}admin/rolAdmin/${userId}`, {
+    const response = await fetch(`${BASE_URL}/admin/rolAdmin/${userId}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -153,7 +153,7 @@ export const grantAdminRole = async (userId) => {
 
 export const revokeAdminRole = async (userId) => {
   try {
-    const response = await fetch(`${BASE_URL}admin/revokeRole/${userId}`, {
+    const response = await fetch(`${BASE_URL}/admin/revokeRole/${userId}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -177,7 +177,7 @@ export const revokeAdminRole = async (userId) => {
 // Listar categorias
 export const fetchCategories = async () => {
   try {
-    const response = await fetch(`${BASE_URL}categorias/listar`,
+    const response = await fetch(`${BASE_URL}/categorias/listar`,
     { headers: {
       'Content-Type': 'application/json'
     }
@@ -199,7 +199,7 @@ export const fetchCategories = async () => {
 // Crear una nueva categoría
 export const createCategory = async (newCategory) => {
   try {
-    const response = await fetch(`${BASE_URL}categorias/crear`, {
+    const response = await fetch(`${BASE_URL}/categorias/crear`, {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -221,7 +221,7 @@ export const createCategory = async (newCategory) => {
 export const updateCategory = async (category) => {
   try {
     console.log(category)
-    const response = await fetch(`${BASE_URL}categorias/actualizar`, {
+    const response = await fetch(`${BASE_URL}/categorias/actualizar`, {
       method: "PUT",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -242,7 +242,7 @@ export const updateCategory = async (category) => {
 // Eliminar una categoría
 export const deleteCategory = async (categoryId) => {
   try {
-    const response = await fetch(`${BASE_URL}categorias/eliminar/${categoryId}`, {
+    const response = await fetch(`${BASE_URL}/categorias/eliminar/${categoryId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -262,7 +262,7 @@ export const deleteCategory = async (categoryId) => {
 // Buscar categoría por ID
 export const getCategoryById = async (categoryId) => {
   try {
-    const response = await fetch(`${BASE_URL}categorias/${categoryId}`, {
+    const response = await fetch(`${BASE_URL}/categorias/${categoryId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
@@ -286,7 +286,7 @@ export const getCategoryById = async (categoryId) => {
 // Listar caracteristicas
 export const fetchCaracteristicas = async () => {
   try {
-    const response = await fetch(`${BASE_URL}caracteristicas/listar`,
+    const response = await fetch(`${BASE_URL}/caracteristicas/listar`,
     { headers: {
       'Content-Type': 'application/json'
     }
@@ -308,7 +308,7 @@ export const fetchCaracteristicas = async () => {
 // Crear una nueva característica
 export const createCaracteristica = async (newCaracteristica) => {
   try {
-    const response = await fetch(`${BASE_URL}caracteristicas/crear`, {
+    const response = await fetch(`${BASE_URL}/caracteristicas/crear`, {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -329,7 +329,7 @@ export const createCaracteristica = async (newCaracteristica) => {
 // Actualizar una característica
 export const updateCaracteristica = async (caracteristica) => {
   try {
-    const response = await fetch(`${BASE_URL}caracteristicas/actualizar`, {
+    const response = await fetch(`${BASE_URL}/caracteristicas/actualizar`, {
       method: "PUT",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -350,7 +350,7 @@ export const updateCaracteristica = async (caracteristica) => {
 // Eliminar una característica
 export const deleteCaracteristica = async (caracteristicaId) => {
   try {
-    const response = await fetch(`${BASE_URL}caracteristicas/eliminar/${caracteristicaId}`, {
+    const response = await fetch(`${BASE_URL}/caracteristicas/eliminar/${caracteristicaId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -370,7 +370,7 @@ export const deleteCaracteristica = async (caracteristicaId) => {
 // Buscar característica por ID
 export const getCaracteristicaById = async (caracterisitcaId) => {
   try {
-    const response = await fetch(`${BASE_URL}caracteristicas/${caracterisitcaId}`, {
+    const response = await fetch(`${BASE_URL}/caracteristicas/${caracterisitcaId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
