@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import RecipeDetails from "./RecipeDetails";
 import NutritionalDetails from "./NutritionalDetails";
 import RecipeCalendar from "./RecipeCalendar";
@@ -13,9 +12,6 @@ import { bonappetitApi } from "../../api/axiosConfig";
 
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
-  const handleSearch = (term) => {
-    console.log('Buscando recetas para:', term);
-  };
 
   const params = useParams();
   const navigate = useNavigate();
@@ -115,7 +111,7 @@ export const Detail = () => {
   return (
     <>
       <div className="detail">
-        <SearchBar onSearch={handleSearch} />
+        <SearchBar />
         <div className="name-container">
           <h1>{nombre}</h1>
           <button className="button-back" onClick={() => navigate(-1)}>
@@ -155,8 +151,13 @@ export const Detail = () => {
             </div>
             <div className="side-details-container">
               <NutritionalDetails caracteristicas={caracteristicas}/>
-              <div className="separator"></div>
-              <RecipeCalendar recipeId={state.recipeSelected} />
+              {
+                logged && 
+                  <>
+                    <div className="separator"></div>
+                    <RecipeCalendar recipeId={state.recipeSelected} />
+                  </>
+              }
             </div>
           </div>
           <div className="instructions-container">
