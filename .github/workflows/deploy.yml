@@ -84,6 +84,11 @@ jobs:
       run: |
         sed -i 's|import.meta.env.VITE_API_URL/|http://'"$AWS_EC2_HOST"':8080/|g' FRONT/src/utils/config.js
 
+
+    # Show the content of config.js
+    - name: Show config.js content
+      run: cat FRONT/src/utils/config.js
+
     - name: Install dependencies
       run: cd FRONT && npm install
 
