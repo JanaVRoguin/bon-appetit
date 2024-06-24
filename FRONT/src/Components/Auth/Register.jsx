@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../../Context';
 import { ToastContainer, toast } from 'react-toastify';
+import { bonappetitApi } from '../../api/axiosConfig';
 
 export const Register = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export const Register = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post('http://localhost:8080/auth/registro', formData);
+        const response = await bonappetitApi.post('/auth/registro', formData);
         console.log('Registro exitoso', response.data);
 
         toast.success('Registro Exitoso, BON APPETIT', {
@@ -70,7 +70,7 @@ export const Register = () => {
 
         // Intentar iniciar sesión después del registro
         try {
-          const loginResponse = await axios.post('http://localhost:8080/auth/login', {
+          const loginResponse = await bonappetitApi.post('/auth/login', {
             correo: formData.correo,
             contraseña: formData.contraseña,
           });

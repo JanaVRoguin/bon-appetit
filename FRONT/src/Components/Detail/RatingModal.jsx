@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { bonappetitApi } from '../../api/axiosConfig';
 
-const RatingModal = ({ recipeId, recipeName, onClose }) => {
+const RatingModal = ({ recipeId, recipeName, onClose, setCheckClicked }) => {
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
@@ -13,10 +14,11 @@ const RatingModal = ({ recipeId, recipeName, onClose }) => {
   };
 
   const submitRating = () => {
-    axios.post(`http://localhost:8080/recetas/${recipeId}/calificar`, null, {
+    bonappetitApi.post(`/recetas/${recipeId}/calificar`, null, {
       params: { puntaje: rating }
     })
     .then(() => {
+      setCheckClicked(true)
       onClose(); // Close the modal after submitting the rating
     })
     .catch(error => {
@@ -39,7 +41,6 @@ const RatingModal = ({ recipeId, recipeName, onClose }) => {
         </div>
           <div className='buttons-modal-rait'>
             <button className='btn-modal-rait' onClick={submitRating}>Aceptar</button>
-            
           </div>
       </div>
     </div>

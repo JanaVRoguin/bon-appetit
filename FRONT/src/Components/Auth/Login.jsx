@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
 import { AuthContext } from '../../Context';
 import { routes } from '../../utils/routes'
+import { bonappetitApi } from '../../api/axiosConfig';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -33,7 +33,7 @@ export const Login = () => {
     e.preventDefault();
     if (validate()) {
       try {
-        const response = await axios.post('http://localhost:8080/auth/login', formData);
+        const response = await bonappetitApi.post('/auth/login', formData);
         localStorage.setItem('email', JSON.stringify(formData.correo));
         login(response.data); 
       } catch (error) {

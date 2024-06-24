@@ -9,6 +9,7 @@ import { ImagesContainer } from "./ImagesContainer";
 import { SearchBar } from "../SearchBar";
 import { AuthContext } from '../../Context';
 import RecipeRatingDetails from "./RecipeRatingDetails";
+import { bonappetitApi } from "../../api/axiosConfig";
 
 export const Detail = () => {
   const { authState: { logged } } = useContext(AuthContext);
@@ -18,7 +19,6 @@ export const Detail = () => {
 
   const params = useParams();
   const navigate = useNavigate();
-  const url = `http://localhost:8080/recetas/${params.id}`;
   const { dispatch, state } = useContext(ContextGlobal);
   const { favs, recipeSelected } = state;
   const { nombre, imagenes, categorías, caracteristicas, descripcion, ingredientes, instrucciones, id } = recipeSelected;
@@ -28,7 +28,11 @@ export const Detail = () => {
   const [currentIndex, setCurrentIndex] = useState(-1);
 
   useEffect(() => {
-    axios(url)
+    bonappetitApi.get(`/recetas/${params.id}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then((response) => {
         dispatch({ type: 'GET_SELECTED', payload: response.data });
       })
@@ -40,7 +44,7 @@ export const Detail = () => {
         }
       });
 
-    axios.get('http://localhost:8080/recetas/listar', {
+    bonappetitApi.get('/recetas/listar', {
       headers: {
         'Authorization': `Bearer ${token}`
       }

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer, useState } from "react";
-import axios from "axios";
 import { reducer } from "./reducer";
 import { fetchCategories, fetchRecipes } from "../../api/api";
+import dayjs from "dayjs";
 
 export const ContextGlobal = createContext();
 
@@ -16,7 +16,6 @@ const initialState = {
 
 export const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  // const [categorias, setCategorias] = useState([]);
 
   const initializeWeek = () => ({
     Lunes: { Desayuno: null, Almuerzo: null, Merienda: null, Cena: null },
@@ -54,6 +53,16 @@ export const ContextProvider = ({ children }) => {
     localStorage.setItem("plannedWeeks", JSON.stringify(newPlannedWeeks));
     dispatch({ type: 'EDIT_WEEK', payload: newPlannedWeeks });
   };
+
+  useEffect(()=>{
+    const currentWeek = dayjs().startOf("isoWeek")
+    const currentWeekStr = currentWeek.format("YYYY-MM-DD");
+    const newPlannedWeeks = { ...state.plannedWeeks };
+
+    if (!newPlannedWeeks[currentWeekStr]) newPlannedWeeks[currentWeekStr] = initializeWeek();
+    localStorage.setItem("plannedWeeks", JSON.stringify(newPlannedWeeks));
+    dispatch({ type: 'EDIT_WEEK', payload: newPlannedWeeks });
+  }, [])
 
   useEffect(() => {
     fetchRecipes().then(res => dispatch({ type: 'GET_RECIPES', payload: res }))
