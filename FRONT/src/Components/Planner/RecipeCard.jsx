@@ -41,7 +41,7 @@ const RecipeCard = ({ recipe, onDragStart, onDragEnd, onDelete }) => {
   }, [recipe.id]);
 
   const handleCheckClick = () => {
-    setCheckClicked(true);
+    // setCheckClicked(true);
     setOpenConfirmModal(true);
   };
 
@@ -174,7 +174,7 @@ const RecipeCard = ({ recipe, onDragStart, onDragEnd, onDelete }) => {
             padding: "16px",
           }}
         >
-          <Rating recipeId={recipe.id} recipeName={recipe.nombre} onClose={handleCloseRatingModal} />
+          <Rating recipeId={recipe.id} recipeName={recipe.nombre} onClose={handleCloseRatingModal} setCheckClicked={setCheckClicked}/>
         </Box>
       </Modal>
     </Card>

@@ -8,6 +8,7 @@ import {
 import CrearCategoria from "./CrearCategoria";
 import EditarCategoria from "./EditarCategoria";
 import "./ListarCategorias.css";
+import { useContextGlobal } from "../../../Context/Recetas/global.context";
 
 const ListarCategorias = () => {
   const [categorias, setCategorias] = useState([]);
@@ -16,6 +17,7 @@ const ListarCategorias = () => {
   const [selectedCategoryId, setSelectedCategoryId] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("desc");
+  const { dispatch } = useContextGlobal()
 
   useEffect(() => {
     getCategorias();
@@ -44,6 +46,7 @@ const ListarCategorias = () => {
         const success = await deleteCategory(id);
         if (success) {
           getCategorias();
+          dispatch({ type: 'REMOVE_CATEGORY', payload: id });
         } else {
           alert("Error al eliminar la categoría.");
         }

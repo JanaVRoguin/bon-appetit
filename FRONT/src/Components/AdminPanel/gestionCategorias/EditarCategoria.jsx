@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getCategoryById, updateCategory } from "../../../api/api";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { firebaseDB } from "../../../api/firebase";
+import { useContextGlobal } from "../../../Context/Recetas/global.context";
 
 const EditarCategoria = ({
   closeModal,
@@ -12,6 +13,7 @@ const EditarCategoria = ({
   const [descripcion, setDescripcion] = useState("");
   const [imagen, setImagen] = useState("");
   const [validationError, setValidationError] = useState("");
+
   const [data, setData] = useState({
     id: '',
     categorias: '',
@@ -19,25 +21,20 @@ const EditarCategoria = ({
     urlImg: '',
   });
 
-  useEffect(() => {
-    getCategoria();
-  }, [id]);
+  const {state:{ categories }, dispatch} = useContextGlobal()
+  const categoria = categories.filter( category => category.id === id )
 
-  const getCategoria = async () => {
-    try {
-      const data = await getCategoryById(id);
-      if (data) {
-        setNombre(data.categorias);
-        setDescripcion(data.descripcion)
-        setImagen(data.imagen)
-        setData(data);
-      } else {
-        alert("Error al cargar la categoría.");
-      }
-    } catch (error) {
-      alert("Error al conectar con el servidor para cargar la categoría.");
-    }
-  };
+  useEffect(() => {
+    setCategoria(categoria)
+  }, []);
+
+  const setCategoria = (category) => {
+    const [{ categorias, descripcion, urlImg }] = category
+    setNombre(categorias);
+    setDescripcion(descripcion)
+    setImagen(urlImg)
+    setData(category[0]);
+  }
 
   useEffect(() => {
     setData(prevData => ({
@@ -80,10 +77,12 @@ const EditarCategoria = ({
     try {
       await uploadBytes(storageRef, imagen)
       const url = await getDownloadURL(storageRef)
-      const success = await updateCategory({ id: data.id, categorias: data.categorias, descripcion: data.descripcion, urlImg: url });
+      const img = imagen.name ? url : data.urlImg
+      const success = await updateCategory({ id: data.id, categorias: data.categorias, descripcion: data.descripcion, urlImg: img });
       if (success) {
         alert("Categoría actualizada exitosamente.");
         closeModal();
+        dispatch({ type: 'EDIT_CATEGORY', payload: { id: data.id, categorias: data.categorias, descripcion: data.descripcion, urlImg: img } });
         fetchCategoriesParent(); // Actualizar la lista de categorías
       } else {
         alert("No se pudo actualizar la categoría.");

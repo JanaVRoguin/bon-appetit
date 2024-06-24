@@ -13,10 +13,11 @@ import Planner from "../Layouts/Planner";
 import { UserRoute } from "./UserRoute";
 import { Categoria } from "../Layouts/Categoria";
 import { useContextGlobal } from "../Context";
-export const AppRouter = () => {
-  const { categorias } = useContextGlobal();
 
-  if (categorias.length === 0) {
+export const AppRouter = () => {
+  const { state: { categories } } = useContextGlobal();
+
+  if (categories.length === 0) {
     return <div>Loading...</div>; // O cualquier componente de carga que prefieras
   }
 
@@ -25,7 +26,7 @@ export const AppRouter = () => {
       <Routes>
         <Route path={routes.home} element={<Home />} />
 
-        {categorias.map((categoria, i) => (
+        {categories.map((categoria, i) => (
           <Route key={i} path={`/${categoria.categorias.toLowerCase()}`} element={<Categoria categoriaNombre={categoria.categorias} />} />
         ))}
 

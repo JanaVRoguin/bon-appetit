@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { fetchCategories, createCategory } from "../../../api/api";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { firebaseDB } from "../../../api/firebase";
+import { useContextGlobal } from "../../../Context/Recetas/global.context";
 
 const CrearCategoria = ({
   closeModal,
@@ -12,6 +13,7 @@ const CrearCategoria = ({
   const [descripcion, setDescripcion] = useState("");
   const [imagen, setImagen] = useState("");
   const [validationError, setValidationError] = useState("");
+  const { dispatch } = useContextGlobal()
 
   useEffect(() => {
     const getCategorias = async () => {
@@ -65,6 +67,7 @@ const CrearCategoria = ({
       if (success) {
         alert("Categoría creada exitosamente.");
         closeModal();
+        dispatch({ type: 'ADD_CATEGORY', payload: { categorias: nombre, descripcion: descripcion, urlImg: url } });
         fetchCategoriesParent(); // Actualizar la lista de categorías
       } else {
         alert("No se pudo crear la categoría.");
