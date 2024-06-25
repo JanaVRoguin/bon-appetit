@@ -180,7 +180,8 @@
 .listar-recetas-delete-btn {
   background-color: #dc3545;
   color: white;
-  margin-left: 10px;
+  margin-top: 10px;
+
 }
 
 .listar-recetas-delete-btn:hover {
