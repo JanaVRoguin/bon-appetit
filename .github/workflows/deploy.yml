@@ -97,6 +97,6 @@ jobs:
         aws-region: ${{ secrets.AWS_REGION }}
         audience: sts.amazonaws.com
 
-    # Sync Frontend to S3
+    # Sync Frontend to S3s
     - name: Sync Frontend to S3
       run: aws s3 sync FRONT/dist/ s3://${{ secrets.AWS_BUCKET_NAME }}/
