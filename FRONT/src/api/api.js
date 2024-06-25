@@ -392,7 +392,7 @@ export const getCaracteristicaById = async (caracterisitcaId) => {
 // Calificar receta
 export const rateRecipe = async (recipeId, puntaje) => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/${recipeId}/calificar`, {
+    const response = await fetch(`${BASE_URL}/recetas/${recipeId}/calificar`, {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -414,7 +414,7 @@ export const rateRecipe = async (recipeId, puntaje) => {
 // Obtener puntaje promedio
 export const getAverageRating = async (recipeId) => {
   try {
-    const response = await fetch(`${BASE_URL}recetas/${recipeId}/puntaje`, {
+    const response = await fetch(`${BASE_URL}/recetas/${recipeId}/puntaje`, {
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
