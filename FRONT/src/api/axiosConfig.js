@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export const bonappetitApi = axios.create({
-  baseURL: import.meta.env.VITE_API_URL
-})
+  baseURL: "http://3.89.55.242:8080",
+});
