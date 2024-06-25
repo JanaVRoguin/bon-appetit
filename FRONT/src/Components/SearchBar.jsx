@@ -2,8 +2,9 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { SearchContext } from '../Context/SearchContext';
 import { ContextGlobal } from '../Context';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
-export const SearchBar = () => {
+export const SearchBar = ({recipeId}) => {
   const { state } = useContext(ContextGlobal);
   const { searchTerm, setSearchTerm, setFilteredRecipes } = useContext(SearchContext);
   const [suggestions, setSuggestions] = useState([]);
@@ -26,15 +27,34 @@ export const SearchBar = () => {
     }
   };
 
-  const handleSearch = (term) => {
+  const handleSearch = async (term) => {
     const results = state.data.filter(recipe =>
       recipe.nombre.toLowerCase().includes(term.toLowerCase()) ||
       recipe.descripcion.toLowerCase().includes(term.toLowerCase()) ||
       recipe.ingredientes.toLowerCase().includes(term.toLowerCase())
     );
-    setSuggestions(results.slice(0, 5));
-  };
 
+    const recipesWithRatings = await Promise.all(results.slice(0, 5).map(async (recipe) => {
+      try {
+        const ratingResponse = await axios.get(`/recetas/${recipe.id}/puntaje`);
+        return {
+          ...recipe,
+          averageRating: parseFloat(ratingResponse.data),
+          
+        };
+      } catch (error) {
+        console.error('Error fetching rating:', error);
+        return {
+          ...recipe,
+          averageRating: null,
+        };
+      }
+    }));
+    
+    setSuggestions(recipesWithRatings);
+    
+  };
+  
   const handleSuggestionClick = (recipe) => {
     setSearchTerm(recipe.nombre);
     setSelectedSuggestion(recipe.id);
@@ -59,7 +79,7 @@ export const SearchBar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
+console.log(suggestions);
   return (
     <div className="search-bar">
       <div className="search-bar-container">
@@ -73,7 +93,6 @@ export const SearchBar = () => {
           <div className="suggestions" ref={suggestionsRef}>
             {suggestions.map((suggestion, index) => {
               const imageUrl = suggestion.imagenes?.length > 0 ? suggestion.imagenes[0].urlImg : '';
-              // console.log("Image URL:", imageUrl); // Para verificar la URL de la imagen
               return (
                 <div
                   key={index}
@@ -86,7 +105,13 @@ export const SearchBar = () => {
                     className="suggestion-image" 
                     onError={(e) => { e.target.onerror = null; e.target.src = 'fallback-image-url'; }} // Reemplaza 'fallback-image-url' con una URL de imagen alternativa si la imagen no se carga
                   />
-                  {suggestion.nombre}
+                  <div className="suggestion-info">
+                    <span>{suggestion.nombre}</span>
+                    <div className="suggestion-rating">
+                      <i className="fas fa-star "></i>
+                      <span>{suggestion.puntajePromedio !== null ? suggestion.puntajePromedio.toFixed(1) : 'N/A'}</span>
+                    </div>
+                  </div>
                 </div>
               );
             })}
