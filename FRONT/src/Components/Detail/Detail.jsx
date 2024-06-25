@@ -169,7 +169,7 @@ export const Detail = () => {
               instrucciones={instrucciones}
             />
           </div>
-          <RecipeRatingDetails recipeId={id}/>
+          <RecipeRatingDetails recipe={recipeSelected}/>
         </div>
         <div className="navigation-buttons">
           <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
