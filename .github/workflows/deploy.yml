@@ -79,24 +79,14 @@ jobs:
       with:
         node-version: '20'
 
-    # Replace API endpoint in config.js and show changes
-    - name: Replace and show API endpoint in config.js
-      run: |
-        sed -i 's|import.meta.env.VITE_API_URL|"http://'"$AWS_EC2_HOST"':8080"|g' FRONT/src/utils/config.js
-        echo "Updated config.js:"
-        cat FRONT/src/utils/config.js
 
-    # Replace API endpoint in axiosConfig.js and show changes
-    - name: Replace and show API endpoint in axiosConfig.js
-      run: |
-        sed -i 's|import.meta.env.VITE_API_URL|"http://'"$AWS_EC2_HOST"':8080"|g' FRONT/src/api/axiosConfig.js
-        echo "Updated axiosconfig.js:"
-        cat FRONT/src/api/axiosConfig.js
 
     - name: Install dependencies
       run: cd FRONT && npm install
 
     - name: Build Frontend
+      env:
+        VITE_API_URL: ${{ secrets.VITE_API_URL }}
       run: cd FRONT && npm run build
 
     # Configure AWS credentials
