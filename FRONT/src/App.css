@@ -810,11 +810,7 @@ footer{
   background-color: var(--colorBlanco); /* Cambia el fondo al color blanco al pasar el cursor */
   color: var(--colorFuente-bordo); /* Cambia el texto al color original */
 }
-.fav-container{
-  display: flex;
-  gap: 2%;
 
-}
 
 .fav-button, .button-share {
   display: flex;
@@ -822,7 +818,7 @@ footer{
   background: none;
   border: none;
   color: var(--colorFuente-bordo);
-  font-size: 3rem; /* Tamaño del icono */
+  font-size: 4rem; /* Tamaño del icono */
   cursor: pointer;
   margin-left: 1rem; /* Espacio entre el icono y el nombre */
   transition: transform 0.3s ease; /* Transición suave */
@@ -1113,8 +1109,32 @@ footer{
   flex-direction: column;
   gap: 10px;
   justify-content: center;
-  align-items: center;
+  align-items:first baseline;
   font-size: 2rem; /* Ajusta el tamaño de las estrellas según sea necesario */
+}
+.fav-rating-share-container{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  
+}
+
+.fav-container{
+  margin-top: 5%;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.vertical-line-fav {
+  margin-top: 5%;
+  margin-left: 2%;
+  height: 100px;
+  width: 4px;
+  background-color: var(--colorFondo-primario);
+  
+  
 }
 
 .rating-container .fa-star {
@@ -1138,7 +1158,7 @@ footer{
 .high-rating {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content:baseline;
   font-size: 2em;
   color: var(--colorFuente-bordo); 
 }

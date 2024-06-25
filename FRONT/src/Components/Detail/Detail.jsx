@@ -118,26 +118,33 @@ export const Detail = () => {
               <i className="fas fa-reply"></i> VOLVER A LA CARTA
           </button>
         </div>
-        <div className="fav-container">
-        {logged && (
-          <>
-            {
-              includesArray ?
-                <button className="fav-button" onClick={removeFav}>
-                  <i className="fa-solid fa-heart"></i>
+        
+        
+        <div className="fav-rating-share-container">
+            <RecipeRatingDetails recipeId={id}/>
+            <div className="vertical-line-fav"></div>
+            <div className="fav-container">
+            {logged && (
+              <>
+                {
+                  includesArray ?
+                    <button className="fav-button" onClick={removeFav}>
+                      <i className="fa-solid fa-heart"></i>
+                    </button>
+                    :
+                    <button className="fav-button" onClick={addFav}>
+                      <i className="fa-regular fa-heart"></i>
+                    </button>
+                }
+                <button className="button-share" onClick={handleShare}>
+                  <i className="fas fa-share-nodes"></i> 
+                  
                 </button>
-                :
-                <button className="fav-button" onClick={addFav}>
-                  <i className="fa-regular fa-heart"></i>
-                </button>
-            }
-            <button className="button-share" onClick={handleShare}>
-              <i className="fas fa-share-nodes"></i> 
-            </button>
-          </>
-        )}
+              </>
+            )}
+            </div>
+            
         </div>
-        <ImagesContainer imagenes={imagenes} />
         <div className="details-container">
           <div className="main-details">
             <div className="ingredientes">
@@ -169,7 +176,7 @@ export const Detail = () => {
               instrucciones={instrucciones}
             />
           </div>
-          <RecipeRatingDetails recipeId={id}/>
+          
         </div>
         <div className="navigation-buttons">
           <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
