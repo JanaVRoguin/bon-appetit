@@ -118,7 +118,7 @@ console.log(suggestions);
           </div>
         )}
         <button onClick={handleSearchButtonClick} className="search-button">
-          <img src="../../public/Images/Lupa.png" alt="Buscar" className="search-icon" />
+          <img src="/Images/Lupa.png" alt="Buscar" className="search-icon" />
         </button>
       </div>
     </div>

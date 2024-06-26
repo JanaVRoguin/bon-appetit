@@ -121,7 +121,7 @@ export const Detail = () => {
         
         
         <div className="fav-rating-share-container">
-            <RecipeRatingDetails recipeId={id}/>
+            <RecipeRatingDetails recipe={recipeSelected}/>
             <div className="vertical-line-fav"></div>
             <div className="fav-container">
             {logged && (
