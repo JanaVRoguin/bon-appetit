@@ -118,27 +118,35 @@ export const Detail = () => {
               <i className="fas fa-reply"></i> VOLVER A LA CARTA
           </button>
         </div>
-        <div className="fav-container">
-        {logged && (
-          <>
-            {
-              includesArray ?
-                <button className="fav-button" onClick={removeFav}>
-                  <i className="fa-solid fa-heart"></i>
-                </button>
-                :
-                <button className="fav-button" onClick={addFav}>
-                  <i className="fa-regular fa-heart"></i>
-                </button>
-            }
-            <button className="button-share" onClick={handleShare}>
-              <i className="fas fa-share-nodes"></i> 
-            </button>
-          </>
-        )}
-        </div>
+        
         <ImagesContainer imagenes={imagenes} />
-        <div className="details-container">
+        <div className="fav-rating-share-container">
+            <RecipeRatingDetails recipe={recipeSelected}/>
+            <div className="vertical-line-fav"></div>
+            <div className="fav-container">
+            {logged && (
+              <>
+                {
+                  includesArray ?
+                    <button className="fav-button" onClick={removeFav}>
+                      <i className="fa-solid fa-heart"></i>
+                    </button>
+                    :
+                    <button className="fav-button" onClick={addFav}>
+                      <i className="fa-regular fa-heart"></i>
+                    </button>
+                }
+                <div className="vertical-line-fav-share"></div>
+                <button className="button-share" onClick={handleShare}>
+                  <i className="fas fa-share-nodes"></i> 
+                  
+                </button>
+              </>
+            )}
+            </div>
+            
+        </div>
+         <div className="details-container">
           <div className="main-details">
             <div className="ingredientes">
               <h1>Ingredientes:</h1>
@@ -169,7 +177,7 @@ export const Detail = () => {
               instrucciones={instrucciones}
             />
           </div>
-          <RecipeRatingDetails recipe={recipeSelected}/>
+          
         </div>
         <div className="navigation-buttons">
           <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
