@@ -61,7 +61,7 @@ jobs:
       run: |
         ls -l BACK/target/
 
-    # Deploy to EC2
+      # Deploy to EC2
     - name: Deploy to EC2
       env:
         KEY_FILE: ${{ secrets.AWS_KEY_FILE }}
@@ -73,12 +73,18 @@ jobs:
         scp -o StrictHostKeyChecking=no -i key.pem BACK/target/bonappetitApi-0.0.1-SNAPSHOT.jar $USER@$HOST:/home/ec2-user/
         ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST << 'EOF'
           sudo systemctl stop your-app.service || true
+          while sudo lsof -i :8080; do
+            echo "Esperando que el puerto 8080 se libere..."
+            sleep 5
+          done
           sudo mv /home/ec2-user/bonappetitApi-0.0.1-SNAPSHOT.jar /path/to/your/app/location/your-app.jar
-          cd /path/to/your/app/location/
-          nohup java -jar your-app.jar > /dev/null 2>&1 &
+          sudo systemctl start your-app.service
         EOF
         rm key.pem
 
+
+
+        
     # Set up Node.js for frontend build
     - name: Set up Node.js
       uses: actions/setup-node@v3

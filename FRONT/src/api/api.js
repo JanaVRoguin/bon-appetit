@@ -99,6 +99,7 @@ export const updateRecipe = async (recipeId, updatedData) => {
 // CRUD USUARIOS
 export const fetchUsers = async () => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/usuarios/listar`, {
       headers: {
         Authorization: `Bearer ${token}`,
