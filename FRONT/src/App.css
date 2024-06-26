@@ -1121,7 +1121,7 @@ footer{
 
 .fav-container{
   margin-top: 5%;
-  margin-left: 50px;
+  margin-left: 10px;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -1129,8 +1129,20 @@ footer{
 
 .vertical-line-fav {
   margin-top: 5%;
+  margin-right: 3px;
   margin-left: 2%;
-  height: 100px;
+  height: 110px;
+  width: 4px;
+  background-color: var(--colorFondo-primario);
+  
+  
+}
+
+.vertical-line-fav-share {
+  
+  margin-left: 2px;
+  margin-right: 2px;
+  height: 110px;
   width: 4px;
   background-color: var(--colorFondo-primario);
   

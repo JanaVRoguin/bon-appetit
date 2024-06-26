@@ -119,7 +119,7 @@ export const Detail = () => {
           </button>
         </div>
         
-        
+        <ImagesContainer imagenes={imagenes} />
         <div className="fav-rating-share-container">
             <RecipeRatingDetails recipe={recipeSelected}/>
             <div className="vertical-line-fav"></div>
@@ -136,6 +136,7 @@ export const Detail = () => {
                       <i className="fa-regular fa-heart"></i>
                     </button>
                 }
+                <div className="vertical-line-fav-share"></div>
                 <button className="button-share" onClick={handleShare}>
                   <i className="fas fa-share-nodes"></i> 
                   
@@ -145,7 +146,7 @@ export const Detail = () => {
             </div>
             
         </div>
-        <div className="details-container">
+         <div className="details-container">
           <div className="main-details">
             <div className="ingredientes">
               <h1>Ingredientes:</h1>
