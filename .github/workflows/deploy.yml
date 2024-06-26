@@ -102,14 +102,15 @@ jobs:
     # Replace Firebase keys in firebase.js and show changes
     - name: Replace firebase keys in firebase.js
       run: |
-        sed -i 's|import.meta.env.VITE_apiKey|'$VITE_apiKey'|g' FRONT/src/api/firebase.js
-        sed -i 's|import.meta.env.VITE_authDomain|'$VITE_authDomain'|g' FRONT/src/api/firebase.js
-        sed -i 's|import.meta.env.VITE_projectId|'$VITE_projectId'|g' FRONT/src/api/firebase.js
-        sed -i 's|import.meta.env.VITE_storageBucket|'$VITE_storageBucket'|g' FRONT/src/api/firebase.js
-        sed -i 's|import.meta.env.VITE_messagingSenderId|'$VITE_messagingSenderId'|g' FRONT/src/api/firebase.js
-        sed -i 's|import.meta.env.VITE_appId|'$VITE_appId'|g' FRONT/src/api/firebase.js
+        sed -i 's|import.meta.env.VITE_apiKey|"'"$VITE_apiKey"'"|g' FRONT/src/api/firebase.js
+        sed -i 's|import.meta.env.VITE_authDomain|"'"$VITE_authDomain"'"|g' FRONT/src/api/firebase.js
+        sed -i 's|import.meta.env.VITE_projectId|"'"$VITE_projectId"'"|g' FRONT/src/api/firebase.js
+        sed -i 's|import.meta.env.VITE_storageBucket|"'"$VITE_storageBucket"'"|g' FRONT/src/api/firebase.js
+        sed -i 's|import.meta.env.VITE_messagingSenderId|"'"$VITE_messagingSenderId"'"|g' FRONT/src/api/firebase.js
+        sed -i 's|import.meta.env.VITE_appId|"'"$VITE_appId"'"|g' FRONT/src/api/firebase.js
         echo "Updated firebase.js:"
         cat FRONT/src/api/firebase.js
+        
 
     - name: Install dependencies
       run: cd FRONT && npm install
