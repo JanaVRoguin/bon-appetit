@@ -162,7 +162,7 @@ const ListarRecetas = ({ recipes, fetchRecipes }) => {
       <table className="listar-recetas-table">
         <thead>
           <tr>
-            <td colSpan="7">
+            <td colSpan="8">
               Filtrado por:{" "}
               {selectedCategories.length === 0
                 ? "Mostrar todas"
