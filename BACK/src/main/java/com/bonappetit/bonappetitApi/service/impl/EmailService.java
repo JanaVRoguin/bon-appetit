@@ -12,16 +12,16 @@ public class EmailService implements IEmailService {
     @Autowired
     private JavaMailSender mailSender;
     @Override
-    public void sendEmail(String toEmail, String subject, String body, String token) {
+    public void sendEmail(String toEmail, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("testbonappetitapp@gmail.com");
         message.setTo(toEmail);
-        message.setText(body + "\n" + generateEmailBody(token));
+        message.setText(body);
         message.setSubject(subject);
         mailSender.send(message);
     }
 
-    private String generateEmailBody(String token) {
+    private String generateEmailBody() {
         return "<!DOCTYPE html>" +
                 "<html>" +
                 "<head>" +
@@ -41,7 +41,7 @@ public class EmailService implements IEmailService {
                 "<h1>Confirmación de Registro</h1>" +
                 "<p>Hola,</p>" +
                 "<p>Gracias por registrarte en Bonapetit. Por favor, haz clic en el siguiente enlace para confirmar tu registro e iniciar sesión:</p>" +
-                "<a href=\"" + token + "\">Confirmar Registro</a>" +
+                "<a href=\"" + "localhost:5173/" + "\">Confirmar Registro</a>" +
                 "<p>Saludos,<br>El equipo de Bonapetit</p>" +
                 "</div>" +
                 "</body>" +
