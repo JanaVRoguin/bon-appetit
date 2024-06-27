@@ -27,6 +27,7 @@ export const fetchRecipes = async () => {
 // Función para crear una nueva receta
 export const createRecipe = async (receta) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/recetas/crear`, {
       method: "POST",
       headers: {
@@ -54,6 +55,7 @@ export const createRecipe = async (receta) => {
 // Eliminar receta
 export const deleteRecipe = async (id) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/recetas/eliminar/${id}`, {
       method: "DELETE",
       headers: {
@@ -76,6 +78,7 @@ export const deleteRecipe = async (id) => {
 // Actualizar receta
 export const updateRecipe = async (recipeId, updatedData) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/recetas/actualizar/${recipeId}`, {
       method: "PUT",
       headers: {
@@ -99,6 +102,7 @@ export const updateRecipe = async (recipeId, updatedData) => {
 // CRUD USUARIOS
 export const fetchUsers = async () => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/usuarios/listar`, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -117,6 +121,7 @@ export const fetchUsers = async () => {
 
 export const deleteUser = async (id) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/usuarios/eliminar/${id}`, {
       method: "DELETE",
       headers: {
@@ -135,6 +140,7 @@ export const deleteUser = async (id) => {
 
 export const grantAdminRole = async (userId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/admin/rolAdmin/${userId}`, {
       method: "PUT",
       headers: {
@@ -153,6 +159,7 @@ export const grantAdminRole = async (userId) => {
 
 export const revokeAdminRole = async (userId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/admin/revokeRole/${userId}`, {
       method: "PUT",
       headers: {
@@ -199,6 +206,7 @@ export const fetchCategories = async () => {
 // Crear una nueva categoría
 export const createCategory = async (newCategory) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/categorias/crear`, {
       method: "POST",
       headers: {
@@ -220,6 +228,8 @@ export const createCategory = async (newCategory) => {
 // Actualizar una categoría
 export const updateCategory = async (category) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
+    console.log(category)
     const response = await fetch(`${BASE_URL}/categorias/actualizar`, {
       method: "PUT",
       headers: {
@@ -241,6 +251,7 @@ export const updateCategory = async (category) => {
 // Eliminar una categoría
 export const deleteCategory = async (categoryId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/categorias/eliminar/${categoryId}`, {
       method: 'DELETE',
       headers: {
@@ -261,6 +272,7 @@ export const deleteCategory = async (categoryId) => {
 // Buscar categoría por ID
 export const getCategoryById = async (categoryId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/categorias/${categoryId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
@@ -307,6 +319,7 @@ export const fetchCaracteristicas = async () => {
 // Crear una nueva característica
 export const createCaracteristica = async (newCaracteristica) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/caracteristicas/crear`, {
       method: "POST",
       headers: {
@@ -328,6 +341,7 @@ export const createCaracteristica = async (newCaracteristica) => {
 // Actualizar una característica
 export const updateCaracteristica = async (caracteristica) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/caracteristicas/actualizar`, {
       method: "PUT",
       headers: {
@@ -349,6 +363,7 @@ export const updateCaracteristica = async (caracteristica) => {
 // Eliminar una característica
 export const deleteCaracteristica = async (caracteristicaId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/caracteristicas/eliminar/${caracteristicaId}`, {
       method: 'DELETE',
       headers: {
@@ -369,6 +384,7 @@ export const deleteCaracteristica = async (caracteristicaId) => {
 // Buscar característica por ID
 export const getCaracteristicaById = async (caracterisitcaId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/caracteristicas/${caracterisitcaId}`, {
       headers: {
         'Authorization': `Bearer ${token}`,
