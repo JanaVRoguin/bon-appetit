@@ -220,7 +220,6 @@ export const createCategory = async (newCategory) => {
 // Actualizar una categoría
 export const updateCategory = async (category) => {
   try {
-    console.log(category)
     const response = await fetch(`${BASE_URL}/categorias/actualizar`, {
       method: "PUT",
       headers: {

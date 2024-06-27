@@ -1,6 +1,6 @@
 import React from 'react'
 
-const RecipeDetails = ({categorías, descripcion, ingredientes, instrucciones}) => {
+const RecipeDetails = ({categorias, descripcion, ingredientes, instrucciones}) => {
 
   return (
     <div className='recipe-detail-data'>
