@@ -94,7 +94,7 @@ const EditarReceta = ({
         imagenes: updatedImages,
       });
     } catch (e){
-      console.log("hubo algun error")
+      console.log(e)
     }
 
     const updatedErrors = [...imageLoadError];

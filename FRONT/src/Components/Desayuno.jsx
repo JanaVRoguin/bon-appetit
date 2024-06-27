@@ -9,7 +9,7 @@ export const Desayuno = () => {
   const recipesPerPage = 8; // 4 por columna
 
   const handleSearch = (term) => {
-    console.log('Buscando recetas para:', term);
+    // console.log('Buscando recetas para:', term);
   };
 
   // Filtrar las recetas de Almuerzo
