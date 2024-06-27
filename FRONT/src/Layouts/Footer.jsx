@@ -34,7 +34,7 @@ export const Footer = () => {
           
           <div className='footer-right'>
             <div className='footer-lists'>
-              <ul className='footer-list'>
+              <ul className='footer-list list-left'>
                 <li>CREAR USUARIO</li>
                 <li>CHEFS DE LA CASA</li>
                 <li>BONAPPETIT PREMIUM</li>
@@ -49,7 +49,7 @@ export const Footer = () => {
             </div>
             <hr className='footer-divider' />
             <div className='footer-ingredients'>
-              <p>Ingredientes: Exequiel Godoy, Francisco Heredia, Hernan Suarez, Jana Roguin, Martin Cinalli, Wilfren Pereira, Stefano Luzi, Franco Lopez</p>
+              <p>Ingredientes: Exequiel Godoy, Francisco Heredia, Martin Cinalli, Wilfren Pereira, Stefano Luzi, Franco Lopez, Hernan Suarez Segura</p>
             </div>
           </div>
         </div>

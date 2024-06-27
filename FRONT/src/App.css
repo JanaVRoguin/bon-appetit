@@ -128,7 +128,7 @@ in
 /*ESTILOS FOOTER*/
 footer{
   width: 100%; /* Ocupa el ancho completo */
-  padding: 20px; /* Relleno */
+  padding-top: 20px; /* Relleno */
   background-color: var(--colorBlanco); /* Color de fondo */
   position: relative;
   z-index: 1000;
@@ -209,6 +209,11 @@ footer{
 .footer-list li:hover {
   color: #007BFF; /* Color al pasar el cursor */
 }
+
+.list-left {
+  text-align: right;
+}
+
 .footer-divider {
   width: 30%; /* El 30% del ancho de footer-right */
   height: 1px; /* Altura de la línea */

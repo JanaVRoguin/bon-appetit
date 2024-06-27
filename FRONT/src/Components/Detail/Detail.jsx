@@ -16,19 +16,12 @@ export const Detail = () => {
   const params = useParams();
   const navigate = useNavigate();
   const { dispatch, state } = useContext(ContextGlobal);
-  const { favs, recipeSelected } = state;
-  const { nombre, imagenes, categorías, caracteristicas, descripcion, ingredientes, instrucciones, id } = recipeSelected;
+  const { favs, recipeSelected, data } = state;
+  const { nombre, imagenes, categorias, caracteristicas, descripcion, ingredientes, instrucciones, id } = recipeSelected;
   const token = JSON.parse(localStorage.getItem('token'));
 
-  const [recipeIds, setRecipeIds] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(-1);
-
   useEffect(() => {
-    bonappetitApi.get(`/recetas/${params.id}`, {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
+    bonappetitApi.get(`/recetas/${params.id}`)
       .then((response) => {
         dispatch({ type: 'GET_SELECTED', payload: response.data });
       })
@@ -39,44 +32,7 @@ export const Detail = () => {
           console.error("Error fetching recipe details:", error);
         }
       });
-
-    bonappetitApi.get('/recetas/listar', {
-      headers: {
-        'Authorization': `Bearer ${token}`
-      }
-    })
-      .then((response) => {
-        setRecipeIds(response.data);
-      })
-      .catch((error) => {
-        if (error.response && error.response.status === 401) {
-          console.error("Unauthorized. Please check your token.");
-        } else {
-          console.error("Error fetching recipe IDs:", error);
-        }
-      });
   }, [params.id, token]);
-
-  useEffect(() => {
-    if (recipeIds.length > 0) {
-      const currentIndex = recipeIds.indexOf(parseInt(params.id));
-      setCurrentIndex(currentIndex);
-    }
-  }, [params.id, recipeIds]);
-
-  const handlePrevious = () => {
-    if (currentIndex > 0) {
-      const previousId = recipeIds[currentIndex - 1];
-      navigate(`/recetas/${previousId}`);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentIndex < recipeIds.length - 1) {
-      const nextId = recipeIds[currentIndex + 1];
-      navigate(`/recetas/${nextId}`);
-    }
-  };
 
   const addFav = () => {
     dispatch({ type: 'ADD_FAV', payload: state.recipeSelected });
@@ -101,12 +57,24 @@ export const Detail = () => {
 
     if (navigator.share) {
       navigator.share(shareData)
-        .then(() => console.log('Successful share'))
+        .then(() => {})
         .catch((error) => console.log('Error sharing', error));
     } else {
       alert('La funcionalidad de compartir no es soportada por tu navegador.');
     }
   };
+  
+  const handlePrevious = () => {
+    const recipeDataIndex = data.findIndex(recipe => recipe.id === id)
+    const previousRecipe = data.at(recipeDataIndex - 1).id
+    navigate(`/recipe/${previousRecipe}`)
+  }
+
+  const handleNext = () => {
+    const recipeDataIndex = data.findIndex(recipe => recipe.id === id)
+    const nextRecipe = data.at(recipeDataIndex + 1).id
+    navigate(`/recipe/${nextRecipe}`)
+  }
 
   return (
     <>
@@ -146,12 +114,12 @@ export const Detail = () => {
             </div>
             
         </div>
-         <div className="details-container">
+        <div className="details-container">
           <div className="main-details">
             <div className="ingredientes">
               <h1>Ingredientes:</h1>
               <RecipeDetails
-                categorías={categorías}
+                categorias={categorias}
                 descripcion={null}
                 ingredientes={ingredientes}
                 instrucciones={null}
@@ -171,7 +139,7 @@ export const Detail = () => {
           <div className="instructions-container">
             <h1>Modo de preparación:</h1>
             <RecipeDetails
-              categorías={categorías}
+              categorias={categorias}
               descripcion={null}
               ingredientes={null}
               instrucciones={instrucciones}
@@ -180,15 +148,21 @@ export const Detail = () => {
           
         </div>
         <div className="navigation-buttons">
-          <button className="nav-button" onClick={handlePrevious} disabled={currentIndex <= 0}>
-            <i className="fas fa-chevron-left"></i>
-          </button>
-          <button className="nav-button" onClick={() => navigate('/')}>
+          {
+            id > data.at(0).id &&
+            <button className="nav-button" onClick={handlePrevious} >
+              <i className="fas fa-chevron-left"></i>
+            </button>
+          }
+          <button className="nav-button" onClick={() => navigate(`/${categorias[0].categorias}`)}>
             Volver al Menú Principal
           </button>
-          <button className="nav-button" onClick={handleNext} disabled={currentIndex >= recipeIds.length - 1}>
-            <i className="fas fa-chevron-right"></i>
-          </button>
+          {
+            id < data.at(-1).id &&
+            <button className="nav-button" onClick={handleNext} >
+              <i className="fas fa-chevron-right"></i>
+            </button>
+          }
         </div>
       </div>
     </>
