@@ -49,13 +49,12 @@ export const Register = () => {
   const disabledButtons = () => {
     setHideButtons(!hideButtons);
   }
-  console.log(hideButtons);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
       try {
         const response = await bonappetitApi.post('/auth/registro', formData);
-        console.log('Registro exitoso', response.data);
 
         toast.success('Registro Exitoso, BON APPETIT', {
           icon: '✔️',
