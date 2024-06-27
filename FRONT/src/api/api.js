@@ -27,6 +27,7 @@ export const fetchRecipes = async () => {
 // Función para crear una nueva receta
 export const createRecipe = async (receta) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/recetas/crear`, {
       method: "POST",
       headers: {

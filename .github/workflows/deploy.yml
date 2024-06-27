@@ -82,9 +82,6 @@ jobs:
         EOF
         rm key.pem
 
-
-
-        
     # Set up Node.js for frontend build
     - name: Set up Node.js
       uses: actions/setup-node@v3
