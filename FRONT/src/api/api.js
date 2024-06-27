@@ -363,6 +363,7 @@ export const updateCaracteristica = async (caracteristica) => {
 // Eliminar una característica
 export const deleteCaracteristica = async (caracteristicaId) => {
   try {
+    const token = JSON.parse(localStorage.getItem("token"));
     const response = await fetch(`${BASE_URL}/caracteristicas/eliminar/${caracteristicaId}`, {
       method: 'DELETE',
       headers: {
