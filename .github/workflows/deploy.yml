@@ -61,7 +61,7 @@ jobs:
       run: |
         ls -l BACK/target/
 
-      # Deploy to EC2
+    # Deploy to EC2
     - name: Deploy to EC2
       env:
         KEY_FILE: ${{ secrets.AWS_KEY_FILE }}
@@ -72,13 +72,34 @@ jobs:
         chmod 600 key.pem
         scp -o StrictHostKeyChecking=no -i key.pem BACK/target/bonappetitApi-0.0.1-SNAPSHOT.jar $USER@$HOST:/home/ec2-user/
         ssh -o StrictHostKeyChecking=no -i key.pem $USER@$HOST << 'EOF'
-          sudo systemctl stop your-app.service || true
+          set -e
+
+          # Intentar detener el servicio
+          if systemctl is-active --quiet your-app.service; then
+            sudo systemctl stop your-app.service || true
+          fi
+
+          # Esperar a que el puerto 8080 se libere, con un límite de tiempo
+          TIMEOUT=60
+          INTERVAL=5
+          ELAPSED=0
+
           while sudo lsof -i :8080; do
+            if [ "$ELAPSED" -ge "$TIMEOUT" ]; then
+              echo "El puerto 8080 no se liberó después de $TIMEOUT segundos."
+              exit 1
+            fi
             echo "Esperando que el puerto 8080 se libere..."
-            sleep 5
+            sleep $INTERVAL
+            ELAPSED=$((ELAPSED + INTERVAL))
           done
+
+          # Mover el nuevo archivo JAR
           sudo mv /home/ec2-user/bonappetitApi-0.0.1-SNAPSHOT.jar /path/to/your/app/location/your-app.jar
+
+          # Iniciar el servicio nuevamente
           sudo systemctl start your-app.service
+
         EOF
         rm key.pem
 
@@ -113,7 +134,6 @@ jobs:
         sed -i 's|import.meta.env.VITE_appId|"'"$VITE_appId"'"|g' FRONT/src/api/firebase.js
         echo "Updated firebase.js:"
         cat FRONT/src/api/firebase.js
-        
 
     - name: Install dependencies
       run: cd FRONT && npm install
