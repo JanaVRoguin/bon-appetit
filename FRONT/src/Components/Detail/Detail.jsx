@@ -108,7 +108,7 @@ export const Detail = () => {
                           <i className="fa-regular fa-heart"></i>
                         </button>
                     }
-                    <div className="vertical-line"></div>
+                    <div className="vertical-line middle"></div>
                     <button className="button-share" onClick={handleShare}>
                       <i className="fas fa-share-nodes"></i> 
                     </button>
