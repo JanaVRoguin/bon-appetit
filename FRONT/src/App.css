@@ -1549,14 +1549,14 @@ input[type="password"] {
 .calendar-dropdown a:hover {
   background-color: #f0f0f0;
 }
+
 .root-myAccount {
-  background-color: var(--colorFondo-hueso
-  );
+  background-color: var(--colorFondo-hueso);
+  font-size: 1.5rem;
   border-radius: 10px;
   color: var(--colorFondo-primario);
   margin: 2rem 15%;
   padding: 3rem;
-  box-shadow: 0 4px 8px var(--colorFondo-hueso);
 }
 
 /* FAVORITOS */
@@ -1989,4 +1989,76 @@ input[type="password"] {
 
 .rating-container-modal .fa-star.far {
   color: var(--colorFondo-primario); /* Estrella vacía */
+}
+
+/* --bp-large: 62.5em; //1000px/16px = 62.5
+--bp-medium: 50em; //800px
+--bp-small: 37.5em; //600px */
+
+@media only screen and ( max-width: 90em ){
+  html {
+    font-size: 50%;
+  }
+}
+
+@media only screen and ( max-width: 85.5em ){
+  .footer-list li {
+    font-size: 2rem;
+  }
+
+  .footer-ingredients {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and ( max-width: 70em ){
+  .footer-content{
+    flex-direction: column;
+  }
+
+  .footer-separator, .footer-divider {
+    display: none;
+  }
+
+  .footer-ingredients {
+    font-size: 1.4rem;
+    margin: 2rem 0;
+  }
+}
+
+@media only screen and ( max-width: 48em ){
+  .footer-lists {
+    flex-direction: column;
+  }
+
+  .footer-lists li {
+    font-size: 2.5rem;
+  }
+}
+@media only screen and ( max-width: 40em ){
+  .titulo-recomendados {
+    text-align: center;
+    font-size: 16rem;
+  }
+
+  .titulo-dos {
+    font-size: 16rem;
+  }
+
+  .titulo-tres {
+    text-align: center;
+    font-size: 16rem;
+  }
+}
+
+@media only screen and ( max-width: 32.5em ){
+  .titulo-recomendados, .titulo-dos, .titulo-tres {
+    font-size: 12rem;
+  }
+}
+
+@media only screen and ( max-width: 24em ){
+  .titulo-recomendados, .titulo-dos, .titulo-tres {
+    font-size: 9rem;
+  }
 }
