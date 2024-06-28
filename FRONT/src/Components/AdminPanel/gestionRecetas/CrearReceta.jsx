@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchCategories, createRecipe, fetchCaracteristicas } from "../../../api/api";
+import {
+  fetchCategories,
+  createRecipe,
+  fetchCaracteristicas,
+} from "../../../api/api";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { firebaseDB } from "../../../api/firebase";
 import "./CrearReceta.css";
@@ -56,19 +60,22 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
 
   const handleImageChange = async (index, imagen) => {
     const updatedImages = [...formData.imagenes];
-    const storageRef = ref(firebaseDB, `/recetas/${formData.nombre}/${imagen.name}`)
+    const storageRef = ref(
+      firebaseDB,
+      `/recetas/${formData.nombre}/${imagen.name}`
+    );
 
     try {
-      await uploadBytes(storageRef, imagen)
-      const url = await getDownloadURL(storageRef)
+      await uploadBytes(storageRef, imagen);
+      const url = await getDownloadURL(storageRef);
       updatedImages[index] = url;
 
       setFormData({
         ...formData,
         imagenes: updatedImages,
       });
-    } catch (e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
 
     const updatedErrors = [...imageLoadError];
@@ -175,74 +182,79 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
               <textarea
                 className="form-control"
                 name="descripcion"
-                rows="4"
+                rows="1"
                 value={formData.descripcion}
                 onChange={handleChange}
               />
               <span className="error-text">{validationErrors.descripcion}</span>
             </div>
 
-            <div className="form-group">
-              <label>Ingredientes</label>
-              <input
-                className="form-control"
-                name="ingredientes"
-                value={formData.ingredientes}
-                onChange={handleChange}
-              />
-              <span className="error-text">
-                {validationErrors.ingredientes}
-              </span>
+            <div className="form-group row">
+              <div className="col">
+                <label>Ingredientes</label>
+                <textarea
+                  className="form-control"
+                  name="ingredientes"
+                  rows="2"
+                  value={formData.ingredientes}
+                  onChange={handleChange}
+                />
+                <span className="error-text">
+                  {validationErrors.ingredientes}
+                </span>
+              </div>
+              <div className="col">
+                <label>Instrucciones</label>
+                <textarea
+                  className="form-control"
+                  name="instrucciones"
+                  rows="2"
+                  value={formData.instrucciones}
+                  onChange={handleChange}
+                />
+                <span className="error-text">
+                  {validationErrors.instrucciones}
+                </span>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label>Instrucciones</label>
-              <textarea
-                className="form-control"
-                name="instrucciones"
-                rows="4"
-                value={formData.instrucciones}
-                onChange={handleChange}
-              />
-              <span className="error-text">
-                {validationErrors.instrucciones}
-              </span>
-            </div>
-
-            <div className="form-group">
-              <label>Categoría</label>
-              <select
-                className="form-control select-categorias"
-                name="categorias"
-                multiple
-                value={formData.categorias}
-                onChange={handleChange}
-              >
-                {categorias.map((categoria) => (
-                  <option key={categoria.id} value={categoria.id}>
-                    {categoria.categorias}
-                  </option>
-                ))}
-              </select>
-              <span className="error-text">{validationErrors.categoria}</span>
-            </div>
-
-            <div className="form-group">
-              <label>Características</label>
-              <select
-                className="form-control select-categorias"
-                name="caracteristicas"
-                multiple
-                value={formData.caracteristicas}
-                onChange={handleChange}
-              >
-                {caracteristicas.map((caracteristica) => (
-                  <option key={caracteristica.id} value={caracteristica.id}>
-                    {caracteristica.nombre}
-                  </option>
-                ))}
-              </select>
-              <span className="error-text">{validationErrors.caracteristica}</span>
+            <div className="form-group row">
+              <div className="col">
+                <label>Categoría</label>
+                <select
+                  className="form-control select-categorias"
+                  name="categorias"
+                  multiple
+                  value={formData.categorias}
+                  onChange={handleChange}
+                >
+                  {categorias.map((categoria) => (
+                    <option key={categoria.id} value={categoria.id}>
+                      {categoria.categorias}
+                    </option>
+                  ))}
+                </select>
+                <span className="error-text">{validationErrors.categoria}</span>
+              </div>
+              <div className="col">
+                <label>Características</label>
+                <select
+                  className="form-control select-categorias"
+                  name="caracteristicas"
+                  multiple
+                  value={formData.caracteristicas}
+                  onChange={handleChange}
+                >
+                  {caracteristicas.map((caracteristica) => (
+                    <option key={caracteristica.id} value={caracteristica.id}>
+                      {caracteristica.nombre}
+                    </option>
+                  ))}
+                </select>
+                <span className="error-text">
+                  {validationErrors.caracteristica}
+                </span>
+              </div>
             </div>
 
             <div className="form-group">
@@ -254,8 +266,9 @@ const CrearReceta = ({ closeModal, fetchRecipes }) => {
                       className="form-control"
                       name={`imagen-${index}`}
                       type="file"
-                      // value={imagen}
-                      onChange={(e) => handleImageChange(index, e.target.files[0])}
+                      onChange={(e) =>
+                        handleImageChange(index, e.target.files[0])
+                      }
                     />
                     {imagen && !imageLoadError[index] ? (
                       <img

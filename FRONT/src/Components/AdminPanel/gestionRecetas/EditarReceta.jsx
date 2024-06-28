@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchCaracteristicas, fetchCategories, updateRecipe } from "../../../api/api";
+import {
+  fetchCaracteristicas,
+  fetchCategories,
+  updateRecipe,
+} from "../../../api/api";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { firebaseDB } from "../../../api/firebase";
 import "./CrearReceta.css";
@@ -19,10 +23,10 @@ const EditarReceta = ({
     instrucciones: "",
     caracteristicas: [],
     categorias: [],
-    imagenes: [],
+    imagenes: [""],
   });
   const [validationErrors, setValidationErrors] = useState({});
-  const [imageLoadError, setImageLoadError] = useState([]);
+  const [imageLoadError, setImageLoadError] = useState([false]);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   useEffect(() => {
@@ -32,7 +36,7 @@ const EditarReceta = ({
       document.body.style.overflow = "auto";
     };
   }, [initialRecipe]);
-  
+
   const initializeForm = async () => {
     await getData();
     if (initialRecipe) {
@@ -41,9 +45,10 @@ const EditarReceta = ({
         descripcion: initialRecipe.descripcion || "",
         ingredientes: initialRecipe.ingredientes || "",
         instrucciones: initialRecipe.instrucciones || "",
-        caracteristicas: initialRecipe.caracteristicas.map((car) => car.id) || [],
+        caracteristicas:
+          initialRecipe.caracteristicas.map((car) => car.id) || [],
         categorias: initialRecipe.categorias.map((cat) => cat.id) || [],
-        imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [],
+        imagenes: initialRecipe.imagenes.map((img) => img.urlImg) || [""],
       });
       setImageLoadError(new Array(initialRecipe.imagenes.length).fill(false));
     }
@@ -82,19 +87,22 @@ const EditarReceta = ({
 
   const handleImageChange = async (index, imagen) => {
     const updatedImages = [...formData.imagenes];
-    const storageRef = ref(firebaseDB, `/recetas/${formData.nombre}/${imagen.name}`)
+    const storageRef = ref(
+      firebaseDB,
+      `/recetas/${formData.nombre}/${imagen.name}`
+    );
 
     try {
-      await uploadBytes(storageRef, imagen)
-      const url = await getDownloadURL(storageRef)
+      await uploadBytes(storageRef, imagen);
+      const url = await getDownloadURL(storageRef);
       updatedImages[index] = url;
 
       setFormData({
         ...formData,
         imagenes: updatedImages,
       });
-    } catch (e){
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
 
     const updatedErrors = [...imageLoadError];
@@ -103,13 +111,11 @@ const EditarReceta = ({
   };
 
   const addImageField = () => {
-    if (formData.imagenes[formData.imagenes.length - 1].trim() !== "") {
-      setFormData({
-        ...formData,
-        imagenes: [...formData.imagenes, ""],
-      });
-      setImageLoadError([...imageLoadError, false]);
-    }
+    setFormData({
+      ...formData,
+      imagenes: [...formData.imagenes, ""],
+    });
+    setImageLoadError([...imageLoadError, false]);
   };
 
   const removeImageField = (index) => {
@@ -128,8 +134,8 @@ const EditarReceta = ({
     setImageLoadError(updatedErrors);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
     const {
       nombre,
@@ -148,7 +154,8 @@ const EditarReceta = ({
       !instrucciones ||
       caracteristicas.length === 0 ||
       categorias.length === 0 ||
-      imagenes.length === 0
+      imagenes.length === 0 ||
+      imagenes.some((image) => image.trim() === "")
     ) {
       alert("Por favor ingrese todos los campos.");
       return;
@@ -159,18 +166,25 @@ const EditarReceta = ({
       descripcion,
       ingredientes,
       instrucciones,
-      caracteristicas: caracteristicas.map((caracteristica) => parseInt(caracteristica)),
+      caracteristicas: caracteristicas.map((caracteristica) =>
+        parseInt(caracteristica)
+      ),
       categorias: categorias.map((category) => parseInt(category)),
       imagenes: imagenes.filter((image) => image.trim() !== ""),
     };
 
-    const success = await updateRecipe(recipeId, updatedRecipe);
-    if (success) {
-      fetchRecipes();
-      closeModal();
-      setShowSuccessMessage(true);
-    } else {
-      alert("Error al actualizar la receta.");
+    try {
+      const success = await updateRecipe(recipeId, updatedRecipe);
+      if (success) {
+        alert("Receta actualizada exitosamente.");
+        fetchRecipes();
+        closeModal();
+        setShowSuccessMessage(true);
+      } else {
+        alert("Error al actualizar la receta.");
+      }
+    } catch (error) {
+      alert("No se pudo conectar con el servidor.");
     }
   };
 
@@ -196,74 +210,79 @@ const EditarReceta = ({
               <textarea
                 className="form-control"
                 name="descripcion"
-                rows="4"
+                rows="1"
                 value={formData.descripcion}
                 onChange={handleChange}
               />
               <span className="error-text">{validationErrors.descripcion}</span>
             </div>
 
-            <div className="form-group">
-              <label>Ingredientes</label>
-              <input
-                className="form-control"
-                name="ingredientes"
-                value={formData.ingredientes}
-                onChange={handleChange}
-              />
-              <span className="error-text">
-                {validationErrors.ingredientes}
-              </span>
+            <div className="form-group row">
+              <div className="col">
+                <label>Ingredientes</label>
+                <textarea
+                  className="form-control"
+                  name="ingredientes"
+                  rows="2"
+                  value={formData.ingredientes}
+                  onChange={handleChange}
+                />
+                <span className="error-text">
+                  {validationErrors.ingredientes}
+                </span>
+              </div>
+              <div className="col">
+                <label>Instrucciones</label>
+                <textarea
+                  className="form-control"
+                  name="instrucciones"
+                  rows="2"
+                  value={formData.instrucciones}
+                  onChange={handleChange}
+                />
+                <span className="error-text">
+                  {validationErrors.instrucciones}
+                </span>
+              </div>
             </div>
 
-            <div className="form-group">
-              <label>Instrucciones</label>
-              <textarea
-                className="form-control"
-                name="instrucciones"
-                rows="4"
-                value={formData.instrucciones}
-                onChange={handleChange}
-              />
-              <span className="error-text">
-                {validationErrors.instrucciones}
-              </span>
-            </div>
-
-            <div className="form-group">
-              <label>Categoría</label>
-              <select
-                className="form-control select-categorias"
-                name="categorias"
-                multiple
-                value={formData.categorias}
-                onChange={handleChange}
-              >
-                {categorias.map((categoria) => (
-                  <option key={categoria.id} value={categoria.id}>
-                    {categoria.categorias}
-                  </option>
-                ))}
-              </select>
-              <span className="error-text">{validationErrors.categoria}</span>
-            </div>
-
-            <div className="form-group">
-              <label>Características</label>
-              <select
-                className="form-control select-categorias"
-                name="caracteristicas"
-                multiple
-                value={formData.caracteristicas}
-                onChange={handleChange}
-              >
-                {caracteristicas.map((caracteristica) => (
-                  <option key={caracteristica.id} value={caracteristica.id}>
-                    {caracteristica.nombre}
-                  </option>
-                ))}
-              </select>
-              <span className="error-text">{validationErrors.caracteristica}</span>
+            <div className="form-group row">
+              <div className="col">
+                <label>Categoría</label>
+                <select
+                  className="form-control select-categorias"
+                  name="categorias"
+                  multiple
+                  value={formData.categorias}
+                  onChange={handleChange}
+                >
+                  {categorias.map((categoria) => (
+                    <option key={categoria.id} value={categoria.id}>
+                      {categoria.categorias}
+                    </option>
+                  ))}
+                </select>
+                <span className="error-text">{validationErrors.categoria}</span>
+              </div>
+              <div className="col">
+                <label>Características</label>
+                <select
+                  className="form-control select-categorias"
+                  name="caracteristicas"
+                  multiple
+                  value={formData.caracteristicas}
+                  onChange={handleChange}
+                >
+                  {caracteristicas.map((caracteristica) => (
+                    <option key={caracteristica.id} value={caracteristica.id}>
+                      {caracteristica.nombre}
+                    </option>
+                  ))}
+                </select>
+                <span className="error-text">
+                  {validationErrors.caracteristica}
+                </span>
+              </div>
             </div>
 
             <div className="form-group">
@@ -275,8 +294,9 @@ const EditarReceta = ({
                       className="form-control"
                       name={`imagen-${index}`}
                       type="file"
-                      // value={imagen}
-                      onChange={(e) => handleImageChange(index, e.target.files[0])}
+                      onChange={(e) =>
+                        handleImageChange(index, e.target.files[0])
+                      }
                     />
                     {imagen && !imageLoadError[index] ? (
                       <img
