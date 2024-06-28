@@ -88,7 +88,7 @@ const RecipeCard = ({ recipe, onDragStart, onDragEnd, onDelete }) => {
               width: "75px",
             }}
           >
-            <h5 style={{ margin: 0, fontWeight: "600" }}>
+            <h5 style={{ margin: 0, fontWeight: "600", fontSize: "1.5rem" }}>
               {getShortenedName(recipe.nombre)}
             </h5>
             {recipe.imagenes && recipe.imagenes[0] && (

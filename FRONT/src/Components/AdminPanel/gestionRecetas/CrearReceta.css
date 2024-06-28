@@ -24,11 +24,11 @@
 
 .modal-content-wrapper {
   width: 80%;
-  max-width: 600px;
+  max-width: 60rem;
   height: 80%;
   max-height: 80%;
   background-color: transparent;
-  border-radius: 15px;
+  border-radius: 1.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -38,9 +38,9 @@
 
 .modal-content {
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 100%;
   display: flex;
@@ -51,57 +51,58 @@
 .form-wrapper {
   flex: 1;
   overflow-y: auto;
-  padding-right: 10px;
+  padding-right: 1rem;
 }
 
 /* Form container styles */
 .crear-receta-container {
-  margin: 0 20px;
-  padding: 20px;
+  margin: 0 2rem;
+  padding: 2rem;
   font-family: Arial, sans-serif;
 }
 
 /* Form group styles */
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
 }
 
 .form-control {
-  width: calc(100% - 16px);
-  padding: 8px;
+  width: calc(100% - 1.6rem);
+  padding: 0.8rem;
   border: 1px solid #ddd;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 }
 
 .form-control[type="file"] {
-  padding: 3px;
+  padding: 0.3rem;
 }
 
 .error-text {
   color: #dc3545;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 /* Form actions styles */
 .form-actions {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .btn {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   border: none;
   cursor: pointer;
   text-decoration: none;
   color: white;
-  font-size: 16px;
+  font-size: 1.6rem;
   transition: background-color 0.3s;
 }
 
@@ -125,23 +126,23 @@
 .image-field {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .image-field input {
   flex: 1;
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 .image-field button {
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
   color: white;
-  font-size: 14px;
+  font-size: 1.4rem;
   transition: background-color 0.3s;
   background-color: #dc3545;
-  border-radius: 4px;
+  border-radius: 0.4rem;
 }
 
 .image-field button:hover {
@@ -150,16 +151,16 @@
 
 /* Scrollable container for image fields */
 .image-container {
-  max-height: 200px; /* Adjust the height as needed */
+  max-height: 20rem; /* Adjust the height as needed */
   overflow-y: auto;
   border: 1px solid #ccc; /* Optional: to give a border around the scrollable area */
-  padding: 10px; /* Optional: to add some padding inside the container */
+  padding: 1rem; /* Optional: to add some padding inside the container */
 }
 
 .preview-image {
-  max-width: 100px;
+  max-width: 10rem;
   height: auto;
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 /* Add image button styles */
@@ -169,14 +170,14 @@
 }
 
 .add-image-btn {
-  width: 40px;
-  height: 40px;
-  margin-top: 10px;
+  width: 4rem;
+  height: 4rem;
+  margin-top: 1rem;
   background-color: #007bff;
   border: none;
   cursor: pointer;
   color: white;
-  font-size: 20px;
+  font-size: 2rem;
   border-radius: 50%;
   transition: background-color 0.3s;
 }
@@ -189,7 +190,7 @@
 .success-message {
   color: green;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .success-message button {
@@ -203,14 +204,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px; /* Ajusta el tamaño según tus necesidades */
-  height: 80px; /* Ajusta el tamaño según tus necesidades */
+  width: 8rem; /* Ajusta el tamaño según tus necesidades */
+  height: 8rem; /* Ajusta el tamaño según tus necesidades */
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   background-color: #f0f0f0;
   color: #999;
-  font-size: 14px;
+  font-size: 1.4rem;
   text-align: center;
-  padding: 10px;
-  margin: 10px;
+  padding: 1rem;
+  margin: 1rem;
 }

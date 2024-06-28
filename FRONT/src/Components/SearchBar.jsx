@@ -79,7 +79,7 @@ export const SearchBar = ({recipeId}) => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-console.log(suggestions);
+
   return (
     <div className="search-bar">
       <div className="search-bar-container">

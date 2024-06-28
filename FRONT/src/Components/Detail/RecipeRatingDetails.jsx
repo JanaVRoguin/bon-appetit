@@ -17,8 +17,8 @@ const RecipeRatingDetails = ({ recipe }) => {
           </div>
           <div className="vertical-line"></div>
           <div className="rating-count">
-            <span className="evaluation-cant">{cantCalificaciones}</span>
-            <div className="evaluation-label">evaluaciones</div>
+            <p className="evaluation-cant">{cantCalificaciones}</p>
+            <p className="evaluation-label">evaluaciones</p>
           </div>
         </div>
       ) : (
@@ -30,8 +30,8 @@ const RecipeRatingDetails = ({ recipe }) => {
           </div>
           <div className="vertical-line"></div>
           <div className="rating-count">
-            <span className="evaluation-cant">{cantCalificaciones}</span>
-            <div className="evaluation-label">evaluaciones</div>
+            <p className="evaluation-cant">{cantCalificaciones}</p>
+            <p className="evaluation-label">evaluaciones</p>
           </div>
         </div>
       )}

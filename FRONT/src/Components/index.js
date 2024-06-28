@@ -1,8 +1,3 @@
-export * from './Desayuno'
-export * from './Almuerzo'
-export * from './Mediatarde'
-export * from './Cena'
-
 export * from './Card'
 export * from './CardCategoria'
 export * from './Recomendados'

@@ -25,7 +25,7 @@ const WeekNavigation = ({
         <IconButton onClick={onPreviousWeek}>
           <ArrowBack className="white-icon" />
         </IconButton>
-        <h3>{`${startOfWeek} - ${endOfWeek}`}</h3>
+        <h3 className="planner-current-week">{`${startOfWeek} - ${endOfWeek}`}</h3>
 
         <IconButton onClick={onNextWeek}>
           <ArrowForward className="white-icon" />

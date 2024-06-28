@@ -25,9 +25,8 @@ export const Home = () => {
         {categorias.map((category, index) => (
           <Link to={`/${category.categorias.toLowerCase()}`} className="card" key={index}>
             <div className="card-front"
-              style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2),
-                                                          rgba(0, 0, 0, 0.4)
-                                                        ),url(${category.urlImg})` }}>
+              style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.4)), 
+                                          url(${category.urlImg})` }}>
               <h1 className='bordelindo title-card'>{category.categorias}</h1>
             </div>
             <div className="card-back">
@@ -36,9 +35,7 @@ export const Home = () => {
           </Link>
         ))}
       </div>
-      <div>
-        <Recomendados />
-      </div>
+      <Recomendados />
     </div>
   );
 };
