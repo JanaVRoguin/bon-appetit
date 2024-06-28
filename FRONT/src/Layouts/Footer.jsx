@@ -31,18 +31,24 @@ export const Footer = () => {
               <img className='footer-logo' src="/Images/instagram-logo.png" alt='Instagram-logo' />
             </div>
           </div>
+
+          <div className='footer-separator'></div>
           
           <div className='footer-right'>
             <div className='footer-lists'>
-              <ul className='footer-list list-left'>
+              <ul className='footer-list'>
                 <li>CREAR USUARIO</li>
                 <li>CHEFS DE LA CASA</li>
+              </ul>
+              <ul className='footer-list'>
                 <li>BONAPPETIT PREMIUM</li>
                 <li>DONACIONES</li>
               </ul>
               <ul className='footer-list'>
                 <li>AYUDA</li>
                 <li>INVERSIONISTAS</li>
+              </ul>
+              <ul className='footer-list'>
                 <li>NOVEDADES</li>
                 <li>NUTRICIONISTAS</li>
               </ul>

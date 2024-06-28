@@ -1,14 +1,13 @@
 /* Estilos generales del panel de administración */
 .admin-panel-container {
-  margin: 50px 20px 20px;
-  padding-bottom: 80px;
-
+  margin: 5rem 2rem 2rem;
+  padding-bottom: 8rem;
 }
 
 .title {
   text-align: center;
-  margin-bottom: 50px;
-  font-size: 36px;
+  margin-bottom: 5rem;
+  font-size: 3.6rem;
   font-weight: bold;
 
 }
@@ -16,13 +15,13 @@
 .actions {
   display: flex;
   justify-content: center;
-  margin-bottom: 50px;
+  margin-bottom: 5rem;
 }
 
 .actions .btn {
-  width: 150px;
-  height: 150px;
-  padding: 20px;
+  width: 15rem;
+  height: 15rem;
+  padding: 2rem;
   border: none;
   cursor: pointer;
   color: #ad793f;
@@ -33,11 +32,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 1rem;
 }
 
 .create-btn {
-
   margin-left: 20px;
 }
 
@@ -45,24 +43,18 @@
   background-color:#731627;
 }
 
-.refresh-btn {
-
-}
-
-
 .actions .btn.active {
   background-color: #731627;
 }
 
-
 .recetas-table {
-  width: calc(100% - 200px);
-  margin: 0 100px;
+  width: calc(100% - 20rem);
+  margin: 0 10rem;
   border-collapse: collapse;
 }
 
 .recetas-table th, .recetas-table td {
-  padding: 10px;
+  padding: 1rem;
   border: 1px solid #ddd;
   text-align: left;
 }
@@ -73,7 +65,7 @@
 
 .recetas-table img {
   display: block;
-  max-width: 100px;
+  max-width: 10rem;
   height: auto;
 }
 
@@ -82,13 +74,13 @@
 }
 
 .action-buttons .btn {
-  margin-right: 5px;
-  padding: 5px 10px;
+  margin-right: 0.5rem;
+  padding: 0.5rem 1rem;
   border: none;
   cursor: pointer;
   text-decoration: none;
   color: white;
-  font-size: 14px;
+  font-size: 1.4rem;
   transition: background-color 0.3s;
 }
 
@@ -109,12 +101,12 @@
 }
 
 .categorias-container {
-  margin-top: 40px;
+  margin-top: 4rem;
 }
 
 .categorias-title {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 .categorias {
@@ -124,13 +116,13 @@
 }
 
 .categoria-card {
-  width: 100px;
-  height: 80px;
+  width: 10rem;
+  height: 8rem;
   background-color: #f2f2f2;
   font-weight: 600;
-  border-radius: 10px;
-  padding: 10px;
-  margin: 10px;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin: 1rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -148,8 +140,8 @@
 }
 
 .mostrar-todas {
-  width: 100px;
-  height: 80px;
+  width: 10rem;
+  height: 8rem;
   background-color: #007bff;
   color: white;
   display: flex;
@@ -175,11 +167,11 @@
 /* Modal Content */
 .modal-content {
   background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.1);
   width: 80%;
-  max-width: 600px;
+  max-width: 60rem;
   position: relative;
 }
 
@@ -193,21 +185,21 @@
 
 /* Form Title */
 .crear-receta-container .title {
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
 }
 
 /* Form Group */
 .crear-receta-container .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
   width: 100%;
 }
 
 /* Form Control */
 .crear-receta-container .form-control {
   width: 100%;
-  padding: 10px;
+  padding: 1rem;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   box-sizing: border-box;
 }
 
@@ -220,9 +212,9 @@
 
 /* Button Styles */
 .crear-receta-container .btn {
-  padding: 10px 20px;
+  padding: 1rem 2rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 
@@ -239,21 +231,21 @@
 /* Error Text */
 .crear-receta-container .error-text {
   color: red;
-  font-size: 12px;
+  font-size: 1.2rem;
 }
 
 .pagination {
   display: flex;
   justify-content: center;
   
-  margin-top: 40px;
-  margin-bottom: 20px;
+  margin-top: 4rem;
+  margin-bottom: 2rem;
 }
 
 .page-number {
   border: 1px solid #ccc;
-  padding: 5px 10px;
-  margin: 0 5px;
+  padding: 0.5rem 1rem;
+  margin: 0 5rem;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -274,8 +266,8 @@
 .carousel .control-arrow {
   background: rgba(0, 0, 0, 0.8); /* Fondo menos transparente */
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 5rem;
+  height: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -284,7 +276,7 @@
 
 .carousel .control-arrow:before {
   color: white;
-  font-size: 30px;
+  font-size: 3rem;
 }
 
 .carousel .control-arrow:hover {
@@ -306,7 +298,7 @@
 }
 
 .carousel .carousel-image {
-  max-height: 150px; /* Ajusta la altura máxima de las imágenes */
+  max-height: 15rem; /* Ajusta la altura máxima de las imágenes */
   object-fit: cover; /* Mantiene las proporciones de la imagen */
 }
 
@@ -314,18 +306,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  height: 150px;
+  width: 15rem;
+  height: 15rem;
   background-color: #f0f0f0;
   color: #999;
-  font-size: 14px;
+  font-size: 1.4rem;
   text-align: center;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 0.8rem;
 }
 
 .imagenes-column {
-  max-width: 150px; /* Define el ancho máximo deseado para la columna de imágenes */
+  max-width: 15rem; /* Define el ancho máximo deseado para la columna de imágenes */
 }
 
 .carousel-container {

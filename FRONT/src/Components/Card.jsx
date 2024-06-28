@@ -10,8 +10,9 @@ export const Card = ({ id, title, image, description, category }) => {
 
   return (
     <Link to={`/recipe/${id}`} className='recipe-card'>
-      <div className="recipe-card-front" style={{ backgroundImage: `url(${imageUrl})` }}>
-        <h3 className="recipe-card-title">{title}</h3>
+      <div className="recipe-card-front" style={{ backgroundImage: `linear-gradient( rgba(0, 0, 0, 0.2),rgba(0, 0, 0, 0.2)), 
+                                                                    url(${imageUrl})` }}>
+        <h3 className="title-card">{title}</h3>
       </div>
       <div className="recipe-card-back">
         {categoryList}

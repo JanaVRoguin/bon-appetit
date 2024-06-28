@@ -83,39 +83,40 @@ export const Detail = () => {
         <div className="name-container">
           <h1>{nombre}</h1>
           <button className="button-back" onClick={() => navigate(-1)}>
-              <i className="fas fa-reply"></i> VOLVER A LA CARTA
+              <i className="fas fa-reply"></i>
+              <span>VOLVER A LA CARTA</span>
           </button>
         </div>
         
         <ImagesContainer imagenes={imagenes} />
-        <div className="fav-rating-share-container">
-            <RecipeRatingDetails recipe={recipeSelected}/>
-            <div className="vertical-line-fav"></div>
-            <div className="fav-container">
-            {logged && (
-              <>
-                {
-                  includesArray ?
-                    <button className="fav-button" onClick={removeFav}>
-                      <i className="fa-solid fa-heart"></i>
-                    </button>
-                    :
-                    <button className="fav-button" onClick={addFav}>
-                      <i className="fa-regular fa-heart"></i>
-                    </button>
-                }
-                <div className="vertical-line-fav-share"></div>
-                <button className="button-share" onClick={handleShare}>
-                  <i className="fas fa-share-nodes"></i> 
-                  
-                </button>
-              </>
-            )}
-            </div>
-            
-        </div>
+
         <div className="details-container">
           <div className="main-details">
+            <div className="fav-rating-share-container">
+              <RecipeRatingDetails recipe={recipeSelected}/>
+              <div className="vertical-line"></div>
+              <div className="fav-container">
+                {logged && (
+                  <>
+                    {
+                      includesArray ?
+                        <button className="fav-button" onClick={removeFav}>
+                          <i className="fa-solid fa-heart"></i>
+                        </button>
+                        :
+                        <button className="fav-button" onClick={addFav}>
+                          <i className="fa-regular fa-heart"></i>
+                        </button>
+                    }
+                    <div className="vertical-line"></div>
+                    <button className="button-share" onClick={handleShare}>
+                      <i className="fas fa-share-nodes"></i> 
+                    </button>
+                  </>
+                )}
+              </div>
+            </div>
+
             <div className="ingredientes">
               <h1>Ingredientes:</h1>
               <RecipeDetails
@@ -125,28 +126,29 @@ export const Detail = () => {
                 instrucciones={null}
               />
             </div>
-            <div className="side-details-container">
-              <NutritionalDetails caracteristicas={caracteristicas}/>
-              {
-                logged && 
-                  <>
-                    <div className="separator"></div>
-                    <RecipeCalendar recipeId={state.recipeSelected} />
-                  </>
-              }
-            </div>
           </div>
-          <div className="instructions-container">
-            <h1>Modo de preparación:</h1>
-            <RecipeDetails
-              categorias={categorias}
-              descripcion={null}
-              ingredientes={null}
-              instrucciones={instrucciones}
-            />
+          <div className="side-details-container">
+            <NutritionalDetails caracteristicas={caracteristicas}/>
+            {
+              logged && 
+                <>
+                  <div className="separator"></div>
+                  <RecipeCalendar recipeId={state.recipeSelected} />
+                </>
+            }
           </div>
-          
         </div>
+
+        <div className="instructions-container">
+          <h1>Modo de preparación:</h1>
+          <RecipeDetails
+            categorias={categorias}
+            descripcion={null}
+            ingredientes={null}
+            instrucciones={instrucciones}
+          />
+        </div>
+
         <div className="navigation-buttons">
           {
             id > data.at(0).id &&

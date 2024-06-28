@@ -74,7 +74,7 @@ const MealArea = ({
             onDragEnd={onDragEnd}
           />
         ) : (
-          <h6>Arrastre una receta aqui</h6>
+          <h6 className="planner-h6">Arrastre una receta aqui</h6>
         )}
       </Paper>
     </Grid>

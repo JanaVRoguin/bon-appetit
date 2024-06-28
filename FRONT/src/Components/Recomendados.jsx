@@ -9,11 +9,12 @@ export const Recomendados = () => {
 
   return (
     <div className="recommended-section">
-      <h1 className="titulo-recomendados">
+      <div className="titulo-recomendados">
         <span className='titulo-uno'>RECO</span>
         <span className='titulo-dos'>MEN</span>
         <span className='titulo-tres'>DADOS</span>
-      </h1>
+        {/* RECOMENDADOS */}
+      </div>
       <div className="recommended-grid">
         {randomRecipes.map((receta) => (
           <Card

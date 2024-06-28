@@ -51,7 +51,7 @@ export const ListarCaracteristicas = () => {
     <div className="listar-categorias-container">
       <div className="listar-categorias-header">
         <div>
-          <h1 className="listar-categorias-title">Lista de Categorías</h1>
+          <h1 className="listar-categorias-title">Lista de Características</h1>
           <p className="listar-recetas-total">
             Total: {caracteristicas.length}
           </p>

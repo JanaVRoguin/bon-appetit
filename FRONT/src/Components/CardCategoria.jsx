@@ -20,17 +20,20 @@ export const CardCategoria = ({ id, title, image, ingredients, category, onRemov
             <h3>Ingredientes:</h3>
             <span>{ingredients}</span>
           </div>
-          <div className='button-card'>
-              {onRemove && (
-                <button className="remove-button" onClick={() => onRemove(id)}>
-                  Eliminar de favoritos
-                </button>
-              )}
+          {
+            onRemove ?
+            <div className='button-card'>
+              <button className="remove-button" onClick={() => onRemove(id)}>
+                Eliminar de favoritos
+              </button>
               <Link to={`/recipe/${id}`} className="card-categoria-button">
                 Detalle...
               </Link>
-           
-          </div>
+            </div>
+            :<Link to={`/recipe/${id}`} className="card-categoria-button">
+              Detalle...
+            </Link>
+          }
         </div>
       </div>
     </div>

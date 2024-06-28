@@ -76,7 +76,7 @@ const WeekPlanner = ({ onDragStart, onDragEnd }) => {
       width="100%"
       height="100vh"
     >
-      <h2>{currentMonth}</h2>
+      <h2 className="planner-current-month">{currentMonth}</h2>
 
       <WeekNavigation
         currentWeek={currentWeek}

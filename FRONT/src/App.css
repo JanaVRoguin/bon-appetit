@@ -17,7 +17,8 @@
   --colorFondo-hueso: #f5ead0;
   --colorBlanco: #fffaff;
   --colorGris-Claro:#D9D9D9;
-  --fontGordita: 'Cinzel Decorative', sans-serif;
+  --fontCursiva: 'Cinzel Decorative', sans-serif;
+  --fontGordita: 'Anton', sans-serif;
   --fontMinuscula: 'Della Respira';
   /* #ad793f */
   /* #f5ead0 */
@@ -25,8 +26,8 @@
 }
 
 html {
-  /* font-size: 62.5%; */
-  font-family: var(--fontGordita)
+  font-size: 62.5%;
+  font-family: var(--fontCursiva)
 }
 
 .title-card {
@@ -38,68 +39,70 @@ html {
   color: var(--colorFuente-Gold);
   background-color: var(--colorFondo-primario);
   min-height: 100vh;
-  padding-top: 85px ;
+  padding-top: 8.5rem ;
 
 }
-/*ESTILOS HEADER*/
+
+/* 
+///////////////////////////////////////////////
+/ESTILOS HEADER/
+///////////////////////////////////////////////
+*/
 nav {
-  width: 100%; /* El navbar ocupa el 100% del ancho de la página */
-  height: 85px;
+  width: 100%;
+  height: 8.5rem;
   display: flex;
   position:fixed;
   top: 0;
-  justify-content: space-between; /* Alinea elementos a la izquierda y derecha */
-  align-items: center; /* Centra verticalmente */
-  padding: 15px 20px 10px 10px; /* Relleno */
-  background-color: var(--colorBlanco); /* Color de fondo */
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem 1rem 1rem;
+  background-color: var(--colorBlanco);
   z-index: 1000;
 }
 
 .navbar-left {
-  text-decoration: none; /* Quita subrayado en enlaces */
-  color:var(--colorFondo-secundario);
+  text-decoration: none;
+  color:var(--colorFuente-Gold);
   display: flex;
-  align-items: center; /* Mantiene el logo y el texto en línea */
+  align-items: center;
 }
 
 .navbar-right {
   display: flex;
-  gap: 10px; /* Espacio entre botones */
+  gap: 1rem;
 }
 .nav-list {
   display: contents;
-  list-style: none; /* Elimina los puntos predeterminados */
-  padding: 0; /* Elimina el relleno predeterminado */
-  margin: 0; /* Elimina el margen predeterminado */
+  list-style: none;
   text-decoration: none;
 }
-in
-/* Estilos CSS para cada ítem de la lista */
+
 .nav-item {
-  padding: 0 10px; /* Añade espacio interno */
+  font-size: 2rem;
+  padding: 0 1rem;
   text-decoration: none;
 }
-
-
 
 .navbar-logo {
-  height: 100px; /* Ajusta la altura del logo */
-  margin-right: 2px; /* Espacio entre el logo y el texto */
-  height: 60px; /* Ajusta la altura del logo */
-  margin-right: 10px; /* Espacio entre el logo y el texto */
+  height: 10rem;
+  margin-right: 0.2rem;
+  height: 6rem;
+  margin-right: 1rem;
 }
 
 .navbar-heading {
-  margin: 0; /* Elimina el margen predeterminado del h2 */
+  margin: 0;
+  font-size: 1.8rem;
 }
 
 .navbar-button {
-  padding: 10px 15px; /* Ajusta el relleno del botón */
-  color: var(--colorBlanco); /* Color del texto */
-  border: none; /* Sin bordes */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor de mano cuando se pasa el ratón */
-  transition: all 0.3s; /* Efecto de transición */
+  padding: 1rem 1.5rem;
+  color: var(--colorBlanco);
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s;
   font-weight: 600;
 }
 
@@ -116,199 +119,196 @@ in
 
 
 .btn-register {
-  background-color: var(--colorFuente-bordo); /* Color del botón */
-  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5); /* Color del botón */
+  background-color: var(--colorFuente-bordo);
+  box-shadow: 0px 2px 5px 1px rgba(0, 0, 0, 0.5);
 }
 
 .btn-register:hover {
   transform: translateY(-2px);
-  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5); /* Color del botón */
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.5);
 }
 
-/*ESTILOS FOOTER*/
+/* 
+///////////////////////////////////////////////
+/ESTILOS FOOTER/
+///////////////////////////////////////////////
+*/
 footer{
-  width: 100%; /* Ocupa el ancho completo */
-  padding-top: 20px; /* Relleno */
-  background-color: var(--colorBlanco); /* Color de fondo */
+  width: 100%;
+  background-color: var(--colorBlanco);
   position: relative;
   z-index: 1000;
 }
+
 .footer-content {
-
-  display: flex; /* Usa Flexbox para distribuir elementos */
-  justify-self: baseline;/* Alinea el contenido a los lados opuestos */
-  align-items: center; /* Alinea verticalmente */
-
+  display: flex;
+  justify-self: baseline;
+  align-items: center;
 }
 
 .footer-left {
-  padding: 1%;
   width: 25%;
   display: flex;
-  flex-direction: column; /* Distribuye en columna */
-  align-items: center; /* Alinea al centro */
-  border-right: 5px solid #000;
+  flex-direction: column;
+  align-items: center;
   border-radius: 8px;
 }
 
 .footer-logo-large {
-  height: 180px; /* Tamaño del logo principal */
-  width: 180px;
+  height: 12rem;
+  width: 12rem;
 }
 
 .footer-text {
-  font-size: 25px;
+  font-size: 2.5rem;
   font-weight: bold;
-  margin-top: -25px; /* Espacio entre el logo y el texto */
-  text-align: center; /* Centra el texto */
+  /* margin-top: -20px; */
+  text-align: center;
+  color: var(--colorFuente-Gold);
 }
 
 .footer-socials {
-  display: flex; /* Distribuye las imágenes de los logotipos en línea */
-  margin-top: 10px; /* Espacio entre el texto y los iconos */
-  justify-content: center; /* Centra los iconos */
+  display: flex;
+  justify-content: center;
 }
 
 .footer-logo {
-  height: 80px; /* Ajusta el tamaño del logo */
-  margin: 0 3px; /* Espacio entre los iconos */
-  cursor: pointer; /* Cambia el cursor para hacer clic */
-  transition: transform 0.3s; /* Efecto de transición al pasar el cursor */
+  height: 80px;
+  /* margin: 0 3px; */
+  cursor: pointer;
+  transition: transform 0.3s;
 }
 
 .footer-logo:hover {
-  transform: scale(1.1); /* Efecto de aumento al pasar el cursor */
+  transform: scale(1.1);
 }
 
+.footer-separator {
+  width: 0.2rem;
+  height: 18rem;
+  background-color: var(--colorFuente-bordo);
+}
 
 .footer-right {
   width: 75%;
-  margin-left: 10%;
-  font-family: var(--fontGordita);
   display: flex;
   flex-direction: column;
 }
 .footer-lists {
-  display: flex; /* Usa flexbox para alinear las listas una al lado de la otra */
+  display: flex;
   justify-content: space-around;
-  margin-bottom: 5%;
 }
+
 .footer-list {
-  list-style: none; /* Quita los puntos de la lista */
+  text-align: center;
+  list-style: none;
   padding: 0;
-  margin: 0 20px; /* Espacio entre las listas */
   font-weight: bold;
 }
 
 .footer-list li {
-  margin-bottom: 10px; /* Espacio entre los elementos de la lista */
-  cursor: pointer; /* Cambia el cursor para hacer clic */
-  transition: color 0.3s; /* Efecto de transición al pasar el cursor */
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: color 0.3s;
+  color: var(--colorFuente-Gold);
 }
 
 .footer-list li:hover {
-  color: #007BFF; /* Color al pasar el cursor */
-}
-
-.list-left {
-  text-align: right;
+  color: var(--colorFuente-bordo);
 }
 
 .footer-divider {
-  width: 30%; /* El 30% del ancho de footer-right */
-  height: 1px; /* Altura de la línea */
-  background-color: #000; /* Color de la línea */
-  margin: 20px auto; /* Margen superior e inferior, centrado horizontalmente */
+  width: 30%;
+  height: 1px;
+  background-color: var(--colorFuente-Gold);
+  margin: 2rem auto;
+  margin-bottom: 3rem;
 }
 
 .footer-ingredients {
-  width: 100%; /* Ancho completo de footer-right */
-  text-align: center; /* Texto centrado */
+  font-size: 1.6rem;
+  width: 100%;
+  text-align: center;
 }
 
 .footer-ingredients p {
-  margin: 0; /* Sin margen */
-}
-.footer-horizontal-line {
-  width: 100%; /* Ocupa el ancho completo de footer-right */
-  height: 1px; /* Altura de la línea */
-  background-color: #000; /* Color de la línea */
-  margin: 5px 0; /* Margen superior e inferior */
+  margin: 0;
 }
 
 .footer-additional {
-  text-align: center; /* Texto centrado */
-  margin-bottom: 10px; /* Margen inferior */
+  text-align: center;
+  padding: 1rem;
 }
 
 .footer-additional p {
-  font-size: 14px; /* Tamaño de fuente del texto adicional */
+  font-size: 1.4rem;
 }
 
 .footer-additional a {
-  color: #000; /* Color de los enlaces */
-  text-decoration: none; /* Quita el subrayado de los enlaces */
-  margin: 0 10px; /* Espacio entre los enlaces */
-  transition: color 0.3s; /* Efecto de transición de color */
+  color: #000;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: color 0.3s;
 }
 
 .footer-additional a:hover {
-  color: #007BFF; /* Color al pasar el cursor sobre los enlaces */
+  color: #007BFF;
 }
 
-/****ESTILOS HOME*****/
+/* 
+///////////////////////////////////////////////
+/ESTILOS HOME/
+///////////////////////////////////////////////
+*/
 .home {
   background-image: url('/Images/fondo-oscuro-simple.png');
   align-items: center;
-  /* margin-top: 60px; */
   height: 100%;
-
 }
 
 .card-container {
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
   justify-items: center;
-  gap: 10px;
-  margin-bottom: 10%;
+  gap: 1rem;
+  margin-bottom: 5%;
 
 }
 
 .card {
-  perspective: 1000px; /* Añade perspectiva para el efecto de giro */
+  perspective: 100rem;
   text-decoration: none;
   color: black;
+  position: relative;
+  width: 32.5rem;
+  height: 50rem;
+  transform-style: preserve-3d;
 }
 
 .card-front, .card-back {
-  width: 325px;
-  height: 549px; /* Altura fija para las tarjetas */
-  border-radius: 10px;
+  width: 32.5rem;
+  height: 50rem;
+  border-radius: 1rem;
   text-align: center;
   background-color: #f5f5f5;
-  backface-visibility: hidden; /*Oculta el reverso al girar*/
+  backface-visibility: hidden;
   transition: transform 0.6s;
-  position: absolute;
+  /* position: absolute; */
 }
 
 .card-front {
-  background-size: cover; /* Ajusta la imagen de fondo */
+  background-size: cover;
   background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white; /* Color del texto */
-  padding: 15px;
+  color: white;
+  padding: 1.5rem;
 }
 
 .card-front h1 {
-  /* position: absolute;
-  bottom: 10px;
-  left: 10px;
-  margin: 0; */
   width: 100%;
   height: 100%;
+  font-size: 4rem;
   display: flex;
   align-items: end;
   padding-left: 10px;
@@ -322,8 +322,11 @@ footer{
   justify-content: center;
   background-color: #f5ead0; /* Color de fondo del reverso */
   color: #ad793f;
-  font-size: 120%;
+  font-size: 2.4rem;
   font-weight: 600;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .card:hover .card-front {
@@ -334,25 +337,18 @@ footer{
   transform: rotateY(360deg); /* Gira el reverso al pasar el mouse */
 }
 
-.card {
-  position: relative;
-  width: 321px;
-  height: 549px;
-  transform-style: preserve-3d;
-}
-
 .bordelindo {
   border: 1px solid var(--colorFuente-Gold);
 }
 
 /****ESTILO CARD RECETAS****/
 .recipe-card {
-  perspective: 1000px; /* Añade perspectiva para el efecto de giro */
+  perspective: 100rem;
   text-decoration: none;
   color: black;
   position: relative;
-  width: 250px; /* Ancho fijo para tarjetas */
-  height: 300px; /* Altura fija para tarjetas */
+  width: 25rem;
+  height: 30rem;
   transform-style: preserve-3d;
 }
 
@@ -363,8 +359,8 @@ footer{
 .recipe-card-front, .recipe-card-back {
   width: 100%;
   height: 100%;
-  border-radius: 10px; /* Bordes redondeados */
-  padding: 15px; /* Espacio interno */
+  border-radius: 1rem; /* Bordes redondeados */
+  padding: 1.5rem; /* Espacio interno */
   text-align: center; /* Centra el contenido */
   background-color: #f5f5f5; /* Color de fondo */
   backface-visibility: hidden; /* Oculta el reverso al girar */
@@ -384,6 +380,7 @@ footer{
 }
 
 .recipe-card-front h3 {
+  font-size: 2rem;
   position: absolute;
   bottom: 10px;
   left: 10px; /* Posiciona el título a la izquierda */
@@ -404,42 +401,29 @@ footer{
 }
 
 .recipe-card:hover .recipe-card-back {
-  transform: rotateY(360deg); /* Gira el reverso al pasar el mouse */
+  transform: rotateY(360deg);
 }
 
 .recipe-card-category {
-  font-size: 1rem; /* Tamaño de fuente para la categoría */
-  color: #EFB810; /* Color del texto para la categoría */
-  margin-bottom: 10px; /* Espacio entre la categoría y la descripción */
+  font-size: 2rem;
+  color: #EFB810;
+  margin-bottom: 1rem;
 }
 
 .recipe-card-description {
-  font-size: 0.9rem; /* Tamaño de fuente para la descripción */
-  color: #EFB810; /* Color del texto para la descripción */
+  font-size: 1.4rem;
+  color: #EFB810;
 }
-
-
-
 
 /*ESTILOS SECCION RECOMENDADOS*/
 .recommended-section {
   padding: 5% 10% 4% 10%;
-  background: linear-gradient(var(--colorFondo-hueso), rgba(255, 255, 255, 0.5)), 
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
               url('/Images/Fondo-claro.png'); /* Ruta a tu imagen de fondo */
   background-size: cover;
   background-position: center;
   position: relative;
   color: var(--colorBlanco);
-}
-
-
-.recommended-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cinco columnas */
-  gap: 30px; /* Espacio entre tarjetas */
-  position: relative;
-  z-index: 2; /* Asegura que el grid esté por encima del fondo */
-  height: 100%;
 }
 
 .titulo-recomendados {
@@ -449,29 +433,40 @@ footer{
   left: 50%;
   width: 100%;
   transform: translate(-50%, -50%);
-  text-align: center;
-  font-size: 13rem;
+  /* text-align: center; */
+  font-size: 20rem;
   font-weight: bold;
   z-index: 1; /* Asegura que el texto esté por encima del fondo pero debajo del grid */
 }
 
 .titulo-uno{
-  margin-top: 5%;
+  /* margin-top: 5%;
   margin-left: 10%;
-  text-align: left;
+  text-align: left; */
 }
 .titulo-tres{
-  margin-left: 10%;
-   text-align: left;
-   margin-bottom: 5%;
- }
-.titulo-dos{
+  /* margin-left: 10%;
+  margin-bottom: 5%; */
   text-align: right;
-  margin-right: 20%;
+}
+.titulo-dos{
+  text-align: center;
+  font-size: 22rem;
+  /* margin-right: 20%; */
 }
 
 .titulo-recomendados span {
   display: block;
+}
+
+.recommended-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Cinco columnas */
+  gap: 30px; /* Espacio entre tarjetas */
+  position: relative;
+  z-index: 2; /* Asegura que el grid esté por encima del fondo */
+  height: 100%;
+  justify-items: center;
 }
 
 /*ESTILO BARRA BUSQUEDA*/
@@ -480,8 +475,8 @@ footer{
   display: flex; /* Flexbox para alinear elementos */
   justify-content: center; /* Centra el contenido horizontalmente */
   align-items: center; /* Centra verticalmente */
-  margin: 40px auto; /* Margen para el contenedor */
-  margin-bottom: 70px;
+  margin: 4rem auto; /* Margen para el contenedor */
+  margin-bottom: 7rem;
 }
 
 .search-bar-container {
@@ -497,9 +492,9 @@ footer{
 .search-bar input {
   background-color: var(--colorFondo-secundario);
   width: 100%; /* El campo de entrada ocupa todo el ancho del contenedor */
-  padding: 10px 40px 10px 10px; /* Espacio interno con espacio para el botón */
+  padding: 1rem 4rem 1rem 1rem; /* Espacio interno con espacio para el botón */
   border: none;
-  border-radius: 30px; /* Bordes redondeados */
+  border-radius: 3rem; /* Bordes redondeados */
   outline: none; /* Quita el contorno azul al enfocar */
   transition: all 0.3s; /* Transición suave para efectos */
   color:var(--colorFondo-hueso);
@@ -507,7 +502,7 @@ footer{
 
 .search-bar input:hover,
 .search-bar input:focus {
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor o enfocar */
+  box-shadow: 0px 6px 1.5rem rgba(0, 0, 0, 0.2); /* Sombra al pasar el cursor o enfocar */
 }
 
 .search-button {
@@ -518,8 +513,8 @@ footer{
   background-color: #f1f1f1; /* Color de fondo del botón */
   border: none; /* Sin borde */
   border-radius: 50%; /* Hace el botón circular */
-  width: 36px; /* Ancho del botón */
-  height: 36px; /* Alto del botón */
+  width: 3.6rem; /* Ancho del botón */
+  height: 3.6rem; /* Alto del botón */
   display: flex; /* Usar flexbox para centrar el contenido */
   justify-content: center; /* Centrar horizontalmente */
   align-items: center; /* Centrar verticalmente */
@@ -532,16 +527,16 @@ footer{
 }
 
 .search-icon {
-  width: 25px; /* Ajusta el tamaño del ícono */
-  height: 25px; /* Ajusta el tamaño del ícono */
+  width: 2.5rem; /* Ajusta el tamaño del ícono */
+  height: 2.5rem; /* Ajusta el tamaño del ícono */
 }
 .suggestions {
   position: absolute;
   width: 100%;
   background-color: var(--colorFondo-hueso);
   border-radius: 5px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-  max-height: 200px;
+  box-shadow: 0 8px 1.6rem rgba(0, 0, 0, 0.2);
+  max-height: 20rem;
   overflow-y: auto;
   transition: max-height 0.3s ease-out;
   color: var(--colorFondo-primario);
@@ -553,7 +548,7 @@ footer{
 .suggestion {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 1rem;
   cursor: pointer;
   transition: background-color 0.3s;
 }
@@ -563,10 +558,14 @@ footer{
 }
 
 .suggestion-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 5px;
-  margin-right: 10px;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0.5rem;
+  margin-right: 1rem;
+}
+
+.suggestion-info span {
+  font-size: 1.6rem;
 }
 
 /* Estilos para las tarjetas de categorías */
@@ -575,22 +574,23 @@ footer{
   background-size: cover;
   background-position: center;
   min-height: 100vh;
-  padding: 20px;
+  padding: 2rem;
 }
 
 .category-title {
-  font-size: 2rem;
+  font-size: 4rem;
   color:var(--colorGris-Claro);
   padding-left: 2%;
-  margin-bottom: 20px;
+  /* margin-bottom: 2rem; */
 }
+
 .title-container h1::after {
   content: "";
   display: inline-block;
-  width: 280px; /* Ajusta el ancho según sea necesario */
-  height: 3px; /* Ajusta la altura según sea necesario */
+  width: 28rem; /* Ajusta el ancho según sea necesario */
+  height: 0.3rem; /* Ajusta la altura según sea necesario */
   background-color: var(--colorFuente-Gold);
-  margin-left: 15px; /* Espacio entre el texto y la línea */
+  margin-left: 1.5rem; /* Espacio entre el texto y la línea */
   box-shadow: 0 2px 4px rgba(246, 243, 243, 0.2); /* Sombra inferior */
   vertical-align: middle;
 }
@@ -598,15 +598,15 @@ footer{
 .category-recipes {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-  gap: 20px;
-  padding: 20px;
+  gap: 2rem;
+  padding: 2rem;
 }
 
 .card-categoria {
   display: flex;
   flex-direction: row;
-  background-color: rgba(245, 245, 245, 0.9);
-  border-radius: 10px;
+  background-color: var(--colorFondo-hueso);
+  border-radius: 1rem;
   overflow: hidden;
   transition: transform 0.3s;
   text-align: left;
@@ -639,15 +639,16 @@ footer{
 }
 
 .card-categoria-content {
-  padding: 15px;
+  padding: 1.5rem;
   flex-direction: column;
-  justify-content: start;
+  justify-content: space-between;
   align-items: flex-start;
   background-color: var(--colorFondo-hueso);
 }
 
 .card-categoria-title {
   color: var(--colorFondo-primario);
+  font-size: 2.4rem;
 }
 
 .card-categoria-nutrition {
@@ -660,35 +661,35 @@ footer{
   display: flex;
   justify-content: center;
   gap: 40%;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
 }
 
 .card-categoria-description {
-  font-size: 0.9rem;
+  font-size: 1.6rem;
   color: #555;
+  width: 100%;
 }
 
 .card-categoria-description span {
   display: inline-block;
   padding: 3%;
-  margin-left: 15%;
-  font-size: 1rem;
+  margin-left: 5%;
+  font-size: 1.6rem;
   color: var(--colorFondo-primario);
   font-family: var(--fontMinuscula);
-
 }
-.card-categoria-button {
 
-  align-self: flex-end;
-  margin-top: auto;
+.card-categoria-button {
+  /* align-self: flex-end; */
+  margin-left: auto;
   background-color: var(--colorFuente-bordo);
   color: var(--colorBlanco);
   text-decoration: none;
-  padding: 8px 12px;
-  border-radius: 5px;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.5rem;
   transition: background-color 0.3s;
   font-family: var(--fontMinuscula);
+  font-size: 1.6rem;
 }
 
 .card-categoria-button:hover {
@@ -702,6 +703,7 @@ footer{
   margin-top: 5%;
   margin-bottom: 3%;
 }
+
 .pagination::before,
 .pagination::after {
   content: '';
@@ -712,11 +714,11 @@ footer{
 }
 
 .pagination::before {
-  margin-right: 10px;
+  margin-right: 1rem;
 }
 
 .pagination::after {
-  margin-left: 10px;
+  margin-left: 1rem;
 }
 
 .nav-button-category {
@@ -728,8 +730,8 @@ footer{
   justify-content: center;
   color:var(--colorFondo-primario); /* Color de las flechas */
   font-size: 18px;
-  margin: 10px;
-  font-family: var(--fontGordita);
+  margin: 1rem;
+  font-family: var(--fontCursiva);
   font-weight: bold;
 }
 
@@ -738,10 +740,10 @@ footer{
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  height: 40px;
-  width: 40px;
+  height: 4rem;
+  width: 4rem;
   color: var(--colorFondo-primario);
-  margin-right: 5px; /* Espacio entre la flecha y el texto */
+  margin-right: 0.5rem; /* Espacio entre la flecha y el texto */
   background-color: var(--colorGris-Claro);
   transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
@@ -751,25 +753,19 @@ footer{
 }
 
 .page-number {
-
   color: var(--colorGris-Claro);
   background-color: var(--colorFondo-primario);
   border: 5px solid var(--colorGris-Claro);
   border-radius: 10px;
-  padding: 10px 15px;
+  padding: 1rem 1.5rem;
   margin: 0 5px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 60px; /* Ancho mínimo para el cuadro */
-  max-height: 50px;
+  min-width: 6rem; /* Ancho mínimo para el cuadro */
+  max-height: 5rem;
   font-size: 2rem;
 }
-
-
-
-
-
 
 @keyframes logo-spin {
   from {
@@ -788,59 +784,72 @@ footer{
 
 /* *SECCION DETALLE */
 .detail {
-  padding: 1% 5% 5% 5%;
+  padding: 1% 2% 1% 2%;
   background-image: url('/Images/Fondo-claro.png'); /* Ruta a tu imagen de fondo */
   background-size: cover; /* Ajusta la imagen para cubrir todo el contenedor */
   background-position: center; /* Centra la imagen */
   background-repeat: no-repeat; /* Evita que la imagen se repita */
   min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% de la altura de la ventana */
 }
+
 .name-container {
   color: var(--colorFondo-primario);
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
+
+/* Línea dorada con sombra inferior para h1 en name-container */
+.name-container h1::after {
+  content: "";
+  display: inline-block;
+  width: 280px; /* Ajusta el ancho según sea necesario */
+  height: 2px; /* Ajusta la altura según sea necesario */
+  background-color: var(--colorFuente-Gold);
+  margin-left: 10px; /* Espacio entre el texto y la línea */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
+  vertical-align: middle;
+}
+
 .button-back{
   background-color: var(--colorFuente-bordo);
   color: var(--colorBlanco);
-  border-radius: 10px;
-  width: 15%;
-  opacity: 0.8;
-
-
-}
-.button-back:hover {
-  background-color: var(--colorBlanco); /* Cambia el fondo al color blanco al pasar el cursor */
-  color: var(--colorFuente-bordo); /* Cambia el texto al color original */
-}
-
-
-.fav-button, .button-share {
-  display: flex;
-  align-items: center;
-  background: none;
   border: none;
-  color: var(--colorFuente-bordo);
-  font-size: 4rem; /* Tamaño del icono */
+  border-radius: 1rem;
+  width: 5rem;
+  height: 5rem;
   cursor: pointer;
-  margin-left: 1rem; /* Espacio entre el icono y el nombre */
-  transition: transform 0.3s ease; /* Transición suave */
+  transition: all 0.3s;
 }
 
-.fav-button:hover, .button-share:hover {
-  transform: scale(1.1); /* Aumenta el tamaño a 110% */
+.button-back span {
+  font-size: 0rem;
+  transition: all 0.3s;
+
+}
+
+.button-back:hover {
+  opacity: 0.8;
+  width: 15%;
+  /* font-size: 1.8rem; */
+}
+
+.button-back:hover span{
+  margin-left: .5rem;
+  font-size: 1.8rem;
 }
 
 .recipe-img-container {
-  margin-bottom: 5%;
-  margin-top: 5%;
+  margin-bottom: 5rem;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 25px;
+  gap: 2.5rem;
 }
 
 .recipe-img {
@@ -856,19 +865,14 @@ footer{
   opacity: 0.8; /* Reducir la opacidad al pasar el cursor */
 }
 
-
-
-
 .img-1 {
   grid-column: 1 / 3;
   grid-row: 1 / -1;
-
 }
 
 .img-2 {
   grid-column: 3 / 4;
   grid-row: 1 / 2;
-
 }
 
 .img-3 {
@@ -879,31 +883,24 @@ footer{
 .img-4 {
   grid-column: 3 / 4;
   grid-row: 2 / -1;
-
 }
 
 .img-5 {
   grid-column: 4 / 5;
   grid-row: 2 / -1;
-
 }
 
 .ver-mas {
   width: 100%;
   height: 100%;
-  font-size: 50px;
+  font-size: 5rem;
   background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,.8));
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: transform 0.3s ease; /* Transición suave para la transformación */
-
 }
-
-/* .ver-mas:hover {
-  transform: scale(1.1);
-} */
 
 .carousel-overlay {
   position: fixed;
@@ -928,9 +925,10 @@ footer{
   align-items: center;
   justify-content: center;
 }
+
 .carousel-popup img{
   max-width: 70%;
- }
+}
 
 .close-button {
   position: absolute;
@@ -943,6 +941,7 @@ footer{
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 .close-button:hover {
   transform: scale(1.1); /* Aumenta el tamaño al pasar el cursor */
   background-color: var(--colorFondo-hueso); /* Cambia el color de fondo al pasar el cursor */
@@ -953,205 +952,84 @@ footer{
 }
 
 .details-container {
-  margin-bottom: 60px;
+  margin-bottom: 3rem;
   color: var(--colorFondo-primario);
   display: flex;
-  flex-direction: column;
-  gap: 20%;
-  padding: 2%;
-}
-.ingredientes{
-  display: flex;
-  flex-direction: column;
-}
-.ingredientes p{
-  font-family: var(--fontMinuscula);
-}
-.main-details {
-  display: flex;
   justify-content: space-between;
-  gap: 20px;
-}
-.recipe-detail-data {
-  font-size: 28px;
-  text-align: left;
-}
-.recipe-detail-data p{
-  font-family: var(--fontMinuscula);
 }
 
-.side-details-container {
-  align-items: center;
-  color: var(--colorBlanco);
-  font-size: 28px;
-  grid-column: 3 / -1;
-  background-color: var(--colorFondo-primario); /* Fondo azul */
-  padding: 20px; /* Añadir padding para el contenido */
-  position: relative; /* Necesario para el pseudo-elemento */
-  max-height: 90%;
-  text-align: center;
-  max-width: 45%;
-}
+.fav-rating-share-container{
+  width: 100%;
+  background-color: var(--colorBlanco);
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  position: relative;
 
-
-
-.side-details-container::before {
-  content: "";
-  position: absolute;
-  top: 12px; /* Ajusta para centrar verticalmente */
-  left: 12px; /* Ajusta para centrar horizontalmente */
-  right: 12px; /* Ajusta para centrar horizontalmente */
-  bottom: 12px; /* Ajusta para centrar verticalmente */
-  border: 2px solid var(--colorFuente-Gold); /* Línea dorada */
-  pointer-events: none; /* Asegura que no interfiera con los eventos del ratón */
-  border-radius: 10px;
-}
-
-.separator {
-  height: 3px;
-  width: 85%; /* Ajusta el ancho al 60% */
-  display: flex;
-  justify-content: center;
-  background-color: var(--colorFuente-Gold); /* Línea dorada */
-  margin: 20px auto; /* Espaciado alrededor de la línea y centra el elemento */
-  border-radius: 80px;
-}
-
-
-.nutritional-details {
-  text-align: center;
-
-}
-
-.nutritional-details ul {
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  justify-content:center;
-  gap: 30px;
-}
-
-.nutritional-details li {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.nutritional-details li p {
-  font-family:var(--fontMinuscula) ;
-  margin-top: 15px;
-  font-size: 18px;
-  color: var(--colorFondo-hueso); /* Ajusta este color según sea necesario */
-}
-
-.nutritional-details li svg {
-  margin-top: 20px;
-  color: var(--colorFuente-Gold); /* Ajusta este color según sea necesario */
-}
-
-.detail-icon {
-  width: 40px;
-  height: 40px;
-}
-
-.week-container {
-  margin: 5% 0 5% 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5%;
-}
-
-.week-day {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background-color: grey; /* Color inicial en gris */
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
-}
-
-.week-day:hover {
-  background-color: lightgrey; /* Cambia a un color más claro al pasar el ratón */
-}
-
-
-.instructions-container {
-  margin-top: 20px;
-}
-
-/* Línea dorada con sombra inferior para h1 en name-container */
-.name-container h1::after {
-  content: "";
-  display: inline-block;
-  width: 280px; /* Ajusta el ancho según sea necesario */
-  height: 2px; /* Ajusta la altura según sea necesario */
-  background-color: var(--colorFuente-Gold);
-  margin-left: 10px; /* Espacio entre el texto y la línea */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
-  vertical-align: middle;
-}
-
-/* Línea dorada con sombra inferior para h1 en ingredientes y modo de preparación */
-.ingredientes h1::after,
-.instructions-container h1::after {
-  content: "";
-  display: inline-block;
-  width: 280px; /* Ajusta el ancho según sea necesario */
-  height: 2px; /* Ajusta la altura según sea necesario */
-  background-color: var(--colorFuente-Gold);
-  margin-left: 30px; /* Espacio entre el texto y la línea */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
-  vertical-align: middle;
 }
 
 .rating-container {
-  margin-top: 5%;
+  font-size: 2rem; /* Ajusta el tamaño de las estrellas según sea necesario */
   display: flex;
   flex-direction: column;
-  gap: 10px;
   justify-content: center;
   align-items:first baseline;
-  font-size: 2rem; /* Ajusta el tamaño de las estrellas según sea necesario */
 }
-.fav-rating-share-container{
+
+.laurel-leaves {
+  margin: 0 2rem;
   display: flex;
   align-items: center;
-  width: 100%;
-  
+}
+
+.laurel-leaves i {
+  margin: 0 5px;
+}
+
+.vertical-line {
+  height: 8rem;
+  width: 0.4rem;
+  background-color: var(--colorFondo-primario);
+  margin: 0 1rem;
+}
+
+.rating-count {
+  margin: 0 2rem;
+  text-align: center;
+}
+
+.evaluation-cant {
+  font-size: 50px;
+  color:var(--colorFuente-bordo);
+  margin-top: 5px;
+}
+
+.evaluation-label {
+  font-size: 20px;
+  color:var(--colorFondo-primario);
+  font-weight: bold;
 }
 
 .fav-container{
-  margin-top: 5%;
-  margin-left: 10px;
   display: flex;
   align-items: center;
-  gap: 20px;
 }
 
-.vertical-line-fav {
-  margin-top: 5%;
-  margin-right: 3px;
-  margin-left: 2%;
-  height: 110px;
-  width: 4px;
-  background-color: var(--colorFondo-primario);
-  
-  
+.fav-button, .button-share {
+  margin: 0 2rem;
+  background: none;
+  border: none;
+  color: var(--colorFuente-bordo);
+  font-size: 4rem; /* Tamaño del icono */
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Transición suave */
 }
 
-.vertical-line-fav-share {
-  
-  margin-left: 2px;
-  margin-right: 2px;
-  height: 110px;
-  width: 4px;
-  background-color: var(--colorFondo-primario);
-  
-  
+.fav-button:hover, .button-share:hover {
+  transform: scale(1.1); /* Aumenta el tamaño a 110% */
 }
 
 .rating-container .fa-star {
@@ -1180,43 +1058,152 @@ footer{
   color: var(--colorFuente-bordo); 
 }
 
-.laurel-leaves {
+.ingredientes {
+  font-size: 1.8rem;
+}
+
+.ingredientes p{
+  font-family: var(--fontMinuscula);
+}
+
+.recipe-detail-data {
+  font-size: 2.8rem;
+  text-align: left;
+}
+
+.recipe-detail-data p{
+  font-family: var(--fontMinuscula);
+}
+
+.side-details-container {
+  align-items: center;
+  color: var(--colorBlanco);
+  font-size: 2.8rem;
+  grid-column: 3 / -1;
+  background-color: var(--colorFondo-primario); /* Fondo azul */
+  padding: 2.5rem; /* Añadir padding para el contenido */
+  position: relative; /* Necesario para el pseudo-elemento */
+  max-height: 90%;
+  text-align: center;
+  max-width: 45%;
+}
+
+.side-details-container::before, .fav-rating-share-container::before {
+  content: "";
+  position: absolute;
+  top: 1.2rem; /* Ajusta para centrar verticalmente */
+  left: 1.2rem; /* Ajusta para centrar horizontalmente */
+  right: 1.2rem; /* Ajusta para centrar horizontalmente */
+  bottom: 1.2rem; /* Ajusta para centrar verticalmente */
+  border: 2px solid var(--colorFuente-Gold); /* Línea dorada */
+  pointer-events: none; /* Asegura que no interfiera con los eventos del ratón */
+  border-radius: 1rem;
+}
+
+.separator {
+  height: 0.3rem;
+  width: 85%; /* Ajusta el ancho al 60% */
   display: flex;
+  justify-content: center;
+  background-color: var(--colorFuente-Gold); /* Línea dorada */
+  margin: 2rem auto; /* Espaciado alrededor de la línea y centra el elemento */
+  border-radius: 8rem;
+}
+
+.nutritional-details {
+  text-align: center;
+}
+
+.nutritional-details ul {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content:center;
+  gap: 3rem;
+}
+
+.nutritional-details li {
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
-.laurel-leaves i {
-  margin: 0 5px;
+.nutritional-details li p {
+  font-family:var(--fontMinuscula) ;
+  margin-top: 1.5rem;
+  font-size: 1.8rem;
+  color: var(--colorFondo-hueso); /* Ajusta este color según sea necesario */
 }
 
-.vertical-line {
-  height: 100px;
-  width: 4px;
-  background-color: var(--colorFondo-primario);
-  margin: 0 10px;
+.nutritional-details li svg {
+  margin-top: 2rem;
+  color: var(--colorFuente-Gold); /* Ajusta este color según sea necesario */
 }
 
-.rating-count {
-  text-align: center;
-}
-.evaluation-cant {
-  font-size: 50px;
-  color:var(--colorFondo-primario);
-  margin-top: 5px;
-}
-.evaluation-label {
-  font-size: 20px;
-  color:var(--colorFondo-primario);
-  margin-top: 1px;
-  margin-left: 15px;
-  font-weight: bold;
+.detail-icon {
+  width: 4rem;
+  height: 4rem;
 }
 
-
-
-.navigation-buttons{
+.week-container {
+  margin: 5% 0 5% 0;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+.week-day {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  background-color: grey; /* Color inicial en gris */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.week-day:hover {
+  background-color: lightgrey; /* Cambia a un color más claro al pasar el ratón */
+}
+
+.instructions-container {
+  font-size: 1.8rem;
+  color: var(--colorFondo-primario);
+  margin-bottom: 6rem;
+}
+
+/* Línea dorada con sombra inferior para h1 en ingredientes y modo de preparación */
+.ingredientes h1::after,
+.instructions-container h1::after {
+  content: "";
+  display: inline-block;
+  width: 28rem; /* Ajusta el ancho según sea necesario */
+  height: 2px; /* Ajusta la altura según sea necesario */
+  background-color: var(--colorFuente-Gold);
+  margin-left: 3rem; /* Espacio entre el texto y la línea */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
+  vertical-align: middle;
+}
+
+.navigation-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.navigation-buttons::before,
+.navigation-buttons::after {
+  content: "";
+  display: inline-block;
+  width: 28rem; /* Ajusta el ancho según sea necesario */
+  height: 2px; /* Ajusta la altura según sea necesario */
+  background-color: var(--colorFuente-Gold);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra inferior */
+  vertical-align: middle;
 }
 
 .nav-button {
@@ -1227,9 +1214,9 @@ footer{
   align-items: center;
   justify-content: center;
   color:var(--colorFondo-primario); /* Color de las flechas */
-  font-size: 18px;
-  margin: 10px;
-  font-family: var(--fontGordita);
+  font-size: 1.8rem;
+  margin: 1rem;
+  font-family: var(--fontCursiva);
   font-weight: bold;
 }
 
@@ -1237,11 +1224,11 @@ footer{
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
-  height: 40px;
-  width: 40px;
+  border-radius: 0.5rem;
+  height: 4rem;
+  width: 4rem;
   color: var(--colorBlanco);
-  margin-right: 5px; /* Espacio entre la flecha y el texto */
+  margin-right: 0.5rem; /* Espacio entre la flecha y el texto */
   background-color: var(--colorFondo-primario);
   transition: background-color 0.3s, color 0.3s; /* Transición suave */
 }
@@ -1260,8 +1247,8 @@ footer{
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 .register-image-container {
 
@@ -1276,17 +1263,20 @@ footer{
   margin-left: 150%;
   max-width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0.8rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 .register {
-
   width: 80vw;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 5rem;
+}
+
+.register h2 {
+  font-size: 3rem;
 }
 
 .register-form {
@@ -1296,7 +1286,7 @@ footer{
   flex-direction: column;
 }
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 label {
@@ -1305,9 +1295,9 @@ label {
 }
 
 input {
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1.6rem;
   border: 1px solid #ccc;
   width: 100%;
 }
@@ -1323,10 +1313,10 @@ input.input-error {
 
 }
 .register-button, .cancel-button {
-  padding: 10px;
-  font-size: 14px;
+  padding: 1rem;
+  font-size: 1.8rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   cursor: pointer;
   width: 48%;
   box-sizing: border-box;
@@ -1356,7 +1346,7 @@ input.input-error {
 }
 .Toastify__toast {
   margin-top: 80%;
-  max-width: 400px;
+  max-width: 40rem;
   font-size: 1rem;
 }
 /* Estilos para el Login */
@@ -1366,36 +1356,40 @@ input.input-error {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 50px auto;
+  margin: 5rem auto;
   width: 80%; /* Ajusta el ancho según tu diseño */
 }
 
 .login-columns {
   border: 2px solid var(--colorFuente-Gold); /* Borde sólido de 2px con el color personalizado */
-  border-radius: 15px;
+  border-radius: 1.5rem;
   display: flex;
   justify-content: space-around;
   width: 100%;
   margin-top:5%;
-  padding: 10px; /* Añade un padding para separar el contenido del borde */
+  padding: 1rem; /* Añade un padding para separar el contenido del borde */
   box-sizing: border-box; /* Asegura que el padding se incluya en el ancho total */
 }
 
 .login-column {
   flex: 1;
-  margin-right: 20px;
+  margin-right: 2rem;
   text-align: center;
-
 }
 
 .login h1 {
   font-size: 10vh;
   margin-top:5% ;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
+}
+
+.login-column h2 {
+  font-size: 3rem;
 }
 
 .login-column p {
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
 }
 
 .login-column a {
@@ -1411,26 +1405,26 @@ input.input-error {
   width: 100%;
   max-width: 100%; /* Ajusta el ancho máximo del formulario según tu diseño */
   border: 1px solid var(--colorFondo-hueso);
-  border-radius: 4px;
-  padding: 20px;
+  border-radius: 0.4rem;
+  padding: 2rem;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 1.5rem;
 }
 
 label {
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 0.8rem;
 }
 
 input[type="email"],
 input[type="password"] {
   width: 100%;
-  padding: 10px;
-  font-size: 14px;
+  padding: 1rem;
+  font-size: 1.4rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   box-sizing: border-box;
 }
 
@@ -1440,22 +1434,22 @@ input[type="password"] {
 
 .error-message {
   color: var(--colorFondo-hueso);
-  font-size: 14px;
-  margin-top: 5px;
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
 }
 
 .form-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 15px;
+  margin-top: 1.5rem;
 }
 
 .login-button,
 .cancel-button {
-  padding: 10px 20px;
-  font-size: 14px;
+  padding: 1rem 2rem;
+  font-size: 1.8rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   cursor: pointer;
   width: 48%;
   box-sizing: border-box;
@@ -1480,9 +1474,9 @@ input[type="password"] {
 }
 .login-horizontal-line {
   width: 100%; /* Ocupa el ancho completo de footer-right */
-  height: 1px; /* Altura de la línea */
+  height: 0.1rem; /* Altura de la línea */
   color: var(--colorFuente-Gold); /* Color de la línea */
-  margin: 10px 10px; /* Margen superior e inferior */
+  margin: 1rem 1rem; /* Margen superior e inferior */
 }
 
 
@@ -1491,13 +1485,13 @@ input[type="password"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 0.5rem;
 }
 
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   color: #ccc;
   background-color: #171D2B;
@@ -1506,14 +1500,15 @@ input[type="password"] {
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  cursor: pointer;
 }
 
 .logout-button {
 
   color: rgb(3, 2, 2);
   border: none;
-  padding: 5px 10px;
-  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
 }
 .mobile-nav-list {
@@ -1531,38 +1526,37 @@ input[type="password"] {
   transform: translateX(-50%);
   background-color: var(--colorFuente-bordo);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+  padding: 1rem;
   z-index: 1000;
   display: none;
-  border-radius: 5px;
+  border-radius: 0.5rem;
 }
 
-.avatar:hover .calendar-dropdown {
+.calendar-dropdown {
   display: block; /* Muestra el dropdown al hacer hover en el avatar */
 }
 
 .calendar-dropdown a {
   font-family: var(--fontMinuscula);
-  font-size: 15px;
+  font-size: 1.5rem;
   display: block;
   text-decoration: none;
   color: var(--colorFuente-Gold);
-  padding: 5px 10px;
+  padding: 0.5rem 1rem;
   transition: background-color 0.3s ease;
 }
 
 .calendar-dropdown a:hover {
   background-color: #f0f0f0;
 }
+
 .root-myAccount {
-  background-color: var(--colorFondo-hueso
-  );
+  background-color: var(--colorFondo-hueso);
+  font-size: 1.5rem;
   border-radius: 10px;
   color: var(--colorFondo-primario);
   margin: 2rem 15%;
-  padding: 30px;
-  box-shadow: 0 4px 8px var(--colorFondo-hueso);
-
+  padding: 3rem;
 }
 
 /* FAVORITOS */
@@ -1574,17 +1568,17 @@ input[type="password"] {
   flex-direction: column;
 }
 .favoritos-title>h3 {
-  margin-top: 30px;
-  padding: 20px;
+  margin-top: 3rem;
+  padding: 2rem;
   font-size: 2rem;
 }
 
 .button-card{
-  margin-top: 25%;
+  /* margin-top: 25%; */
   width: 100%;
   display: flex;
-  align-items: end;
-  justify-content: space-around;
+  /* align-items: end; */
+  justify-content: space-between;
   gap: 15%;
 
 }
@@ -1594,10 +1588,12 @@ input[type="password"] {
   background-color: var(--colorFuente-bordo);
   color: var(--colorBlanco);
   text-decoration: none;
-  padding: 8px 12px;
+  padding: 0.8rem 1.2rem;
   border-radius: 5px;
+  border: none;
   transition: background-color 0.3s;
   font-family: var(--fontMinuscula);
+  font-size: 1.6rem;
 }
 .remove-button:hover {
   background-color: var(--colorFondo-secundario);
@@ -1618,7 +1614,7 @@ input[type="password"] {
   .mobile-nav-list{
     width: 100%;
     height: 100vh;
-    font-size: 32px;
+    font-size: 3.2rem;
     background-color: #f5f5f5;
     list-style: none;
 
@@ -1653,7 +1649,7 @@ input[type="password"] {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding-bottom: 150px;
+  padding-bottom: 15rem;
 
 }
 
@@ -1663,12 +1659,12 @@ input[type="password"] {
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 20px;
+  padding: 2rem;
   box-sizing: border-box;
 }
 
 .drawer-content {
-  width: 300px;
+  width: 30rem;
   position: absolute;
 }
 
@@ -1707,10 +1703,10 @@ input[type="password"] {
 
 
 .day-column {
-  flex: 1 1 calc(14.285% - 16px);
+  flex: 1 1 calc(14.285% - 1.6rem);
   display: flex;
   flex-direction: column;
-  margin: 4px;
+  margin: 0.4rem;
 }
 
 .days-container {
@@ -1719,16 +1715,16 @@ input[type="password"] {
 }
 
 .meal-area {
-  padding: 8px;
+  padding: 0.8rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   background-color: #ccc; /* Default color */
-  height: 150px;
-  margin-bottom: 8px;
-  border-radius: 8px;
+  height: 15rem;
+  margin-bottom: 0.8rem;
+  border-radius: 0.8rem;
 }
 
 .meal-area.breakfast {
@@ -1751,17 +1747,6 @@ input[type="password"] {
   background-color: #e0e0e0 !important;
 }
 
-/* .recipe-card {
-  opacity: 1;
-  background-color: #fafafa;
-  border-radius: 8px;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border: 1px solid grey;
-} */
-
 .recipe-card.dragging {
   opacity: 0.5;
 }
@@ -1771,7 +1756,7 @@ input[type="password"] {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 16px;
+  margin-bottom: 1.6rem;
 }
 
 .week-navigation-header {
@@ -1781,61 +1766,71 @@ input[type="password"] {
 }
 
 .week-navigation-dates {
-  margin: 0 16px;
+  margin: 0 1.6rem;
 }
 
 .week-navigation-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 
 .week-navigation-button {
-  margin-right: 8px;
+  margin-right: 0.8rem;
 }
 
 .title-planner {
+  font-size: 3rem;
   text-align: center;
-  margin-bottom: 20px;
-  margin-top: 30px;
+  margin-bottom: 2rem;
+  margin-top: 3rem;
 }
+
+.planner-current-month {
+  font-size: 2.6rem;
+}
+
+.planner-current-week {
+  font-size: 2.2rem;
+}
+
 .white-icon {
   color: #ad793f;
 }
 
 .recipecard-nutri-details {
-
-  padding-left: 10px;
+  padding-left: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-size: 14px; /* Tamaño de fuente reducido para los detalles nutricionales */
+  font-size: 1.4rem; /* Tamaño de fuente reducido para los detalles nutricionales */
 }
 
 .recipecard-nutri-details ul {
   border-left: 1px solid lightgrey;
   list-style: none;
-  padding-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  padding-left: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .recipecard-nutri-details li {
   display: flex;
   align-items: center;
-  margin-bottom: 1px; /* Espaciado más compacto */
+  margin-bottom: 0.1rem; /* Espaciado más compacto */
 }
 
 .recipecard-nutri-details li p {
-  margin-left: 8px;
+  margin-left: 0.8rem;
   margin: 0; /* Eliminar márgenes para un diseño más compacto */
-  font-size: 12px; /* Tamaño de fuente reducido para los detalles nutricionales */
-  padding-left: 5px;
+  font-size: 1.2rem; /* Tamaño de fuente reducido para los detalles nutricionales */
+  padding-left: 0.5rem;
 }
 
 /* DAY COlUMN */
 
 .day-title {
+  font-size: 1.8rem;
   font-weight: normal;
 }
 
@@ -1846,7 +1841,12 @@ input[type="password"] {
 /* MEAL Area */
 
 .meal-area-h4{
-  margin-bottom: 4px;
+  font-size: 1.8rem;
+  margin-bottom: 0.4rem;
+}
+
+.planner-h6 {
+  font-size: 1.2rem;
 }
 
 /* WEEK Navigation */
@@ -1854,7 +1854,7 @@ input[type="password"] {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1.6rem;
 }
 
 .week-navigation-header {
@@ -1866,20 +1866,21 @@ input[type="password"] {
 .week-navigation-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 .week-navigation-buttons {
   display: flex;
   justify-content: center;
-  margin-top: 16px;
+  margin-top: 1.6rem;
 }
 
 .week-button {
   cursor: pointer;
-  margin-right: 8px;
-  padding: 8px 16px;
+  font-size: 1.4rem;
+  margin-right: 0.8rem;
+  padding: 0.8rem 1.6rem;
   border: 1px solid #697185;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   color: white;
   background-color: transparent;
   transition: background-color 0.3s, color 0.3s;
@@ -1888,36 +1889,20 @@ input[type="password"] {
 .week-button.active {
   background-color: #697185;
   color: white;
-
 }
 
 .week-button:hover {
   background-color: #434855;
   color: white;
 }
-/*estilos a terminos y condiciones modal*/
-/* .modal {
-  margin-top: 4%;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
 
 .modal-content {
   background-color: #fefefe;
-  padding: 20px;
+  padding: 2rem;
   border: 1px solid #888;
   width: 90%;
-  max-width: 800px;
-  border-radius: 8px;
+  max-width: 80rem;
+  border-radius: 0.8rem;
   max-height: 80%;
   display: flex;
   flex-direction: column;
@@ -1929,12 +1914,12 @@ input[type="password"] {
 }
 
 .terms-scroll {
-  margin-top: 10px;
+  margin-top: 1rem;
 }
 
 .modal-content h3 {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .button-close-term {
@@ -1942,11 +1927,11 @@ input[type="password"] {
   height: 8%;
   color: var(--colorFondo-hueso);
   background-color: var(--colorFuente-bordo);
-  border-radius: 10px;
+  border-radius: 1rem;
   font-weight: bold;
   cursor: pointer;
   align-self: center;
-  margin-top: 20px;
+  margin-top: 2rem;
 }
 
 .button-close-term:hover {
@@ -1956,13 +1941,13 @@ input[type="password"] {
 }
 
 .modal-rait{
-  height: 400px;
+  height: 40rem;
 }
 
 .rating-container-modal {
   margin-top: 5%;
   display: flex;
-  gap: 10px;
+  gap: 1rem;
   justify-content: center;
   align-items: center;
   font-size: 2rem; /* Ajusta el tamaño de las estrellas según sea necesario */
@@ -1974,17 +1959,17 @@ input[type="password"] {
   display: flex;
   align-items:center;
   justify-content: center;
-  gap: 50px;
-  margin-top: 30px;
+  gap: 5rem;
+  margin-top: 3rem;
 }
 
 .btn-modal-rait {
   border: 1px solid var(--colorFuente-bordo);
   color: var(--colorBlanco);
   background-color: var(--colorFuente-bordo); 
-  height: 32px;
-  width: 60px;
-  border-radius: 5px;
+  height: 3.2rem;
+  width: 6rem;
+  border-radius: 0.5rem;
 }
 
 .btn-modal-rait:hover, .btn-agendar {
@@ -2006,3 +1991,74 @@ input[type="password"] {
   color: var(--colorFondo-primario); /* Estrella vacía */
 }
 
+/* --bp-large: 62.5em; //1000px/16px = 62.5
+--bp-medium: 50em; //800px
+--bp-small: 37.5em; //600px */
+
+@media only screen and ( max-width: 90em ){
+  html {
+    font-size: 50%;
+  }
+}
+
+@media only screen and ( max-width: 85.5em ){
+  .footer-list li {
+    font-size: 2rem;
+  }
+
+  .footer-ingredients {
+    font-size: 1.3rem;
+  }
+}
+
+@media only screen and ( max-width: 70em ){
+  .footer-content{
+    flex-direction: column;
+  }
+
+  .footer-separator, .footer-divider {
+    display: none;
+  }
+
+  .footer-ingredients {
+    font-size: 1.4rem;
+    margin: 2rem 0;
+  }
+}
+
+@media only screen and ( max-width: 48em ){
+  .footer-lists {
+    flex-direction: column;
+  }
+
+  .footer-lists li {
+    font-size: 2.5rem;
+  }
+}
+@media only screen and ( max-width: 40em ){
+  .titulo-recomendados {
+    text-align: center;
+    font-size: 16rem;
+  }
+
+  .titulo-dos {
+    font-size: 16rem;
+  }
+
+  .titulo-tres {
+    text-align: center;
+    font-size: 16rem;
+  }
+}
+
+@media only screen and ( max-width: 32.5em ){
+  .titulo-recomendados, .titulo-dos, .titulo-tres {
+    font-size: 12rem;
+  }
+}
+
+@media only screen and ( max-width: 24em ){
+  .titulo-recomendados, .titulo-dos, .titulo-tres {
+    font-size: 9rem;
+  }
+}

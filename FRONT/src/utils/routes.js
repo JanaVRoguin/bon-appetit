@@ -1,9 +1,5 @@
 export const routes = {
     home: '/',
-    desayuno: '/desayuno',
-    almuerzo: '/almuerzo',
-    mediatarde:'/merienda',
-    cena: '/cena',
     detail: '/recipe/:id',
     detailTest: '',
     adminPanel: '/administracion/',
