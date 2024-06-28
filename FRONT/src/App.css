@@ -1602,7 +1602,7 @@ input[type="password"] {
 @media (max-width: 920px) {
 
   .nav-list, .navbar-right {
-    display: none;
+    /* display: none; */
   }
   logo grisAzul.png
   .menu-hamburguesa {
@@ -2026,6 +2026,23 @@ input[type="password"] {
   }
 }
 
+@media only screen and ( max-width: 62em ){
+  .details-container {
+    flex-direction: column;
+  }
+
+  .side-details-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+}
+
+@media only screen and ( max-width: 57em ){
+  .nav-list {
+    display: none;
+  }
+}
+
 @media only screen and ( max-width: 48em ){
   .footer-lists {
     flex-direction: column;
@@ -2035,6 +2052,7 @@ input[type="password"] {
     font-size: 2.5rem;
   }
 }
+
 @media only screen and ( max-width: 40em ){
   .titulo-recomendados {
     text-align: center;
@@ -2054,6 +2072,26 @@ input[type="password"] {
 @media only screen and ( max-width: 32.5em ){
   .titulo-recomendados, .titulo-dos, .titulo-tres {
     font-size: 12rem;
+  }
+
+  .average-rating {
+    font-size: 4rem;
+  }
+
+  .evaluation-cant {
+    font-size: 4rem;
+  }
+
+  .evaluation-label {
+    font-size: 1.4rem;
+  }
+
+  .rating-count {
+    margin: 0 1rem;
+  }
+
+  .fav-button, .button-share {
+    font-size: 3rem;
   }
 }
 
